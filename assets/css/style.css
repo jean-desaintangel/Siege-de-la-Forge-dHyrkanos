@@ -1,0 +1,332 @@
+/* Global Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #0b0a09;
+  color: #e6dcc8;
+  font-family: Spectral, Georgia, serif;
+}
+
+a {
+  color: #c9a227;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 162, 39, 0.35);
+}
+
+a:hover {
+  color: #f0d67a;
+  border-bottom-color: #f0d67a;
+}
+
+::selection {
+  background: #9b2226;
+  color: #fff;
+}
+
+input {
+  font-family: inherit;
+}
+
+/* Animations */
+@keyframes emberPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* Font Families */
+.font-cinzel {
+  font-family: Cinzel, serif;
+}
+
+.font-jetbrains {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Text Utilities */
+.mono {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #8c7c5f;
+}
+
+.text-muted {
+  color: #7d7160;
+}
+
+.text-light {
+  color: #f3e9d2;
+}
+
+.text-warm {
+  color: #b8ab92;
+}
+
+.text-accent {
+  color: #c9a227;
+}
+
+.text-accent-light {
+  color: #f0d67a;
+}
+
+.text-accent-dark {
+  color: #9b2226;
+}
+
+.text-brand {
+  color: #c9524f;
+}
+
+.text-gold {
+  color: #c9a227;
+}
+
+.text-neutral {
+  color: #a2957f;
+}
+
+.text-pale {
+  color: #cbbb98;
+}
+
+/* Containers */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.card {
+  border: 1px solid #2e2721;
+  background: #14110d;
+  padding: 28px 26px;
+}
+
+.card-bordered-top {
+  border: 1px solid #2e2721;
+  border-top: 2px solid #c9a227;
+  background: #14110d;
+  padding: 24px;
+}
+
+/* Headers */
+header {
+  position: relative;
+  padding: 0;
+  border-bottom: 1px solid #2e2721;
+  background: radial-gradient(
+    120% 90% at 50% 0%,
+    #1d1712 0%,
+    #0b0a09 62%
+  );
+}
+
+header .header-subtitle {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: #8c7c5f;
+}
+
+header .divider {
+  width: 1px;
+  height: 46px;
+  background: linear-gradient(#c9a227, transparent);
+  margin: 26px auto 22px;
+}
+
+header h1 {
+  font-family: Cinzel, serif;
+  font-weight: 900;
+  font-size: clamp(38px, 6.5vw, 84px);
+  line-height: 0.96;
+  margin: 0;
+  letter-spacing: 0.02em;
+  color: #f3e9d2;
+  text-wrap: balance;
+}
+
+header .subtitle {
+  font-family: Cinzel, serif;
+  font-size: clamp(14px, 1.6vw, 19px);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #9b2226;
+  margin: 26px 0 0;
+}
+
+header .tagline {
+  max-width: 700px;
+  margin: 30px auto 0;
+  font-size: 18px;
+  line-height: 1.72;
+  color: #b8ab92;
+  font-style: italic;
+  text-wrap: pretty;
+}
+
+/* Navigation */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(11, 10, 9, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #2e2721;
+}
+
+nav a {
+  color: #a2957f;
+  border: none;
+}
+
+/* Main Content */
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px 120px;
+}
+
+section {
+  padding: 92px 0 0;
+}
+
+section > div:first-child {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  border-bottom: 1px solid #2e2721;
+  padding-bottom: 14px;
+}
+
+section h2 {
+  font-family: Cinzel, serif;
+  font-weight: 700;
+  font-size: clamp(26px, 3.4vw, 40px);
+  margin: 0;
+  color: #f3e9d2;
+  letter-spacing: 0.01em;
+}
+
+.section-number {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: #9b2226;
+}
+
+/* Grid Layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* Special Cards */
+.belligerant-card {
+  border: 1px solid #3a3129;
+  border-top: 2px solid;
+  background: linear-gradient(#191510, #100e0b);
+  padding: 28px 26px;
+}
+
+.belligerant-card h3 {
+  font-family: Cinzel, serif;
+  font-size: 24px;
+  margin: 0 0 16px;
+  color: #f3e9d2;
+}
+
+.belligerant-card .oath {
+  border-left: 2px solid;
+  padding-left: 16px;
+}
+
+/* Figures */
+figure {
+  margin: 48px 0 0;
+  border: 1px solid #2e2721;
+  background: #14110d;
+  padding: 14px;
+}
+
+figure img {
+  width: 100%;
+  display: block;
+  filter: sepia(0.3) contrast(1.06) brightness(0.84);
+  border: 1px solid #221d18;
+}
+
+figcaption {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  padding: 20px 8px 6px;
+}
+
+/* List Styles */
+dl {
+  margin: 0;
+  display: grid;
+  gap: 16px;
+}
+
+dt {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7d7160;
+}
+
+dd {
+  margin: 0;
+  font-size: 16px;
+  color: #e6dcc8;
+}
+
+/* Special Case: First section */
+#theatre {
+  padding: 86px 0 0;
+}
+
+/* Strong text styling */
+strong {
+  color: #f3e9d2;
+  font-weight: 600;
+}
+
+/* Aside styling */
+aside {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+}
+
+/* Pulsing animation for important text */
+.pulse-animation {
+  animation: emberPulse 3.2s ease-in-out infinite;
+}

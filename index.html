@@ -1,0 +1,4521 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Le Reflux de Yarath-Maximal — campagne narrative Horus Heresy V3
+    </title>
+    <meta
+      name="description"
+      content="Dossier de campagne narrative pour Warhammer: The Horus Heresy 3e édition — 5 missions à embranchement pour 4 joueurs indépendants, chacun pour soi, batailles planétaires et Zone Mortalis, plafond de 3000 points par partie."
+    />
+    <meta name="theme-color" content="#0b0a09" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="Le Reflux de Yarath-Maximal" />
+    <meta
+      property="og:description"
+      content="Campagne narrative Horus Heresy V3 pour 4 joueurs indépendants : 5 missions, Zone Mortalis, un Warhound en jeu, aucune équipe."
+    />
+    <meta property="og:image" content="assets/carte-globale.jpg" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0a09'/%3E%3Cpath d='M16 5l9 5.5v11L16 27 7 21.5v-11z' fill='none' stroke='%23c9a227' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%239b2226'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </helmet>
+
+      <div style="background: #0b0a09; min-height: 100vh; overflow-x: hidden">
+        <header
+          style="
+            position: relative;
+            padding: 0;
+            border-bottom: 1px solid #2e2721;
+            background: radial-gradient(
+              120% 90% at 50% 0%,
+              #1d1712 0%,
+              #0b0a09 62%
+            );
+          "
+        >
+          <div
+            style="
+              max-width: 1120px;
+              margin: 0 auto;
+              padding: 92px 40px 76px;
+              text-align: center;
+            "
+          >
+            <div
+              style="
+                font-family: &quot;JetBrains Mono&quot;, monospace;
+                font-size: 11px;
+                letter-spacing: 0.42em;
+                text-transform: uppercase;
+                color: #8c7c5f;
+              "
+            >
+              Dossier de campagne · Les Étoiles Pâles
+            </div>
+            <h1
+              style="
+                font-family: Cinzel, serif;
+                font-weight: 900;
+                font-size: clamp(38px, 6.5vw, 84px);
+                line-height: 0.96;
+                margin: 0;
+                letter-spacing: 0.02em;
+                color: #f3e9d2;
+                text-wrap: balance;
+              "
+            >
+              Le Reflux de<br />Yarath-Maximal
+            </h1>
+            <p
+              style="
+                max-width: 700px;
+                margin: 30px auto 0;
+                font-size: 18px;
+                line-height: 1.72;
+                color: #b8ab92;
+                font-style: italic;
+                text-wrap: pretty;
+              "
+            >
+              « Le monde-forge n'a pas été conquis. Il s'est retourné. Ses
+              fonderies tournent toujours, ses litanies sont toujours chantées —
+              simplement, ce ne sont plus les mêmes mots, et ce ne sont plus des
+              hommes qui les chantent. »
+            </p>
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                justify-content: center;
+                margin-top: 40px;
+                font-family: &quot;JetBrains Mono&quot;, monospace;
+                font-size: 11px;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+              "
+            >
+              <span
+                style="
+                  border: 1px solid #3a3129;
+                  padding: 9px 16px;
+                  color: #cbbb98;
+                  background: #14110d;
+                "
+                >5 missions · chacun pour soi</span
+              >
+            </div>
+          </div>
+        </header>
+
+        <nav
+          style="
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(11, 10, 9, 0.94);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #2e2721;
+          "
+        >
+          <div
+            style="
+              max-width: 1120px;
+              margin: 0 auto;
+              padding: 0 40px;
+              display: flex;
+              flex-wrap: wrap;
+              gap: 26px;
+              align-items: center;
+              min-height: 54px;
+              font-family: &quot;JetBrains Mono&quot;, monospace;
+              font-size: 10.5px;
+              letter-spacing: 0.2em;
+              text-transform: uppercase;
+            "
+          >
+            <a href="#theatre" style="color: #a2957f; border: none"
+              >I · Théâtre</a
+            >
+            <a href="#camps" style="color: #a2957f; border: none"
+              >II · Belligérants</a
+            >
+            <a href="#titan" style="color: #a2957f; border: none"
+              >III · Le Warhound</a
+            >
+            <a href="#arbre" style="color: #a2957f; border: none">IV · Arbre</a>
+            <a href="#missions" style="color: #a2957f; border: none"
+              >V · Missions</a
+            >
+            <a href="#progression" style="color: #a2957f; border: none"
+              >VI · Progression</a
+            >
+            <a href="#journal" style="color: #a2957f; border: none"
+              >VII · Journal</a
+            >
+          </div>
+        </nav>
+
+        <main style="max-width: 1120px; margin: 0 auto; padding: 0 40px 120px">
+          <section id="theatre" style="padding: 86px 0 0">
+            <div
+              style="
+                display: flex;
+                align-items: baseline;
+                gap: 18px;
+                border-bottom: 1px solid #2e2721;
+                padding-bottom: 14px;
+              "
+            >
+              <span
+                style="
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 11px;
+                  letter-spacing: 0.3em;
+                  color: #9b2226;
+                "
+                >I</span
+              >
+              <h2
+                style="
+                  font-family: Cinzel, serif;
+                  font-weight: 700;
+                  font-size: clamp(26px, 3.4vw, 40px);
+                  margin: 0;
+                  color: #f3e9d2;
+                  letter-spacing: 0.01em;
+                "
+              >
+                Le théâtre d'opérations
+              </h2>
+            </div>
+
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1.45fr 1fr;
+                gap: 54px;
+                margin-top: 40px;
+                align-items: start;
+              "
+            >
+              <div>
+                <p
+                  style="
+                    font-size: 19px;
+                    line-height: 1.78;
+                    margin: 0 0 22px;
+                    color: #d9cdb4;
+                    text-wrap: pretty;
+                  "
+                >
+                  <span
+                    style="
+                      float: left;
+                      font-family: Cinzel, serif;
+                      font-size: 66px;
+                      line-height: 0.78;
+                      margin: 6px 12px 0 0;
+                      color: #c9a227;
+                    "
+                    >Y</span
+                  >arath-Maximal est un monde-forge des Étoiles Pâles, posé sur
+                  le corridor qui relie Nocturne aux marches de Baal. Rien de
+                  prestigieux : des fonderies de blindage lourd, des chantiers
+                  de coque, et une chose que personne n'avait jugée importante
+                  avant la Trahison — un vault de logique contenant les archives
+                  pré-Unification de tout le secteur.
+                </p>
+                <p
+                  style="
+                    font-size: 19px;
+                    line-height: 1.78;
+                    margin: 0 0 22px;
+                    color: #d9cdb4;
+                    text-wrap: pretty;
+                  "
+                >
+                  La forge n'est pas tombée sous les bombes. Elle s'est
+                  retournée d'elle-même. Le Magos Dominus
+                  <strong style="color: #f3e9d2; font-weight: 600"
+                    >Kaustos-77</strong
+                  >
+                  a rompu ses serments à Mars, réécrit les esprits-machines de
+                  ses fonderies, et ouvert ses portes à une Fraternité de la
+                  XV<sup>e</sup> Légion venue chercher dans le vault ce que les
+                  Thousand Sons cherchent toujours : ce qui a été effacé. Il l'a
+                  fait par calcul, pas par amitié — et il commence à le
+                  regretter.
+                </p>
+                <p
+                  style="
+                    font-size: 19px;
+                    line-height: 1.78;
+                    margin: 0;
+                    color: #d9cdb4;
+                    text-wrap: pretty;
+                  "
+                >
+                  Quatre forces convergent, et aucune ne marche avec une autre.
+                  Depuis Nocturne, une compagnie de
+                  <strong style="color: #f3e9d2; font-weight: 600"
+                    >Salamanders</strong
+                  >
+                  avec un ordre simple : la forge ne doit plus jamais produire.
+                  Depuis Baal, une compagnie de
+                  <strong style="color: #f3e9d2; font-weight: 600"
+                    >Blood Angels</strong
+                  >
+                  avec un ordre différent : ce qui dort dans le vault doit
+                  rentrer intact, et nul autre ne doit l'avoir lu. Dans la
+                  forge, Kaustos-77 défend le corps qu'il s'est fabriqué. Et
+                  sous le vault, la Neuvième Fraternité lit déjà.
+                </p>
+              </div>
+
+              <aside
+                style="
+                  border: 1px solid #2e2721;
+                  background: #14110d;
+                  padding: 28px 26px;
+                "
+              >
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 10px;
+                    letter-spacing: 0.28em;
+                    text-transform: uppercase;
+                    color: #8c7c5f;
+                    margin-bottom: 20px;
+                  "
+                >
+                  Fiche système
+                </div>
+                <dl style="margin: 0; display: grid; gap: 16px">
+                  <div style="display: grid; gap: 4px">
+                    <dt
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.18em;
+                        text-transform: uppercase;
+                        color: #7d7160;
+                      "
+                    >
+                      Désignation
+                    </dt>
+                    <dd style="margin: 0; font-size: 16px; color: #e6dcc8">
+                      Yarath-Maximal — monde-forge du Dark Mechanicum
+                    </dd>
+                  </div>
+                  <div style="display: grid; gap: 4px">
+                    <dt
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.18em;
+                        text-transform: uppercase;
+                        color: #7d7160;
+                      "
+                    >
+                      Région
+                    </dt>
+                    <dd style="margin: 0; font-size: 16px; color: #e6dcc8">
+                      Les Étoiles Pâles, entre Nocturne et le Maelstrom —
+                      corridor des mondes-forges
+                    </dd>
+                  </div>
+                  <div style="display: grid; gap: 4px">
+                    <dt
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.18em;
+                        text-transform: uppercase;
+                        color: #7d7160;
+                      "
+                    >
+                      Enjeu
+                    </dt>
+                    <dd style="margin: 0; font-size: 16px; color: #e6dcc8">
+                      Le Vault de Logique Kaustos-Alpha, les chantiers de
+                      Titans, et Syrgalah, le Warhound de la Legio Audax
+                    </dd>
+                  </div>
+                  <div style="display: grid; gap: 4px">
+                    <dt
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.18em;
+                        text-transform: uppercase;
+                        color: #7d7160;
+                      "
+                    >
+                      Durée
+                    </dt>
+                    <dd style="margin: 0; font-size: 16px; color: #e6dcc8">
+                      5 missions · 1 session toutes les 2 à 3 semaines
+                    </dd>
+                  </div>
+                  <div style="display: grid; gap: 4px">
+                    <dt
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.18em;
+                        text-transform: uppercase;
+                        color: #7d7160;
+                      "
+                    >
+                      Collection
+                    </dt>
+                    <dd style="margin: 0; font-size: 16px; color: #e6dcc8">
+                      {{ budget }} points par joueur suffisent pour toute la
+                      campagne
+                    </dd>
+                  </div>
+                </dl>
+              </aside>
+            </div>
+
+            <figure
+              style="
+                margin: 48px 0 0;
+                border: 1px solid #2e2721;
+                background: #14110d;
+                padding: 14px;
+              "
+            >
+              <img
+                src="assets/carte-globale.jpg"
+                alt="Carta Galactica — position de Yarath-Maximal dans les Étoiles Pâles"
+                style="
+                  width: 100%;
+                  display: block;
+                  filter: sepia(0.3) contrast(1.06) brightness(0.84);
+                  border: 1px solid #221d18;
+                "
+              />
+              <figcaption
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(4, 1fr);
+                  gap: 22px;
+                  padding: 20px 8px 6px;
+                "
+              >
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.2em;
+                      text-transform: uppercase;
+                      color: #c9a227;
+                      margin-bottom: 6px;
+                    "
+                  >
+                    Nocturne
+                  </div>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 14px;
+                      line-height: 1.58;
+                      color: #8c7c5f;
+                    "
+                  >
+                    Base de départ des Salamanders. Deux sauts jusqu'aux Étoiles
+                    Pâles.
+                  </p>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.2em;
+                      text-transform: uppercase;
+                      color: #c9a227;
+                      margin-bottom: 6px;
+                    "
+                  >
+                    Baal
+                  </div>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 14px;
+                      line-height: 1.58;
+                      color: #8c7c5f;
+                    "
+                  >
+                    Monde d'origine des Blood Angels. Le plus long transit des
+                    quatre — ils arrivent en dernier, et le savent.
+                  </p>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.2em;
+                      text-transform: uppercase;
+                      color: #c9524f;
+                      margin-bottom: 6px;
+                    "
+                  >
+                    Yarath-Maximal
+                  </div>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 14px;
+                      line-height: 1.58;
+                      color: #8c7c5f;
+                    "
+                  >
+                    Objectif commun aux quatre. Sur la marge des Étoiles Pâles,
+                    au bord de la zone tenue par le Dark Mechanicum.
+                  </p>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.2em;
+                      text-transform: uppercase;
+                      color: #c9524f;
+                      margin-bottom: 6px;
+                    "
+                  >
+                    Le Maelstrom
+                  </div>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 14px;
+                      line-height: 1.58;
+                      color: #8c7c5f;
+                    "
+                  >
+                    Voisin immédiat : tempête warp permanente. Explique la
+                    sorcellerie stable de la XV<sup>e</sup> et l'isolement du
+                    système.
+                  </p>
+                </div>
+              </figcaption>
+            </figure>
+
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 22px;
+                margin-top: 26px;
+              "
+            >
+              <div
+                style="
+                  border: 1px solid #2e2721;
+                  border-top: 2px solid #c9a227;
+                  background: #14110d;
+                  padding: 24px;
+                "
+              >
+                <div
+                  style="
+                    font-family: Cinzel, serif;
+                    font-size: 19px;
+                    color: #f3e9d2;
+                    margin-bottom: 10px;
+                  "
+                >
+                  La surface
+                </div>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 15.5px;
+                    line-height: 1.66;
+                    color: #a2957f;
+                  "
+                >
+                  Plaines de scorie et rampes de coulée, sous un ciel de fumée.
+                  Chars, marcheurs et artillerie autorisés.
+                </p>
+              </div>
+              <div
+                style="
+                  border: 1px solid #2e2721;
+                  border-top: 2px solid #9b2226;
+                  background: #14110d;
+                  padding: 24px;
+                "
+              >
+                <div
+                  style="
+                    font-family: Cinzel, serif;
+                    font-size: 19px;
+                    color: #f3e9d2;
+                    margin-bottom: 10px;
+                  "
+                >
+                  Les entrailles
+                </div>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 15.5px;
+                    line-height: 1.66;
+                    color: #a2957f;
+                  "
+                >
+                  Galeries de coulée, sas de pression, cloîtres de cogitateurs.
+                  Ni aéronef, ni tir sans ligne de vue. Pack « Zone Mortalis ».
+                </p>
+              </div>
+              <div
+                style="
+                  border: 1px solid #2e2721;
+                  border-top: 2px solid #3f7d77;
+                  background: #14110d;
+                  padding: 24px;
+                "
+              >
+                <div
+                  style="
+                    font-family: Cinzel, serif;
+                    font-size: 19px;
+                    color: #f3e9d2;
+                    margin-bottom: 10px;
+                  "
+                >
+                  Les chantiers
+                </div>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 15.5px;
+                    line-height: 1.66;
+                    color: #a2957f;
+                  "
+                >
+                  Nefs de montage de Titans, ponts roulants, berceaux de coque.
+                  C'est là qu'attend le Warhound — et c'est ce qui fait basculer
+                  la campagne.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="camps" style="padding: 92px 0 0">
+            <div
+              style="
+                display: flex;
+                align-items: baseline;
+                gap: 18px;
+                border-bottom: 1px solid #2e2721;
+                padding-bottom: 14px;
+              "
+            >
+              <span
+                style="
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 11px;
+                  letter-spacing: 0.3em;
+                  color: #9b2226;
+                "
+                >II</span
+              >
+              <h2
+                style="
+                  font-family: Cinzel, serif;
+                  font-weight: 700;
+                  font-size: clamp(26px, 3.4vw, 40px);
+                  margin: 0;
+                  color: #f3e9d2;
+                "
+              >
+                Les quatre belligérants
+              </h2>
+            </div>
+            <p
+              style="
+                font-size: 18px;
+                line-height: 1.72;
+                color: #b8ab92;
+                max-width: 800px;
+                margin: 26px 0 40px;
+                text-wrap: pretty;
+              "
+            >
+              Quatre joueurs, quatre agendas. Chacun marque ses propres points
+              de campagne et poursuit son propre serment ; les alliances se
+              nouent à la table, pour un tour ou pour une partie, et se rompent
+              de même.
+            </p>
+
+            <div
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 26px"
+            >
+              <div
+                style="
+                  border: 1px solid #3a3129;
+                  border-top: 2px solid #2f6b4f;
+                  background: linear-gradient(#191510, #100e0b);
+                  padding: 28px 26px;
+                "
+              >
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 10px;
+                    letter-spacing: 0.3em;
+                    text-transform: uppercase;
+                    color: #5aa87f;
+                    margin-bottom: 12px;
+                  "
+                >
+                  Raphaël — « Le Serment de Cendre »
+                </div>
+                <h3
+                  style="
+                    font-family: Cinzel, serif;
+                    font-size: 24px;
+                    margin: 0 0 16px;
+                    color: #f3e9d2;
+                  "
+                >
+                  Salamanders — XVIII<sup>e</sup>
+                </h3>
+                <div style="border-left: 2px solid #2f6b4f; padding-left: 16px">
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 15.5px;
+                      line-height: 1.62;
+                      color: #a2957f;
+                    "
+                  >
+                    Venus de Nocturne pour éteindre la forge. Terminators,
+                    lance-flammes lourds, dreadnoughts. Détachement de Croisade
+                    en surface,
+                    <em>Zone Mortalis Bulwark</em> en intérieur. Doctrine :
+                    entrer lentement, ne rien laisser derrière soi — y compris
+                    ce que les trois autres étaient venus chercher.
+                  </p>
+                  <p
+                    style="
+                      margin: 10px 0 0;
+                      font-size: 14.5px;
+                      line-height: 1.58;
+                      color: #7d7160;
+                    "
+                  >
+                    Serment : <em>« La forge ne produira plus. »</em>
+                  </p>
+                  <p
+                    style="
+                      margin: 8px 0 0;
+                      font-size: 14.5px;
+                      line-height: 1.58;
+                      color: #5aa87f;
+                    "
+                  >
+                    Victoire personnelle : Yarath-Maximal ne produit plus rien à
+                    la fin de la mission V.
+                  </p>
+                </div>
+              </div>
+              <div
+                style="
+                  border: 1px solid #3a3129;
+                  border-top: 2px solid #9b2226;
+                  background: linear-gradient(#191510, #100e0b);
+                  padding: 28px 26px;
+                "
+              >
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 10px;
+                    letter-spacing: 0.3em;
+                    text-transform: uppercase;
+                    color: #d1483c;
+                    margin-bottom: 12px;
+                  "
+                >
+                  Jean — « Le Serment de Baal »
+                </div>
+                <h3
+                  style="
+                    font-family: Cinzel, serif;
+                    font-size: 24px;
+                    margin: 0 0 16px;
+                    color: #f3e9d2;
+                  "
+                >
+                  Blood Angels — IX<sup>e</sup>
+                </h3>
+                <div style="border-left: 2px solid #9b2226; padding-left: 16px">
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 15.5px;
+                      line-height: 1.62;
+                      color: #a2957f;
+                    "
+                  >
+                    Venus de Baal pour le vault — pas pour le lire, pour
+                    l'emporter. Escouades d'assaut à réacteurs dorsaux, Crimson
+                    Paladins, maîtres de la lame. Détachement de Croisade en
+                    surface, <em>Zone Mortalis Linebreaker</em> en intérieur.
+                    Doctrine : tomber du plafond, finir au corps à corps, ne
+                    jamais laisser une salle à moitié prise.
+                  </p>
+                  <p
+                    style="
+                      margin: 10px 0 0;
+                      font-size: 14.5px;
+                      line-height: 1.58;
+                      color: #7d7160;
+                    "
+                  >
+                    Serment :
+                    <em
+                      >« Ce qui dort à Yarath rentrera à Baal — ou ne sera lu
+                      par personne. »</em
+                    >
+                  </p>
+                  <p
+                    style="
+                      margin: 8px 0 0;
+                      font-size: 14.5px;
+                      line-height: 1.58;
+                      color: #d1483c;
+                    "
+                  >
+                    Victoire personnelle : les archives quittent le système sans
+                    que Tristan les ait lues.
+                  </p>
+                </div>
+              </div>
+              <div
+                style="
+                  border: 1px solid #3a3129;
+                  border-top: 2px solid #8a6a3a;
+                  background: linear-gradient(#191510, #100e0b);
+                  padding: 28px 26px;
+                "
+              >
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 10px;
+                    letter-spacing: 0.3em;
+                    text-transform: uppercase;
+                    color: #b8903f;
+                    margin-bottom: 12px;
+                  "
+                >
+                  Thomas — « Le Protocole Kaustos »
+                </div>
+                <h3
+                  style="
+                    font-family: Cinzel, serif;
+                    font-size: 24px;
+                    margin: 0 0 16px;
+                    color: #f3e9d2;
+                  "
+                >
+                  Dark Mechanicum — Kaustos-77
+                </h3>
+                <div style="border-left: 2px solid #8a6a3a; padding-left: 16px">
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 15.5px;
+                      line-height: 1.62;
+                      color: #a2957f;
+                    "
+                  >
+                    Le Magos Dominus
+                    <strong style="color: #cbbb98; font-weight: 600"
+                      >Kaustos-77</strong
+                    >
+                    et sa taghmata corrompue. Maître du terrain : portes,
+                    cogitateurs, protocoles, esprits-machines réécrits. C'est
+                    lui qui décide de l'obscurité et des sas verrouillés. Il a
+                    invité la Fraternité ; il n'a jamais promis de la laisser
+                    repartir.
+                  </p>
+                  <p
+                    style="
+                      margin: 10px 0 0;
+                      font-size: 14.5px;
+                      line-height: 1.58;
+                      color: #7d7160;
+                    "
+                  >
+                    Serment :
+                    <em
+                      >« La forge est mon corps. On n'entre pas dans un corps
+                      sans conséquence. »</em
+                    >
+                  </p>
+                  <p
+                    style="
+                      margin: 8px 0 0;
+                      font-size: 14.5px;
+                      line-height: 1.58;
+                      color: #b8903f;
+                    "
+                  >
+                    Victoire personnelle : les fonderies tournent encore, et il
+                    a survécu à ses invités.
+                  </p>
+                </div>
+              </div>
+              <div
+                style="
+                  border: 1px solid #3a3129;
+                  border-top: 2px solid #6a4b9b;
+                  background: linear-gradient(#191510, #100e0b);
+                  padding: 28px 26px;
+                "
+              >
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 10px;
+                    letter-spacing: 0.3em;
+                    text-transform: uppercase;
+                    color: #9273c9;
+                    margin-bottom: 12px;
+                  "
+                >
+                  Tristan — « La Neuvième Fraternité »
+                </div>
+                <h3
+                  style="
+                    font-family: Cinzel, serif;
+                    font-size: 24px;
+                    margin: 0 0 16px;
+                    color: #f3e9d2;
+                  "
+                >
+                  Thousand Sons — XV<sup>e</sup>
+                </h3>
+                <div style="border-left: 2px solid #6a4b9b; padding-left: 16px">
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 15.5px;
+                      line-height: 1.62;
+                      color: #a2957f;
+                    "
+                  >
+                    Venue lire le vault avant que quiconque ne le brûle ou ne
+                    l'emporte. Sorciers, automates Sekhmet, tirs précis.
+                    <em>Zone Mortalis Strike Force</em> : peu d'unités, chacune
+                    capable de tenir une salle seule. Le seul des quatre qui n'a
+                    rien à ramener — il lui suffit d'avoir lu.
+                  </p>
+                  <p
+                    style="
+                      margin: 10px 0 0;
+                      font-size: 14.5px;
+                      line-height: 1.58;
+                      color: #7d7160;
+                    "
+                  >
+                    Serment : <em>« Ce qui a été effacé sera relu. »</em>
+                  </p>
+                  <p
+                    style="
+                      margin: 8px 0 0;
+                      font-size: 14.5px;
+                      line-height: 1.58;
+                      color: #9273c9;
+                    "
+                  >
+                    Victoire personnelle : la lecture est achevée, même si tout
+                    le reste est perdu.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style="
+                border: 1px solid #2e2721;
+                background: #14110d;
+                padding: 30px 28px;
+                margin-top: 26px;
+              "
+            >
+              <div
+                style="
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 10px;
+                  letter-spacing: 0.28em;
+                  text-transform: uppercase;
+                  color: #8c7c5f;
+                  margin-bottom: 18px;
+                "
+              >
+                Traits de faction — à appliquer sur toute la campagne
+              </div>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(4, 1fr);
+                  gap: 24px;
+                "
+              >
+                <div>
+                  <div
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: 17px;
+                      color: #f3e9d2;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Vœu prométhéen
+                  </div>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 14.5px;
+                      line-height: 1.6;
+                      color: #a2957f;
+                    "
+                  >
+                    <strong style="color: #cbbb98; font-weight: 600"
+                      >Salamanders</strong
+                    >
+                    — une fois par partie, une unité relance tous ses jets de
+                    blessure ratés avec des armes à gabarit de flamme.
+                  </p>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: 17px;
+                      color: #f3e9d2;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Colère de Baal
+                  </div>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 14.5px;
+                      line-height: 1.6;
+                      color: #a2957f;
+                    "
+                  >
+                    <strong style="color: #cbbb98; font-weight: 600"
+                      >Blood Angels</strong
+                    >
+                    — une unité par partie relance son jet de charge ; si elle
+                    charge à travers une porte ouverte ou depuis une hauteur,
+                    elle gagne +1 pour blesser jusqu'à la fin du tour.
+                  </p>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: 17px;
+                      color: #f3e9d2;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Protocoles Kaustos
+                  </div>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 14.5px;
+                      line-height: 1.6;
+                      color: #a2957f;
+                    "
+                  >
+                    <strong style="color: #cbbb98; font-weight: 600"
+                      >Dark Mechanicum</strong
+                    >
+                    — une fois par tour, actionner une porte à distance sans
+                    test, n'importe où sur la table. En surface, deux
+                    servo-tourelles gratuites en défense.
+                  </p>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: 17px;
+                      color: #f3e9d2;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Neuvième Fraternité
+                  </div>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 14.5px;
+                      line-height: 1.6;
+                      color: #a2957f;
+                    "
+                  >
+                    <strong style="color: #cbbb98; font-weight: 600"
+                      >Thousand Sons</strong
+                    >
+                    — la proximité du Maelstrom autorise une manifestation
+                    psychique supplémentaire par tour ; en cas de ratage,
+                    l'obscurité s'épaissit.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style="
+                border: 1px solid #3a2020;
+                background: linear-gradient(#1a100f, #100e0b);
+                padding: 30px 28px;
+                margin-top: 26px;
+              "
+            >
+              <div
+                style="
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 10px;
+                  letter-spacing: 0.28em;
+                  text-transform: uppercase;
+                  color: #c9524f;
+                  margin-bottom: 8px;
+                "
+              >
+                Pactes, ruptures et trahisons — optionnel
+              </div>
+              <p
+                style="
+                  margin: 0 0 20px;
+                  font-size: 16px;
+                  line-height: 1.68;
+                  color: #b8ab92;
+                  max-width: 820px;
+                "
+              >
+                Rien de ce qui suit n'est obligatoire : une campagne entière
+                peut se jouer sans qu'un seul pacte soit noué. Mais quatre
+                agendas incompatibles finissent rarement par quatre lignes
+                droites.
+              </p>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(3, 1fr);
+                  gap: 24px;
+                "
+              >
+                <div style="border-left: 2px solid #2f6b4f; padding-left: 16px">
+                  <div
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: 17px;
+                      color: #f3e9d2;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Nouer
+                  </div>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 14.5px;
+                      line-height: 1.6;
+                      color: #a2957f;
+                    "
+                  >
+                    À tout moment, deux joueurs annoncent un pacte, avec sa
+                    durée (un tour, ou jusqu'à la fin de la partie) et son prix
+                    : un objectif cédé, un point de campagne promis, etc... (à
+                    définir).
+                  </p>
+                </div>
+                <div style="border-left: 2px solid #c9a227; padding-left: 16px">
+                  <div
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: 17px;
+                      color: #f3e9d2;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Tenir
+                  </div>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 14.5px;
+                      line-height: 1.6;
+                      color: #a2957f;
+                    "
+                  >
+                    Tant qu'il tient : les deux joueurs ne se ciblent pas, leurs
+                    unités se traversent comme des unités amies lors des
+                    mouvements de repli, et ils ne se contestent pas un objectif
+                    — chacun le marque normalement. Un pacte annoncé pour toute
+                    la partie et jamais rompu vaut
+                    <strong style="color: #f0d67a; font-weight: 600"
+                      >+1 point de campagne</strong
+                    >
+                    à chacun des deux.
+                  </p>
+                </div>
+                <div style="border-left: 2px solid #9b2226; padding-left: 16px">
+                  <div
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: 17px;
+                      color: #f3e9d2;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Rompre &amp; trahir
+                  </div>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 14.5px;
+                      line-height: 1.6;
+                      color: #a2957f;
+                    "
+                  >
+                    <strong style="color: #cbbb98; font-weight: 600"
+                      >Rompre</strong
+                    >
+                    est gratuit : on le déclare au début de n'importe quelle
+                    phase, et on agit normalement ensuite.
+                    <strong style="color: #c9524f; font-weight: 600"
+                      >Trahir</strong
+                    >
+                    — rompre pendant sa propre phase pour frapper immédiatement
+                    son allié — donne +1 pour toucher sur cette attaque, mais
+                    coûte
+                    <strong style="color: #c9524f; font-weight: 600"
+                      >1 point de campagne</strong
+                    >
+                    au traître et en donne 1 au trahi.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="titan" style="padding: 92px 0 0">
+            <div
+              style="
+                display: flex;
+                align-items: baseline;
+                gap: 18px;
+                border-bottom: 1px solid #2e2721;
+                padding-bottom: 14px;
+              "
+            >
+              <span
+                style="
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 11px;
+                  letter-spacing: 0.3em;
+                  color: #9b2226;
+                "
+                >III</span
+              >
+              <h2
+                style="
+                  font-family: Cinzel, serif;
+                  font-weight: 700;
+                  font-size: clamp(26px, 3.4vw, 40px);
+                  margin: 0;
+                  color: #f3e9d2;
+                "
+              >
+                Le Warhound
+                <span style="font-style: italic; color: #c9a227">Syrgalah</span>
+              </h2>
+            </div>
+
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1.3fr 1fr;
+                gap: 44px;
+                margin-top: 40px;
+                align-items: start;
+              "
+            >
+              <div>
+                <p
+                  style="
+                    font-size: 19px;
+                    line-height: 1.78;
+                    margin: 0 0 22px;
+                    color: #d9cdb4;
+                    text-wrap: pretty;
+                  "
+                >
+                  Dans les chantiers de Yarath-Maximal veille
+                  <strong style="color: #f3e9d2; font-weight: 600"
+                    >Syrgalah</strong
+                  >, prédateur d'acier de la
+                  <strong style="color: #f3e9d2; font-weight: 600"
+                    >Legio Audax</strong
+                  >
+                  — les Loups de Braise. Forgée dans les fonderies de Sarum et
+                  aguerrie dans la boucherie de Bodt aux côtés des World Eaters,
+                  la machine arpente son berceau comme une ombre de mort
+                  incarnée : Canon Inferno prêt à vomir ses torrents de flamme,
+                  Mega-Bolter Vulcan armé pour déchirer chair et acier. Elle
+                  n'est pas tombée avec la forge — elle est venue la garder, au
+                  nom du pacte que Kaustos-77 a scellé avec la Legio Audax le
+                  jour où le monde-forge s'est retourné.
+                </p>
+                <p
+                  style="
+                    font-size: 19px;
+                    line-height: 1.78;
+                    margin: 0 0 22px;
+                    color: #d9cdb4;
+                    text-wrap: pretty;
+                  "
+                >
+                  <strong style="color: #f3e9d2; font-weight: 600"
+                    >Syrgalah ne répond qu'à Thomas au début de la
+                    campagne.</strong
+                  >
+                  Mais un Warhound reste un enjeu, pas une certitude : elle est
+                  la cible de la mission III et l'atout de la mission V. Un seul
+                  joueur le contrôle, et seulement à partir du moment où il l'a
+                  gagnée sur la table — pacte renouvelé ou commandes arrachées.
+                </p>
+                <div
+                  style="
+                    display: grid;
+                    gap: 16px;
+                    font-size: 16.5px;
+                    line-height: 1.7;
+                    color: #b8ab92;
+                  "
+                >
+                  <div
+                    style="border-left: 2px solid #c9a227; padding-left: 16px"
+                  >
+                    <strong style="color: #f0d67a; font-weight: 600"
+                      >Mission III — le rite inachevé.</strong
+                    >
+                    Le Warhound est posé sur la table, immobile : Solotine
+                    refuse de l'engager tant que Kaustos-77 n'a pas fini d'y
+                    verser les dernières litanies de consécration. Il ne bouge
+                    pas, ne tire pas, et compte comme une fortification
+                    (blindage 13, 6 points de coque, terrain infranchissable).
+                    Le joueur qui contrôle son berceau à la fin de la partie la
+                    remporte.
+                  </div>
+                  <div
+                    style="border-left: 2px solid #c9a227; padding-left: 16px"
+                  >
+                    <strong style="color: #f0d67a; font-weight: 600"
+                      >Mission V — la marche.</strong
+                    >
+                    Le joueur propriétaire le déploie lors de l'avant dernier
+                    tour de la bataille.
+                  </div>
+                  <div
+                    style="border-left: 2px solid #9b2226; padding-left: 16px"
+                  >
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >S'il est détruit</strong
+                    >
+                    en mission V, la carcasse compte comme un objectif de valeur
+                    3 pour le joueur qui a porté le coup fatal, jusqu'à la fin
+                    de la partie : sa dépouille valait déjà plus que sa marche.
+                  </div>
+                </div>
+              </div>
+
+              <aside style="display: grid; gap: 20px; align-content: start">
+                <div
+                  style="
+                    border: 1px solid #2e2721;
+                    background: #14110d;
+                    padding: 24px;
+                  "
+                >
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.24em;
+                      text-transform: uppercase;
+                      color: #8c7c5f;
+                      margin-bottom: 12px;
+                    "
+                  >
+                    L'équipage
+                  </div>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 14.5px;
+                      line-height: 1.62;
+                      color: #a2957f;
+                    "
+                  >
+                    Aux commandes :
+                    <strong style="color: #cbbb98; font-weight: 600"
+                      >Princeps Venric Solotine</strong
+                    >, vétéran aux nerfs d'acier, épaulé par ses Moderatii
+                    <strong style="color: #cbbb98; font-weight: 600"
+                      >Toth Kol</strong
+                    >
+                    (armement) et
+                    <strong style="color: #cbbb98; font-weight: 600"
+                      >Keeda Bly</strong
+                    >
+                    (défense).
+                  </p>
+                </div>
+                <div
+                  style="
+                    border: 1px solid #4a3c22;
+                    background: linear-gradient(#1c1710, #14110d);
+                    padding: 24px;
+                  "
+                >
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.24em;
+                      text-transform: uppercase;
+                      color: #c9a227;
+                      margin-bottom: 14px;
+                    "
+                  >
+                    Selon le joueur qui l'obtient
+                  </div>
+                  <div
+                    style="
+                      display: grid;
+                      gap: 16px;
+                      font-size: 15px;
+                      line-height: 1.62;
+                      color: #a2957f;
+                    "
+                  >
+                    <div>
+                      <strong style="color: #c9524f; font-weight: 600"
+                        >Thomas — « Le pacte tient »</strong
+                      ><br />Solotine et ses Moderatii, Toth Kol et Keeda Bly,
+                      restent aux commandes. Le Warhound gagne 1 point de coque
+                      supplémentaire — les litanies de Sarum et le sang versé à
+                      Bodt ne s'oublient pas — mais son équipage, voué à Khorne,
+                      doit charger l'ennemi le plus proche chaque fois qu'il le
+                      peut.
+                    </div>
+                    <div>
+                      <strong style="color: #c9a227; font-weight: 600"
+                        >N'importe qui d'autre — « Commandes arrachées »</strong
+                      ><br />Les Moderatii de Solotine sont passés par l'épée et
+                      remplacés par deux servants improvisés. Le Warhound peut,
+                      une fois par partie, relancer tous ses jets de touche
+                      d'une même arme : la machine, dressée pour tuer, ne fait
+                      pas de différence entre ses maîtres. Mais elle ne peut
+                      jamais courir deux tours de suite.
+                    </div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </section>
+
+          <section id="arbre" style="padding: 92px 0 0">
+            <div
+              style="
+                display: flex;
+                align-items: baseline;
+                gap: 18px;
+                border-bottom: 1px solid #2e2721;
+                padding-bottom: 14px;
+              "
+            >
+              <span
+                style="
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 11px;
+                  letter-spacing: 0.3em;
+                  color: #9b2226;
+                "
+                >IV</span
+              >
+              <h2
+                style="
+                  font-family: Cinzel, serif;
+                  font-weight: 700;
+                  font-size: clamp(26px, 3.4vw, 40px);
+                  margin: 0;
+                  color: #f3e9d2;
+                "
+              >
+                L'arbre de campagne
+              </h2>
+            </div>
+            <p
+              style="
+                font-size: 18px;
+                line-height: 1.72;
+                color: #b8ab92;
+                max-width: 800px;
+                margin: 26px 0 44px;
+                text-wrap: pretty;
+              "
+            >
+              Cinq missions, une bascule après la troisième. Chaque résultat
+              change la mission suivante : son format, qui l'ouvre, et qui
+              possède Syrgalah.
+            </p>
+
+            <div style="display: grid; gap: 0">
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 92px 1fr;
+                  gap: 26px;
+                  align-items: stretch;
+                "
+              >
+                <div
+                  style="
+                    display: grid;
+                    place-items: center;
+                    border: 1px solid #2e2721;
+                    background: #14110d;
+                    font-family: Cinzel, serif;
+                    font-size: 30px;
+                    color: #c9a227;
+                  "
+                >
+                  I
+                </div>
+                <div
+                  style="
+                    border: 1px solid #2e2721;
+                    background: #14110d;
+                    padding: 22px 26px;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      flex-wrap: wrap;
+                      gap: 12px;
+                      align-items: baseline;
+                      justify-content: space-between;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: Cinzel, serif;
+                        font-size: 21px;
+                        color: #f3e9d2;
+                      "
+                    >
+                      Cendres sur Yarath
+                      <span
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 10px;
+                          letter-spacing: 0.18em;
+                          color: #7d7160;
+                          text-transform: uppercase;
+                          margin-left: 8px;
+                        "
+                        >4 joueurs</span
+                      >
+                    </div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 11px;
+                        letter-spacing: 0.16em;
+                        color: #8c7c5f;
+                        text-transform: uppercase;
+                      "
+                    >
+                      Planétaire · {{ pts1 }} pts/joueur
+                    </div>
+                  </div>
+                  <p
+                    style="
+                      margin: 10px 0 0;
+                      font-size: 15.5px;
+                      line-height: 1.64;
+                      color: #a2957f;
+                    "
+                  >
+                    Thomas défend, les trois autres débarquent — chacun pour
+                    soi. Le vainqueur emporte un
+                    <strong style="color: #cbbb98; font-weight: 600"
+                      >avantage d'accès</strong
+                    >
+                    pour la mission II.
+                  </p>
+                </div>
+              </div>
+              <div
+                style="
+                  height: 26px;
+                  margin-left: 45px;
+                  border-left: 1px solid #3a3129;
+                "
+              ></div>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 92px 1fr;
+                  gap: 26px;
+                  align-items: stretch;
+                "
+              >
+                <div
+                  style="
+                    display: grid;
+                    place-items: center;
+                    border: 1px solid #2e2721;
+                    background: #14110d;
+                    font-family: Cinzel, serif;
+                    font-size: 30px;
+                    color: #9b2226;
+                  "
+                >
+                  II
+                </div>
+                <div
+                  style="
+                    border: 1px solid #2e2721;
+                    background: #14110d;
+                    padding: 22px 26px;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      flex-wrap: wrap;
+                      gap: 12px;
+                      align-items: baseline;
+                      justify-content: space-between;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: Cinzel, serif;
+                        font-size: 21px;
+                        color: #f3e9d2;
+                      "
+                    >
+                      Les galeries de coulée
+                      <span
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 10px;
+                          letter-spacing: 0.18em;
+                          color: #7d7160;
+                          text-transform: uppercase;
+                          margin-left: 8px;
+                        "
+                        >Jean vs Thomas</span
+                      >
+                    </div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 11px;
+                        letter-spacing: 0.16em;
+                        color: #8c7c5f;
+                        text-transform: uppercase;
+                      "
+                    >
+                      Zone Mortalis · {{ pts2 }} pts/joueur
+                    </div>
+                  </div>
+                  <p
+                    style="
+                      margin: 10px 0 0;
+                      font-size: 15.5px;
+                      line-height: 1.64;
+                      color: #a2957f;
+                    "
+                  >
+                    Course souterraine vers les chantiers. Le vainqueur du duel
+                    fixe la
+                    <strong style="color: #cbbb98; font-weight: 600"
+                      >carte de déploiement</strong
+                    >
+                    de la mission III.
+                  </p>
+                </div>
+              </div>
+              <div
+                style="
+                  height: 26px;
+                  margin-left: 45px;
+                  border-left: 1px solid #3a3129;
+                "
+              ></div>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 92px 1fr;
+                  gap: 26px;
+                  align-items: stretch;
+                "
+              >
+                <div
+                  style="
+                    display: grid;
+                    place-items: center;
+                    border: 2px solid #c9a227;
+                    background: #1c1710;
+                    font-family: Cinzel, serif;
+                    font-size: 30px;
+                    color: #f0d67a;
+                  "
+                >
+                  III
+                </div>
+                <div
+                  style="
+                    border: 1px solid #4a3c22;
+                    background: linear-gradient(#1c1710, #14110d);
+                    padding: 22px 26px;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      flex-wrap: wrap;
+                      gap: 12px;
+                      align-items: baseline;
+                      justify-content: space-between;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: Cinzel, serif;
+                        font-size: 21px;
+                        color: #f3e9d2;
+                      "
+                    >
+                      Les chantiers de Syrgalah
+                      <span
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 10px;
+                          letter-spacing: 0.22em;
+                          color: #c9a227;
+                          text-transform: uppercase;
+                          margin-left: 8px;
+                          animation: emberPulse 3.2s ease-in-out infinite;
+                        "
+                        >bascule</span
+                      >
+                      <span
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 10px;
+                          letter-spacing: 0.18em;
+                          color: #7d7160;
+                          text-transform: uppercase;
+                          margin-left: 8px;
+                        "
+                        >4 joueurs</span
+                      >
+                    </div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 11px;
+                        letter-spacing: 0.16em;
+                        color: #8c7c5f;
+                        text-transform: uppercase;
+                      "
+                    >
+                      Planétaire · {{ pts3 }} pts/joueur
+                    </div>
+                  </div>
+                  <p
+                    style="
+                      margin: 10px 0 0;
+                      font-size: 15.5px;
+                      line-height: 1.64;
+                      color: #a2957f;
+                    "
+                  >
+                    Syrgalah change de main. Le vainqueur le contrôle en mission
+                    V ; tout joueur encore sans victoire gagne l'atout
+                    <strong style="color: #f0d67a; font-weight: 600"
+                      >Dernier Recours</strong
+                    >.
+                  </p>
+                </div>
+              </div>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 92px 1fr;
+                  gap: 26px;
+                "
+              >
+                <div></div>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 22px;
+                    margin-top: 26px;
+                    position: relative;
+                  "
+                >
+                  <div
+                    style="
+                      position: absolute;
+                      top: -26px;
+                      left: 25%;
+                      right: 25%;
+                      height: 1px;
+                      background: #3a3129;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      border: 1px solid #2e2721;
+                      background: #14110d;
+                      padding: 22px 26px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #c9a227;
+                        margin-bottom: 8px;
+                      "
+                    >
+                      Branche A — le vault est encore l'enjeu
+                    </div>
+                    <div
+                      style="
+                        font-family: Cinzel, serif;
+                        font-size: 20px;
+                        color: #f3e9d2;
+                      "
+                    >
+                      IV·A — Le Vault de Logique
+                      <span
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 10px;
+                          letter-spacing: 0.18em;
+                          color: #7d7160;
+                          text-transform: uppercase;
+                          margin-left: 8px;
+                        "
+                        >Raphaël vs Tristan</span
+                      >
+                    </div>
+                    <p
+                      style="
+                        margin: 8px 0 0;
+                        font-size: 15px;
+                        line-height: 1.62;
+                        color: #a2957f;
+                      "
+                    >
+                      Zone Mortalis, {{ pts4 }} pts/joueur,
+                      <em>Ténèbres Abyssales</em>. Raphaël doit atteindre le
+                      vault avant que Tristan ne l'ait lu jusqu'au bout. Choisie
+                      par celui des deux qui est le moins bien classé.
+                    </p>
+                  </div>
+                  <div
+                    style="
+                      border: 1px solid #3a2020;
+                      background: #17100f;
+                      padding: 22px 26px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #c9524f;
+                        margin-bottom: 8px;
+                      "
+                    >
+                      Branche B — le vault est déjà perdu
+                    </div>
+                    <div
+                      style="
+                        font-family: Cinzel, serif;
+                        font-size: 20px;
+                        color: #f3e9d2;
+                      "
+                    >
+                      IV·B — Protocole de Cendres
+                      <span
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 10px;
+                          letter-spacing: 0.18em;
+                          color: #7d7160;
+                          text-transform: uppercase;
+                          margin-left: 8px;
+                        "
+                        >Raphaël vs Tristan</span
+                      >
+                    </div>
+                    <p
+                      style="
+                        margin: 8px 0 0;
+                        font-size: 15px;
+                        line-height: 1.62;
+                        color: #a2957f;
+                      "
+                    >
+                      Zone Mortalis, {{ pts4 }} pts/joueur, rôles inversés :
+                      Raphaël renonce au vault et saborde la forge avant de se
+                      retirer. Même règle de choix.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="
+                  height: 26px;
+                  margin-left: 45px;
+                  border-left: 1px solid #3a3129;
+                "
+              ></div>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 92px 1fr;
+                  gap: 26px;
+                  align-items: stretch;
+                "
+              >
+                <div
+                  style="
+                    display: grid;
+                    place-items: center;
+                    border: 1px solid #2e2721;
+                    background: #14110d;
+                    font-family: Cinzel, serif;
+                    font-size: 28px;
+                    color: #c9a227;
+                  "
+                >
+                  V
+                </div>
+                <div
+                  style="
+                    border: 1px solid #2e2721;
+                    background: #14110d;
+                    padding: 22px 26px;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      flex-wrap: wrap;
+                      gap: 12px;
+                      align-items: baseline;
+                      justify-content: space-between;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: Cinzel, serif;
+                        font-size: 21px;
+                        color: #f3e9d2;
+                      "
+                    >
+                      Le Verdict de Yarath
+                      <span
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 10px;
+                          letter-spacing: 0.18em;
+                          color: #7d7160;
+                          text-transform: uppercase;
+                          margin-left: 8px;
+                        "
+                        >4 joueurs</span
+                      >
+                    </div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 11px;
+                        letter-spacing: 0.16em;
+                        color: #8c7c5f;
+                        text-transform: uppercase;
+                      "
+                    >
+                      Grande bataille · {{ pts5 }} pts/joueur
+                    </div>
+                  </div>
+                  <p
+                    style="
+                      margin: 10px 0 0;
+                      font-size: 15.5px;
+                      line-height: 1.64;
+                      color: #a2957f;
+                    "
+                  >
+                    Résolution, à quatre. Le joueur en tête au cumul choisit la
+                    carte de déploiement ; le dernier choisit la mission.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="missions" style="padding: 92px 0 0">
+            <div
+              style="
+                display: flex;
+                align-items: baseline;
+                gap: 18px;
+                border-bottom: 1px solid #2e2721;
+                padding-bottom: 14px;
+              "
+            >
+              <span
+                style="
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 11px;
+                  letter-spacing: 0.3em;
+                  color: #9b2226;
+                "
+                >V</span
+              >
+              <h2
+                style="
+                  font-family: Cinzel, serif;
+                  font-weight: 700;
+                  font-size: clamp(26px, 3.4vw, 40px);
+                  margin: 0;
+                  color: #f3e9d2;
+                "
+              >
+                Les dossiers de mission
+              </h2>
+            </div>
+
+            <article
+              style="
+                margin-top: 44px;
+                border: 1px solid #2e2721;
+                background: #100e0b;
+              "
+            >
+              <div
+                style="
+                  border-bottom: 1px solid #2e2721;
+                  background: linear-gradient(90deg, #1d1509, #100e0b 70%);
+                  padding: 26px 30px;
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 16px;
+                  justify-content: space-between;
+                  align-items: baseline;
+                "
+              >
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.3em;
+                      text-transform: uppercase;
+                      color: #8c7c5f;
+                    "
+                  >
+                    Mission I · Bataille planétaire · Thomas défend, trois
+                    assaillants
+                  </div>
+                  <h3
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: clamp(24px, 3vw, 34px);
+                      margin: 10px 0 0;
+                      color: #f3e9d2;
+                    "
+                  >
+                    Cendres sur Yarath
+                  </h3>
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11.5px;
+                    letter-spacing: 0.14em;
+                    color: #c9a227;
+                    text-align: right;
+                    line-height: 1.9;
+                  "
+                >
+                  {{ pts1 }} PTS/JOUEUR — QUATRE JOUEURS<br />5 TOURS
+                </div>
+              </div>
+              <div
+                style="
+                  padding: 30px;
+                  display: grid;
+                  grid-template-columns: 1.35fr 1fr;
+                  gap: 44px;
+                "
+              >
+                <div>
+                  <p
+                    style="
+                      margin: 0 0 20px;
+                      font-size: 17.5px;
+                      line-height: 1.74;
+                      color: #d9cdb4;
+                      font-style: italic;
+                      text-wrap: pretty;
+                    "
+                  >
+                    Les Thunderhawks salamanders descendent en formation serrée,
+                    phares allumés dans la fumée de scorie. Au-dessus d'eux, les
+                    escouades de Baal se laissent tomber en chute libre et
+                    allument leurs réacteurs à deux cents mètres du sol.
+                    Personne n'a coordonné les deux descentes. Les
+                    servo-tourelles de Kaustos ouvrent le feu sur tout ce qui
+                    bouge, et la Fraternité, déjà à terre, regarde.
+                  </p>
+                  <h4
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.26em;
+                      text-transform: uppercase;
+                      color: #9b2226;
+                      margin: 26px 0 12px;
+                    "
+                  >
+                    Objectif principal
+                  </h4>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 16px;
+                      line-height: 1.7;
+                      color: #b8ab92;
+                    "
+                  >
+                    Trois marqueurs sur l'axe médian : le
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >puits d'accès majeur</strong
+                    >
+                    (valeur 3, au centre) et deux
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >relais de tourelle</strong
+                    >
+                    (valeur 2). Chaque joueur marque la valeur de chaque
+                    marqueur qu'il contrôle seul lors de ses sous-phases de
+                    victoire.
+                  </p>
+                  <h4
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.26em;
+                      text-transform: uppercase;
+                      color: #9b2226;
+                      margin: 26px 0 12px;
+                    "
+                  >
+                    Objectifs secondaires
+                  </h4>
+                  <ul
+                    style="
+                      margin: 0;
+                      padding-left: 20px;
+                      display: grid;
+                      gap: 8px;
+                      font-size: 16px;
+                      line-height: 1.62;
+                      color: #b8ab92;
+                    "
+                  >
+                    <li>
+                      Tuer le Seigneur de Guerre
+                      <span style="color: #c9a227">(3)</span>
+                    </li>
+                    <li>
+                      Premier sang <span style="color: #c9a227">(2)</span>
+                    </li>
+                    <li>
+                      Le dernier carré <span style="color: #c9a227">(3)</span>
+                    </li>
+                    <li>
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Reconnaissance de Baal</strong
+                      >
+                      <span style="color: #c9a227">(2)</span> — une unité à
+                      réacteurs dorsaux termine la partie dans le quart de table
+                      d'un autre joueur, hors combat.
+                    </li>
+                  </ul>
+                  <h4
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.26em;
+                      text-transform: uppercase;
+                      color: #9b2226;
+                      margin: 26px 0 12px;
+                    "
+                  >
+                    Règles spéciales
+                  </h4>
+                  <div
+                    style="
+                      display: grid;
+                      gap: 14px;
+                      font-size: 16px;
+                      line-height: 1.66;
+                      color: #b8ab92;
+                    "
+                  >
+                    <div
+                      style="border-left: 2px solid #3a3129; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Défense automatisée</strong
+                      >
+                      — le Dark Mechanicum déploie gratuitement deux batteries
+                      Tarantula ou plateformes Araknae et tire avec elles avant
+                      le premier tour, en tirs au jugé, sur l'unité la plus
+                      proche sans distinction de propriétaire.
+                    </div>
+                    <div
+                      style="border-left: 2px solid #3a3129; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Descente en deux vagues</strong
+                      >
+                      — tous les détachements de Raphaël et de Jean commencent
+                      en réserve ; leur test réussit automatiquement aux tours 2
+                      et 3 et ils entrent par n'importe quel point de leur bord
+                      de table. Aucune réaction d'Interception contre eux.
+                    </div>
+                    <div
+                      style="border-left: 2px solid #6a4b9b; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Brume de scorie</strong
+                      >
+                      — la XV<sup>e</sup> épaissit l'air. Au tour 1, aucune arme
+                      ne peut cibler au-delà de 24″. Au tour 2, 36″. Ensuite,
+                      plus de limite.
+                    </div>
+                    <div
+                      style="border-left: 2px solid #3a3129; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Cinquième tour</strong
+                      >
+                      — à la fin du tour 4, Thomas lance un dé : sur 4+, un tour
+                      supplémentaire est joué.
+                    </div>
+                  </div>
+                </div>
+                <aside style="display: grid; gap: 22px; align-content: start">
+                  <div
+                    style="
+                      border: 1px solid #2e2721;
+                      background: #14110d;
+                      padding: 20px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #8c7c5f;
+                        margin-bottom: 14px;
+                      "
+                    >
+                      Décor
+                    </div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-size: 15px;
+                        line-height: 1.62;
+                        color: #a2957f;
+                      "
+                    >
+                      Quart de Thomas : rampes bétonnées, silos, cheminées de
+                      coulée, lignes Aegis. Les trois autres quarts : plaine de
+                      scorie ouverte, épaves, cratères de largage. Thomas pose
+                      la première pièce, puis chacun en pose une à son tour.
+                    </p>
+                  </div>
+                  <div
+                    style="
+                      border: 1px solid #2e2721;
+                      background: #14110d;
+                      padding: 20px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #8c7c5f;
+                        margin-bottom: 14px;
+                      "
+                    >
+                      Conséquence narrative
+                    </div>
+                    <ul
+                      style="
+                        margin: 0;
+                        padding-left: 18px;
+                        display: grid;
+                        gap: 10px;
+                        font-size: 15px;
+                        line-height: 1.6;
+                        color: #a2957f;
+                      "
+                    >
+                      <li>
+                        <strong style="color: #d1483c; font-weight: 600"
+                          >Victoire de Jean ou de Raphaël</strong
+                        >
+                        — le puits d'accès est ouvert : en mission II, les
+                        portes commencent
+                        <em>ouvertes</em> et Jean bénéficie d'une infiltration ;
+                        en mission III, une unité Salamanders peut redéployer
+                        gratuitement une fois.
+                      </li>
+                      <li>
+                        <strong style="color: #b8903f; font-weight: 600"
+                          >Victoire de Thomas ou de Tristan</strong
+                        >
+                        — Kaustos scelle la descente : en mission II, Thomas
+                        place deux portes supplémentaires et une valve de plus ;
+                        en mission III, Tristan gagne une manifestation
+                        psychique supplémentaire.
+                      </li>
+                    </ul>
+                  </div>
+                </aside>
+              </div>
+            </article>
+
+            <article
+              style="
+                margin-top: 34px;
+                border: 1px solid #3a2020;
+                background: #100e0b;
+              "
+            >
+              <div
+                style="
+                  border-bottom: 1px solid #3a2020;
+                  background: linear-gradient(90deg, #1e0f0e, #100e0b 70%);
+                  padding: 26px 30px;
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 16px;
+                  justify-content: space-between;
+                  align-items: baseline;
+                "
+              >
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.3em;
+                      text-transform: uppercase;
+                      color: #8c7c5f;
+                    "
+                  >
+                    Mission II · Zone Mortalis · Blood Angels contre Dark
+                    Mechanicum
+                  </div>
+                  <h3
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: clamp(24px, 3vw, 34px);
+                      margin: 10px 0 0;
+                      color: #f3e9d2;
+                    "
+                  >
+                    Les galeries de coulée
+                  </h3>
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11.5px;
+                    letter-spacing: 0.14em;
+                    color: #c9524f;
+                    text-align: right;
+                    line-height: 1.9;
+                  "
+                >
+                  {{ pts2 }} POINTS PAR JOUEUR<br />5–6 TOURS
+                </div>
+              </div>
+              <div
+                style="
+                  padding: 30px;
+                  display: grid;
+                  grid-template-columns: 1.35fr 1fr;
+                  gap: 44px;
+                "
+              >
+                <div>
+                  <p
+                    style="
+                      margin: 0 0 20px;
+                      font-size: 17.5px;
+                      line-height: 1.74;
+                      color: #d9cdb4;
+                      font-style: italic;
+                      text-wrap: pretty;
+                    "
+                  >
+                    Sous la plaine, la forge respire encore. Les galeries
+                    transportent l'acier en fusion vers les moules ; un homme en
+                    Terminator y passe à peine, et deux ne se croisent pas. Les
+                    Blood Angels y entrent quand même, parce que le chemin le
+                    plus court vers le vault passe par là — et parce qu'une
+                    galerie de trois pieds de large est exactement le genre
+                    d'endroit où une hache tranche mieux qu'un bolter.
+                  </p>
+                  <h4
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.26em;
+                      text-transform: uppercase;
+                      color: #9b2226;
+                      margin: 26px 0 12px;
+                    "
+                  >
+                    Sélection de la mission
+                  </h4>
+                  <p
+                    style="
+                      margin: 0 0 14px;
+                      font-size: 16px;
+                      line-height: 1.7;
+                      color: #b8ab92;
+                    "
+                  >
+                    Utilisez le pack
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >« Zone Mortalis »</strong
+                    >
+                    : accordez-vous sur une mission, ou lancez un dé.
+                  </p>
+                  <div style="border: 1px solid #2e2721; background: #14110d">
+                    <sc-for
+                      list="{{ tableMissions }}"
+                      as="m"
+                      hint-placeholder-count="6"
+                    >
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: 44px 1fr;
+                          align-items: center;
+                          border-bottom: 1px solid #221d18;
+                          font-size: 15.5px;
+                        "
+                      >
+                        <div
+                          style="
+                            font-family: &quot;JetBrains Mono&quot;, monospace;
+                            font-weight: 700;
+                            color: #c9a227;
+                            text-align: center;
+                            padding: 11px 0;
+                            border-right: 1px solid #221d18;
+                            background: #17130f;
+                          "
+                        >
+                          {{ m.de }}
+                        </div>
+                        <div style="padding: 11px 16px; color: #cbbb98">
+                          {{ m.nom }}<span
+                            style="color: #7d7160; font-size: 14px"
+                          >
+                            — {{ m.note }}</span
+                          >
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                  <sc-if value="{{ outils }}" hint-placeholder-val="{{ true }}">
+                    <div
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: 18px;
+                        margin-top: 18px;
+                        border: 1px solid #2e2721;
+                        background: #14110d;
+                        padding: 16px 18px;
+                      "
+                    >
+                      <button
+                        type="button"
+                        onClick="{{ lancerDe }}"
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 11px;
+                          letter-spacing: 0.2em;
+                          text-transform: uppercase;
+                          color: #0b0a09;
+                          background: #c9a227;
+                          border: none;
+                          padding: 12px 18px;
+                          cursor: pointer;
+                        "
+                        style-hover="background: #f0d67a"
+                      >
+                        Lancer le dé
+                      </button>
+                      <div
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 13px;
+                          color: #cbbb98;
+                        "
+                      >
+                        {{ deTexte }}
+                      </div>
+                    </div>
+                  </sc-if>
+                  <h4
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.26em;
+                      text-transform: uppercase;
+                      color: #9b2226;
+                      margin: 26px 0 12px;
+                    "
+                  >
+                    Objectif principal — Sang pour sang
+                  </h4>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 16px;
+                      line-height: 1.7;
+                      color: #b8ab92;
+                    "
+                  >
+                    1 point de victoire chaque fois que la dernière figurine
+                    d'une unité ennemie est retirée hors sous-phase de défi. Si
+                    l'attaque venait d'une unité dont la majorité des figurines
+                    a
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >Avant-Garde (X)</strong
+                    >, marquez X points à la place.
+                  </p>
+                  <h4
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.26em;
+                      text-transform: uppercase;
+                      color: #9b2226;
+                      margin: 26px 0 12px;
+                    "
+                  >
+                    Objectifs secondaires
+                  </h4>
+                  <div
+                    style="
+                      display: grid;
+                      gap: 14px;
+                      font-size: 16px;
+                      line-height: 1.66;
+                      color: #b8ab92;
+                    "
+                  >
+                    <div
+                      style="border-left: 2px solid #3a3129; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Domination de Secteur (1)</strong
+                      >
+                      — le joueur réactif marque, pendant chaque sous-phase de
+                      victoire adverse, pour chaque secteur où il compte plus
+                      d'unités que l'ennemi. Les unités sous statut tactique ne
+                      comptent pas ; <em>Ligne (X)</em> compte X unités de plus.
+                    </div>
+                    <div
+                      style="border-left: 2px solid #3a3129; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Tueur de Champions (1)</strong
+                      >
+                      — à chaque défi gagné dont le combat est également gagné,
+                      +1 point ; +1 supplémentaire si la figurine retirée est de
+                      type Parangon.
+                    </div>
+                    <div
+                      style="border-left: 2px solid #c9a227; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Saignée des valves</strong
+                      >
+                      <span style="color: #c9a227">(3)</span> —
+                      <em>propre à la campagne.</em> Trois valves de coulée sont
+                      placées, une par secteur central. Jean marque 3 points par
+                      valve dont il a pris le secteur au corps à corps ; Thomas
+                      marque 2 points par valve encore sous son contrôle en fin
+                      de partie.
+                    </div>
+                  </div>
+                </div>
+                <aside style="display: grid; gap: 22px; align-content: start">
+                  <div
+                    style="
+                      border: 1px solid #2e2721;
+                      background: #14110d;
+                      padding: 20px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #8c7c5f;
+                        margin-bottom: 14px;
+                      "
+                    >
+                      Carte de déploiement — Primus
+                    </div>
+                    <div
+                      style="
+                        border: 1px solid #3a3129;
+                        background: #0d0b09;
+                        padding: 8px;
+                        display: grid;
+                        grid-template-columns: 34px 1fr 34px;
+                        gap: 6px;
+                        height: 92px;
+                      "
+                    >
+                      <div
+                        style="
+                          background: rgba(201, 162, 39, 0.16);
+                          border: 1px dashed #6b5a2c;
+                          display: grid;
+                          place-items: center;
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 9px;
+                          letter-spacing: 0.12em;
+                          color: #d3b866;
+                          writing-mode: vertical-rl;
+                        "
+                      >
+                        ZONE A · 8″
+                      </div>
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: repeat(4, 1fr);
+                          gap: 6px;
+                        "
+                      >
+                        <div style="border: 1px solid #221d18"></div>
+                        <div
+                          style="
+                            border: 1px solid #221d18;
+                            display: grid;
+                            place-items: center;
+                            color: #c9a227;
+                            font-family: &quot;JetBrains Mono&quot;, monospace;
+                            font-size: 11px;
+                          "
+                        >
+                          ◈
+                        </div>
+                        <div
+                          style="
+                            border: 1px solid #221d18;
+                            display: grid;
+                            place-items: center;
+                            color: #c9a227;
+                            font-family: &quot;JetBrains Mono&quot;, monospace;
+                            font-size: 11px;
+                          "
+                        >
+                          ◈
+                        </div>
+                        <div style="border: 1px solid #221d18"></div>
+                      </div>
+                      <div
+                        style="
+                          background: rgba(155, 34, 38, 0.22);
+                          border: 1px dashed #6d3230;
+                          display: grid;
+                          place-items: center;
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 9px;
+                          letter-spacing: 0.12em;
+                          color: #d99a97;
+                          writing-mode: vertical-rl;
+                        "
+                      >
+                        ZONE B · 8″
+                      </div>
+                    </div>
+                    <p
+                      style="
+                        margin: 12px 0 0;
+                        font-size: 13.5px;
+                        line-height: 1.6;
+                        color: #7d7160;
+                      "
+                    >
+                      Huit sections de 12″ en bande.
+                      <em>Primus</em> — zones opposées aux deux extrémités, 8″
+                      de profondeur sur toute la largeur. <em>Secundus</em> —
+                      zones opposées le long des deux grands bords, 6″ de
+                      profondeur. <em>Tertius</em> — deux angles diagonalement
+                      opposés, 16″ le long de chaque bord. Tirage : 1–2 Primus,
+                      3–4 Secundus, 5–6 Tertius.
+                    </p>
+                  </div>
+                  <div
+                    style="
+                      border: 1px solid #2e2721;
+                      background: #14110d;
+                      padding: 20px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #8c7c5f;
+                        margin-bottom: 14px;
+                      "
+                    >
+                      Conséquence narrative
+                    </div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-size: 15px;
+                        line-height: 1.62;
+                        color: #a2957f;
+                      "
+                    >
+                      Victoire de Jean : il débouche dans les chantiers par les
+                      galeries — en mission III, il choisit sa zone de
+                      déploiement et une de ses unités entre par le centre.
+                      Victoire de Thomas : les galeries sont noyées d'acier ; en
+                      mission III, Jean commence avec une unité de moins sur la
+                      table (placée en réserve).
+                    </p>
+                  </div>
+                </aside>
+              </div>
+            </article>
+
+            <article
+              style="
+                margin-top: 34px;
+                border: 1px solid #4a3c22;
+                background: #100e0b;
+              "
+            >
+              <div
+                style="
+                  border-bottom: 1px solid #4a3c22;
+                  background: linear-gradient(90deg, #221a0c, #100e0b 70%);
+                  padding: 26px 30px;
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 16px;
+                  justify-content: space-between;
+                  align-items: baseline;
+                "
+              >
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.3em;
+                      text-transform: uppercase;
+                      color: #c9a227;
+                    "
+                  >
+                    Mission III · Bataille planétaire · Bascule narrative
+                  </div>
+                  <h3
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: clamp(24px, 3vw, 34px);
+                      margin: 10px 0 0;
+                      color: #f3e9d2;
+                    "
+                  >
+                    Les chantiers de Syrgalah
+                  </h3>
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11.5px;
+                    letter-spacing: 0.14em;
+                    color: #c9a227;
+                    text-align: right;
+                    line-height: 1.9;
+                  "
+                >
+                  {{ pts3 }} PTS/JOUEUR — QUATRE JOUEURS
+                </div>
+              </div>
+              <div
+                style="
+                  padding: 30px;
+                  display: grid;
+                  grid-template-columns: 1.35fr 1fr;
+                  gap: 44px;
+                "
+              >
+                <div>
+                  <p
+                    style="
+                      margin: 0 0 20px;
+                      font-size: 17.5px;
+                      line-height: 1.74;
+                      color: #d9cdb4;
+                      font-style: italic;
+                      text-wrap: pretty;
+                    "
+                  >
+                    La nef de montage fait huit cents mètres de long et trois
+                    cents de haut. Au centre, dans son berceau, Syrgalah —
+                    immobile, réacteur en veille rituelle. Personne ne tire dans
+                    sa direction : les quatre veulent la machine entière. On se
+                    bat donc autour d'elle, sous elle, entre ses jambes, à
+                    portée de crachat.
+                  </p>
+                  <h4
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.26em;
+                      text-transform: uppercase;
+                      color: #9b2226;
+                      margin: 26px 0 12px;
+                    "
+                  >
+                    Objectif principal — le berceau
+                  </h4>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 16px;
+                      line-height: 1.7;
+                      color: #b8ab92;
+                    "
+                  >
+                    Syrgalah occupe le centre exact. Son
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >berceau</strong
+                    >
+                    est une zone de 12″ autour de sa base : le joueur qui y
+                    compte le plus d'unités non entravées à la fin de la partie
+                    marque 6 points de victoire et
+                    <strong style="color: #f0d67a; font-weight: 600"
+                      >remporte la machine</strong
+                    >. Quatre
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >ponts roulants</strong
+                    >
+                    (valeur 2) sont placés aux quatre coins de la nef ; ils se
+                    marquent normalement chaque sous-phase de victoire.
+                  </p>
+                  <h4
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.26em;
+                      text-transform: uppercase;
+                      color: #9b2226;
+                      margin: 26px 0 12px;
+                    "
+                  >
+                    Objectifs secondaires
+                  </h4>
+                  <ul
+                    style="
+                      margin: 0;
+                      padding-left: 20px;
+                      display: grid;
+                      gap: 8px;
+                      font-size: 16px;
+                      line-height: 1.62;
+                      color: #b8ab92;
+                    "
+                  >
+                    <li>
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Rite inachevé</strong
+                      >
+                      <span style="color: #c9a227">(3)</span> — trois tests
+                      d'Intelligence réussis, cumulés sur la partie, par une
+                      figurine au contact du Warhound et hors combat : achevez
+                      la consécration si vous comptez emmener la machine,
+                      sabotez-la si vous préférez que personne ne l'ait.
+                    </li>
+                    <li>
+                      Tuer le Seigneur de Guerre
+                      <span style="color: #c9a227">(3)</span> · Géant tueur
+                      <span style="color: #c9a227">(2)</span> · Le dernier carré
+                      <span style="color: #c9a227">(2)</span>
+                    </li>
+                  </ul>
+                  <h4
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.26em;
+                      text-transform: uppercase;
+                      color: #9b2226;
+                      margin: 26px 0 12px;
+                    "
+                  >
+                    Règles spéciales
+                  </h4>
+                  <div
+                    style="
+                      display: grid;
+                      gap: 14px;
+                      font-size: 16px;
+                      line-height: 1.66;
+                      color: #b8ab92;
+                    "
+                  >
+                    <div
+                      style="border-left: 2px solid #3a3129; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Feu contraint</strong
+                      >
+                      — aucune arme de gabarit d'explosion ni de Barrage (X) ne
+                      peut cibler une unité située dans le berceau. Personne ne
+                      veut abîmer la machine.
+                    </div>
+                    <div
+                      style="border-left: 2px solid #3a3129; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Ponts roulants</strong
+                      >
+                      — au début de chaque tour de bataille, le joueur actif
+                      peut déplacer un pont roulant de 6″ le long de son rail.
+                      Toute unité dessous doit réussir un test d'Initiative ou
+                      subir une touche de force 6, PA 4, dégâts 1.
+                    </div>
+                    <div
+                      style="border-left: 2px solid #6a4b9b; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Le vault chante</strong
+                      >
+                      — Tristan peut, une fois par partie, relancer une
+                      manifestation psychique ratée : les archives lui soufflent
+                      la formule juste.
+                    </div>
+                    <div
+                      style="border-left: 2px solid #c9a227; padding-left: 14px"
+                    >
+                      <strong style="color: #f0d67a; font-weight: 600"
+                        >Dernier Recours</strong
+                      >
+                      — tout joueur encore sans la moindre victoire de campagne
+                      gagne, une fois par partie : relancer un jet de réserve
+                      raté, faire entrer une unité par n'importe quel bord de
+                      table, et relancer tous les tests de Moral d'un même tour.
+                    </div>
+                  </div>
+                </div>
+                <aside style="display: grid; gap: 22px; align-content: start">
+                  <div
+                    style="
+                      border: 1px solid #4a3c22;
+                      background: #191307;
+                      padding: 20px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #c9a227;
+                        margin-bottom: 14px;
+                      "
+                    >
+                      La bascule
+                    </div>
+                    <p
+                      style="
+                        margin: 0 0 12px;
+                        font-size: 15px;
+                        line-height: 1.64;
+                        color: #cbbb98;
+                      "
+                    >
+                      Comptez les points de campagne après cette mission. La
+                      mission IV oppose Raphaël et Tristan en duel, et c'est
+                      celui des deux qui est le moins bien classé qui décide
+                      laquelle des deux versions est jouée :
+                    </p>
+                    <ul
+                      style="
+                        margin: 0;
+                        padding-left: 18px;
+                        display: grid;
+                        gap: 10px;
+                        font-size: 15px;
+                        line-height: 1.6;
+                        color: #a2957f;
+                      "
+                    >
+                      <li>
+                        Le vault vaut encore d'être pris →
+                        <strong style="color: #c9a227; font-weight: 600"
+                          >IV·A — Le Vault de Logique</strong
+                        >.
+                      </li>
+                      <li>
+                        Le vault est déjà perdu →
+                        <strong style="color: #c9524f; font-weight: 600"
+                          >IV·B — Protocole de Cendres</strong
+                        >.
+                      </li>
+                    </ul>
+                    <p
+                      style="
+                        margin: 12px 0 0;
+                        font-size: 15px;
+                        line-height: 1.6;
+                        color: #a2957f;
+                      "
+                    >
+                      Et notez qui repart avec Syrgalah : c'est la ligne la plus
+                      importante du journal de guerre.
+                    </p>
+                  </div>
+                  <div
+                    style="
+                      border: 1px solid #2e2721;
+                      background: #14110d;
+                      padding: 20px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #8c7c5f;
+                        margin-bottom: 14px;
+                      "
+                    >
+                      Décor
+                    </div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-size: 15px;
+                        line-height: 1.62;
+                        color: #a2957f;
+                      "
+                    >
+                      Table industrielle verticale : berceaux de coque,
+                      passerelles, conteneurs, grues. Beaucoup de couvert, peu
+                      de lignes de tir longues. Le Warhound, posé au centre,
+                      fait partie du décor jusqu'à la mission V.
+                    </p>
+                  </div>
+                  <div
+                    style="
+                      border: 1px solid #2e2721;
+                      background: #14110d;
+                      padding: 20px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #8c7c5f;
+                        margin-bottom: 14px;
+                      "
+                    >
+                      Note d'arbitre
+                    </div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-size: 15px;
+                        line-height: 1.62;
+                        color: #a2957f;
+                      "
+                    >
+                      Partie la plus longue de la campagne : prévoyez trois
+                      heures pleines, un cumul annoncé à voix haute à chaque fin
+                      de tour, et le compte-rendu rédigé le soir même. La
+                      mission IV en dépend.
+                    </p>
+                  </div>
+                </aside>
+              </div>
+            </article>
+
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 26px;
+                margin-top: 34px;
+              "
+            >
+              <article style="border: 1px solid #2e2721; background: #100e0b">
+                <div
+                  style="
+                    border-bottom: 1px solid #2e2721;
+                    background: linear-gradient(90deg, #1d1509, #100e0b 70%);
+                    padding: 24px 26px;
+                  "
+                >
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.28em;
+                      text-transform: uppercase;
+                      color: #8c7c5f;
+                    "
+                  >
+                    Mission IV·A · Zone Mortalis · {{ pts4 }} pts · Raphaël vs
+                    Tristan
+                  </div>
+                  <h3
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: 27px;
+                      margin: 10px 0 0;
+                      color: #f3e9d2;
+                    "
+                  >
+                    Le Vault de Logique
+                  </h3>
+                </div>
+                <div style="padding: 26px; display: grid; gap: 20px">
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 16.5px;
+                      line-height: 1.72;
+                      color: #d9cdb4;
+                      font-style: italic;
+                    "
+                  >
+                    La forge a coupé ses propres lumières, et la Fraternité a
+                    fait le reste : dans le cloître du vault, l'obscurité n'est
+                    plus une absence de lumière, c'est une présence. Les
+                    Salamanders avancent au lance-flammes, parce que le feu, au
+                    moins, éclaire.
+                  </p>
+                  <div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #9b2226;
+                        margin-bottom: 10px;
+                      "
+                    >
+                      Objectif principal
+                    </div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-size: 15.5px;
+                        line-height: 1.66;
+                        color: #b8ab92;
+                      "
+                    >
+                      Le terminal
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Kaustos-Alpha</strong
+                      >, au centre exact. Le joueur qui le contrôle en fin de
+                      partie marque 6 points. Chaque tour où il est contesté,
+                      personne ne marque.
+                    </p>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #9b2226;
+                        margin-bottom: 10px;
+                      "
+                    >
+                      Secondaires
+                    </div>
+                    <ul
+                      style="
+                        margin: 0;
+                        padding-left: 18px;
+                        display: grid;
+                        gap: 8px;
+                        font-size: 15.5px;
+                        line-height: 1.6;
+                        color: #b8ab92;
+                      "
+                    >
+                      <li>
+                        <strong style="color: #e6dcc8; font-weight: 600"
+                          >Lecture achevée</strong
+                        >
+                        (3) — Tristan cumule quatre tests psychiques ou
+                        d'Intelligence réussis au contact du terminal. S'il y
+                        parvient, il marque même en perdant le contrôle.
+                      </li>
+                      <li>
+                        <strong style="color: #e6dcc8; font-weight: 600"
+                          >Purge prométhéenne</strong
+                        >
+                        (2) — Raphaël détruit deux unités ennemies à 6″ ou moins
+                        du terminal.
+                      </li>
+                      <li>
+                        <strong style="color: #e6dcc8; font-weight: 600"
+                          >Tueur de Champions</strong
+                        >
+                        (1) ·
+                        <strong style="color: #e6dcc8; font-weight: 600"
+                          >Domination de Secteur</strong
+                        >
+                        (1)
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #9b2226;
+                        margin-bottom: 10px;
+                      "
+                    >
+                      Ténèbres Abyssales
+                    </div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-size: 15.5px;
+                        line-height: 1.66;
+                        color: #b8ab92;
+                      "
+                    >
+                      Aucune ligne de vue au-delà de 12″. Les armes à gabarit de
+                      flamme et les unités dotées de
+                      <em>Vision Nocturne</em> ignorent cette limite. Chaque
+                      manifestation psychique ratée de la XV<sup>e</sup> réduit
+                      la limite de 2″ pour tout le monde jusqu'à la fin du tour
+                      suivant, minimum 6″ — y compris pour elle.
+                    </p>
+                  </div>
+                  <div style="border-top: 1px solid #221d18; padding-top: 18px">
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #8c7c5f;
+                        margin-bottom: 10px;
+                      "
+                    >
+                      Épilogue possible
+                    </div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-size: 15px;
+                        line-height: 1.62;
+                        color: #a2957f;
+                      "
+                    >
+                      Vault tenu par Raphaël → il le sabordera : en mission V,
+                      la table se joue en défense étagée et c'est lui qui la
+                      pose. Vault lu par Tristan → il connaît les plans des
+                      trois autres : en mission V, c'est lui qui choisit la
+                      carte de déploiement, quel que soit le classement.
+                    </p>
+                  </div>
+                </div>
+              </article>
+
+              <article style="border: 1px solid #3a2020; background: #100e0b">
+                <div
+                  style="
+                    border-bottom: 1px solid #3a2020;
+                    background: linear-gradient(90deg, #1e0f0e, #100e0b 70%);
+                    padding: 24px 26px;
+                  "
+                >
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.28em;
+                      text-transform: uppercase;
+                      color: #8c7c5f;
+                    "
+                  >
+                    Mission IV·B · Zone Mortalis · {{ pts4 }} pts · Raphaël vs
+                    Tristan
+                  </div>
+                  <h3
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: 27px;
+                      margin: 10px 0 0;
+                      color: #f3e9d2;
+                    "
+                  >
+                    Protocole de Cendres
+                  </h3>
+                </div>
+                <div style="padding: 26px; display: grid; gap: 20px">
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 16.5px;
+                      line-height: 1.72;
+                      color: #d9cdb4;
+                      font-style: italic;
+                    "
+                  >
+                    Le vault est perdu. Reste à décider de ce qu'il en restera.
+                    Les rôles s'inversent : ce sont les Salamanders qui posent
+                    les charges, et la Fraternité qui doit tenir les couloirs
+                    assez longtemps pour finir sa lecture.
+                  </p>
+                  <div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #9b2226;
+                        margin-bottom: 10px;
+                      "
+                    >
+                      Objectif principal
+                    </div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-size: 15.5px;
+                        line-height: 1.66;
+                        color: #b8ab92;
+                      "
+                    >
+                      Quatre
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >nœuds de conduite</strong
+                      >, un par quadrant. Raphaël marque 3 points par nœud
+                      détruit aux charges de sape ; Tristan marque 3 points par
+                      nœud intact en fin de partie.
+                    </p>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #9b2226;
+                        margin-bottom: 10px;
+                      "
+                    >
+                      Secondaires
+                    </div>
+                    <ul
+                      style="
+                        margin: 0;
+                        padding-left: 18px;
+                        display: grid;
+                        gap: 8px;
+                        font-size: 15.5px;
+                        line-height: 1.6;
+                        color: #b8ab92;
+                      "
+                    >
+                      <li>
+                        <strong style="color: #e6dcc8; font-weight: 600"
+                          >Sortir vivant</strong
+                        >
+                        (3) — une unité de Raphaël quitte la table par son bord
+                        de déploiement après la destruction d'au moins deux
+                        nœuds.
+                      </li>
+                      <li>
+                        <strong style="color: #e6dcc8; font-weight: 600"
+                          >Aucun témoin</strong
+                        >
+                        (2) — aucune unité de Raphaël ne quitte la table.
+                      </li>
+                      <li>
+                        <strong style="color: #e6dcc8; font-weight: 600"
+                          >Sang pour sang</strong
+                        >
+                        (1)
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #9b2226;
+                        margin-bottom: 10px;
+                      "
+                    >
+                      Charges de sape
+                    </div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-size: 15.5px;
+                        line-height: 1.66;
+                        color: #b8ab92;
+                      "
+                    >
+                      Toute figurine Legiones Astartes de sous-type Commandement
+                      ou Sergent portant un bouclier d'abordage peut recevoir
+                      des charges de sape (+10 pts). Déclarées à l'étape 2 de la
+                      sous-phase de combat contre une fortification : initiative
+                      0, touches automatiques, force 10, PA –, dégâts D3+3.
+                    </p>
+                  </div>
+                  <div style="border-top: 1px solid #221d18; padding-top: 18px">
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #8c7c5f;
+                        margin-bottom: 10px;
+                      "
+                    >
+                      Épilogue possible
+                    </div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-size: 15px;
+                        line-height: 1.62;
+                        color: #a2957f;
+                      "
+                    >
+                      Trois nœuds ou plus détruits → la mission V se joue sur
+                      une table en ruines : terrain difficile généralisé, aucun
+                      renfort de la forge pour personne. Sinon, la forge intacte
+                      donne à Thomas un détachement Apex gratuit en mission V.
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <article
+              style="
+                margin-top: 34px;
+                border: 1px solid #2e2721;
+                background: #100e0b;
+              "
+            >
+              <div
+                style="
+                  border-bottom: 1px solid #2e2721;
+                  background: linear-gradient(90deg, #1d1509, #100e0b 70%);
+                  padding: 26px 30px;
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 16px;
+                  justify-content: space-between;
+                  align-items: baseline;
+                "
+              >
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.3em;
+                      text-transform: uppercase;
+                      color: #8c7c5f;
+                    "
+                  >
+                    Mission V · Grande bataille · Résolution
+                  </div>
+                  <h3
+                    style="
+                      font-family: Cinzel, serif;
+                      font-size: clamp(24px, 3vw, 34px);
+                      margin: 10px 0 0;
+                      color: #f3e9d2;
+                    "
+                  >
+                    Le Verdict de Yarath
+                  </h3>
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11.5px;
+                    letter-spacing: 0.14em;
+                    color: #c9a227;
+                    text-align: right;
+                    line-height: 1.9;
+                  "
+                >
+                  {{ pts5 }} PTS/JOUEUR — QUATRE JOUEURS — WARHOUND INCLUS
+                </div>
+              </div>
+              <div
+                style="
+                  padding: 30px;
+                  display: grid;
+                  grid-template-columns: 1.35fr 1fr;
+                  gap: 44px;
+                "
+              >
+                <div>
+                  <p
+                    style="
+                      margin: 0 0 20px;
+                      font-size: 17.5px;
+                      line-height: 1.74;
+                      color: #d9cdb4;
+                      font-style: italic;
+                      text-wrap: pretty;
+                    "
+                  >
+                    Tout ce qui tient encore debout entre dans la bataille, et
+                    Syrgalah marche enfin — pour l'un des quatre. Les quatre
+                    joueurs déploient l'intégralité de leur budget de campagne,
+                    moins les unités mortes pour de bon. Les pactes de la veille
+                    ne valent que ce que vaut la parole de chacun.
+                  </p>
+                  <h4
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.26em;
+                      text-transform: uppercase;
+                      color: #9b2226;
+                      margin: 26px 0 12px;
+                    "
+                  >
+                    Mise en place asymétrique
+                  </h4>
+                  <p
+                    style="
+                      margin: 0 0 14px;
+                      font-size: 16px;
+                      line-height: 1.7;
+                      color: #b8ab92;
+                    "
+                  >
+                    Le joueur en tête au cumul de points de campagne
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >choisit la carte de déploiement</strong
+                    >
+                    ; le dernier au classement
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >choisit la mission</strong
+                    >
+                    parmi trois. Un joueur relégué à 6 points ou plus du meneur
+                    peut à la place réclamer sa
+                    <em>mission de la dernière chance</em>.
+                  </p>
+                  <div
+                    style="
+                      display: grid;
+                      gap: 14px;
+                      font-size: 16px;
+                      line-height: 1.66;
+                      color: #b8ab92;
+                    "
+                  >
+                    <div
+                      style="border-left: 2px solid #3a3129; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Ligne d'avance</strong
+                      >
+                      — quatre objectifs de valeur 1 poussés secteur par secteur
+                      vers le bord adverse : marquer maintenant ou progresser
+                      encore, il faut choisir à chaque tour.
+                    </div>
+                    <div
+                      style="border-left: 2px solid #3a3129; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Percée</strong
+                      >
+                      — mêmes objectifs, mais les réserves du défenseur entrent
+                      par les bords courts et menacent les flancs.
+                    </div>
+                    <div
+                      style="border-left: 2px solid #3a3129; padding-left: 14px"
+                    >
+                      <strong style="color: #e6dcc8; font-weight: 600"
+                        >Raid de l'aube</strong
+                      >
+                      — déploiement en diagonale, le défenseur déploie toujours
+                      en premier, l'attaquant prend le premier tour sur 4+, et
+                      tous les tirs du tour 1 sont des tirs au jugé.
+                    </div>
+                    <div
+                      style="border-left: 2px solid #9b2226; padding-left: 14px"
+                    >
+                      <strong style="color: #f0d67a; font-weight: 600"
+                        >Dernière chance — « La Sentence »</strong
+                      >
+                      — le joueur qui la réclame devient attaquant unique et les
+                      trois autres défendent, sans être alliés pour autant. Il
+                      gagne la campagne s'il détruit le Seigneur de Guerre du
+                      meneur <em>et</em> contrôle le centre à la fin du tour 5 ;
+                      sinon elle est perdue pour lui, quels que soient ses
+                      points.
+                    </div>
+                  </div>
+                </div>
+                <aside style="display: grid; gap: 22px; align-content: start">
+                  <div
+                    style="
+                      border: 1px solid #2e2721;
+                      background: #14110d;
+                      padding: 20px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 10px;
+                        letter-spacing: 0.24em;
+                        text-transform: uppercase;
+                        color: #8c7c5f;
+                        margin-bottom: 14px;
+                      "
+                    >
+                      Dénouements
+                    </div>
+                    <ul
+                      style="
+                        margin: 0;
+                        padding-left: 18px;
+                        display: grid;
+                        gap: 11px;
+                        font-size: 15px;
+                        line-height: 1.6;
+                        color: #a2957f;
+                      "
+                    >
+                      <li>
+                        <strong style="color: #5aa87f; font-weight: 600"
+                          >Yarath éteinte</strong
+                        >
+                        — Raphaël l'emporte : les fonderies sont noyées, et ce
+                        que les trois autres étaient venus chercher a fondu
+                        avec. Il garde une relique de campagne.
+                      </li>
+                      <li>
+                        <strong style="color: #d1483c; font-weight: 600"
+                          >Yarath emportée</strong
+                        >
+                        — Jean l'emporte : le vault quitte le système scellé,
+                        jamais ouvert, en route vers Baal. Il débloque
+                        définitivement un Rite of War.
+                      </li>
+                      <li>
+                        <strong style="color: #b8903f; font-weight: 600"
+                          >Yarath tenue</strong
+                        >
+                        — Thomas l'emporte : la forge tourne encore et son
+                        maître a survécu à ses invités. Il débloque
+                        définitivement un Rite of War.
+                      </li>
+                      <li>
+                        <strong style="color: #9273c9; font-weight: 600"
+                          >Yarath relue</strong
+                        >
+                        — Tristan l'emporte : la Fraternité repart avec ce qui
+                        avait été effacé. Le reste peut brûler, cela ne la
+                        regarde plus.
+                      </li>
+                      <li>
+                        <strong style="color: #cbbb98; font-weight: 600"
+                          >Yarath brûlée</strong
+                        >
+                        — personne ne tient le centre : le monde-forge est perdu
+                        pour les quatre, et Syrgalah reste dans les décombres.
+                        La campagne suivante s'ouvre sur ses ruines.
+                      </li>
+                    </ul>
+                  </div>
+                </aside>
+              </div>
+            </article>
+          </section>
+
+          <section id="progression" style="padding: 92px 0 0">
+            <div
+              style="
+                display: flex;
+                align-items: baseline;
+                gap: 18px;
+                border-bottom: 1px solid #2e2721;
+                padding-bottom: 14px;
+              "
+            >
+              <span
+                style="
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 11px;
+                  letter-spacing: 0.3em;
+                  color: #9b2226;
+                "
+                >VI</span
+              >
+              <h2
+                style="
+                  font-family: Cinzel, serif;
+                  font-weight: 700;
+                  font-size: clamp(26px, 3.4vw, 40px);
+                  margin: 0;
+                  color: #f3e9d2;
+                "
+              >
+                Progression &amp; conséquences
+              </h2>
+            </div>
+
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 26px;
+                margin-top: 40px;
+              "
+            >
+              <div
+                style="
+                  border: 1px solid #2e2721;
+                  background: #14110d;
+                  padding: 28px;
+                "
+              >
+                <h3
+                  style="
+                    font-family: Cinzel, serif;
+                    font-size: 21px;
+                    margin: 0 0 16px;
+                    color: #f3e9d2;
+                  "
+                >
+                  Points de campagne
+                </h3>
+                <ul
+                  style="
+                    margin: 0;
+                    padding-left: 20px;
+                    display: grid;
+                    gap: 10px;
+                    font-size: 16px;
+                    line-height: 1.62;
+                    color: #b8ab92;
+                  "
+                >
+                  <li>
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >3 points</strong
+                    >
+                    — victoire majeure (écart de 15 points de victoire ou plus).
+                  </li>
+                  <li>
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >2 points</strong
+                    >
+                    — victoire mineure.
+                  </li>
+                  <li>
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >1 point</strong
+                    >
+                    — égalité, pour chaque joueur concerné.
+                  </li>
+                  <li>
+                    <strong style="color: #e6dcc8; font-weight: 600"
+                      >+1 point</strong
+                    >
+                    — compte-rendu de bataille rédigé avant la session suivante.
+                    La chronique fait partie du jeu.
+                  </li>
+                  <li>
+                    <strong style="color: #f0d67a; font-weight: 600"
+                      >+2 points</strong
+                    >
+                    — possession de Syrgalah, comptés une seule fois après la
+                    mission III.
+                  </li>
+                  <li>
+                    <strong style="color: #c9524f; font-weight: 600"
+                      >−1 point</strong
+                    >
+                    — dépassement du plafond de points, même de peu. La
+                    contrainte fait partie du jeu.
+                  </li>
+                  <li>
+                    <strong style="color: #c9524f; font-weight: 600"
+                      >±1 point</strong
+                    >
+                    — pacte tenu jusqu'au bout, ou trahison consommée : le
+                    traître perd un point, le trahi en gagne un (section II).
+                  </li>
+                </ul>
+              </div>
+              <div
+                style="
+                  border: 1px solid #2e2721;
+                  background: #14110d;
+                  padding: 28px;
+                "
+              >
+                <h3
+                  style="
+                    font-family: Cinzel, serif;
+                    font-size: 21px;
+                    margin: 0 0 16px;
+                    color: #f3e9d2;
+                  "
+                >
+                  Cicatrices de campagne
+                </h3>
+                <p
+                  style="
+                    margin: 0 0 14px;
+                    font-size: 16px;
+                    line-height: 1.68;
+                    color: #b8ab92;
+                  "
+                >
+                  Après chaque mission, chaque joueur choisit une unité détruite
+                  et lance un D6 :
+                </p>
+                <ul
+                  style="
+                    margin: 0;
+                    padding-left: 20px;
+                    display: grid;
+                    gap: 8px;
+                    font-size: 15.5px;
+                    line-height: 1.6;
+                    color: #b8ab92;
+                  "
+                >
+                  <li>
+                    <strong style="color: #c9524f; font-weight: 600">1</strong>
+                    — décimée : indisponible pour la mission suivante.
+                  </li>
+                  <li>
+                    <strong style="color: #cbbb98; font-weight: 600"
+                      >2–4</strong
+                    >
+                    — reconstituée : aucun effet.
+                  </li>
+                  <li>
+                    <strong style="color: #c9a227; font-weight: 600"
+                      >5–6</strong
+                    >
+                    — endurcie : gagne un nom propre et, une fois par partie,
+                    une relance de test de Moral.
+                  </li>
+                </ul>
+              </div>
+              <div
+                style="
+                  border: 1px solid #2e2721;
+                  background: #14110d;
+                  padding: 28px;
+                "
+              >
+                <h3
+                  style="
+                    font-family: Cinzel, serif;
+                    font-size: 21px;
+                    margin: 0 0 16px;
+                    color: #f3e9d2;
+                  "
+                >
+                  Serments de campagne
+                </h3>
+                <p
+                  style="
+                    margin: 0 0 14px;
+                    font-size: 16px;
+                    line-height: 1.68;
+                    color: #b8ab92;
+                  "
+                >
+                  Les quatre serments sont déjà écrits (section II). Tenir le
+                  sien en mission V vaut
+                  <strong style="color: #e6dcc8; font-weight: 600"
+                    >2 points de campagne</strong
+                  >, quel que soit le résultat de la bataille — et un serment
+                  tenu par un joueur battu est le meilleur récit de fin
+                  possible.
+                </p>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 15.5px;
+                    line-height: 1.62;
+                    color: #a2957f;
+                  "
+                >
+                  Chacun peut reformuler le sien avant la mission I.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="journal" style="padding: 92px 0 0">
+            <div
+              style="
+                display: flex;
+                align-items: baseline;
+                gap: 18px;
+                border-bottom: 1px solid #2e2721;
+                padding-bottom: 14px;
+              "
+            >
+              <span
+                style="
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 11px;
+                  letter-spacing: 0.3em;
+                  color: #9b2226;
+                "
+                >VII</span
+              >
+              <h2
+                style="
+                  font-family: Cinzel, serif;
+                  font-weight: 700;
+                  font-size: clamp(26px, 3.4vw, 40px);
+                  margin: 0;
+                  color: #f3e9d2;
+                "
+              >
+                Journal de guerre
+              </h2>
+            </div>
+
+            <sc-if value="{{ outils }}" hint-placeholder-val="{{ true }}">
+              <div
+                style="
+                  margin-top: 40px;
+                  border: 1px solid #2e2721;
+                  background: #14110d;
+                "
+              >
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 1.1fr 1.5fr 0.8fr 0.8fr 1.1fr;
+                    gap: 0;
+                    border-bottom: 1px solid #2e2721;
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 10px;
+                    letter-spacing: 0.2em;
+                    text-transform: uppercase;
+                    color: #8c7c5f;
+                  "
+                >
+                  <div style="padding: 14px 18px">Joueur</div>
+                  <div style="padding: 14px 18px">Force</div>
+                  <div style="padding: 14px 18px; text-align: center">
+                    Victoires
+                  </div>
+                  <div style="padding: 14px 18px; text-align: center">
+                    Points
+                  </div>
+                  <div style="padding: 14px 18px; text-align: center">
+                    Ajuster
+                  </div>
+                </div>
+                <sc-for list="{{ joueurs }}" as="j" hint-placeholder-count="4">
+                  <div
+                    style="
+                      display: grid;
+                      grid-template-columns: 1.1fr 1.5fr 0.8fr 0.8fr 1.1fr;
+                      align-items: center;
+                      border-bottom: 1px solid #221d18;
+                    "
+                  >
+                    <div style="padding: 10px 18px">
+                      <input
+                        type="text"
+                        value="{{ j.nom }}"
+                        onChange="{{ j.setNom }}"
+                        placeholder="Nom"
+                        style="
+                          width: 100%;
+                          background: transparent;
+                          border: none;
+                          border-bottom: 1px solid #2e2721;
+                          color: #e6dcc8;
+                          font-size: 16px;
+                          padding: 6px 0;
+                          outline: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="padding: 10px 18px; font-size: 14.5px; color: {{ j.couleur }}"
+                    >
+                      {{ j.force }}
+                    </div>
+                    <div
+                      style="
+                        padding: 10px 18px;
+                        text-align: center;
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 17px;
+                        color: #cbbb98;
+                      "
+                    >
+                      {{ j.victoires }}
+                    </div>
+                    <div
+                      style="
+                        padding: 10px 18px;
+                        text-align: center;
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 17px;
+                        color: #c9a227;
+                      "
+                    >
+                      {{ j.points }}
+                    </div>
+                    <div
+                      style="
+                        padding: 10px 18px;
+                        display: flex;
+                        gap: 8px;
+                        justify-content: center;
+                      "
+                    >
+                      <button
+                        type="button"
+                        onClick="{{ j.moins }}"
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 13px;
+                          width: 30px;
+                          height: 30px;
+                          background: #1c1813;
+                          color: #a2957f;
+                          border: 1px solid #2e2721;
+                          cursor: pointer;
+                        "
+                        style-hover="color: #f3e9d2; border-color: #4a4038"
+                      >
+                        −
+                      </button>
+                      <button
+                        type="button"
+                        onClick="{{ j.plus }}"
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                          font-size: 13px;
+                          width: 30px;
+                          height: 30px;
+                          background: #1c1813;
+                          color: #a2957f;
+                          border: 1px solid #2e2721;
+                          cursor: pointer;
+                        "
+                        style-hover="color: #f3e9d2; border-color: #4a4038"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </sc-for>
+                <div
+                  style="
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 26px;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 20px 18px;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      flex-wrap: wrap;
+                      gap: 30px;
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 12px;
+                      letter-spacing: 0.12em;
+                      text-transform: uppercase;
+                    "
+                  >
+                    <div style="color: #c9a227">{{ meneurTxt }}</div>
+                    <div style="color: #c9524f">{{ dernierTxt }}</div>
+                    <div style="color: #cbbb98">{{ etatCampagne }}</div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick="{{ reset }}"
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 10px;
+                      letter-spacing: 0.2em;
+                      text-transform: uppercase;
+                      background: transparent;
+                      color: #7d7160;
+                      border: 1px solid #2e2721;
+                      padding: 9px 14px;
+                      cursor: pointer;
+                    "
+                    style-hover="color: #c9524f; border-color: #6d3230"
+                  >
+                    Réinitialiser
+                  </button>
+                </div>
+              </div>
+            </sc-if>
+
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 26px;
+                margin-top: 26px;
+              "
+            >
+              <div
+                style="
+                  border: 1px solid #2e2721;
+                  background: #14110d;
+                  padding: 28px;
+                "
+              >
+                <h3
+                  style="
+                    font-family: Cinzel, serif;
+                    font-size: 20px;
+                    margin: 0 0 14px;
+                    color: #f3e9d2;
+                  "
+                >
+                  Le compte-rendu, mode d'emploi
+                </h3>
+                <p
+                  style="
+                    margin: 0 0 12px;
+                    font-size: 16px;
+                    line-height: 1.68;
+                    color: #b8ab92;
+                  "
+                >
+                  Trois à cinq lignes après chaque partie, pas plus : le
+                  résultat, un moment marquant, et la conséquence narrative
+                  retenue. C'est ce texte, et non le score, qui alimente la
+                  mission suivante.
+                </p>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 15.5px;
+                    line-height: 1.62;
+                    color: #a2957f;
+                  "
+                >
+                  Postez-le dans le canal du groupe avant la session suivante.
+                  Mis bout à bout, les cinq comptes-rendus forment la chronique
+                  du Reflux — c'est le vrai trophée.
+                </p>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer style="border-top: 1px solid #2e2721; background: #0d0c0a">
+          <div
+            style="
+              max-width: 1120px;
+              margin: 0 auto;
+              padding: 46px 40px 60px;
+              display: grid;
+              grid-template-columns: 1.4fr 1fr;
+              gap: 44px;
+            "
+          >
+            <div>
+              <div
+                style="
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 10px;
+                  letter-spacing: 0.28em;
+                  text-transform: uppercase;
+                  color: #8c7c5f;
+                  margin-bottom: 14px;
+                "
+              >
+                Sources
+              </div>
+              <p
+                style="
+                  margin: 0 0 10px;
+                  font-size: 15px;
+                  line-height: 1.66;
+                  color: #a2957f;
+                "
+              >
+                Règles et pack de missions Zone Mortalis (« Protocole de
+                Nettoyage ») d'après la traduction francophone du
+                <a
+                  href="https://jean-desaintangel.github.io/zone-mortalis/"
+                  target="_blank"
+                  rel="noopener"
+                  >Journal Tactica — Zone Mortalis</a
+                >.
+              </p>
+              <p
+                style="
+                  margin: 0 0 10px;
+                  font-size: 15px;
+                  line-height: 1.66;
+                  color: #a2957f;
+                "
+              >
+                Missions légendaires, narratives et format Onslaught d'après
+                <a
+                  href="https://lagrandecroisade.fr/pages/missions.html"
+                  target="_blank"
+                  rel="noopener"
+                  >La Grande Croisade — Missions</a
+                >.
+              </p>
+              <p
+                style="
+                  margin: 0;
+                  font-size: 15px;
+                  line-height: 1.66;
+                  color: #a2957f;
+                "
+              >
+                Structure de campagne et rythme de sessions d'après la note «
+                Concevoir une campagne narrative Horus Heresy V3 pour 4 joueurs
+                ». Positions stellaires d'après la
+                <em>Carta Galactica</em> fournie par le groupe.
+              </p>
+            </div>
+            <div>
+              <div
+                style="
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 10px;
+                  letter-spacing: 0.28em;
+                  text-transform: uppercase;
+                  color: #8c7c5f;
+                  margin-bottom: 14px;
+                "
+              >
+                Mention
+              </div>
+              <p
+                style="
+                  margin: 0;
+                  font-size: 14px;
+                  line-height: 1.66;
+                  color: #7d7160;
+                "
+              >
+                Document de campagne non officiel, réalisé par des joueurs.
+                Warhammer : The Horus Heresy, Zone Mortalis, Legiones Astartes
+                et les noms associés sont des marques de Games Workshop Ltd. Ce
+                document n'est ni affilié ni approuvé par Games Workshop, et
+                aucun défi à leur statut n'est intentionné.
+              </p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </x-dc>
+    <style>
+      .mission-header {
+        cursor: pointer !important;
+      }
+      .mission-header:hover {
+        background: linear-gradient(90deg, #2a1f14, #1a1710 70%) !important;
+      }
+      .mission-content.hidden {
+        display: none !important;
+      }
+    </style>
+    <script>
+      function setupMissions() {
+        const articles = document.querySelectorAll("section#missions article");
+
+        if (articles.length === 0) {
+          console.log("Aucune mission trouvée, nouvel essai...");
+          return false;
+        }
+
+        console.log("Setup missions - trouvé:", articles.length);
+
+        articles.forEach((article, index) => {
+          // Vérifier si déjà configuré
+          if (article.dataset.missionSetup === "true") return;
+
+          const children = Array.from(article.children);
+          if (children.length >= 2) {
+            const header = children[0];
+            const content = children[1];
+
+            header.style.cursor = "pointer";
+            content.style.display = "none";
+
+            header.addEventListener("click", function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              if (content.style.display === "none") {
+                content.style.display = "";
+              } else {
+                content.style.display = "none";
+              }
+            });
+
+            article.dataset.missionSetup = "true";
+            console.log("Mission", index, "configurée");
+          }
+        });
+
+        return articles.length > 0;
+      }
+
+      // Attendre que x-dc soit chargé
+      const observer = new MutationObserver(function (mutations) {
+        if (setupMissions()) {
+          observer.disconnect();
+        }
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+
+      // Essayer aussi après délai
+      setTimeout(() => setupMissions(), 100);
+      setTimeout(() => setupMissions(), 500);
+      setTimeout(() => setupMissions(), 2000);
+    </script>
+    <script
+      type="text/x-dc"
+      data-dc-script
+      data-props='{"plafondPartie":{"editor":"int","default":3000,"min":1500,"max":4000,"step":250,"unit":"pts","tsType":"number","section":"Format de campagne"},"outilsInteractifs":{"editor":"boolean","default":true,"tsType":"boolean","section":"Format de campagne"}}'
+    >
+      const CLE = 'yarath-journal-v2';
+      const MISSIONS_ZM = [
+        { de: '1', nom: 'Assaut de secteur', note: 'poussée frontale dans les galeries' },
+        { de: '2', nom: 'Sans quartier', note: 'attrition pure, aucun objectif' },
+        { de: '3', nom: 'Terre ensanglantée', note: 'tenir le sol conquis' },
+        { de: '4', nom: 'Prise de contrôle', note: 'terminaux et sas' },
+        { de: '5', nom: 'Nexus de ruine', note: 'carrefour central disputé' },
+        { de: '6', nom: 'Domination totale', note: 'domination de secteur généralisée' }
+      ];
+      const DEFAUT = [
+        { nom: 'Raphaël', force: 'Salamanders — XVIII\u1d49', couleur: '#5aa87f' },
+        { nom: 'Jean', force: 'Blood Angels — IX\u1d49', couleur: '#d1483c' },
+        { nom: 'Thomas', force: 'Dark Mechanicum — Kaustos-77', couleur: '#b8903f' },
+        { nom: 'Tristan', force: 'Thousand Sons — XV\u1d49', couleur: '#9273c9' }
+      ];
+
+      class Component extends DCLogic {
+        state = { lignes: DEFAUT.map(d => ({ ...d, victoires: 0, points: 0 })), de: null };
+
+        componentDidMount() {
+          try {
+            const brut = localStorage.getItem(CLE);
+            if (brut) {
+              const l = JSON.parse(brut);
+              if (Array.isArray(l) && l.length === 4) this.setState({ lignes: l });
+            }
+          } catch (e) {}
+        }
+
+        sauver(lignes) {
+          this.setState({ lignes });
+          try { localStorage.setItem(CLE, JSON.stringify(lignes)); } catch (e) {}
+        }
+
+        maj(i, patch) {
+          this.sauver(this.state.lignes.map((l, k) => (k === i ? { ...l, ...patch } : l)));
+        }
+
+        arrondi(v) { return Math.round(v / 50) * 50; }
+
+        renderVals() {
+          const plafond = Number(this.props.plafondPartie) || 3000;
+          const duo = this.arrondi(plafond / 4);
+          const solo = this.arrondi(plafond / 2);
+          const lignes = this.state.lignes;
+          const maxi = Math.max(...lignes.map(l => l.points));
+          const mini = Math.min(...lignes.map(l => l.points));
+          const meneurs = lignes.filter(l => l.points === maxi).map(l => l.nom);
+          const derniers = lignes.filter(l => l.points === mini).map(l => l.nom);
+          const meneurTxt = maxi === mini ? 'Aucun meneur' : 'Meneur — ' + meneurs.join(', ') + ' (' + maxi + ')';
+          const dernierTxt = maxi === mini ? 'Aucun dernier' : 'Dernier — ' + derniers.join(', ') + ' (' + mini + ')';
+          const etat = maxi === mini
+            ? 'Campagne à l\u2019équilibre — personne ne mène'
+            : 'Le dernier choisit la branche IV et la mission V';
+          const d = this.state.de;
+          return {
+            plafondTxt: plafond.toLocaleString('fr-FR'),
+            budget: this.arrondi(plafond * 0.67).toLocaleString('fr-FR'),
+            pts1: duo.toLocaleString('fr-FR'),
+            pts2: this.arrondi(plafond * 0.42).toLocaleString('fr-FR'),
+            pts3: duo.toLocaleString('fr-FR'),
+            pts4: solo.toLocaleString('fr-FR'),
+            pts5: duo.toLocaleString('fr-FR'),
+            outils: this.props.outilsInteractifs !== false,
+            tableMissions: MISSIONS_ZM,
+            deTexte: d ? 'D6 : ' + d + ' — ' + MISSIONS_ZM[d - 1].nom : 'Aucun jet effectué.',
+            lancerDe: () => this.setState({ de: 1 + Math.floor(Math.random() * 6) }),
+            meneurTxt, dernierTxt, etatCampagne: etat,
+            joueurs: lignes.map((l, i) => ({
+              nom: l.nom, force: l.force, victoires: l.victoires, points: l.points,
+              couleur: l.couleur || '#cbbb98',
+              setNom: e => this.maj(i, { nom: e.target.value }),
+              plus: () => this.maj(i, { points: l.points + 1, victoires: l.victoires + 1 }),
+              moins: () => this.maj(i, { points: Math.max(0, l.points - 1), victoires: Math.max(0, l.victoires - 1) })
+            })),
+            reset: () => this.sauver(DEFAUT.map(x => ({ ...x, victoires: 0, points: 0 })))
+          };
+        }
+      }
+    </script>
+  </body>
+</html>
