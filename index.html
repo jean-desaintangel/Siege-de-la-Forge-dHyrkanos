@@ -752,12 +752,20 @@
                   </p>
                 </div>
               </div>
-              <div
+              <a
+                href="pages/blood_angels.html"
+                title="Ordre de déploiement du Ier Bataillon — « Le Serment de Baal »"
                 style="
+                  display: block;
                   border: 1px solid #3a3129;
                   border-top: 2px solid #9b2226;
+                  border-bottom: 1px solid #3a3129;
                   background: linear-gradient(#191510, #100e0b);
                   padding: 28px 26px;
+                  color: inherit;
+                  transition:
+                    border-color 0.2s ease,
+                    background 0.2s ease;
                 "
               >
                 <div
@@ -824,7 +832,19 @@
                     que Tristan les ait lues.
                   </p>
                 </div>
-              </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 10px;
+                    letter-spacing: 0.24em;
+                    text-transform: uppercase;
+                    color: #d1483c;
+                    margin-top: 18px;
+                  "
+                >
+                  Ordre de déploiement du I<sup>er</sup> Bataillon →
+                </div>
+              </a>
               <div
                 style="
                   border: 1px solid #3a3129;
@@ -3929,7 +3949,9 @@
                   "
                 >
                   <li>
-                    <strong style="color: #c9524f; font-weight: 600">1-2</strong>
+                    <strong style="color: #c9524f; font-weight: 600"
+                      >1-2</strong
+                    >
                     — décimée : indisponible pour la mission suivante.
                   </li>
                   <li>
@@ -3942,7 +3964,8 @@
                     <strong style="color: #c9a227; font-weight: 600"
                       >5–6</strong
                     >
-                    — endurcie : une fois par partie, gagne une relance de test de Commandement ou de Sang Froid.
+                    — endurcie : une fois par partie, gagne une relance de test
+                    de Commandement ou de Sang Froid.
                   </li>
                 </ul>
               </div>
@@ -4086,7 +4109,7 @@
                       />
                     </div>
                     <div
-                      style="padding: 10px 18px; font-size: 14.5px; color: {{ j.couleur }}"
+                      :style="{ padding: '10px 18px', fontSize: '14.5px', color: j.couleur }"
                     >
                       {{ j.force }}
                     </div>

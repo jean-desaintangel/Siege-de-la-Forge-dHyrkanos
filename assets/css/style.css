@@ -124,11 +124,7 @@ header {
   position: relative;
   padding: 0;
   border-bottom: 1px solid #2e2721;
-  background: radial-gradient(
-    120% 90% at 50% 0%,
-    #1d1712 0%,
-    #0b0a09 62%
-  );
+  background: radial-gradient(120% 90% at 50% 0%, #1d1712 0%, #0b0a09 62%);
 }
 
 header .header-subtitle {
@@ -329,4 +325,18 @@ aside {
 /* Pulsing animation for important text */
 .pulse-animation {
   animation: emberPulse 3.2s ease-in-out infinite;
+}
+
+/* Carte de belligérant cliquable → fiche de détachement dans pages/ */
+a[href^="pages/"] {
+  border-bottom: none;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+a[href^="pages/"]:hover {
+  border-color: #9b2226;
+  border-top-color: #9b2226;
+  background: linear-gradient(#1f1712, #14100c);
 }
