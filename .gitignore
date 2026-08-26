@@ -1,0 +1,8 @@
+# Dépendances installées par npm : régénérables avec `npm install`.
+# Elles n'ont rien à faire dans l'historique Git.
+node_modules/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
