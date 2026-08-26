@@ -28,255 +28,43 @@
   <body style="overflow-x: hidden">
     <div style="background: #0b0a09; min-height: 100vh">
       <!-- ===== Navigation ===== -->
-      <nav
-        style="
-          position: sticky;
-          top: 0;
-          z-index: 40;
-          background: rgba(11, 10, 9, 0.94);
-          backdrop-filter: blur(8px);
-          border-bottom: 1px solid #2e2721;
-        "
-      >
-        <div
-          style="
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 26px;
-            align-items: center;
-            min-height: 54px;
-            font-family: &quot;JetBrains Mono&quot;, monospace;
-            font-size: 10.5px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-          "
-        >
-          <a href="../index.html" style="color: #9b2226; border: none"
-            >← Dossier de campagne</a
-          >
-          <a href="#commandement" style="color: #a2957f; border: none"
-            >1 · Commandement</a
-          >
-          <a href="#etat-major" style="color: #a2957f; border: none"
-            >2 · État-major</a
-          >
-          <a href="#compagnies" style="color: #a2957f; border: none"
-            >3 · Compagnies</a
-          >
+      <nav>
+        <div class="container-max nav-mono" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 26px; align-items: center; min-height: 54px;">
+          <a href="../index.html" style="color: #9b2226; border: none">← Dossier de campagne</a>
+          <a href="#commandement" style="color: #a2957f; border: none">1 · Commandement</a>
+          <a href="#etat-major" style="color: #a2957f; border: none">2 · État-major</a>
+          <a href="#compagnies" style="color: #a2957f; border: none">3 · Compagnies</a>
           <a href="#moyens" style="color: #a2957f; border: none">4 · Moyens</a>
-          <a href="#mission" style="color: #a2957f; border: none"
-            >5 · Ordre de mission</a
-          >
+          <a href="#mission" style="color: #a2957f; border: none">5 · Ordre de mission</a>
         </div>
       </nav>
 
       <!-- ===== En-tête ===== -->
-      <header
-        style="
-          border-bottom: 1px solid #2e2721;
-          background: radial-gradient(
-            120% 90% at 50% 0%,
-            #1d1712 0%,
-            #0b0a09 62%
-          );
-        "
-      >
-        <div style="max-width: 1120px; margin: 0 auto; padding: 76px 40px 64px">
-          <div
-            style="
-              font-family: &quot;JetBrains Mono&quot;, monospace;
-              font-size: 11px;
-              letter-spacing: 0.42em;
-              text-transform: uppercase;
-              color: #9b2226;
-              text-align: center;
-            "
-          >
-            Ordre de déploiement
-          </div>
-          <h1
-            style="
-              font-family: Cinzel, serif;
-              font-weight: 900;
-              font-size: clamp(34px, 5.6vw, 68px);
-              line-height: 1;
-              margin: 18px 0 0;
-              letter-spacing: 0.02em;
-              color: #f3e9d2;
-              text-wrap: balance;
-            "
-          >
-            I<sup style="font-size: 0.46em">er</sup> Bataillon du I<sup
-              style="font-size: 0.46em"
-              >er</sup
-            >
-            Chapitre
-          </h1>
-          <div
-            style="
-              font-family: Cinzel, serif;
-              font-size: clamp(13px, 1.5vw, 18px);
-              letter-spacing: 0.28em;
-              text-transform: uppercase;
-              color: #9b2226;
-              margin: 24px 0 0;
-              text-align: center;
-            "
-          >
-            « Le Serment de Baal »
-          </div>
-          <p
-            style="
-              max-width: 760px;
-              margin: 28px auto 0;
-              font-size: 19px;
-              line-height: 1.76;
-              color: #b8ab92;
-              font-style: italic;
-              text-wrap: pretty;
-              text-align: center;
-            "
-          >
-            «Sanguinius a détaché le Premier Bataillon de son propre ordre de
-            bataille pour un seul objet — ce qui dort sous Yarath-Maximal — et
-            n'a promis ni relève, ni renfort. »
-          </p>
-          <div
-            style="
-              display: flex;
-              flex-wrap: wrap;
-              gap: 10px;
-              margin-top: 36px;
-              font-family: &quot;JetBrains Mono&quot;, monospace;
-              font-size: 11px;
-              letter-spacing: 0.16em;
-              text-transform: uppercase;
-            "
-          ></div>
+      <header>
+        <div class="header-container">
+          <div class="subtitle-mono">Ordre de déploiement</div>
+          <h1 class="page-title">I<sup style="font-size: 0.46em">er</sup> Bataillon du I<sup style="font-size: 0.46em">er</sup> Chapitre</h1>
+          <div class="page-subtitle">« Le Serment de Baal »</div>
+          <p class="page-tagline">«Sanguinius a détaché le Premier Bataillon de son propre ordre de bataille pour un seul objet — ce qui dort sous Yarath-Maximal — et n'a promis ni relève, ni renfort. »</p>
         </div>
       </header>
 
-      <main style="max-width: 1120px; margin: 0 auto; padding: 0 40px 120px">
+      <main class="container-max" style="padding: 0 0 120px">
         <!-- ===== 1 · Commandement ===== -->
         <section id="commandement" style="padding: 86px 0 0">
-          <div
-            style="
-              display: flex;
-              align-items: baseline;
-              gap: 18px;
-              border-bottom: 1px solid #2e2721;
-              padding-bottom: 14px;
-            "
-          >
-            <span
-              style="
-                font-family: &quot;JetBrains Mono&quot;, monospace;
-                font-size: 11px;
-                letter-spacing: 0.3em;
-                color: #9b2226;
-              "
-              >I</span
-            >
-            <h2
-              style="
-                font-family: Cinzel, serif;
-                font-weight: 700;
-                font-size: clamp(26px, 3.4vw, 40px);
-                margin: 0;
-                color: #f3e9d2;
-              "
-            >
-              Premier Capitaine des Blood Angels
-            </h2>
+          <div class="section-header">
+            <span class="section-label">I</span>
+            <h2 class="section-title">Premier Capitaine des Blood Angels</h2>
           </div>
 
-          <div
-            style="
-              margin-top: 34px;
-              border: 1px solid #3a3129;
-              border-top: 2px solid #9b2226;
-              background: linear-gradient(#191510, #100e0b);
-              display: grid;
-              grid-template-columns: repeat(
-                auto-fit,
-                minmax(min(100%, 400px), 1fr)
-              );
-            "
-          >
-            <div style="padding: 38px 34px">
-              <img
-                src="../assets/images/blood_angels/raldoron.jpg"
-                alt="Raldoron, Premier Capitaine de la IXe Légion"
-                style="
-                  width: 100%;
-                  height: 320px;
-                  object-fit: cover;
-                  object-position: top center;
-                  display: block;
-                  filter: sepia(0.25) contrast(1.08) brightness(0.82);
-                  border: 1px solid #3a3129;
-                  margin-bottom: 22px;
-                "
-              />
-              <div
-                style="
-                  font-family: &quot;JetBrains Mono&quot;, monospace;
-                  font-size: 10px;
-                  letter-spacing: 0.3em;
-                  color: #d1483c;
-                  text-transform: uppercase;
-                "
-              >
-                Commandement de la force
-              </div>
-              <div
-                style="
-                  font-family: Cinzel, serif;
-                  font-weight: 700;
-                  font-size: clamp(34px, 4.4vw, 46px);
-                  color: #f3e9d2;
-                  margin: 12px 0 6px;
-                  line-height: 1;
-                "
-              >
-                Raldoron
-              </div>
-              <div
-                style="
-                  font-family: Cinzel, serif;
-                  font-size: 17px;
-                  color: #c9a227;
-                  letter-spacing: 0.1em;
-                "
-              >
-                Premier Capitaine de la IX<sup>e</sup> Légion
-              </div>
-              <div
-                style="
-                  font-family: &quot;JetBrains Mono&quot;, monospace;
-                  font-size: 10.5px;
-                  letter-spacing: 0.18em;
-                  color: #7d7160;
-                  text-transform: uppercase;
-                  margin-top: 10px;
-                "
-              >
-                Maître du I<sup>er</sup> Chapitre · Fils des tribus de Baal
-                Primus
-              </div>
-              <p
-                style="
-                  margin: 24px 0 0;
-                  font-size: 18px;
-                  line-height: 1.74;
-                  color: #d9cdb4;
-                  text-wrap: pretty;
-                "
-              >
+          <div class="card-command" style="margin-top: 34px; border-top-color: #9b2226;">
+            <div class="card-command-main">
+              <img class="character-image" src="../assets/images/blood_angels/raldoron.jpg" alt="Raldoron, Premier Capitaine de la IXe Légion" />
+              <div class="label-tiny">Commandement de la force</div>
+              <div class="character-name">Raldoron</div>
+              <div class="character-title">Premier Capitaine de la IX<sup>e</sup> Légion</div>
+              <div class="character-subtitle">Maître du I<sup>er</sup> Chapitre · Fils des tribus de Baal Primus</div>
+              <p class="text-body">
                 Fils des tribus chasseresses de Baal Primus, il est de ceux que
                 Sanguinius est allé chercher lui-même sous l'Arx Angelicum. Le
                 Primarque en fit son premier Capitaine — préférant à la
@@ -285,15 +73,7 @@
                 nul officier de la Légion ne connaît mieux le tempérament de
                 ceux qu'il commande.
               </p>
-              <p
-                style="
-                  margin: 16px 0 0;
-                  font-size: 17px;
-                  line-height: 1.7;
-                  color: #a2957f;
-                  text-wrap: pretty;
-                "
-              >
+              <p class="text-secondary">
                 À Signus Prime, il conduit l'assaut sur la Cathédrale de la
                 Marque quand Sanguinius tombe sous les coups du buveur de sang
                 Ka'Bandha. Au Siège de Terra, on lui confie la porte Hélios ;
@@ -303,121 +83,37 @@
                 simplement l'ensanglanté, et cela lui suffit.
               </p>
             </div>
-            <div
-              style="
-                padding: 38px 34px;
-                border-left: 1px solid #2e2721;
-                display: flex;
-                flex-direction: column;
-                gap: 18px;
-              "
-            >
-              <div
-                style="border-bottom: 1px dotted #3a3129; padding-bottom: 14px"
-              >
-                <div
-                  style="
-                    font-family: &quot;JetBrains Mono&quot;, monospace;
-                    font-size: 10px;
-                    letter-spacing: 0.26em;
-                    color: #8c7c5f;
-                    text-transform: uppercase;
-                  "
-                >
-                  Titre d'usage
-                </div>
-                <div
-                  style="
-                    font-size: 17px;
-                    line-height: 1.58;
-                    color: #e6dcc8;
-                    margin-top: 7px;
-                  "
-                >
+            <div class="card-command-side">
+              <div class="info-item">
+                <div class="info-label">Titre d'usage</div>
+                <div class="info-text">
                   « L'ensanglanté » — et, dans les cercles plus anciens,
                   l'Archein de la Sagesse. Un nom gagné dans les tribus de
                   chasse de Baal Primus, avant même que Sanguinius ne le trouve
                   sous l'Arx Angelicum.
                 </div>
               </div>
-              <div
-                style="border-bottom: 1px dotted #3a3129; padding-bottom: 14px"
-              >
-                <div
-                  style="
-                    font-family: &quot;JetBrains Mono&quot;, monospace;
-                    font-size: 10px;
-                    letter-spacing: 0.26em;
-                    color: #8c7c5f;
-                    text-transform: uppercase;
-                  "
-                >
-                  Manière de commander
-                </div>
-                <div
-                  style="
-                    font-size: 17px;
-                    line-height: 1.58;
-                    color: #e6dcc8;
-                    margin-top: 7px;
-                  "
-                >
+              <div class="info-item">
+                <div class="info-label">Manière de commander</div>
+                <div class="info-text">
                   Là où Azkaellon impose l'ordre, Raldoron lit les hommes.
                   Sanguinius l'a choisi premier Capitaine pour cette souplesse :
                   il ploie un plan de bataille comme on ploie un roseau, et
                   devine ce qu'un frère taira toujours de lui-même.
                 </div>
               </div>
-              <div
-                style="border-bottom: 1px dotted #3a3129; padding-bottom: 14px"
-              >
-                <div
-                  style="
-                    font-family: &quot;JetBrains Mono&quot;, monospace;
-                    font-size: 10px;
-                    letter-spacing: 0.26em;
-                    color: #8c7c5f;
-                    text-transform: uppercase;
-                  "
-                >
-                  Rapport au Primarque
-                </div>
-                <div
-                  style="
-                    font-size: 17px;
-                    line-height: 1.58;
-                    color: #e6dcc8;
-                    margin-top: 7px;
-                  "
-                >
+              <div class="info-item">
+                <div class="info-label">Rapport au Primarque</div>
+                <div class="info-text">
                   Écuyer du Primarque durant toute la Grande Croisade, il est
                   celui à qui Sanguinius se confie le plus — un rôle que
                   d'autres Légions auraient nommé Mournival, si les Anges
                   Sanglants avaient eu besoin d'un tel mot.
                 </div>
               </div>
-              <div
-                style="border-bottom: 1px dotted #3a3129; padding-bottom: 14px"
-              >
-                <div
-                  style="
-                    font-family: &quot;JetBrains Mono&quot;, monospace;
-                    font-size: 10px;
-                    letter-spacing: 0.26em;
-                    color: #8c7c5f;
-                    text-transform: uppercase;
-                  "
-                >
-                  Charge morale
-                </div>
-                <div
-                  style="
-                    font-size: 17px;
-                    line-height: 1.58;
-                    color: #e6dcc8;
-                    margin-top: 7px;
-                  "
-                >
+              <div class="info-item-last">
+                <div class="info-label">Charge morale</div>
+                <div class="info-text">
                   Sur le Vengeful Spirit, il se tient aux côtés de Sanguinius.
                   Il en ressent la mort avant qu'elle ne soit annoncée, et
                   sombre avec toute la Légion dans la Rage Noire. C'est lui qui
@@ -431,35 +127,9 @@
 
         <!-- ===== 2 · État-major ===== -->
         <section id="etat-major" style="padding: 92px 0 0">
-          <div
-            style="
-              display: flex;
-              align-items: baseline;
-              gap: 18px;
-              border-bottom: 1px solid #2e2721;
-              padding-bottom: 14px;
-            "
-          >
-            <span
-              style="
-                font-family: &quot;JetBrains Mono&quot;, monospace;
-                font-size: 11px;
-                letter-spacing: 0.3em;
-                color: #9b2226;
-              "
-              >II</span
-            >
-            <h2
-              style="
-                font-family: Cinzel, serif;
-                font-weight: 700;
-                font-size: clamp(26px, 3.4vw, 40px);
-                margin: 0;
-                color: #f3e9d2;
-              "
-            >
-              État-major du Bataillon
-            </h2>
+          <div class="section-header">
+            <span class="section-label">II</span>
+            <h2 class="section-title">État-major du Bataillon</h2>
           </div>
 
           <div
@@ -473,66 +143,13 @@
               gap: 22px;
             "
           >
-            <div
-              style="
-                border: 1px solid #2e2721;
-                background: #14110d;
-                padding: 26px 24px;
-              "
-            >
-              <img
-                src="../assets/images/blood_angels/zephon.jpg"
-                alt="Dominion Zephon"
-                style="
-                  width: 100%;
-                  aspect-ratio: 1 / 1;
-                  object-fit: cover;
-                  object-position: top center;
-                  display: block;
-                  filter: sepia(0.25) contrast(1.08) brightness(0.82);
-                  border: 1px solid #2e2721;
-                  margin-bottom: 16px;
-                "
-              />
-              <div
-                style="
-                  font-family: &quot;JetBrains Mono&quot;, monospace;
-                  font-size: 10px;
-                  letter-spacing: 0.24em;
-                  color: #8c7c5f;
-                  text-transform: uppercase;
-                "
-              >
-                Adjoint de Raldoron
+            <div class="card-simple">
+              <img class="portrait" src="../assets/images/blood_angels/zephon.jpg" alt="Dominion Zephon" />
+              <div class="label-small">Adjoint de Raldoron</div>
+              <div class="unit-header" style="margin: 10px 0;">
+                <span class="unit-title">Dominion Zephon</span>
               </div>
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: baseline;
-                  gap: 10px;
-                  flex-wrap: wrap;
-                  margin: 10px 0;
-                "
-              >
-                <span
-                  style="
-                    font-family: Cinzel, serif;
-                    font-size: 21px;
-                    color: #f3e9d2;
-                  "
-                  >Dominion Zephon</span
-                >
-              </div>
-              <p
-                style="
-                  margin: 0;
-                  font-size: 16px;
-                  line-height: 1.6;
-                  color: #a2957f;
-                  text-wrap: pretty;
-                "
-              >
+              <p class="text-normal" style="margin: 0;">
                 Ancien sergent d'escouade Destructeur, il a gagné sur les mondes
                 de Compliance le surnom de Porteur de Chagrin — pour la manière
                 dont il y menait la guerre. Une lame xenos lui a pris les bras
@@ -542,66 +159,13 @@
                 laisse, et ne la laisse parler qu'au combat.
               </p>
             </div>
-            <div
-              style="
-                border: 1px solid #2e2721;
-                background: #14110d;
-                padding: 26px 24px;
-              "
-            >
-              <img
-                src="../assets/images/blood_angels/apothicaire.jpg"
-                alt="Apothicaire Vaelor"
-                style="
-                  width: 100%;
-                  aspect-ratio: 1 / 1;
-                  object-fit: cover;
-                  object-position: top center;
-                  display: block;
-                  filter: sepia(0.25) contrast(1.08) brightness(0.82);
-                  border: 1px solid #2e2721;
-                  margin-bottom: 16px;
-                "
-              />
-              <div
-                style="
-                  font-family: &quot;JetBrains Mono&quot;, monospace;
-                  font-size: 10px;
-                  letter-spacing: 0.24em;
-                  color: #8c7c5f;
-                  text-transform: uppercase;
-                "
-              >
-                Section de l'Apothecarion
+            <div class="card-simple">
+              <img class="portrait" src="../assets/images/blood_angels/apothicaire.jpg" alt="Apothicaire Vaelor" />
+              <div class="label-small">Section de l'Apothecarion</div>
+              <div class="unit-header" style="margin: 10px 0;">
+                <span class="unit-title">Apothicaire Vaelor</span>
               </div>
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: baseline;
-                  gap: 10px;
-                  flex-wrap: wrap;
-                  margin: 10px 0;
-                "
-              >
-                <span
-                  style="
-                    font-family: Cinzel, serif;
-                    font-size: 21px;
-                    color: #f3e9d2;
-                  "
-                  >Apothicaire Vaelor</span
-                >
-              </div>
-              <p
-                style="
-                  margin: 0;
-                  font-size: 16px;
-                  line-height: 1.6;
-                  color: #a2957f;
-                  text-wrap: pretty;
-                "
-              >
+              <p class="text-normal" style="margin: 0;">
                 Comme tout prêtre sanguinien de la Légion, il porte un double
                 fardeau : arracher le progénoïde aux morts avant que la lignée
                 ne se perde, et consigner, frère par frère, les premiers signes
@@ -614,35 +178,9 @@
 
         <!-- ===== 3 · Compagnies ===== -->
         <section id="compagnies" style="padding: 92px 0 0">
-          <div
-            style="
-              display: flex;
-              align-items: baseline;
-              gap: 18px;
-              border-bottom: 1px solid #2e2721;
-              padding-bottom: 14px;
-            "
-          >
-            <span
-              style="
-                font-family: &quot;JetBrains Mono&quot;, monospace;
-                font-size: 11px;
-                letter-spacing: 0.3em;
-                color: #9b2226;
-              "
-              >III</span
-            >
-            <h2
-              style="
-                font-family: Cinzel, serif;
-                font-weight: 700;
-                font-size: clamp(26px, 3.4vw, 40px);
-                margin: 0;
-                color: #f3e9d2;
-              "
-            >
-              Compagnies du Bataillon
-            </h2>
+          <div class="section-header">
+            <span class="section-label">III</span>
+            <h2 class="section-title">Compagnies du Bataillon</h2>
           </div>
 
           <div
@@ -654,200 +192,48 @@
             "
           >
             <!-- Ire Compagnie -->
-            <div
-              style="
-                border: 1px solid #2e2721;
-                background: #14110d;
-                display: grid;
-                grid-template-columns: repeat(
-                  auto-fit,
-                  minmax(min(100%, 300px), 1fr)
-                );
-              "
-            >
-              <div
-                style="
-                  padding: 28px 28px;
-                  border-right: 1px solid #2e2721;
-                  max-width: 420px;
-                "
-              >
-                <div
-                  style="
-                    font-family: &quot;JetBrains Mono&quot;, monospace;
-                    font-size: 10px;
-                    letter-spacing: 0.28em;
-                    color: #9b2226;
-                    text-transform: uppercase;
-                  "
-                >
-                  I<sup>re</sup> Compagnie · vétérans
-                </div>
-                <div
-                  style="
-                    font-family: Cinzel, serif;
-                    font-size: 26px;
-                    color: #f3e9d2;
-                    margin: 10px 0;
-                    line-height: 1.15;
-                  "
-                >
-                  « Écarlate »
-                </div>
-                <p
-                  style="
-                    margin: 14px 0 0;
-                    font-size: 16px;
-                    line-height: 1.6;
-                    color: #a2957f;
-                    text-wrap: pretty;
-                  "
-                >
+            <div class="card-company">
+              <div class="card-company-header">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.28em; color: #9b2226; text-transform: uppercase;">I<sup>re</sup> Compagnie · vétérans</div>
+                <div class="company-name">« Écarlate »</div>
+                <p class="text-normal" style="margin: 14px 0 0;">
                   Compagnie de vétérans du Ier Chapitre, héritière des rites de
                   la Grande Croisade. Elle ne combat jamais dès l'ouverture d'un
                   assaut, mais au point où la bataille bascule.
                 </p>
-                <div
-                  style="
-                    font-family: &quot;JetBrains Mono&quot;, monospace;
-                    font-size: 10px;
-                    letter-spacing: 0.2em;
-                    color: #7d7160;
-                    text-transform: uppercase;
-                    margin-top: 14px;
-                  "
-                >
-                  Capitaine — Bel Sepatus
-                </div>
+                <div class="unit-label" style="margin-top: 14px;">Capitaine — Bel Sepatus</div>
               </div>
-              <div style="padding: 18px 8px 18px 0">
-                <div
-                  style="padding: 12px 22px; border-bottom: 1px dotted #241f1b"
-                >
-                  <div
-                    style="
-                      display: flex;
-                      align-items: baseline;
-                      gap: 12px;
-                      flex-wrap: wrap;
-                    "
-                  >
-                    <span
-                      style="
-                        font-family: Cinzel, serif;
-                        font-size: 19px;
-                        color: #f3e9d2;
-                      "
-                      >Paladins Écarlates</span
-                    >
-                    <span
-                      style="
-                        font-family: &quot;JetBrains Mono&quot;, monospace;
-                        font-size: 10px;
-                        letter-spacing: 0.2em;
-                        color: #7d7160;
-                        text-transform: uppercase;
-                      "
-                      >Cénacle d'élite</span
-                    >
+              <div class="card-company-content">
+                <div class="unit-item">
+                  <div class="unit-header">
+                    <span class="unit-title">Paladins Écarlates</span>
+                    <span class="unit-label">Cénacle d'élite</span>
                   </div>
-                  <p
-                    style="
-                      margin: 6px 0 0;
-                      font-size: 16px;
-                      line-height: 1.58;
-                      color: #a2957f;
-                      text-wrap: pretty;
-                    "
-                  >
+                  <p class="text-smaller" style="margin: 6px 0 0;">
                     Un cénacle formé sur les mondes de la Grande Croisade, où
                     l'on n'entrait qu'en remplaçant un mort. Sepatus les mène là
                     où deux assauts ont déjà échoué ; on dit que la troisième
                     tentative cède toujours aux Écarlates.
                   </p>
                 </div>
-                <div
-                  style="padding: 12px 22px; border-bottom: 1px dotted #241f1b"
-                >
-                  <div
-                    style="
-                      display: flex;
-                      align-items: baseline;
-                      gap: 12px;
-                      flex-wrap: wrap;
-                    "
-                  >
-                    <span
-                      style="
-                        font-family: Cinzel, serif;
-                        font-size: 19px;
-                        color: #f3e9d2;
-                      "
-                      >Escouade Vétérans Brécheuse</span
-                    >
-                    <span
-                      style="
-                        font-family: &quot;JetBrains Mono&quot;, monospace;
-                        font-size: 10px;
-                        letter-spacing: 0.2em;
-                        color: #7d7160;
-                        text-transform: uppercase;
-                      "
-                      >Assaut de brèche</span
-                    >
+                <div class="unit-item">
+                  <div class="unit-header">
+                    <span class="unit-title">Escouade Vétérans Brécheuse</span>
+                    <span class="unit-label">Assaut de brèche</span>
                   </div>
-                  <p
-                    style="
-                      margin: 6px 0 0;
-                      font-size: 16px;
-                      line-height: 1.58;
-                      color: #a2957f;
-                      text-wrap: pretty;
-                    "
-                  >
+                  <p class="text-smaller" style="margin: 6px 0 0;">
                     Dix vétérans en formation coin, boucliers verrouillés, un
                     pas par seconde — une tactique que le Ier Chapitre pratique
                     depuis les guerres de Compliance. Le feu se casse sur eux,
                     et le Bataillon passe derrière.
                   </p>
                 </div>
-                <div style="padding: 12px 22px">
-                  <div
-                    style="
-                      display: flex;
-                      align-items: baseline;
-                      gap: 12px;
-                      flex-wrap: wrap;
-                    "
-                  >
-                    <span
-                      style="
-                        font-family: Cinzel, serif;
-                        font-size: 19px;
-                        color: #f3e9d2;
-                      "
-                      >Les Larmes de l'Ange</span
-                    >
-                    <span
-                      style="
-                        font-family: &quot;JetBrains Mono&quot;, monospace;
-                        font-size: 10px;
-                        letter-spacing: 0.2em;
-                        color: #7d7160;
-                        text-transform: uppercase;
-                      "
-                      >Vétérans</span
-                    >
+                <div class="unit-item-last">
+                  <div class="unit-header">
+                    <span class="unit-title">Les Larmes de l'Ange</span>
+                    <span class="unit-label">Vétérans</span>
                   </div>
-                  <p
-                    style="
-                      margin: 6px 0 0;
-                      font-size: 16px;
-                      line-height: 1.58;
-                      color: #a2957f;
-                      text-wrap: pretty;
-                    "
-                  >
+                  <p class="text-smaller" style="margin: 6px 0 0;">
                     Guerriers réservés aux missions les plus brutales et
                     moralement douteuses — extermination, armes interdites,
                     anéantissement de populations jugées irrécupérables. Chaque
@@ -862,103 +248,24 @@
             </div>
 
             <!-- IIe Compagnie -->
-            <div
-              style="
-                border: 1px solid #2e2721;
-                background: #14110d;
-                display: grid;
-                grid-template-columns: repeat(
-                  auto-fit,
-                  minmax(min(100%, 300px), 1fr)
-                );
-              "
-            >
-              <div
-                style="
-                  padding: 28px 28px;
-                  border-right: 1px solid #2e2721;
-                  max-width: 420px;
-                "
-              >
-                <div
-                  style="
-                    font-family: &quot;JetBrains Mono&quot;, monospace;
-                    font-size: 10px;
-                    letter-spacing: 0.28em;
-                    color: #9b2226;
-                    text-transform: uppercase;
-                  "
-                >
-                  II<sup>e</sup> Compagnie · ligne & corps à corps
-                </div>
-                <div
-                  style="
-                    font-family: Cinzel, serif;
-                    font-size: 26px;
-                    color: #f3e9d2;
-                    margin: 10px 0;
-                    line-height: 1.15;
-                  "
-                >
-                  « Enclume »
-                </div>
-                <p
-                  style="
-                    margin: 14px 0 0;
-                    font-size: 16px;
-                    line-height: 1.6;
-                    color: #a2957f;
-                    text-wrap: pretty;
-                  "
-                >
+            <div class="card-company">
+              <div class="card-company-header">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.28em; color: #9b2226; text-transform: uppercase;">II<sup>e</sup> Compagnie · ligne & corps à corps</div>
+                <div class="company-name">« Enclume »</div>
+                <p class="text-normal" style="margin: 14px 0 0;">
                   Compagnie de ligne de la IXe Légion, l'une des plus anciennes
                   en âge de service. Elle tient le point d'ancrage d'où se
                   déploie tout l'assaut, et ne laisse jamais l'ennemi refermer
                   derrière elle ce qu'elle vient d'ouvrir.
                 </p>
-                <div
-                  style="
-                    font-family: &quot;JetBrains Mono&quot;, monospace;
-                    font-size: 10px;
-                    letter-spacing: 0.2em;
-                    color: #7d7160;
-                    text-transform: uppercase;
-                    margin-top: 14px;
-                  "
-                >
-                  Capitaine — Primus Halvor
-                </div>
+                <div class="unit-label" style="margin-top: 14px;">Capitaine — Primus Halvor</div>
               </div>
-              <div style="padding: 18px 8px 18px 0">
-                <div
-                  style="padding: 12px 22px; border-bottom: 1px dotted #241f1b"
-                >
-                  <div
-                    style="
-                      display: flex;
-                      align-items: baseline;
-                      gap: 12px;
-                      flex-wrap: wrap;
-                    "
-                  >
-                    <span
-                      style="
-                        font-family: Cinzel, serif;
-                        font-size: 19px;
-                        color: #f3e9d2;
-                      "
-                      >Escouade Tactique « Les Veilleurs »</span
-                    >
+              <div class="card-company-content">
+                <div class="unit-item">
+                  <div class="unit-header">
+                    <span class="unit-title">Escouade Tactique « Les Veilleurs »</span>
                   </div>
-                  <p
-                    style="
-                      margin: 6px 0 0;
-                      font-size: 16px;
-                      line-height: 1.58;
-                      color: #a2957f;
-                      text-wrap: pretty;
-                    "
-                  >
+                  <p class="text-smaller" style="margin: 6px 0 0;">
                     La discipline de tir la plus austère du Chapitre — rare
                     vertu chez des fils de Sanguinius plus prompts au corps à
                     corps. Ils tiennent la ligne qu'une autre escouade a ouverte
@@ -966,35 +273,11 @@
                     cela que Raldoron les cite plus souvent que les autres.
                   </p>
                 </div>
-                <div
-                  style="padding: 12px 22px; border-bottom: 1px dotted #241f1b"
-                >
-                  <div
-                    style="
-                      display: flex;
-                      align-items: baseline;
-                      gap: 12px;
-                      flex-wrap: wrap;
-                    "
-                  >
-                    <span
-                      style="
-                        font-family: Cinzel, serif;
-                        font-size: 19px;
-                        color: #f3e9d2;
-                      "
-                      >Escouade Tactique « Chant de Nassau »</span
-                    >
+                <div class="unit-item">
+                  <div class="unit-header">
+                    <span class="unit-title">Escouade Tactique « Chant de Nassau »</span>
                   </div>
-                  <p
-                    style="
-                      margin: 6px 0 0;
-                      font-size: 16px;
-                      line-height: 1.58;
-                      color: #a2957f;
-                      text-wrap: pretty;
-                    "
-                  >
+                  <p class="text-smaller" style="margin: 6px 0 0;">
                     Levée après l'anéantissement de sa compagnie d'origine sur
                     un monde que les registres de la Légion citent à peine ;
                     l'ancien numéro reste peint sous le neuf, en mémoire. Ils
@@ -1003,35 +286,11 @@
                     perdus.
                   </p>
                 </div>
-                <div
-                  style="padding: 12px 22px; border-bottom: 1px dotted #241f1b"
-                >
-                  <div
-                    style="
-                      display: flex;
-                      align-items: baseline;
-                      gap: 12px;
-                      flex-wrap: wrap;
-                    "
-                  >
-                    <span
-                      style="
-                        font-family: Cinzel, serif;
-                        font-size: 19px;
-                        color: #f3e9d2;
-                      "
-                      >Escouade Nettoyeuse « Purge rapprochée »</span
-                    >
+                <div class="unit-item">
+                  <div class="unit-header">
+                    <span class="unit-title">Escouade Nettoyeuse « Purge rapprochée »</span>
                   </div>
-                  <p
-                    style="
-                      margin: 6px 0 0;
-                      font-size: 16px;
-                      line-height: 1.58;
-                      color: #a2957f;
-                      text-wrap: pretty;
-                    "
-                  >
+                  <p class="text-smaller" style="margin: 6px 0 0;">
                     Épées tronçonneuses et combats à bout portant. Sur les
                     mondes de Compliance comme dans les entrailles d'un vaisseau
                     ennemi, ce sont eux qu'on envoie nettoyer ce que
@@ -1039,33 +298,11 @@
                     jamais consigné dans les rapports du Chapitre.
                   </p>
                 </div>
-                <div style="padding: 12px 22px">
-                  <div
-                    style="
-                      display: flex;
-                      align-items: baseline;
-                      gap: 12px;
-                      flex-wrap: wrap;
-                    "
-                  >
-                    <span
-                      style="
-                        font-family: Cinzel, serif;
-                        font-size: 19px;
-                        color: #f3e9d2;
-                      "
-                      >Escouade Nettoyeuse « Fer bas »</span
-                    >
+                <div class="unit-item-last">
+                  <div class="unit-header">
+                    <span class="unit-title">Escouade Nettoyeuse « Fer bas »</span>
                   </div>
-                  <p
-                    style="
-                      margin: 6px 0 0;
-                      font-size: 16px;
-                      line-height: 1.58;
-                      color: #a2957f;
-                      text-wrap: pretty;
-                    "
-                  >
+                  <p class="text-smaller" style="margin: 6px 0 0;">
                     Ils avancent en formation serrée, en silence, et comptent à
                     voix basse les combats remportés — une habitude prise sur
                     tant de mondes qu'aucun d'eux ne sait plus dire laquelle l'a
@@ -1080,35 +317,9 @@
 
         <!-- ===== 4 · Moyens ===== -->
         <section id="moyens" style="padding: 92px 0 0">
-          <div
-            style="
-              display: flex;
-              align-items: baseline;
-              gap: 18px;
-              border-bottom: 1px solid #2e2721;
-              padding-bottom: 14px;
-            "
-          >
-            <span
-              style="
-                font-family: &quot;JetBrains Mono&quot;, monospace;
-                font-size: 11px;
-                letter-spacing: 0.3em;
-                color: #9b2226;
-              "
-              >IV</span
-            >
-            <h2
-              style="
-                font-family: Cinzel, serif;
-                font-weight: 700;
-                font-size: clamp(26px, 3.4vw, 40px);
-                margin: 0;
-                color: #f3e9d2;
-              "
-            >
-              Moyens du Bataillon
-            </h2>
+          <div class="section-header">
+            <span class="section-label">IV</span>
+            <h2 class="section-title">Moyens du Bataillon</h2>
           </div>
 
           <div
@@ -1122,105 +333,23 @@
               gap: 22px;
             "
           >
-            <div
-              style="
-                border: 1px solid #2e2721;
-                border-top: 2px solid #c9a227;
-                background: #14110d;
-                padding: 24px;
-              "
-            >
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: baseline;
-                  gap: 10px;
-                  flex-wrap: wrap;
-                "
-              >
-                <span
-                  style="
-                    font-family: Cinzel, serif;
-                    font-size: 19px;
-                    color: #f3e9d2;
-                  "
-                  >Modules de largage</span
-                >
+            <div class="card-top-border">
+              <div class="unit-header" style="justify-content: flex-start;">
+                <span class="unit-title">Modules de largage</span>
               </div>
-              <div
-                style="
-                  font-family: &quot;JetBrains Mono&quot;, monospace;
-                  font-size: 10px;
-                  letter-spacing: 0.24em;
-                  color: #8c7c5f;
-                  text-transform: uppercase;
-                  margin: 8px 0 12px;
-                "
-              >
-                Insertion · surface
-              </div>
-              <p
-                style="
-                  margin: 0;
-                  font-size: 16px;
-                  line-height: 1.58;
-                  color: #a2957f;
-                  text-wrap: pretty;
-                "
-              >
+              <div class="label-small" style="margin: 8px 0 12px;">Insertion · surface</div>
+              <p class="text-smaller" style="margin: 0;">
                 Un seul module descend avec la force ; les autres restent en
                 soute, prêts pour une extraction que Raldoron n'a jamais
                 demandée. Le vault, lui, doit remonter.
               </p>
             </div>
-            <div
-              style="
-                border: 1px solid #2e2721;
-                border-top: 2px solid #c9a227;
-                background: #14110d;
-                padding: 24px;
-              "
-            >
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: baseline;
-                  gap: 10px;
-                  flex-wrap: wrap;
-                "
-              >
-                <span
-                  style="
-                    font-family: Cinzel, serif;
-                    font-size: 19px;
-                    color: #f3e9d2;
-                  "
-                  >Serre de Dreadnoughts</span
-                >
+            <div class="card-top-border">
+              <div class="unit-header" style="justify-content: flex-start;">
+                <span class="unit-title">Serre de Dreadnoughts</span>
               </div>
-              <div
-                style="
-                  font-family: &quot;JetBrains Mono&quot;, monospace;
-                  font-size: 10px;
-                  letter-spacing: 0.24em;
-                  color: #8c7c5f;
-                  text-transform: uppercase;
-                  margin: 8px 0 12px;
-                "
-              >
-                Appui lourd
-              </div>
-              <p
-                style="
-                  margin: 0;
-                  font-size: 16px;
-                  line-height: 1.58;
-                  color: #a2957f;
-                  text-wrap: pretty;
-                "
-              >
+              <div class="label-small" style="margin: 8px 0 12px;">Appui lourd</div>
+              <p class="text-smaller" style="margin: 0;">
                 Un sarcophage, deux servitors, un techmarine qui refuse de
                 commenter l'état du pilote depuis que la forge a commencé à
                 répondre à son chant de mort.
@@ -1231,35 +360,9 @@
 
         <!-- ===== 5 · Ordre de mission ===== -->
         <section id="mission" style="padding: 92px 0 0">
-          <div
-            style="
-              display: flex;
-              align-items: baseline;
-              gap: 18px;
-              border-bottom: 1px solid #2e2721;
-              padding-bottom: 14px;
-            "
-          >
-            <span
-              style="
-                font-family: &quot;JetBrains Mono&quot;, monospace;
-                font-size: 11px;
-                letter-spacing: 0.3em;
-                color: #9b2226;
-              "
-              >V</span
-            >
-            <h2
-              style="
-                font-family: Cinzel, serif;
-                font-weight: 700;
-                font-size: clamp(26px, 3.4vw, 40px);
-                margin: 0;
-                color: #f3e9d2;
-              "
-            >
-              Ordre de mission — Yarath-Maximal
-            </h2>
+          <div class="section-header">
+            <span class="section-label">V</span>
+            <h2 class="section-title">Ordre de mission — Yarath-Maximal</h2>
           </div>
 
           <div
@@ -1273,59 +376,18 @@
               gap: 22px;
             "
           >
-            <div
-              style="
-                border: 1px solid #3a2020;
-                background: linear-gradient(#1a100f, #100e0b);
-                padding: 30px 28px;
-              "
-            >
-              <div
-                style="
-                  font-family: &quot;JetBrains Mono&quot;, monospace;
-                  font-size: 10px;
-                  letter-spacing: 0.3em;
-                  color: #d1483c;
-                  text-transform: uppercase;
-                "
-              >
-                Serment du détachement
-              </div>
-              <p
-                style="
-                  margin: 16px 0 0;
-                  font-family: Cinzel, serif;
-                  font-size: 22px;
-                  line-height: 1.5;
-                  color: #f3e9d2;
-                  text-wrap: pretty;
-                "
-              >
+            <div class="card-mission">
+              <div class="label-tiny">Serment du détachement</div>
+              <p style="margin: 16px 0 0; font-family: Cinzel, serif; font-size: 22px; line-height: 1.5; color: #f3e9d2; text-wrap: pretty;">
                 « Ce qui dort à Yarath rentrera à Baal — ou ne sera lu par
                 personne. »
               </p>
-              <p
-                style="
-                  margin: 20px 0 0;
-                  font-size: 16.5px;
-                  line-height: 1.65;
-                  color: #a2957f;
-                  text-wrap: pretty;
-                "
-              >
+              <p style="margin: 20px 0 0; font-size: 16.5px; line-height: 1.65; color: #a2957f; text-wrap: pretty;">
                 Le Bataillon n'est pas venu lire le vault de logique
                 Kaustos-Alpha : il est venu l'emporter. Raldoron a reçu l'ordre
                 d'agir sans attendre de renfort.
               </p>
-              <p
-                style="
-                  margin: 14px 0 0;
-                  font-size: 16.5px;
-                  line-height: 1.65;
-                  color: #cbbb98;
-                  text-wrap: pretty;
-                "
-              >
+              <p style="margin: 14px 0 0; font-size: 16.5px; line-height: 1.65; color: #cbbb98; text-wrap: pretty;">
                 <strong style="color: #f3e9d2; font-weight: 600"
                   >Victoire personnelle :</strong
                 >
@@ -1336,49 +398,14 @@
           </div>
         </section>
 
-        <div
-          style="
-            margin: 92px 0;
-            border: 1px solid #2e2721;
-            background: #14110d;
-            padding: 14px;
-            overflow: hidden;
-          "
-        >
-          <img
-            src="../assets/images/blood_angels/vaisseaux.png"
-            alt="Vaisseaux Blood Angels"
-            style="
-              width: 100%;
-              display: block;
-              max-height: 50vh;
-              object-fit: contain;
-            "
-          />
+        <div class="image-card">
+          <img src="../assets/images/blood_angels/vaisseaux.png" alt="Vaisseaux Blood Angels" />
         </div>
 
         <!-- ===== Annexe A ===== -->
         <section id="recapitulatif" style="padding: 92px 0 0">
-          <div
-            style="
-              display: flex;
-              align-items: baseline;
-              gap: 18px;
-              border-bottom: 1px solid #2e2721;
-              padding-bottom: 14px;
-            "
-          >
-            <h2
-              style="
-                font-family: Cinzel, serif;
-                font-weight: 700;
-                font-size: clamp(26px, 3.4vw, 40px);
-                margin: 0;
-                color: #f3e9d2;
-              "
-            >
-              État récapitulatif
-            </h2>
+          <div class="section-header">
+            <h2 class="section-title">État récapitulatif</h2>
           </div>
 
           <div
@@ -1693,22 +720,7 @@
 
       <!-- ===== Pied de page ===== -->
       <footer style="border-top: 1px solid #2e2721; background: #100e0b">
-        <div
-          style="
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 34px 40px;
-            display: flex;
-            justify-content: space-between;
-            gap: 24px;
-            flex-wrap: wrap;
-            font-family: &quot;JetBrains Mono&quot;, monospace;
-            font-size: 10px;
-            letter-spacing: 0.22em;
-            color: #7d7160;
-            text-transform: uppercase;
-          "
-        >
+        <div class="container-max footer-mono" style="padding: 34px 40px; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
           <span>Homologué — Raldoron, Maître du I<sup>er</sup> Chapitre</span>
           <span>Contreseing du Primarque · scellé sanguin</span>
           <span><a href="../index.html">← Le Reflux de Yarath-Maximal</a></span>
