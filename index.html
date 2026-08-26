@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <script src="./support.js"></script>
   </head>
-  <body>
+  <body style="overflow-x: hidden">
     <x-dc>
       <helmet>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,7 +41,56 @@
         />
       </helmet>
 
-      <div style="background: #0b0a09; min-height: 100vh; overflow-x: hidden">
+      <div style="background: #0b0a09; min-height: 100vh">
+        <nav
+          style="
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(11, 10, 9, 0.94);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #2e2721;
+          "
+        >
+          <div
+            style="
+              max-width: 1120px;
+              margin: 0 auto;
+              padding: 0 40px;
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              gap: 26px;
+              align-items: center;
+              min-height: 54px;
+              font-family: &quot;JetBrains Mono&quot;, monospace;
+              font-size: 10.5px;
+              letter-spacing: 0.2em;
+              text-transform: uppercase;
+            "
+          >
+            <a href="#theatre" style="color: #a2957f; border: none"
+              >Théâtre</a
+            >
+            <a href="#camps" style="color: #a2957f; border: none"
+              >Belligérants</a
+            >
+            <a href="#titan" style="color: #a2957f; border: none"
+              >Le Warhound</a
+            >
+            <a href="#arbre" style="color: #a2957f; border: none">Arbre</a>
+            <a href="#missions" style="color: #a2957f; border: none"
+              >Missions</a
+            >
+            <a href="#progression" style="color: #a2957f; border: none"
+              >Progression</a
+            >
+            <a href="#journal" style="color: #a2957f; border: none"
+              >Journal</a
+            >
+          </div>
+        </nav>
+
         <header
           style="
             position: relative;
@@ -128,54 +177,6 @@
             </div>
           </div>
         </header>
-
-        <nav
-          style="
-            position: sticky;
-            top: 0;
-            z-index: 40;
-            background: rgba(11, 10, 9, 0.94);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid #2e2721;
-          "
-        >
-          <div
-            style="
-              max-width: 1120px;
-              margin: 0 auto;
-              padding: 0 40px;
-              display: flex;
-              flex-wrap: wrap;
-              gap: 26px;
-              align-items: center;
-              min-height: 54px;
-              font-family: &quot;JetBrains Mono&quot;, monospace;
-              font-size: 10.5px;
-              letter-spacing: 0.2em;
-              text-transform: uppercase;
-            "
-          >
-            <a href="#theatre" style="color: #a2957f; border: none"
-              >I · Théâtre</a
-            >
-            <a href="#camps" style="color: #a2957f; border: none"
-              >II · Belligérants</a
-            >
-            <a href="#titan" style="color: #a2957f; border: none"
-              >III · Le Warhound</a
-            >
-            <a href="#arbre" style="color: #a2957f; border: none">IV · Arbre</a>
-            <a href="#missions" style="color: #a2957f; border: none"
-              >V · Missions</a
-            >
-            <a href="#progression" style="color: #a2957f; border: none"
-              >VI · Progression</a
-            >
-            <a href="#journal" style="color: #a2957f; border: none"
-              >VII · Journal</a
-            >
-          </div>
-        </nav>
 
         <main style="max-width: 1120px; margin: 0 auto; padding: 0 40px 120px">
           <section id="theatre" style="padding: 86px 0 0">
@@ -800,11 +801,9 @@
                     "
                   >
                     Venus de Baal pour le vault — pas pour le lire, pour
-                    l'emporter. Escouades d'assaut à réacteurs dorsaux, Crimson
-                    Paladins, maîtres de la lame. Détachement de Croisade en
-                    surface, <em>Zone Mortalis Linebreaker</em> en intérieur.
-                    Doctrine : tomber du plafond, finir au corps à corps, ne
-                    jamais laisser une salle à moitié prise.
+                    l'emporter. Détachement de Croisade en surface,
+                    <em>Zone Mortalis Linebreaker</em> en intérieur. Doctrine :
+                    ne jamais laisser une salle à moitié prise.
                   </p>
                   <p
                     style="
@@ -829,20 +828,8 @@
                     "
                   >
                     Victoire personnelle : les archives quittent le système sans
-                    que Tristan les ait lues.
+                    que la Neuvième Fraternité les ait lues.
                   </p>
-                </div>
-                <div
-                  style="
-                    font-family: &quot;JetBrains Mono&quot;, monospace;
-                    font-size: 10px;
-                    letter-spacing: 0.24em;
-                    text-transform: uppercase;
-                    color: #d1483c;
-                    margin-top: 18px;
-                  "
-                >
-                  Ordre de déploiement du I<sup>er</sup> Bataillon →
                 </div>
               </a>
               <div
@@ -4281,108 +4268,6 @@
             </div>
           </section>
         </main>
-
-        <footer style="border-top: 1px solid #2e2721; background: #0d0c0a">
-          <div
-            style="
-              max-width: 1120px;
-              margin: 0 auto;
-              padding: 46px 40px 60px;
-              display: grid;
-              grid-template-columns: 1.4fr 1fr;
-              gap: 44px;
-            "
-          >
-            <div>
-              <div
-                style="
-                  font-family: &quot;JetBrains Mono&quot;, monospace;
-                  font-size: 10px;
-                  letter-spacing: 0.28em;
-                  text-transform: uppercase;
-                  color: #8c7c5f;
-                  margin-bottom: 14px;
-                "
-              >
-                Sources
-              </div>
-              <p
-                style="
-                  margin: 0 0 10px;
-                  font-size: 15px;
-                  line-height: 1.66;
-                  color: #a2957f;
-                "
-              >
-                Règles et pack de missions Zone Mortalis (« Protocole de
-                Nettoyage ») d'après la traduction francophone du
-                <a
-                  href="https://jean-desaintangel.github.io/zone-mortalis/"
-                  target="_blank"
-                  rel="noopener"
-                  >Journal Tactica — Zone Mortalis</a
-                >.
-              </p>
-              <p
-                style="
-                  margin: 0 0 10px;
-                  font-size: 15px;
-                  line-height: 1.66;
-                  color: #a2957f;
-                "
-              >
-                Missions légendaires, narratives et format Onslaught d'après
-                <a
-                  href="https://lagrandecroisade.fr/pages/missions.html"
-                  target="_blank"
-                  rel="noopener"
-                  >La Grande Croisade — Missions</a
-                >.
-              </p>
-              <p
-                style="
-                  margin: 0;
-                  font-size: 15px;
-                  line-height: 1.66;
-                  color: #a2957f;
-                "
-              >
-                Structure de campagne et rythme de sessions d'après la note «
-                Concevoir une campagne narrative Horus Heresy V3 pour 4 joueurs
-                ». Positions stellaires d'après la
-                <em>Carta Galactica</em> fournie par le groupe.
-              </p>
-            </div>
-            <div>
-              <div
-                style="
-                  font-family: &quot;JetBrains Mono&quot;, monospace;
-                  font-size: 10px;
-                  letter-spacing: 0.28em;
-                  text-transform: uppercase;
-                  color: #8c7c5f;
-                  margin-bottom: 14px;
-                "
-              >
-                Mention
-              </div>
-              <p
-                style="
-                  margin: 0;
-                  font-size: 14px;
-                  line-height: 1.66;
-                  color: #7d7160;
-                "
-              >
-                Document de campagne non officiel, réalisé par des joueurs.
-                Warhammer : The Horus Heresy, Zone Mortalis, Legiones Astartes
-                et les noms associés sont des marques de Games Workshop Ltd. Ce
-                document n'est ni affilié ni approuvé par Games Workshop, et
-                aucun défi à leur statut n'est intentionné.
-              </p>
-            </div>
-          </div>
-        </footer>
       </div>
     </x-dc>
     <style>
