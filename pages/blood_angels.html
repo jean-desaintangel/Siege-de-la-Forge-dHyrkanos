@@ -25,36 +25,54 @@
     />
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
-  <body>
-    <div style="background: #0b0a09; min-height: 100vh; overflow-x: hidden">
-      <!-- ===== Bandeau de classification ===== -->
-      <div style="border-bottom: 1px solid #2e2721; background: #100e0b">
+  <body style="overflow-x: hidden">
+    <div style="background: #0b0a09; min-height: 100vh">
+      <!-- ===== Navigation ===== -->
+      <nav
+        style="
+          position: sticky;
+          top: 0;
+          z-index: 40;
+          background: rgba(11, 10, 9, 0.94);
+          backdrop-filter: blur(8px);
+          border-bottom: 1px solid #2e2721;
+        "
+      >
         <div
           style="
             max-width: 1120px;
             margin: 0 auto;
-            padding: 16px 40px;
+            padding: 0 40px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
             flex-wrap: wrap;
+            justify-content: center;
+            gap: 26px;
+            align-items: center;
+            min-height: 54px;
             font-family: &quot;JetBrains Mono&quot;, monospace;
             font-size: 10.5px;
             letter-spacing: 0.2em;
-            color: #7d7160;
             text-transform: uppercase;
           "
         >
-          <span
-            >IX<sup>e</sup> Legio Astartes &nbsp;//&nbsp; Angeli Sanguinis</span
+          <a href="../index.html" style="color: #9b2226; border: none"
+            >← Dossier de campagne</a
           >
-          <span style="color: #c9524f"
-            >Vermilion &nbsp;·&nbsp; Diffusion restreinte état-major</span
+          <a href="#commandement" style="color: #a2957f; border: none"
+            >1 · Commandement</a
           >
-          <span>Réf. OPORD / IX / I-I / 0917-B</span>
+          <a href="#etat-major" style="color: #a2957f; border: none"
+            >2 · État-major</a
+          >
+          <a href="#compagnies" style="color: #a2957f; border: none"
+            >3 · Compagnies</a
+          >
+          <a href="#moyens" style="color: #a2957f; border: none">4 · Moyens</a>
+          <a href="#mission" style="color: #a2957f; border: none"
+            >5 · Ordre de mission</a
+          >
         </div>
-      </div>
+      </nav>
 
       <!-- ===== En-tête ===== -->
       <header
@@ -141,55 +159,6 @@
           ></div>
         </div>
       </header>
-
-      <!-- ===== Navigation ===== -->
-      <nav
-        style="
-          position: sticky;
-          top: 0;
-          z-index: 40;
-          background: rgba(11, 10, 9, 0.94);
-          backdrop-filter: blur(8px);
-          border-bottom: 1px solid #2e2721;
-        "
-      >
-        <div
-          style="
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 26px;
-            align-items: center;
-            min-height: 54px;
-            font-family: &quot;JetBrains Mono&quot;, monospace;
-            font-size: 10.5px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-          "
-        >
-          <a href="../index.html" style="color: #9b2226; border: none"
-            >← Dossier de campagne</a
-          >
-          <a href="#commandement" style="color: #a2957f; border: none"
-            >1 · Commandement</a
-          >
-          <a href="#etat-major" style="color: #a2957f; border: none"
-            >2 · État-major</a
-          >
-          <a href="#compagnies" style="color: #a2957f; border: none"
-            >3 · Compagnies</a
-          >
-          <a href="#moyens" style="color: #a2957f; border: none">4 · Moyens</a>
-          <a href="#mission" style="color: #a2957f; border: none"
-            >5 · Ordre de mission</a
-          >
-          <a href="#recapitulatif" style="color: #a2957f; border: none"
-            >Annexe A</a
-          >
-        </div>
-      </nav>
 
       <main style="max-width: 1120px; margin: 0 auto; padding: 0 40px 120px">
         <!-- ===== 1 · Commandement ===== -->
