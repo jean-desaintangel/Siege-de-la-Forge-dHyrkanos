@@ -527,8 +527,9 @@ a[href^="pages/"]:hover {
 
 .character-image {
   width: 100%;
-  height: 320px;
-  object-fit: cover;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
   object-position: top center;
   display: block;
   filter: sepia(0.25) contrast(1.08) brightness(0.82);
