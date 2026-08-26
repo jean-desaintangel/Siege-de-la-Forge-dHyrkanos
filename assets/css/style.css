@@ -1,663 +1,1721 @@
-/* Global Styles */
+/* =============================================================================
+   Le Reflux de Yarath-Maximal — feuille de styles unique
+   -----------------------------------------------------------------------------
+   Deux pages la consomment : index.html (le dossier de campagne) et
+   pages/blood_angels.html (la fiche de détachement). Aucun style en ligne dans
+   le HTML : tout est ici, nommé, commenté et réutilisable.
+
+   ORGANISATION
+     1. Jetons          — couleurs, échelle typographique, espacements
+     2. Réinitialisation et styles de base
+     3. Accessibilité transversale
+     4. Mise en page    — conteneurs, grilles, piles
+     5. Typographie     — titres, étiquettes, paragraphes, listes
+     6. Composants      — cartes, filets, missions, diaporama, tableaux, journal
+     7. Pages           — en-tête, navigation, pied de page
+     8. Élargissements  — media queries (mobile-first : on part du petit écran)
+
+   PARTI PRIS — mobile-first.
+   Les styles de base décrivent le TÉLÉPHONE : une seule colonne, marges
+   réduites. Les media queries `min-width` n'ajoutent des colonnes que lorsque la
+   place existe. C'est l'inverse du réflexe habituel, et c'est ce qui garantit
+   qu'aucun écran étroit ne se retrouve avec une mise en page conçue pour un
+   grand écran (WCAG 1.4.10 — redistribution).
+
+   PARTI PRIS — unités relatives.
+   Les tailles sont en `rem` (relatif à la taille de police du navigateur) et non
+   en `px`. Un utilisateur qui a réglé une police par défaut plus grande est ainsi
+   servi, et pas seulement celui qui utilise le zoom.
+   ============================================================================= */
+
+/* =============================================================================
+   1. Jetons
+   ============================================================================= */
+:root {
+  /* --- Couleurs : fonds ------------------------------------------------- */
+  --fond-page: #0b0a09;
+  --fond-carte: #14110d;
+  --fond-article: #100e0b;
+  --fond-carte-or: #1c1710;
+  --fond-carte-rouge: #17100f;
+  --bordure: #2e2721;
+  --bordure-claire: #3a3129;
+  --bordure-fine: #221d18;
+  --bordure-or: #4a3c22;
+  --bordure-rouge: #3a2020;
+
+  /* --- Couleurs : textes -------------------------------------------------
+     Toutes vérifiées au ratio WCAG 2.1 §1.4.3 : ≥ 4,5:1 sur TOUS les fonds du
+     projet — page, cartes, dégradés et boutons — et non seulement sur les deux
+     principaux. Un texte qui passe sur #0b0a09 peut échouer sur #1c1813.     */
+  --texte: #e6dcc8; /* 12,9:1 */
+  --texte-clair: #f3e9d2; /* 14,6:1 */
+  --texte-lecture: #d9cdb4; /* 10,7:1 */
+  --texte-pale: #cbbb98; /*  9,1:1 */
+  --texte-chaud: #b8ab92; /*  7,4:1 */
+  --texte-doux: #a2957f; /*  6,7:1 */
+  --texte-attenue: #90836f; /*  5,3:1 — ex-#7d7160, qui plafonnait à 3,95:1 */
+  --etiquette: #938264; /*  5,1:1 */
+
+  /* --- Couleurs : accents ------------------------------------------------ */
+  --or: #c9a227; /* 7,5:1 */
+  --or-clair: #f0d67a; /* 11,3:1 */
+  --rouge: #db5b5e; /* 5,2:1 — ex-#9b2226, qui plafonnait à 2,50:1 */
+  --rouge-vif: #cf6461; /* 5,2:1 */
+  --sang: #9b2226; /* décoratif uniquement : bordures et ::selection */
+
+  /* --- Couleurs : identité des quatre joueurs ---------------------------- */
+  --raphael: #5aa87f;
+  --jean: #d75f54;
+  --thomas: #b8903f;
+  --tristan: #9475ca;
+  --raphael-bord: #2f6b4f;
+  --jean-bord: #9b2226;
+  --thomas-bord: #8a6a3a;
+  --tristan-bord: #6a4b9b;
+  --teal-bord: #3f7d77;
+
+  /* --- Typographie ------------------------------------------------------- */
+  --titre: Cinzel, "Times New Roman", serif;
+  --lecture: Spectral, Georgia, serif;
+  --mono: "JetBrains Mono", ui-monospace, "Courier New", monospace;
+
+  --fs-micro: 0.625rem; /* 10px — étiquettes capitales espacées */
+  --fs-mention: 0.6875rem; /* 11px */
+  --fs-petit: 0.875rem; /* 14px */
+  --fs-sec: 0.9375rem; /* 15px */
+  --fs-base: 1rem; /* 16px */
+  --fs-md: 1.0625rem; /* 17px */
+  --fs-lg: 1.1875rem; /* 19px */
+
+  /* --- Espacements ------------------------------------------------------- */
+  --esp-xs: 0.5rem;
+  --esp-sm: 0.75rem;
+  --esp: 1rem;
+  --esp-md: 1.375rem;
+  --esp-lg: 1.75rem;
+  --esp-xl: 2.75rem;
+  --esp-section: 3.5rem;
+
+  --largeur-page: 70rem; /* 1120px */
+  --marge-page: 1.25rem;
+  --focus: var(--or-clair);
+}
+
+/* =============================================================================
+   2. Réinitialisation et styles de base
+   ============================================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
+  /* Décale les ancres pour qu'un titre ne finisse pas sous la barre de
+     navigation collante — sinon « Aller au contenu » amène sur un titre caché. */
+  scroll-padding-top: 4rem;
 }
 
 body {
   margin: 0;
-  background: #0b0a09;
-  color: #e6dcc8;
-  font-family: Spectral, Georgia, serif;
+  background: var(--fond-page);
+  color: var(--texte);
+  font-family: var(--lecture);
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  /* Pas d'`overflow-x: hidden` : masquer un débordement ne le corrige pas, il
+     escamote le contenu qui dépasse. La mise en page ne déborde plus. */
+}
+
+img,
+picture,
+svg {
+  max-width: 100%;
 }
 
 a {
-  color: #c9a227;
+  color: var(--or);
   text-decoration: none;
+  /* Soulignement dessiné en `border-bottom` : sa couleur se choisit
+     indépendamment de celle du texte. Le lien reste identifiable autrement que
+     par la couleur seule (WCAG 1.4.1 / RGAA 10.6). */
   border-bottom: 1px solid rgba(201, 162, 39, 0.35);
 }
 
 a:hover {
-  color: #f0d67a;
-  border-bottom-color: #f0d67a;
+  color: var(--or-clair);
+  border-bottom-color: var(--or-clair);
 }
 
 ::selection {
-  background: #9b2226;
+  background: var(--sang);
   color: #fff;
 }
 
+button,
 input {
-  font-family: inherit;
+  font: inherit;
+  color: inherit;
 }
 
-/* Animations */
-@keyframes emberPulse {
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-  50% {
-    opacity: 0.85;
-  }
-}
-
-/* Font Families */
-.font-cinzel {
-  font-family: Cinzel, serif;
-}
-
-.font-jetbrains {
-  font-family: "JetBrains Mono", monospace;
-}
-
-/* Text Utilities */
-.mono {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #8c7c5f;
-}
-
-.text-muted {
-  color: #7d7160;
-}
-
-.text-light {
-  color: #f3e9d2;
-}
-
-.text-warm {
-  color: #b8ab92;
-}
-
-.text-accent {
-  color: #c9a227;
-}
-
-.text-accent-light {
-  color: #f0d67a;
-}
-
-.text-accent-dark {
-  color: #9b2226;
-}
-
-.text-brand {
-  color: #c9524f;
-}
-
-.text-gold {
-  color: #c9a227;
-}
-
-.text-neutral {
-  color: #a2957f;
-}
-
-.text-pale {
-  color: #cbbb98;
-}
-
-/* Containers */
-.container {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-.card {
-  border: 1px solid #2e2721;
-  background: #14110d;
-  padding: 28px 26px;
-}
-
-.card-bordered-top {
-  border: 1px solid #2e2721;
-  border-top: 2px solid #c9a227;
-  background: #14110d;
-  padding: 24px;
-}
-
-/* Headers */
-header {
-  position: relative;
-  padding: 0;
-  border-bottom: 1px solid #2e2721;
-  background: radial-gradient(120% 90% at 50% 0%, #1d1712 0%, #0b0a09 62%);
-}
-
-header .header-subtitle {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
-  color: #8c7c5f;
-}
-
-header .divider {
-  width: 1px;
-  height: 46px;
-  background: linear-gradient(#c9a227, transparent);
-  margin: 26px auto 22px;
-}
-
-header h1 {
-  font-family: Cinzel, serif;
-  font-weight: 900;
-  font-size: clamp(38px, 6.5vw, 84px);
-  line-height: 0.96;
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--titre);
+  color: var(--texte-clair);
+  line-height: 1.2;
   margin: 0;
-  letter-spacing: 0.02em;
-  color: #f3e9d2;
   text-wrap: balance;
 }
 
-header .subtitle {
-  font-family: Cinzel, serif;
-  font-size: clamp(14px, 1.6vw, 19px);
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #9b2226;
-  margin: 26px 0 0;
-}
-
-header .tagline {
-  max-width: 700px;
-  margin: 30px auto 0;
-  font-size: 18px;
-  line-height: 1.72;
-  color: #b8ab92;
-  font-style: italic;
+p {
+  margin: 0;
   text-wrap: pretty;
 }
 
-/* Navigation */
+sup {
+  font-size: 0.66em;
+  line-height: 0;
+}
+
+/* =============================================================================
+   3. Accessibilité transversale
+   ============================================================================= */
+
+/* Prise de focus visible au clavier.
+   `:focus-visible` plutôt que `:focus` : le navigateur n'affiche l'anneau qu'en
+   navigation clavier, jamais au clic souris. On obtient la conformité
+   WCAG 2.4.7 sans le halo que les designers finissent toujours par supprimer. */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Lien d'évitement (WCAG 2.4.1 / RGAA 12.7).
+   Il n'est PAS masqué par `display: none` : un élément ainsi masqué sort de
+   l'ordre de tabulation et devient inatteignable au clavier — exactement les
+   utilisateurs à qui il est destiné. On le sort de l'écran, et on le ramène au
+   focus. */
+.lien-evitement {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--fond-carte);
+  color: var(--or-clair);
+  border: 1px solid var(--or);
+  padding: 0.75rem 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.lien-evitement:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+/* Contenu réservé aux technologies d'assistance : absent visuellement, présent
+   dans l'arbre d'accessibilité. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Respect du réglage système « réduire les animations » (WCAG 2.3.3 /
+   RGAA 13.8). Les animations en boucle déclenchent des troubles vestibulaires
+   chez certains utilisateurs ; le système expose ce réglage, il suffit de
+   l'écouter. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes pulsation-braise {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* =============================================================================
+   4. Mise en page
+   ============================================================================= */
+.conteneur {
+  max-width: var(--largeur-page);
+  margin-inline: auto;
+  padding-inline: var(--marge-page);
+}
+
+main.conteneur {
+  padding-bottom: var(--esp-xl);
+}
+
+section {
+  padding-top: var(--esp-section);
+}
+
+/* Empilement vertical régulier : remplace des dizaines de `margin-top` ad hoc.
+   POURQUOI une classe plutôt qu'une marge sur chaque enfant : l'espacement
+   appartient au CONTENEUR, pas aux éléments. Un enfant déplacé ailleurs ne
+   traîne alors aucune marge parasite. */
+.pile {
+  display: grid;
+  gap: var(--esp);
+  align-content: start;
+}
+
+.pile--serree {
+  gap: var(--esp-sm);
+}
+
+.marge-haut {
+  margin-top: var(--esp-md);
+}
+
+/* Largeur de lecture confortable : au-delà de ~80 caractères, l'œil perd la
+   ligne suivante. */
+.mesure {
+  max-width: 52rem;
+}
+
+/* --- Grilles ---------------------------------------------------------------
+   Toutes en une seule colonne par défaut (mobile-first). Les media queries de
+   la section 8 ajoutent des colonnes quand la place le permet. */
+.grille-2,
+.grille-3,
+.grille-4,
+.grille-texte-aside,
+.grille-mission,
+.branches {
+  display: grid;
+  gap: var(--esp-md);
+}
+
+/* Grille qui se réorganise seule, sans media query : `auto-fit` répartit autant
+   de colonnes que la largeur en permet, `min(100%, 18.75rem)` empêche une
+   colonne de dépasser le conteneur sur un écran étroit. À privilégier sur les
+   grilles à nombre de colonnes fixe. */
+.grille-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.75rem), 1fr));
+  gap: var(--esp-md);
+  margin-top: var(--esp-lg);
+}
+
+/* =============================================================================
+   5. Typographie
+   ============================================================================= */
+
+/* --- Titres de section ----------------------------------------------------- */
+.section-entete {
+  display: flex;
+  align-items: baseline;
+  gap: var(--esp);
+  border-bottom: 1px solid var(--bordure);
+  padding-bottom: 0.875rem;
+  margin-bottom: var(--esp-md);
+}
+
+.section-numero {
+  font-family: var(--mono);
+  font-size: var(--fs-mention);
+  letter-spacing: 0.3em;
+  color: var(--rouge);
+  flex: none;
+}
+
+.section-entete h2 {
+  font-weight: 700;
+  font-size: clamp(1.625rem, 5vw, 2.5rem);
+  letter-spacing: 0.01em;
+}
+
+.section-intro {
+  font-size: var(--fs-md);
+  line-height: 1.72;
+  color: var(--texte-chaud);
+  max-width: 50rem;
+  margin-bottom: var(--esp-lg);
+}
+
+/* --- Titres de bloc -------------------------------------------------------- */
+.titre-carte {
+  font-family: var(--titre);
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  margin-bottom: var(--esp-xs);
+}
+
+.titre-carte--sm {
+  font-size: var(--fs-md);
+}
+
+.titre-belligerant,
+.titre-etape,
+.titre-compagnie,
+.titre-unite,
+.titre-personnage {
+  font-family: var(--titre);
+  color: var(--texte-clair);
+}
+
+.titre-belligerant {
+  font-size: 1.5rem;
+  margin-bottom: var(--esp);
+}
+
+.titre-belligerant a {
+  color: inherit;
+  border-bottom-color: rgba(230, 220, 200, 0.3);
+}
+
+.titre-etape {
+  font-size: 1.3125rem;
+  font-weight: 700;
+}
+
+/* Sous-titre interne aux dossiers de mission. */
+.sous-titre {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--rouge);
+  margin: var(--esp-md) 0 var(--esp-xs);
+}
+
+/* --- Étiquettes en capitales ----------------------------------------------- */
+.etiquette {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--etiquette);
+  margin: 0 0 var(--esp-sm);
+}
+
+.etiquette--large {
+  letter-spacing: 0.28em;
+}
+
+.etiquette--or {
+  color: var(--or);
+}
+
+.etiquette--rouge {
+  color: var(--rouge);
+}
+
+/* Reprend la couleur de la faction du bloc parent (voir `.belligerant--*`). */
+.etiquette--faction {
+  color: var(--faction, var(--etiquette));
+  letter-spacing: 0.3em;
+}
+
+/* Mention discrète en ligne : « 4 joueurs », « Jean vs Thomas »… */
+.mention {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--texte-attenue);
+  white-space: nowrap;
+}
+
+.mention--bascule {
+  color: var(--or);
+  letter-spacing: 0.22em;
+  animation: pulsation-braise 3.2s ease-in-out infinite;
+}
+
+/* --- Paragraphes ----------------------------------------------------------- */
+.texte-intro {
+  font-size: var(--fs-md);
+  line-height: 1.78;
+  color: var(--texte-lecture);
+  margin-bottom: var(--esp-md);
+}
+
+.texte {
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  color: var(--texte-chaud);
+}
+
+.texte-sec {
+  font-size: var(--fs-sec);
+  line-height: 1.64;
+  color: var(--texte-doux);
+}
+
+.texte-petit {
+  font-size: var(--fs-petit);
+  line-height: 1.6;
+  color: var(--texte-doux);
+}
+
+.texte-faction {
+  color: var(--faction, var(--texte-doux));
+}
+
+/* Chapeau narratif en italique qui ouvre chaque dossier de mission. */
+.chapeau {
+  font-size: var(--fs-md);
+  line-height: 1.74;
+  color: var(--texte-lecture);
+  font-style: italic;
+  margin-bottom: var(--esp);
+}
+
+/* Lettrine sur le premier paragraphe du dossier.
+   `::first-letter` plutôt qu'un `<span>` flottant : c'est de la présentation
+   pure, elle n'a rien à faire dans le HTML, et le lecteur d'écran lit le mot
+   entier au lieu d'épeler une lettre isolée. */
+.lettrine::first-letter {
+  float: left;
+  font-family: var(--titre);
+  font-size: 4.125rem;
+  line-height: 0.78;
+  margin: 0.375rem 0.75rem 0 0;
+  color: var(--or);
+}
+
+/* --- Citations -------------------------------------------------------------
+   `<q>` et `<blockquote>` au lieu de guillemets tapés à la main (RGAA 9.4) :
+   la citation devient une donnée structurée, et les guillemets sont posés par
+   le CSS à la langue du document. */
+.serment {
+  font-style: italic;
+  color: var(--texte-attenue);
+}
+
+.exergue {
+  margin: var(--esp-lg) auto 0;
+  max-width: 44rem;
+  font-size: var(--fs-md);
+  line-height: 1.72;
+  color: var(--texte-chaud);
+  font-style: italic;
+}
+
+.exergue p {
+  margin: 0;
+}
+
+.exergue p::before {
+  content: "« ";
+}
+
+.exergue p::after {
+  content: " »";
+}
+
+/* --- Listes ---------------------------------------------------------------- */
+.liste {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: var(--esp-xs);
+  font-size: var(--fs-base);
+  line-height: 1.62;
+  color: var(--texte-chaud);
+}
+
+.liste--sec {
+  font-size: var(--fs-sec);
+  color: var(--texte-doux);
+  gap: var(--esp-sm);
+}
+
+/* --- Listes de définition -------------------------------------------------- */
+dl {
+  margin: 0;
+  display: grid;
+  gap: var(--esp);
+}
+
+dt {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--texte-attenue);
+  margin-bottom: 0.25rem;
+}
+
+dd {
+  margin: 0;
+  font-size: var(--fs-base);
+  color: var(--texte);
+}
+
+/* --- Couleurs applicables à une portion de texte --------------------------- */
+strong {
+  color: var(--texte-clair);
+  font-weight: 600;
+}
+
+.c-pale {
+  color: var(--texte-pale);
+}
+.c-or {
+  color: var(--or);
+}
+.c-or-clair {
+  color: var(--or-clair);
+}
+.c-rouge {
+  color: var(--rouge-vif);
+}
+.c-raphael {
+  color: var(--raphael);
+}
+.c-jean {
+  color: var(--jean);
+}
+.c-thomas {
+  color: var(--thomas);
+}
+.c-tristan {
+  color: var(--tristan);
+}
+
+/* =============================================================================
+   6. Composants
+   ============================================================================= */
+
+/* --- Cartes ---------------------------------------------------------------- */
+.carte {
+  border: 1px solid var(--bordure);
+  background: var(--fond-carte);
+  padding: var(--esp-md);
+}
+
+.carte--dense {
+  padding: var(--esp);
+}
+
+.carte--ample {
+  padding: var(--esp-lg);
+}
+
+.carte--or {
+  border-color: var(--bordure-or);
+  background: linear-gradient(var(--fond-carte-or), var(--fond-carte));
+}
+
+.carte--rouge {
+  border-color: var(--bordure-rouge);
+  background: linear-gradient(#1a100f, var(--fond-article));
+}
+
+.carte--accent-or {
+  border-top: 2px solid var(--or);
+}
+.carte--accent-rouge {
+  border-top: 2px solid var(--sang);
+}
+.carte--accent-teal {
+  border-top: 2px solid var(--teal-bord);
+}
+
+/* --- Filets : un liseré coloré à gauche d'un bloc de règles ---------------- */
+.filet {
+  border-left: 2px solid var(--bordure-claire);
+  padding-left: 0.875rem;
+}
+
+.filet--or {
+  border-left-color: var(--or);
+}
+.filet--rouge {
+  border-left-color: var(--sang);
+}
+.filet--vert {
+  border-left-color: var(--raphael-bord);
+}
+.filet--violet {
+  border-left-color: var(--tristan-bord);
+}
+.filet--faction {
+  border-left-color: var(--faction-bord, var(--bordure-claire));
+  padding-left: var(--esp);
+}
+
+.separateur {
+  border-top: 1px solid var(--bordure-fine);
+  padding-top: var(--esp);
+}
+
+/* --- Cartes de belligérant -------------------------------------------------
+   Chaque faction ne redéfinit que deux variables ; tout le reste est partagé.
+   C'est le remplacement direct de quatre blocs de styles quasi identiques. */
+.belligerant {
+  border: 1px solid var(--bordure-claire);
+  border-top: 2px solid var(--faction-bord);
+  background: linear-gradient(#191510, var(--fond-article));
+  padding: var(--esp-lg) var(--esp-md);
+}
+
+.belligerant--raphael {
+  --faction: var(--raphael);
+  --faction-bord: var(--raphael-bord);
+}
+.belligerant--jean {
+  --faction: var(--jean);
+  --faction-bord: var(--jean-bord);
+}
+.belligerant--thomas {
+  --faction: var(--thomas);
+  --faction-bord: var(--thomas-bord);
+}
+.belligerant--tristan {
+  --faction: var(--tristan);
+  --faction-bord: var(--tristan-bord);
+}
+
+/* --- Arbre de campagne -----------------------------------------------------
+   `<ol>` et non une suite de `<div>` : les cinq missions forment une séquence
+   ordonnée, l'information est dans la structure (RGAA 9.3). */
+.arbre {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--esp-md);
+}
+
+.etape {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: var(--esp);
+  align-items: stretch;
+}
+
+.etape--branches {
+  grid-template-columns: 1fr;
+}
+
+.etape-numero {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--bordure);
+  background: var(--fond-carte);
+  font-family: var(--titre);
+  font-size: 1.75rem;
+  color: var(--or);
+}
+
+.etape-numero--rouge {
+  color: var(--rouge);
+}
+
+.etape-numero--bascule {
+  border: 2px solid var(--or);
+  background: var(--fond-carte-or);
+  color: var(--or-clair);
+}
+
+.etape-entete {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-xs) var(--esp-sm);
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--esp-xs);
+}
+
+.etape-format {
+  font-family: var(--mono);
+  font-size: var(--fs-mention);
+  letter-spacing: 0.16em;
+  color: var(--etiquette);
+  text-transform: uppercase;
+}
+
+.branches {
+  padding-left: 0;
+}
+
+/* --- Dossiers de mission ---------------------------------------------------
+   `<details>` / `<summary>` : le navigateur fournit gratuitement le pliage, la
+   prise de focus, l'activation à Entrée ET à Espace, et l'état annoncé au
+   lecteur d'écran. Un `<div>` cliquable — ce qu'il y avait ici — n'offrait rien
+   de tout cela (WCAG 2.1.1 et 4.1.2). */
+.mission {
+  border: 1px solid var(--bordure);
+  background: var(--fond-article);
+  margin-top: var(--esp-md);
+}
+
+.mission--rouge {
+  border-color: var(--bordure-rouge);
+}
+.mission--or {
+  border-color: var(--bordure-or);
+}
+
+.mission-entete {
+  /* Grille plutôt que flex : elle place l'étiquette et le titre en colonne 1 et
+     la métadonnée en colonne 2 sur deux rangées, sans conteneur intermédiaire.
+     Sur petit écran (une seule colonne), les trois blocs s'empilent d'eux-mêmes. */
+  display: grid;
+  gap: var(--esp-xs) var(--esp);
+  padding: var(--esp-md) var(--esp);
+  border-bottom: 1px solid var(--bordure);
+  background: linear-gradient(90deg, #1d1509, var(--fond-article) 70%);
+  cursor: pointer;
+  /* Supprime le triangle par défaut : on dessine le nôtre plus bas, aligné sur
+     la typographie du dossier. */
+  list-style: none;
+}
+
+.mission-entete::-webkit-details-marker {
+  display: none;
+}
+
+.mission--rouge > .mission-entete {
+  border-bottom-color: var(--bordure-rouge);
+  background: linear-gradient(90deg, #1e0f0e, var(--fond-article) 70%);
+}
+
+.mission--or > .mission-entete {
+  border-bottom-color: var(--bordure-or);
+  background: linear-gradient(90deg, #221a0c, var(--fond-article) 70%);
+}
+
+.mission-entete:hover {
+  filter: brightness(1.25);
+}
+
+.mission-titre {
+  font-size: clamp(1.5rem, 4vw, 2.125rem);
+  /* Le chevron indique l'état plié/déplié. Il double `aria-expanded`, que le
+     navigateur pose seul sur <summary> : l'un pour l'œil, l'autre pour l'oreille. */
+  display: flex;
+  align-items: baseline;
+  gap: var(--esp-sm);
+}
+
+.mission-titre::before {
+  content: "▸";
+  font-size: 0.7em;
+  color: var(--or);
+  transition: transform 0.2s ease;
+}
+
+.mission[open] > .mission-entete .mission-titre::before {
+  transform: rotate(90deg);
+}
+
+.mission-titre--sm {
+  font-size: 1.5rem;
+}
+
+.mission-meta {
+  font-family: var(--mono);
+  font-size: 0.71875rem;
+  letter-spacing: 0.14em;
+  color: var(--or);
+  line-height: 1.9;
+  text-transform: uppercase;
+}
+
+.mission-meta--rouge {
+  color: var(--rouge-vif);
+}
+
+.mission-corps {
+  padding: var(--esp-lg) var(--esp);
+}
+
+/* --- Diaporama -------------------------------------------------------------
+   Le défilement repose sur le scroll natif (`scroll-snap`) : sans JavaScript
+   le diaporama reste feuilletable au doigt, à la molette et au clavier. Les
+   contrôles, eux, n'apparaissent que si le script tourne (classe `js-actif`). */
+.diaporama {
+  margin: var(--esp-lg) 0 0;
+  border: 1px solid var(--bordure);
+  background: var(--fond-carte);
+  padding: 0.875rem;
+}
+
+.diaporama-cadre {
+  position: relative;
+  background: var(--fond-page);
+}
+
+.diaporama-piste {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  max-height: 60vh;
+}
+
+.diaporama-piste::-webkit-scrollbar {
+  display: none;
+}
+
+.diaporama-piste > picture {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+}
+
+.diaporama-piste img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 60vh;
+  filter: sepia(0.3) contrast(1.06) brightness(0.84);
+  border: 1px solid var(--bordure-fine);
+}
+
+.diaporama-fleche,
+.diaporama-pause,
+.diaporama-puces {
+  display: none;
+}
+
+.diaporama-cadre.js-actif .diaporama-fleche,
+.diaporama-cadre.js-actif .diaporama-pause {
+  display: flex;
+}
+
+.diaporama-cadre.js-actif .diaporama-puces {
+  display: flex;
+}
+
+.diaporama-fleche {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  /* 44 × 44px : cible tactile minimale recommandée (WCAG 2.5.5). */
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201, 162, 39, 0.85);
+  border: 1px solid var(--or);
+  color: var(--fond-page);
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.diaporama-fleche--gauche {
+  left: 1rem;
+}
+.diaporama-fleche--droite {
+  right: 1rem;
+}
+
+.diaporama-pause {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 10, 9, 0.8);
+  border: 1px solid var(--or);
+  color: var(--or-clair);
+  font-size: 0.9375rem;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.diaporama-puces {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* La puce reste visuellement petite (10px) mais sa zone cliquable fait
+   44 × 44px : le `padding` est transparent, `background-clip: content-box`
+   limite la peinture au point central. Agrandir la cible ne se voit pas ;
+   ne pas l'agrandir rend le contrôle inutilisable au doigt. */
+.diaporama-puce {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 1.0625rem;
+  background-color: var(--or);
+  background-clip: content-box;
+  border: none;
+  border-radius: 50%;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.diaporama-puce.est-active {
+  opacity: 1;
+}
+
+figcaption {
+  padding: var(--esp) 0.5rem 0.375rem;
+}
+
+/* --- Schéma de carte de déploiement ---------------------------------------- */
+.schema {
+  border: 1px solid var(--bordure-claire);
+  background: #0d0b09;
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: 2.125rem 1fr 2.125rem;
+  gap: 0.375rem;
+  min-height: 5.75rem;
+  margin-bottom: var(--esp-sm);
+}
+
+.schema-zone {
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.12em;
+  writing-mode: vertical-rl;
+}
+
+.schema-zone--a {
+  background: rgba(201, 162, 39, 0.16);
+  border: 1px dashed #6b5a2c;
+  color: #d3b866;
+}
+
+.schema-zone--b {
+  background: rgba(155, 34, 38, 0.22);
+  border: 1px dashed #6d3230;
+  color: #d99a97;
+}
+
+.schema-cases {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.375rem;
+}
+
+.schema-case {
+  border: 1px solid var(--bordure-fine);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: var(--fs-mention);
+  color: var(--or);
+}
+
+/* --- Boutons --------------------------------------------------------------- */
+.bouton {
+  font-family: var(--mono);
+  font-size: var(--fs-mention);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fond-page);
+  background: var(--or);
+  border: none;
+  min-height: 2.75rem;
+  padding: 0.75rem 1.125rem;
+  cursor: pointer;
+}
+
+.bouton:hover {
+  background: var(--or-clair);
+}
+
+.bouton--fantome {
+  background: transparent;
+  color: var(--texte-attenue);
+  border: 1px solid var(--bordure);
+}
+
+.bouton--fantome:hover {
+  background: transparent;
+  color: var(--rouge-vif);
+  border-color: #6d3230;
+}
+
+.bouton-ajust {
+  font-family: var(--mono);
+  font-size: 0.9375rem;
+  /* 30 × 30px à l'origine : sous le seuil tactile. */
+  width: 2.75rem;
+  height: 2.75rem;
+  background: #1c1813;
+  color: var(--texte-doux);
+  border: 1px solid var(--bordure);
+  cursor: pointer;
+}
+
+.bouton-ajust:hover {
+  color: var(--texte-clair);
+  border-color: #4a4038;
+}
+
+.ajusteurs {
+  display: flex;
+  gap: var(--esp-xs);
+  justify-content: center;
+}
+
+/* --- Tableaux --------------------------------------------------------------
+   `.table-defilante` fait défiler un tableau trop large plutôt que de le laisser
+   déborder de la page (WCAG 1.4.10). `tabindex="0"` n'est pas nécessaire ici :
+   les navigateurs récents rendent focusable tout conteneur défilant. */
+.table-defilante {
+  border: 1px solid var(--bordure);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+caption {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--etiquette);
+  text-align: left;
+  padding: 0.875rem 1.625rem 0;
+}
+
+/* Table de tirage des missions Zone Mortalis */
+.table-des {
+  border: 1px solid var(--bordure);
+  background: var(--fond-carte);
+  font-size: var(--fs-sec);
+  margin-bottom: var(--esp);
+}
+
+.table-des tr {
+  border-bottom: 1px solid var(--bordure-fine);
+}
+
+.table-des th {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--or);
+  text-align: center;
+  padding: 0.6875rem 0;
+  width: 2.75rem;
+  border-right: 1px solid var(--bordure-fine);
+  background: #17130f;
+}
+
+.table-des td {
+  padding: 0.6875rem 1rem;
+  color: var(--texte-pale);
+}
+
+.table-des .note {
+  color: var(--texte-attenue);
+  font-size: var(--fs-petit);
+}
+
+.table-des .est-tiree {
+  background: rgba(201, 162, 39, 0.12);
+}
+
+.lanceur {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp);
+  border: 1px solid var(--bordure);
+  background: var(--fond-carte);
+  padding: var(--esp) 1.125rem;
+  margin-bottom: var(--esp);
+}
+
+.lanceur-resultat {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--texte-pale);
+}
+
+/* --- Journal de guerre ------------------------------------------------------
+   Un vrai `<table>` : cinq colonnes de données bâties en `<div>` perdent toute
+   relation ligne/colonne pour un lecteur d'écran (WCAG 1.3.1). */
+.journal {
+  border: 1px solid var(--bordure);
+  background: var(--fond-carte);
+  margin-top: var(--esp-md);
+}
+
+.journal .table-defilante {
+  border: none;
+}
+
+.table-journal {
+  min-width: 38rem;
+}
+
+.table-journal thead th {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--etiquette);
+  text-align: left;
+  padding: 0.875rem 1.125rem;
+  border-bottom: 1px solid var(--bordure);
+}
+
+.table-journal tbody tr {
+  border-bottom: 1px solid var(--bordure-fine);
+}
+
+.table-journal th,
+.table-journal td {
+  padding: 0.625rem 1.125rem;
+  font-weight: 400;
+  text-align: left;
+}
+
+.table-journal .centre {
+  text-align: center;
+}
+
+.champ-nom {
+  width: 100%;
+  min-width: 6rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--bordure);
+  color: var(--texte);
+  font-size: var(--fs-base);
+  padding: 0.375rem 0;
+  /* Pas d'`outline: none` ici : c'est exactement la déclaration qui rendait la
+     navigation au clavier invisible (WCAG 2.4.7). */
+}
+
+.force {
+  font-size: var(--fs-petit);
+}
+.force--raphael {
+  color: var(--raphael);
+}
+.force--jean {
+  color: var(--jean);
+}
+.force--thomas {
+  color: var(--thomas);
+}
+.force--tristan {
+  color: var(--tristan);
+}
+
+.chiffre {
+  font-family: var(--mono);
+  font-size: var(--fs-md);
+  color: var(--texte-pale);
+}
+
+.chiffre--or {
+  color: var(--or);
+}
+
+.journal-pied {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-md);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--esp-md) 1.125rem;
+}
+
+.journal-etats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-md);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.journal-alerte {
+  margin: 0;
+  padding: 0 1.125rem var(--esp);
+  font-size: var(--fs-petit);
+  color: var(--rouge);
+}
+
+/* =============================================================================
+   7. Structure de page
+   ============================================================================= */
 nav {
   position: sticky;
   top: 0;
   z-index: 40;
   background: rgba(11, 10, 9, 0.94);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid #2e2721;
+  border-bottom: 1px solid var(--bordure);
 }
 
-nav a {
-  color: #a2957f;
-  border: none;
-}
-
-/* Main Content */
-main {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 40px 120px;
-}
-
-section {
-  padding: 92px 0 0;
-}
-
-section > div:first-child {
+/* `<ul>` et non une suite de `<a>` : un menu est une liste de liens, et le
+   lecteur d'écran en annonce le nombre — « liste de 7 éléments ». */
+.nav-liste {
+  list-style: none;
+  margin: 0;
   display: flex;
-  align-items: baseline;
-  gap: 18px;
-  border-bottom: 1px solid #2e2721;
-  padding-bottom: 14px;
-}
-
-section h2 {
-  font-family: Cinzel, serif;
-  font-weight: 700;
-  font-size: clamp(26px, 3.4vw, 40px);
-  margin: 0;
-  color: #f3e9d2;
-  letter-spacing: 0.01em;
-}
-
-.section-number {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 0.3em;
-  color: #9b2226;
-}
-
-/* Grid Layouts */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 26px;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-}
-
-/* Special Cards */
-.belligerant-card {
-  border: 1px solid #3a3129;
-  border-top: 2px solid;
-  background: linear-gradient(#191510, #100e0b);
-  padding: 28px 26px;
-}
-
-.belligerant-card h3 {
-  font-family: Cinzel, serif;
-  font-size: 24px;
-  margin: 0 0 16px;
-  color: #f3e9d2;
-}
-
-.belligerant-card .oath {
-  border-left: 2px solid;
-  padding-left: 16px;
-}
-
-/* Figures */
-figure {
-  margin: 48px 0 0;
-  border: 1px solid #2e2721;
-  background: #14110d;
-  padding: 14px;
-}
-
-figure img {
-  width: 100%;
-  display: block;
-  filter: sepia(0.3) contrast(1.06) brightness(0.84);
-  border: 1px solid #221d18;
-}
-
-figcaption {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-  padding: 20px 8px 6px;
-}
-
-/* List Styles */
-dl {
-  margin: 0;
-  display: grid;
-  gap: 16px;
-}
-
-dt {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #7d7160;
-}
-
-dd {
-  margin: 0;
-  font-size: 16px;
-  color: #e6dcc8;
-}
-
-/* Special Case: First section */
-#theatre {
-  padding: 86px 0 0;
-}
-
-/* Strong text styling */
-strong {
-  color: #f3e9d2;
-  font-weight: 600;
-}
-
-/* Aside styling */
-aside {
-  display: grid;
-  gap: 20px;
-  align-content: start;
-}
-
-/* Pulsing animation for important text */
-.pulse-animation {
-  animation: emberPulse 3.2s ease-in-out infinite;
-}
-
-/* Carte de belligérant cliquable → fiche de détachement dans pages/ */
-a[href^="pages/"] {
-  border-bottom: none;
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease;
-}
-
-a[href^="pages/"]:hover {
-  border-color: #9b2226;
-  border-top-color: #9b2226;
-  background: linear-gradient(#1f1712, #14100c);
-}
-
-/* Blood Angels Page Utilities */
-.subtitle-mono {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
-  color: #9b2226;
-  text-align: center;
-}
-
-.page-title {
-  font-family: Cinzel, serif;
-  font-weight: 900;
-  font-size: clamp(34px, 5.6vw, 68px);
-  line-height: 1;
-  margin: 18px 0 0;
-  letter-spacing: 0.02em;
-  color: #f3e9d2;
-  text-wrap: balance;
-}
-
-.page-subtitle {
-  font-family: Cinzel, serif;
-  font-size: clamp(13px, 1.5vw, 18px);
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #9b2226;
-  margin: 24px 0 0;
-  text-align: center;
-}
-
-.page-tagline {
-  max-width: 760px;
-  margin: 28px auto 0;
-  font-size: 19px;
-  line-height: 1.76;
-  color: #b8ab92;
-  font-style: italic;
-  text-wrap: pretty;
-  text-align: center;
-}
-
-.nav-mono {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10.5px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 var(--esp-md);
+  font-family: var(--mono);
+  font-size: 0.65625rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
-.section-header {
+.nav-liste a {
+  color: var(--texte-doux);
+  border: none;
+  /* Cible tactile : un lien de 14px de haut est intouchable au doigt. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+
+.nav-liste a:hover {
+  color: var(--or-clair);
+}
+
+/* Le lien de retour se distingue du reste du menu par sa couleur. */
+.nav-retour {
+  color: var(--rouge);
+}
+
+header {
+  position: relative;
+  border-bottom: 1px solid var(--bordure);
+  background: radial-gradient(120% 90% at 50% 0%, #1d1712 0%, #0b0a09 62%);
+}
+
+.bandeau {
+  padding-block: var(--esp-xl) var(--esp-lg);
+  text-align: center;
+}
+
+.surtitre {
+  font-family: var(--mono);
+  font-size: var(--fs-mention);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--etiquette);
+  margin-bottom: var(--esp);
+}
+
+.surtitre--rouge {
+  color: var(--rouge);
+}
+
+header h1 {
+  font-weight: 900;
+  /* `clamp()` : la taille suit la largeur de l'écran entre deux bornes. Du
+     responsive sans media query, et le zoom navigateur reste possible. */
+  font-size: clamp(2.375rem, 9vw, 5.25rem);
+  line-height: 0.96;
+  letter-spacing: 0.02em;
+}
+
+.sous-titre-page {
+  font-family: var(--titre);
+  font-size: clamp(0.8125rem, 3vw, 1.125rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--rouge);
+  margin-top: var(--esp-md);
+}
+
+.jeton {
+  display: inline-block;
+  border: 1px solid var(--bordure-claire);
+  background: var(--fond-carte);
+  padding: 0.5625rem 1rem;
+  margin-top: var(--esp-lg);
+  font-family: var(--mono);
+  font-size: var(--fs-mention);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--texte-pale);
+}
+
+footer {
+  border-top: 1px solid var(--bordure);
+  background: var(--fond-article);
+  margin-top: var(--esp-xl);
+}
+
+.pied {
+  padding-block: var(--esp-lg);
+  display: grid;
+  gap: var(--esp-xs);
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  line-height: 1.8;
+  letter-spacing: 0.06em;
+  color: var(--texte-attenue);
+}
+
+/* =============================================================================
+   8. Fiche de détachement — pages/blood_angels.html
+   ============================================================================= */
+.carte-commandement {
+  border: 1px solid var(--bordure-claire);
+  border-top: 2px solid var(--sang);
+  background: linear-gradient(#191510, var(--fond-article));
+  display: grid;
+  /* `auto-fit` + `minmax` : la grille passe seule de deux colonnes à une quand
+     la place manque. `min(100%, …)` évite le débordement sous 400px.
+     C'est le motif à réutiliser pour toute nouvelle grille du projet. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr));
+  margin-top: var(--esp-lg);
+}
+
+.carte-commandement-principal,
+.carte-commandement-cote {
+  padding: var(--esp-lg) var(--esp-md);
+}
+
+.carte-commandement-cote {
+  border-left: 1px solid var(--bordure);
+  display: grid;
+  gap: var(--esp);
+  align-content: start;
+}
+
+.carte-compagnie {
+  border: 1px solid var(--bordure);
+  background: var(--fond-carte);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.75rem), 1fr));
+}
+
+.carte-compagnie-entete {
+  padding: var(--esp-lg);
+  border-right: 1px solid var(--bordure);
+  max-width: 26rem;
+}
+
+.carte-compagnie-corps {
+  padding: var(--esp) 0.5rem var(--esp) 0;
+}
+
+.titre-compagnie {
+  font-size: 1.625rem;
+  font-weight: 700;
+  margin: 0.625rem 0;
+  line-height: 1.15;
+}
+
+.titre-unite {
+  font-size: 1.1875rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.unite {
+  padding: var(--esp-sm) var(--esp-md);
+  border-bottom: 1px dotted #241f1b;
+}
+
+.unite--fin {
+  border-bottom: none;
+}
+
+.unite-entete {
   display: flex;
   align-items: baseline;
-  gap: 18px;
-  border-bottom: 1px solid #2e2721;
-  padding-bottom: 14px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--esp-sm);
+  margin-bottom: 0.375rem;
 }
 
-.section-label {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 0.3em;
-  color: #9b2226;
+.unite-entete--gauche {
+  justify-content: flex-start;
 }
 
-.section-title {
-  font-family: Cinzel, serif;
-  font-weight: 700;
-  font-size: clamp(26px, 3.4vw, 40px);
+.unite p + p,
+.info p + p {
+  margin-top: 0.4375rem;
+}
+
+/* Serment mis en exergue sur la fiche de détachement. */
+.serment-bloc {
+  margin: var(--esp) 0;
+  font-family: var(--titre);
+  font-size: 1.375rem;
+  line-height: 1.5;
+  color: var(--texte-clair);
+}
+
+.serment-bloc p {
   margin: 0;
-  color: #f3e9d2;
 }
 
-.card-simple {
-  border: 1px solid #2e2721;
-  background: #14110d;
-  padding: 26px 24px;
+.serment-bloc p::before {
+  content: "« ";
 }
 
-.card-top-border {
-  border: 1px solid #2e2721;
-  border-top: 2px solid #c9a227;
-  background: #14110d;
-  padding: 24px;
+.serment-bloc p::after {
+  content: " »";
 }
 
-.card-command {
-  border: 1px solid #3a3129;
-  border-top: 2px solid;
-  background: linear-gradient(#191510, #100e0b);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+.titre-personnage {
+  font-weight: 700;
+  font-size: clamp(2.125rem, 6vw, 2.875rem);
+  margin: 0.75rem 0 0.375rem;
+  line-height: 1;
 }
 
-.card-command-main {
-  padding: 38px 34px;
+.personnage-fonction {
+  font-family: var(--titre);
+  font-size: var(--fs-md);
+  color: var(--or);
+  letter-spacing: 0.1em;
 }
 
-.card-command-side {
-  padding: 38px 34px;
-  border-left: 1px solid #2e2721;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+.personnage-mention {
+  font-family: var(--mono);
+  font-size: 0.65625rem;
+  letter-spacing: 0.18em;
+  color: var(--texte-attenue);
+  text-transform: uppercase;
+  margin-top: 0.625rem;
 }
 
-.card-company {
-  border: 1px solid #2e2721;
-  background: #14110d;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+.portrait-grand,
+.portrait {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: sepia(0.25) contrast(1.08) brightness(0.82);
+  border: 1px solid var(--bordure-claire);
 }
 
-.card-company-header {
-  padding: 28px 28px;
-  border-right: 1px solid #2e2721;
-  max-width: 420px;
+.portrait-grand {
+  max-height: 37.5rem;
+  object-fit: contain;
+  object-position: top center;
+  margin-bottom: var(--esp-md);
 }
 
-.card-company-content {
-  padding: 18px 8px 18px 0;
+.portrait {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: top center;
+  border-color: var(--bordure);
+  margin-bottom: var(--esp);
 }
 
-.card-mission {
-  border: 1px solid #3a2020;
-  background: linear-gradient(#1a100f, #100e0b);
-  padding: 30px 28px;
-}
-
-.image-card {
-  margin: 92px 0;
-  border: 1px solid #2e2721;
-  background: #14110d;
-  padding: 14px;
+.carte-image {
+  margin: var(--esp-xl) 0;
+  border: 1px solid var(--bordure);
+  background: var(--fond-carte);
+  padding: 0.875rem;
   overflow: hidden;
 }
 
-.image-card img {
+.carte-image img {
   width: 100%;
+  height: auto;
   display: block;
   max-height: 50vh;
   object-fit: contain;
 }
 
-.label-small {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10px;
+.info {
+  border-bottom: 1px dotted var(--bordure-claire);
+  padding-bottom: 0.875rem;
+}
+
+.info--fin {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.table-recap tbody td:first-child {
+  font-family: var(--lecture);
+  font-size: var(--fs-md);
+  color: var(--texte);
+}
+
+.table-recap {
+  min-width: 35rem;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--texte-doux);
+}
+
+.table-recap thead tr {
+  background: rgba(255, 255, 255, 0.02);
+  font-size: var(--fs-micro);
   letter-spacing: 0.24em;
-  color: #8c7c5f;
+  color: var(--texte-attenue);
   text-transform: uppercase;
 }
 
-.label-tiny {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  color: #d1483c;
+.table-recap th,
+.table-recap td {
+  padding: 0.6875rem 1.625rem;
+  text-align: left;
+  font-weight: 400;
+}
+
+.table-recap thead th {
+  padding-block: 0.875rem;
+}
+
+.table-recap tbody tr {
+  border-top: 1px solid #1a1714;
+}
+
+.table-recap .nombre {
+  text-align: right;
+  color: var(--or);
+}
+
+.table-recap tfoot tr {
+  background: rgba(155, 34, 38, 0.12);
+  color: var(--texte-clair);
   text-transform: uppercase;
-}
-
-.character-name {
-  font-family: Cinzel, serif;
-  font-weight: 700;
-  font-size: clamp(34px, 4.4vw, 46px);
-  color: #f3e9d2;
-  margin: 12px 0 6px;
-  line-height: 1;
-}
-
-.character-title {
-  font-family: Cinzel, serif;
-  font-size: 17px;
-  color: #c9a227;
   letter-spacing: 0.1em;
 }
 
-.character-subtitle {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.18em;
-  color: #7d7160;
-  text-transform: uppercase;
-  margin-top: 10px;
+.table-recap tfoot th,
+.table-recap tfoot td {
+  padding-block: 1.125rem;
 }
 
-.character-image {
-  width: 100%;
-  height: auto;
-  max-height: 600px;
-  object-fit: contain;
-  object-position: top center;
-  display: block;
-  filter: sepia(0.25) contrast(1.08) brightness(0.82);
-  border: 1px solid #3a3129;
-  margin-bottom: 22px;
+.table-recap tfoot .nombre {
+  font-weight: 700;
 }
 
-.portrait {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-  filter: sepia(0.25) contrast(1.08) brightness(0.82);
-  border: 1px solid #2e2721;
-  margin-bottom: 16px;
+/* =============================================================================
+   9. Élargissements — on n'ajoute des colonnes que si la place existe
+   ============================================================================= */
+
+/* --- À partir de 34em (≈ 544px) : les grilles fines se dédoublent --------- */
+@media (min-width: 34em) {
+  :root {
+    --marge-page: 1.75rem;
+  }
+
+  .grille-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-.text-body {
-  margin: 24px 0 0;
-  font-size: 18px;
-  line-height: 1.74;
-  color: #d9cdb4;
-  text-wrap: pretty;
+/* --- À partir de 48em (≈ 768px) : mise en page tablette ------------------- */
+@media (min-width: 48em) {
+  :root {
+    --marge-page: 2.5rem;
+    --esp-section: 5rem;
+  }
+
+  .grille-2,
+  .grille-3,
+  .branches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .etape {
+    grid-template-columns: 5.75rem 1fr;
+    gap: var(--esp-md);
+  }
+
+  .etape--branches {
+    grid-template-columns: 5.75rem 1fr;
+  }
+
+  .etape--branches .branches {
+    grid-column: 2;
+  }
+
+  .mission-entete,
+  .mission-corps {
+    padding-inline: var(--esp-lg);
+  }
+
+  .mission-entete {
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+  }
+
+  .mission-entete > .etiquette {
+    grid-area: 1 / 1;
+  }
+
+  .mission-titre {
+    grid-area: 2 / 1;
+  }
+
+  .mission-meta {
+    grid-area: 1 / 2 / 3 / 3;
+    text-align: right;
+    align-self: center;
+  }
 }
 
-.text-secondary {
-  margin: 16px 0 0;
-  font-size: 17px;
-  line-height: 1.7;
-  color: #a2957f;
-  text-wrap: pretty;
-}
+/* --- À partir de 60em (≈ 960px) : mise en page bureau --------------------- */
+@media (min-width: 60em) {
+  .grille-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 
-.text-normal {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #a2957f;
-  text-wrap: pretty;
-}
+  .grille-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 
-.text-smaller {
-  font-size: 16px;
-  line-height: 1.58;
-  color: #a2957f;
-  text-wrap: pretty;
-}
+  /* Le texte occupe ~60 % et l'encart ~40 % : la proportion d'origine. */
+  .grille-texte-aside {
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+    gap: var(--esp-xl);
+    align-items: start;
+  }
 
-.info-item {
-  border-bottom: 1px dotted #3a3129;
-  padding-bottom: 14px;
-}
+  .grille-mission {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: var(--esp-xl);
+  }
 
-.info-item-last {
-  padding-bottom: 0;
-  border: none;
-}
-
-.info-label {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 0.26em;
-  color: #8c7c5f;
-  text-transform: uppercase;
-}
-
-.info-text {
-  font-size: 17px;
-  line-height: 1.58;
-  color: #e6dcc8;
-  margin-top: 7px;
-}
-
-.company-name {
-  font-family: Cinzel, serif;
-  font-size: 26px;
-  color: #f3e9d2;
-  margin: 10px 0;
-  line-height: 1.15;
-}
-
-.unit-title {
-  font-family: Cinzel, serif;
-  font-size: 19px;
-  color: #f3e9d2;
-}
-
-.unit-label {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: #7d7160;
-  text-transform: uppercase;
-}
-
-.unit-item {
-  padding: 12px 22px;
-  border-bottom: 1px dotted #241f1b;
-}
-
-.unit-item-last {
-  padding: 12px 22px;
-  border: none;
-}
-
-.unit-header {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.container-max {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-.header-container {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 76px 40px 64px;
-}
-
-.footer-mono {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  color: #7d7160;
-  text-transform: uppercase;
+  .bandeau {
+    padding-block: 5.75rem 4.75rem;
+  }
 }

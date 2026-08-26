@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"c:\\\\Users\\\\jean\\\\Documents\\\\git\\\\Siege-de-la-Forge-dHyrkanos\" && rm assets/images/**/*.jpg && git add -A && git status --short)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\jean\\Documents\\git\\Siege-de-la-Forge-dHyrkanos\\assets\\images\\**"
+    ]
+  }
+}
