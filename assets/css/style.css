@@ -884,7 +884,7 @@ strong {
   display: none;
 }
 
-.diaporama-piste > picture {
+.diaporama-piste > * {
   flex: 0 0 100%;
   scroll-snap-align: center;
 }
