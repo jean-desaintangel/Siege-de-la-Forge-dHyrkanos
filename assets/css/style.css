@@ -1385,6 +1385,8 @@ footer {
   padding-block: var(--esp-lg);
   display: grid;
   gap: var(--esp-xs);
+  justify-items: center;
+  text-align: center;
   font-family: var(--mono);
   font-size: 0.6875rem;
   line-height: 1.8;
