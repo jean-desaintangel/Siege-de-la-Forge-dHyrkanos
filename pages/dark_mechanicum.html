@@ -32,15 +32,20 @@
       type="image/webp"
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Polices auto-hébergées : plus aucun appel à un domaine tiers, donc
+         aucune adresse IP de visiteur transmise hors UE (RGPD). Les `@font-face`
+         sont déclarés en tête de style.css.
+
+         `preload` sur la seule police du CORPS DE TEXTE : sans lui, le
+         navigateur ne découvre le fichier qu'après avoir lu toute la feuille
+         de styles. `crossorigin` est obligatoire même en même origine — les
+         polices se chargent toujours en mode anonyme. -->
     <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
+      rel="preload"
+      href="../assets/fonts/spectral-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
       crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Spectral:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
@@ -59,6 +64,7 @@
         <li><a href="#troupes">3 · Troupes</a></li>
         <li><a href="#moyens">4 · Moyens</a></li>
         <li><a href="#mission">5 · Ordre de mission</a></li>
+        <li><a href="#recapitulatif">6 · Récapitulatif</a></li>
       </ul>
     </nav>
 
@@ -94,14 +100,30 @@
               Maître de la Forge de Yarath-Maximal
             </p>
             <p class="personnage-mention">Akbaa — Ambassadeur de l'Abîme</p>
+            <!-- Dimensions = celles du fichier (880 × 1280). Un `width`/`height`
+                 faux fausse le rapport d'aspect réservé par le navigateur : la
+                 page tressaute au chargement (Cumulative Layout Shift).
+                 `fetchpriority="high"` remplace `loading="lazy"` : c'est
+                 l'image la plus grande au-dessus de la ligne de flottaison. -->
+            <!-- `srcset` et `sizes` : le navigateur choisit lui-même le fichier, d'après
+                     la largeur RÉELLE d'affichage ET la densité de l'écran. `sizes` décrit
+                     cette largeur au navigateur AVANT qu'il ait lu la moindre feuille de
+                     styles — c'est pour cela qu'on doit l'écrire à la main. Les valeurs
+                     ci-dessous ont été mesurées au navigateur de 320 à 1600 px, pas
+                     devinées. Sans `srcset`, un téléphone télécharge l'image de bureau. -->
             <img
               class="portrait-grand"
               src="../assets/images/dark_mechanicum/TX-4-CP.webp"
+              srcset="
+                ../assets/images/dark_mechanicum/TX-4-CP-440.webp 440w,
+                ../assets/images/dark_mechanicum/TX-4-CP.webp     880w
+              "
+              sizes="(min-width: 60em) 30rem, (min-width: 48em) 85vw, 80vw"
               alt="Archimagos TX-4-CP, maître de la forge de Yarath-Maximal"
-              width="900"
-              height="1274"
-              loading="lazy"
+              width="880"
+              height="1280"
               decoding="async"
+              fetchpriority="high"
             />
             <p class="texte-intro">
               Il y avait un magos, autrefois. TX-4-CP, c'était ce nom donné par
@@ -133,9 +155,9 @@
               <p class="texte">
                 TX-4-CP est un nom mort, une étiquette du Mechanicum qu'il a
                 abandonnée. Il répond à présent à Akbaa — un ancien mot, une
-                nouvelle identité, l'incarnation de ce qu'il est devenu. Ceux qui
-                utilisent encore TX-4-CP sont traités avec une courtoisie qui
-                confine au mépris. Ceux qui l'appellent Akbaa comprennent.
+                nouvelle identité, l'incarnation de ce qu'il est devenu. Ceux
+                qui utilisent encore TX-4-CP sont traités avec une courtoisie
+                qui confine au mépris. Ceux qui l'appellent Akbaa comprennent.
               </p>
             </div>
             <div class="info">
@@ -206,16 +228,7 @@
 
         <div class="pile marge-haut">
           <article class="carte-compagnie">
-            <div
-              class="carte-compagnie-entete"
-              style="
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-              "
-            >
+            <div class="carte-compagnie-entete carte-compagnie-entete--centre">
               <p class="etiquette">Troupes de Choc</p>
               <h3 class="titre-compagnie">Thallax Phalanx</h3>
               <p class="texte-sec">
@@ -227,7 +240,7 @@
             <div class="carte-compagnie-corps">
               <div class="unite">
                 <div class="unite-entete">
-                  <h4 class="titre-unite">Cohorte Thallax</h4>
+                  <h4 class="titre-unite">Cohorte Thallax — fusils à foudre</h4>
                 </div>
                 <p class="texte-sec">
                   Six Thallax configurés pour l'assaut rapproché, quatre armés
@@ -238,33 +251,24 @@
               </div>
               <div class="unite unite--fin">
                 <div class="unite-entete">
-                  <h4 class="titre-unite">
-                    Cohorte Thallax
-                  </h4>
+                  <h4 class="titre-unite">Cohorte Thallax — plasma phasé</h4>
                 </div>
                 <p class="texte-sec">
                   Six Thallax reconfigurés pour les salves de plasma phasé de
                   longue portée. Plus lents que la première cohorte, mais
-                  capables de perforer l'armure des dreadnoughts et des machines
-                  de siège.
+                  capables de perforer l'armure des
+                  <span lang="en">dreadnoughts</span> et des machines de siège.
                 </p>
               </div>
             </div>
           </article>
 
           <article class="carte-compagnie">
-            <div
-              class="carte-compagnie-entete"
-              style="
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-              "
-            >
+            <div class="carte-compagnie-entete carte-compagnie-entete--centre">
               <p class="etiquette">Élite Corrompue</p>
-              <h3 class="titre-compagnie">Myrmidons Destructors</h3>
+              <h3 class="titre-compagnie">
+                Myrmidons <span lang="en">Destructors</span>
+              </h3>
               <p class="texte-sec">
                 Phalanges de combat de l'ancienne garde techno-guerrière,
                 maintenant réveillées à la puissance du Warp. TX-4-CP les a
@@ -275,7 +279,9 @@
             <div class="carte-compagnie-corps">
               <div class="unite unite--fin">
                 <div class="unite-entete">
-                  <h4 class="titre-unite">Ost de Myrmidons Destructors</h4>
+                  <h4 class="titre-unite">
+                    Ost de Myrmidons <span lang="en">Destructors</span>
+                  </h4>
                 </div>
                 <p class="texte-sec">
                   Six Myrmidons en formation de poing, chacun porteur de
@@ -289,16 +295,7 @@
           </article>
 
           <article class="carte-compagnie">
-            <div
-              class="carte-compagnie-entete"
-              style="
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-              "
-            >
+            <div class="carte-compagnie-entete carte-compagnie-entete--centre">
               <p class="etiquette">Engins de Guerre</p>
               <h3 class="titre-compagnie">Manipules de Siège</h3>
               <p class="texte-sec">
@@ -311,7 +308,7 @@
               <div class="unite">
                 <div class="unite-entete">
                   <h4 class="titre-unite">
-                    Manipule de Siège Thanatar
+                    Manipule de Siège Thanatar — mortier à plasma
                   </h4>
                 </div>
                 <p class="texte-sec">
@@ -323,7 +320,7 @@
               <div class="unite unite--fin">
                 <div class="unite-entete">
                   <h4 class="titre-unite">
-                    Manipule de Siège Thanatar
+                    Manipule de Siège Thanatar — laser sollex
                   </h4>
                 </div>
                 <p class="texte-sec">
@@ -336,16 +333,7 @@
           </article>
 
           <article class="carte-compagnie">
-            <div
-              class="carte-compagnie-entete"
-              style="
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-              "
-            >
+            <div class="carte-compagnie-entete carte-compagnie-entete--centre">
               <p class="etiquette">Support Blindé</p>
               <h3 class="titre-compagnie">Manipules de Combat</h3>
               <p class="texte-sec">
@@ -358,20 +346,21 @@
               <div class="unite">
                 <div class="unite-entete">
                   <h4 class="titre-unite">
-                    Manipule de Combat Castellax
+                    Manipule de Combat Castellax — premier secteur
                   </h4>
                   <span class="mention">Support de ligne</span>
                 </div>
                 <p class="texte-sec">
-                  Configuration de base : quatre bolters de tir de ligne, deux
-                  canons à bolts Mauler pour l'appui. Forme le socle de la
-                  défense de la Forge.
+                  Configuration de base : quatre
+                  <span lang="en">bolters</span> de tir de ligne, deux canons à
+                  bolts Mauler pour l'appui. Forme le socle de la défense de la
+                  Forge.
                 </p>
               </div>
               <div class="unite unite--fin">
                 <div class="unite-entete">
                   <h4 class="titre-unite">
-                    Manipule de Combat Castellax
+                    Manipule de Combat Castellax — second secteur
                   </h4>
                   <span class="mention">Support de ligne</span>
                 </div>
@@ -417,11 +406,16 @@
            (WCAG 1.1.1 / RGAA 1.2 — image de décoration). -->
       <div class="carte-image">
         <img
-          src="../assets/images/dark_mechanicum/darkmechanicum.jpg"
+          src="../assets/images/dark_mechanicum/darkmechanicum.webp"
+          srcset="
+            ../assets/images/dark_mechanicum/darkmechanicum-672.webp  672w,
+            ../assets/images/dark_mechanicum/darkmechanicum.webp     1343w
+          "
+          sizes="(min-width: 70em) 64rem, 92vw"
           alt=""
           aria-hidden="true"
-          width="1600"
-          height="900"
+          width="1343"
+          height="853"
           loading="lazy"
           decoding="async"
         />
@@ -463,11 +457,11 @@
            (WCAG 1.1.1 / RGAA 1.2 — image de décoration). -->
       <div class="carte-image">
         <img
-          src="../assets/images/dark_mechanicum/spider.jpg"
+          src="../assets/images/dark_mechanicum/spider.webp"
           alt=""
           aria-hidden="true"
-          width="1600"
-          height="900"
+          width="505"
+          height="234"
           loading="lazy"
           decoding="async"
         />
@@ -520,7 +514,7 @@
                 <td class="nombre">255</td>
               </tr>
               <tr>
-                <td>Ost de Myrmidons Destructors</td>
+                <td>Ost de Myrmidons <span lang="en">Destructors</span></td>
                 <td>6</td>
                 <td class="nombre">405</td>
               </tr>
@@ -544,7 +538,7 @@
               <tr>
                 <th scope="row">Total force engagée</th>
                 <td></td>
-                <td class="nombre">2 170</td>
+                <td class="nombre">1&nbsp;970</td>
               </tr>
             </tfoot>
           </table>
@@ -554,9 +548,18 @@
 
     <footer>
       <div class="conteneur pied">
-        <p>Protocole Kaustos — Archimagos TX-4-CP</p>
+        <p>Protocole TX-4-CP — Archimagos de Yarath-Maximal</p>
         <p>La Forge tourne. L'Akbaa veille.</p>
-        <p><a href="../index.html">← Le Reflux de Yarath-Maximal</a></p>
+        <p>
+          Warhammer: The Horus Heresy et les noms associés sont des marques de
+          Games Workshop Ltd. Ce document n'est ni affilié ni approuvé par Games
+          Workshop.
+        </p>
+        <p>
+          <a class="lien-bloc" href="../index.html"
+            >← Le Reflux de Yarath-Maximal</a
+          >
+        </p>
       </div>
     </footer>
   </body>

@@ -26,17 +26,26 @@
       content="https://jean-desaintangel.github.io/Siege-de-la-Forge-dHyrkanos/assets/images/blood_angels/raldoron.webp"
     />
 
-    <link rel="icon" href="../assets/images/favicon/favicon_blood_angels.webp" type="image/webp" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin="anonymous"
+      rel="icon"
+      href="../assets/images/favicon/favicon_blood_angels.webp"
+      type="image/webp"
     />
+
+    <!-- Polices auto-hébergées : plus aucun appel à un domaine tiers, donc
+         aucune adresse IP de visiteur transmise hors UE (RGPD). Les `@font-face`
+         sont déclarés en tête de style.css.
+
+         `preload` sur la seule police du CORPS DE TEXTE : sans lui, le
+         navigateur ne découvre le fichier qu'après avoir lu toute la feuille
+         de styles. `crossorigin` est obligatoire même en même origine — les
+         polices se chargent toujours en mode anonyme. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Spectral:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="../assets/fonts/spectral-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
@@ -55,6 +64,7 @@
         <li><a href="#compagnies">3 · Compagnies</a></li>
         <li><a href="#moyens">4 · Moyens</a></li>
         <li><a href="#mission">5 · Ordre de mission</a></li>
+        <li><a href="#recapitulatif">6 · Récapitulatif</a></li>
       </ul>
     </nav>
 
@@ -93,14 +103,30 @@
             <p class="personnage-mention">
               Maître du I<sup>er</sup> Chapitre · Fils des tribus de Baal Primus
             </p>
-            <img class="portrait-grand"
-                src="../assets/images/blood_angels/raldoron.webp"
-                alt="Raldoron, Premier Capitaine de la IXe Légion, en armure de Terminator"
-                width="900"
-                height="1274"
-                loading="lazy"
-                decoding="async"
-              />
+            <!-- Image la plus grande au-dessus de la ligne de flottaison :
+                 c'est elle qui décide du LCP. `loading="lazy"` la faisait
+                 attendre la fin de la mise en page ; `fetchpriority="high"` la
+                 fait au contraire demander en premier. -->
+            <!-- `srcset` et `sizes` : le navigateur choisit lui-même le fichier, d'après
+                     la largeur RÉELLE d'affichage ET la densité de l'écran. `sizes` décrit
+                     cette largeur au navigateur AVANT qu'il ait lu la moindre feuille de
+                     styles — c'est pour cela qu'on doit l'écrire à la main. Les valeurs
+                     ci-dessous ont été mesurées au navigateur de 320 à 1600 px, pas
+                     devinées. Sans `srcset`, un téléphone télécharge l'image de bureau. -->
+            <img
+              class="portrait-grand"
+              src="../assets/images/blood_angels/raldoron.webp"
+              srcset="
+                ../assets/images/blood_angels/raldoron-450.webp 450w,
+                ../assets/images/blood_angels/raldoron.webp     900w
+              "
+              sizes="(min-width: 60em) 30rem, (min-width: 48em) 85vw, 80vw"
+              alt="Raldoron, Premier Capitaine de la IXe Légion, en armure de Terminator"
+              width="900"
+              height="1274"
+              decoding="async"
+              fetchpriority="high"
+            />
             <p class="texte-intro">
               Fils des tribus chasseresses de Baal Primus, il est de ceux que
               Sanguinius est allé chercher lui-même sous l'Arx Angelicum. Le
@@ -144,8 +170,8 @@
               <p class="texte">
                 Écuyer du Primarque durant toute la Grande Croisade, il est
                 celui à qui Sanguinius se confie le plus — un rôle que d'autres
-                Légions auraient nommé Mournival, si les Anges Sanglants avaient
-                eu besoin d'un tel mot.
+                Légions auraient nommé <span lang="en">Mournival</span>, si les
+                Anges Sanglants avaient eu besoin d'un tel mot.
               </p>
             </div>
             <div class="info info--fin">
@@ -173,14 +199,20 @@
 
         <div class="grille-auto">
           <div class="carte">
-            <img class="portrait"
-                src="../assets/images/blood_angels/zephon.webp"
-                alt="Portrait de Dominion Zephon, adjoint de Raldoron"
-                width="900"
-                height="900"
-                loading="lazy"
-                decoding="async"
-              />
+            <img
+              class="portrait"
+              src="../assets/images/blood_angels/zephon.webp"
+              srcset="
+                ../assets/images/blood_angels/zephon-450.webp 450w,
+                ../assets/images/blood_angels/zephon.webp     900w
+              "
+              sizes="(min-width: 60em) 29rem, (min-width: 48em) 40vw, 80vw"
+              alt="Portrait de Dominion Zephon, adjoint de Raldoron"
+              width="900"
+              height="900"
+              loading="lazy"
+              decoding="async"
+            />
             <p class="etiquette">Adjoint de Raldoron</p>
             <div class="unite-entete">
               <h3 class="titre-unite">Dominion Zephon</h3>
@@ -196,24 +228,30 @@
             </p>
           </div>
           <div class="carte">
-            <img class="portrait"
-                src="../assets/images/blood_angels/apothicaire.webp"
-                alt="Portrait de l’Apothicaire Vaelor"
-                width="900"
-                height="900"
-                loading="lazy"
-                decoding="async"
-              />
+            <img
+              class="portrait"
+              src="../assets/images/blood_angels/apothicaire.webp"
+              srcset="
+                ../assets/images/blood_angels/apothicaire-450.webp 450w,
+                ../assets/images/blood_angels/apothicaire.webp     900w
+              "
+              sizes="(min-width: 60em) 29rem, (min-width: 48em) 40vw, 80vw"
+              alt="Portrait de l’Apothicaire Vaelor"
+              width="900"
+              height="900"
+              loading="lazy"
+              decoding="async"
+            />
             <p class="etiquette">Section de l'Apothecarion</p>
             <div class="unite-entete">
               <h3 class="titre-unite">Apothicaire Vaelor</h3>
             </div>
             <p class="texte-sec">
-              Comme tout les prêtres sanguiniens de la Légion, il porte un double
-              fardeau : arracher le progénoïde aux morts avant que la lignée ne
-              se perde, et consigner, frère par frère, les premiers signes de la
-              Soif Rouge. Ses rapports ne remontent qu'à Raldoron ; nul autre
-              n'a le droit de les lire.
+              Comme tous les prêtres sanguiniens de la Légion, il porte un
+              double fardeau : arracher le progénoïde aux morts avant que la
+              lignée ne se perde, et consigner, frère par frère, les premiers
+              signes de la Soif Rouge. Ses rapports ne remontent qu'à Raldoron ;
+              nul autre n'a le droit de les lire.
             </p>
           </div>
         </div>
@@ -230,7 +268,7 @@
 
         <div class="pile marge-haut">
           <article class="carte-compagnie">
-            <div class="carte-compagnie-entete" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+            <div class="carte-compagnie-entete carte-compagnie-entete--centre">
               <p class="etiquette etiquette--rouge">
                 I<sup>re</sup> Compagnie · vétérans
               </p>
@@ -241,20 +279,20 @@
                 l'ouverture d'un assaut, mais au point où la bataille bascule.
               </p>
               <p class="mention">Capitaine — Bel Sepatus</p>
-              <img src="../assets/images/blood_angels/logo_1.png"
-                  alt="Logo de la Ire Compagnie « Écarlate »"
-                  width="250"
-                  height="250"
-                  loading="lazy"
-                  decoding="async"
-                  class="logo-compagnie"
-                  style="display: block; margin: 1rem auto 0;"
-                />
+              <img
+                class="logo-compagnie"
+                src="../assets/images/blood_angels/logo_1.webp"
+                alt="Blason de la Ire Compagnie « Écarlate »"
+                width="500"
+                height="500"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             <div class="carte-compagnie-corps">
               <div class="unite">
                 <div class="unite-entete">
-                  <h4 class="titre-unite">Paladins Écarlates "Malafael"</h4>
+                  <h4 class="titre-unite">Paladins Écarlates « Malafael »</h4>
                   <span class="mention">Cénacle d'élite</span>
                 </div>
                 <p class="texte-sec">
@@ -266,7 +304,9 @@
               </div>
               <div class="unite">
                 <div class="unite-entete">
-                  <h4 class="titre-unite">Escouade Vétérans Brécheuse "Ordamael"</h4>
+                  <h4 class="titre-unite">
+                    Escouade Vétérans Brécheuse « Ordamael »
+                  </h4>
                   <span class="mention">Assaut de brèche</span>
                 </div>
                 <p class="texte-sec">
@@ -278,16 +318,16 @@
               </div>
               <div class="unite unite--fin">
                 <div class="unite-entete">
-                  <h4 class="titre-unite">Les Larmes de l'Ange "Verimus"</h4>
+                  <h4 class="titre-unite">Les Larmes de l'Ange « Verimus »</h4>
                   <span class="mention">Vétérans</span>
                 </div>
                 <p class="texte-sec">
                   Guerriers réservés aux missions les plus brutales et
                   moralement douteuses — extermination, armes interdites,
                   anéantissement de populations jugées irrécupérables. Chaque
-                  membre, un 'Erelim', incarne la colère de Sanguinius là où la
-                  pitié n'a plus sa place. Spécialistes de la guerre sale, ils
-                  dissimulent leur visage sous un masque argenté, seul signe
+                  membre, un « Erelim », incarne la colère de Sanguinius là où
+                  la pitié n'a plus sa place. Spécialistes de la guerre sale,
+                  ils dissimulent leur visage sous un masque argenté, seul signe
                   visible d'une unité que le reste de la Légion préfère ne pas
                   nommer autrement que Lame Brisée.
                 </p>
@@ -296,7 +336,7 @@
           </article>
 
           <article class="carte-compagnie">
-            <div class="carte-compagnie-entete" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+            <div class="carte-compagnie-entete carte-compagnie-entete--centre">
               <p class="etiquette etiquette--rouge">
                 II<sup>e</sup> Compagnie · lignes
               </p>
@@ -308,22 +348,20 @@
                 derrière elle ce qu'elle vient d'ouvrir.
               </p>
               <p class="mention">Capitaine — Amit</p>
-              <img src="../assets/images/blood_angels/logo_2.png"
-                  alt="Logo de la IIe Compagnie « Enclume »"
-                  width="auto"
-                  height="250"
-                  loading="lazy"
-                  decoding="async"
-                  class="logo-compagnie"
-                  style="display: block; margin: 1rem auto 0;"
-                />
+              <img
+                class="logo-compagnie"
+                src="../assets/images/blood_angels/logo_2.webp"
+                alt="Blason de la IIe Compagnie « Enclume »"
+                width="500"
+                height="329"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             <div class="carte-compagnie-corps">
               <div class="unite">
                 <div class="unite-entete">
-                  <h4 class="titre-unite">
-                    Escouade Tactique « Araféo »
-                  </h4>
+                  <h4 class="titre-unite">Escouade Tactique « Araféo »</h4>
                 </div>
                 <p class="texte-sec">
                   La discipline de tir la plus austère du Chapitre — rare vertu
@@ -335,9 +373,7 @@
               </div>
               <div class="unite">
                 <div class="unite-entete">
-                  <h4 class="titre-unite">
-                    Escouade Tactique « Bephael »
-                  </h4>
+                  <h4 class="titre-unite">Escouade Tactique « Bephael »</h4>
                 </div>
                 <p class="texte-sec">
                   Levée après l'anéantissement de sa compagnie d'origine sur un
@@ -349,9 +385,7 @@
               </div>
               <div class="unite">
                 <div class="unite-entete">
-                  <h4 class="titre-unite">
-                    Escouade Nettoyeuse « Tazael »
-                  </h4>
+                  <h4 class="titre-unite">Escouade Nettoyeuse « Tazael »</h4>
                 </div>
                 <p class="texte-sec">
                   Épées tronçonneuses et combats à bout portant. Sur les mondes
@@ -401,7 +435,9 @@
           </div>
           <div class="carte carte--accent-or">
             <div class="unite-entete unite-entete--gauche">
-              <h3 class="titre-unite">Serre de Dreadnoughts</h3>
+              <h3 class="titre-unite">
+                Serre de <span lang="en">Dreadnoughts</span>
+              </h3>
             </div>
             <p class="etiquette">Appui lourd</p>
             <p class="texte-sec">
@@ -446,14 +482,20 @@
            le texte ne porte déjà. Une alternative bavarde parasite la lecture
            (WCAG 1.1.1 / RGAA 1.2 — image de décoration). -->
       <div class="carte-image">
-        <img src="../assets/images/blood_angels/vaisseaux.webp"
-            alt=""
-            aria-hidden="true"
-            width="1600"
-            height="900"
-            loading="lazy"
-            decoding="async"
-          />
+        <img
+          src="../assets/images/blood_angels/vaisseaux.webp"
+          srcset="
+            ../assets/images/blood_angels/vaisseaux-800.webp  800w,
+            ../assets/images/blood_angels/vaisseaux.webp     1600w
+          "
+          sizes="(min-width: 70em) 64rem, 92vw"
+          alt=""
+          aria-hidden="true"
+          width="1600"
+          height="900"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
       <!-- ==================================================================
@@ -524,7 +566,7 @@
                 <td class="nombre">300</td>
               </tr>
               <tr>
-                <td>Dreadnought Incaendius « Axiel »</td>
+                <td><span lang="en">Dreadnought</span> Incaendius « Axiel »</td>
                 <td>1</td>
                 <td class="nombre">230</td>
               </tr>
@@ -550,7 +592,16 @@
       <div class="conteneur pied">
         <p>Homologué — Raldoron, Maître du I<sup>er</sup> Chapitre</p>
         <p>Contreseing du Primarque · scellé sanguin</p>
-        <p><a href="../index.html">← Le Reflux de Yarath-Maximal</a></p>
+        <p>
+          Warhammer: The Horus Heresy, <span lang="en">Legiones Astartes</span>
+          et les noms associés sont des marques de Games Workshop Ltd. Ce
+          document n'est ni affilié ni approuvé par Games Workshop.
+        </p>
+        <p>
+          <a class="lien-bloc" href="../index.html"
+            >← Le Reflux de Yarath-Maximal</a
+          >
+        </p>
       </div>
     </footer>
   </body>

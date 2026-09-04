@@ -25,24 +25,42 @@
     />
     <meta
       property="og:image"
-      content="https://jean-desaintangel.github.io/Siege-de-la-Forge-dHyrkanos/assets/images/page_index/carte-secteur.webp"
+      content="https://jean-desaintangel.github.io/Siege-de-la-Forge-dHyrkanos/assets/images/page_index/monde-forge.webp"
     />
 
+    <!-- L'alternative de l'image de partage : elle est lue par les lecteurs
+         d'écran des réseaux sociaux, où la vignette est souvent le seul
+         contenu visible d'un lien partagé. -->
+    <meta
+      property="og:image:alt"
+      content="Vue orbitale de Yarath-Maximal, planète entièrement recouverte de fonderies."
+    />
+    <meta property="og:site_name" content="Le Reflux de Yarath-Maximal" />
+
+    <link
+      rel="canonical"
+      href="https://jean-desaintangel.github.io/Siege-de-la-Forge-dHyrkanos/"
+    />
     <link
       rel="icon"
       href="assets/images/favicon/favicon.webp"
       type="image/webp"
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Polices auto-hébergées : plus aucun appel à un domaine tiers, donc
+         aucune adresse IP de visiteur transmise hors UE (RGPD). Les `@font-face`
+         sont déclarés en tête de style.css.
+
+         `preload` sur la seule police du CORPS DE TEXTE : sans lui, le
+         navigateur ne découvre le fichier qu'après avoir lu toute la feuille
+         de styles. `crossorigin` est obligatoire même en même origine — les
+         polices se chargent toujours en mode anonyme. -->
     <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
+      rel="preload"
+      href="./assets/fonts/spectral-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
       crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Spectral:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
@@ -56,7 +74,9 @@
       <ul class="nav-liste conteneur">
         <li><a href="#theatre">Théâtre</a></li>
         <li><a href="#camps">Belligérants</a></li>
-        <li><a href="#titan">Le Warhound</a></li>
+        <li>
+          <a href="#titan">Le <span lang="en">Warhound</span></a>
+        </li>
         <li><a href="#arbre">Arbre</a></li>
         <li><a href="#missions">Missions</a></li>
         <li><a href="#progression">Progression</a></li>
@@ -106,23 +126,21 @@
               archives pré-Unification de tout le secteur.
             </p>
             <p class="texte-intro">
-              Les Étoiles Pâles s’articule autour d’un système
-              stellaire ancien, figé dans un lent déclin. Au centre, une naine
-              blanche mourante éclaire faiblement les orbites de ses planètes,
-              comme une braise persistante dans l’obscurité galactique. Malgré
-              ce déclin cosmique, la région demeure un nœud vital de l’effort de
-              guerre, disputé avec férocité par les forces loyalistes et
-              renégates.
+              Les Étoiles Pâles s’articule autour d’un système stellaire ancien,
+              figé dans un lent déclin. Au centre, une naine blanche mourante
+              éclaire faiblement les orbites de ses planètes, comme une braise
+              persistante dans l’obscurité galactique. Malgré ce déclin
+              cosmique, la région demeure un nœud vital de l’effort de guerre,
+              disputé avec férocité par les forces loyalistes et renégates.
             </p>
             <p class="texte-intro">
-              Les Étoiles Pâles s’étendait jadis comme une veine
-              industrielle et logistique au sein de l’Imperium. Traversé par la
-              Route de Fer Telerian, son réseau de mondes-forges, cités-ruches,
-              avant-postes miniers et systèmes relais assurait
-              l’approvisionnement d’au moins trois fronts majeurs dans la
-              Croisade de l’Empereur. Mais avec la trahison d’Horus, ce secteur
-              crucial devient une faille ouverte attirant l’attention de
-              multiples factions.
+              Les Étoiles Pâles s’étendait jadis comme une veine industrielle et
+              logistique au sein de l’Imperium. Traversé par la Route de Fer
+              Telerian, son réseau de mondes-forges, cités-ruches, avant-postes
+              miniers et systèmes relais assurait l’approvisionnement d’au moins
+              trois fronts majeurs dans la Croisade de l’Empereur. Mais avec la
+              trahison d’Horus, ce secteur crucial devient une faille ouverte
+              attirant l’attention de multiples factions.
             </p>
             <p class="texte-intro">
               Durant les premiers mois de l’Hérésie, le Secteur resta loyal.
@@ -152,11 +170,9 @@
             </p>
             <p class="texte-intro">
               La forge n'est pas tombée sous les bombes. Elle s'est retournée
-              d'elle-même. L'Archimagos <strong>TX-4-CP</strong> a rompu
-              ses serments à Mars, réécrit les esprits-machines de ses
-              fonderies, et ouvert ses portes à une Fraternité de la XV<sup
-                >e</sup
-              >
+              d'elle-même. L'Archimagos <strong>TX-4-CP</strong> a rompu ses
+              serments à Mars, réécrit les esprits-machines de ses fonderies, et
+              ouvert ses portes à une Fraternité de la XV<sup>e</sup>
               Légion venue chercher dans le vault ce que les Thousand Sons
               cherchent toujours : ce qui a été effacé. Il l'a fait par calcul,
               pas par amitié — et il commence à le regretter.
@@ -198,7 +214,7 @@
                 <dt>Enjeu</dt>
                 <dd>
                   Le Vault de Logique Kaustos-Alpha, les chantiers de Titans, et
-                  Syrgalah, le Warhound de la Legio Audax
+                  Syrgalah, le <span lang="en">Warhound</span> de la Legio Audax
                 </dd>
               </div>
               <div>
@@ -228,13 +244,26 @@
             aria-roledescription="carrousel"
             aria-label="Images de Yarath-Maximal"
           >
-            <div class="diaporama-piste" id="diaporama-piste">
+            <!-- `tabindex="0"` : une zone qui défile doit être atteignable au
+                 clavier (WCAG 2.1.1 / RGAA 7.3). Chromium rend focusables les
+                 conteneurs défilants, Firefox non : sans cet attribut, un
+                 utilisateur au clavier ne peut pas faire défiler la piste dans
+                 la moitié des navigateurs. Le `aria-label` évite un arrêt de
+                 tabulation muet. -->
+            <div
+              class="diaporama-piste"
+              id="diaporama-piste"
+              tabindex="0"
+              role="group"
+              aria-label="Images de Yarath-Maximal, faites défiler avec les flèches"
+            >
               <img
                 src="assets/images/page_index/monde-forge.webp"
                 alt="Vue orbitale de Yarath-Maximal : une planète entièrement recouverte de fonderies, d’où s’élèvent plusieurs colonnes de fumée noire."
                 width="450"
                 height="562"
                 decoding="async"
+                fetchpriority="high"
               />
               <img
                 src="assets/images/page_index/monde-forge-2.webp"
@@ -269,11 +298,10 @@
                 loading="lazy"
               />
               <img
-                src="assets/images/page_index/officier.jpg"
+                src="assets/images/page_index/officier.webp"
                 alt="Un officier du Mechanicum, vêtu d'une armure brillante, tenant un sceptre orné de symboles technologiques."
-                aria-describedby="officier-details"
                 width="450"
-                height="516"
+                height="562"
                 decoding="async"
                 loading="lazy"
               />
@@ -286,13 +314,6 @@
                 loading="lazy"
               />
             </div>
-
-            <!-- Description détaillée de l'officier (RGAA 1.6) : une
-                 image porteuse de dizaines de toponymes ne tient pas dans un alt. -->
-            <p class="sr-only" id="officier-details">
-              L'officier du Mechanicum est vêtu d'une armure brillante et tient
-              un sceptre orné de symboles technologiques.
-            </p>
 
             <button
               type="button"
@@ -375,8 +396,8 @@
             <h3 class="titre-carte">Les chantiers</h3>
             <p class="texte-sec">
               Nefs de montage de Titans, ponts roulants, berceaux de coque.
-              C'est là qu'attend le Warhound — et c'est ce qui fait basculer la
-              campagne.
+              C'est là qu'attend le <span lang="en">Warhound</span> — et c'est
+              ce qui fait basculer la campagne.
             </p>
           </div>
         </div>
@@ -404,8 +425,9 @@
             <h3 class="titre-belligerant">Salamanders — XVIII<sup>e</sup></h3>
             <div class="filet filet--faction">
               <p class="texte-sec">
-                Venus de Nocturne pour éteindre la forge. Terminators,
-                lance-flammes lourds, dreadnoughts. Détachement de Croisade en
+                Venus de Nocturne pour éteindre la forge.
+                <span lang="en">Terminators</span>, lance-flammes lourds,
+                <span lang="en">dreadnoughts</span>. Détachement de Croisade en
                 surface, <em lang="en">Zone Mortalis Bulwark</em> en intérieur.
                 Doctrine : entrer lentement, ne rien laisser derrière soi — y
                 compris ce que les trois autres étaient venus chercher.
@@ -445,7 +467,7 @@
                 la Neuvième Fraternité les ait lues.
               </p>
               <p class="texte-petit">
-                <a href="pages/blood_angels.html"
+                <a class="lien-bloc" href="pages/blood_angels.html"
                   >Ordre de déploiement du I<sup>er</sup> Bataillon →</a
                 >
               </p>
@@ -461,8 +483,8 @@
               <p class="texte-sec">
                 L'Archimagos <strong class="c-pale">TX-4-CP</strong> — ou plutôt
                 ce qu'il en reste — et sa taghmata corrompue. Il a abandonné
-                l'identité que le Mechanicum lui avait donnée pour en revêtir une
-                nouvelle : Akbaa. Maître du terrain : portes, cogitateurs,
+                l'identité que le Mechanicum lui avait donnée pour en revêtir
+                une nouvelle : Akbaa. Maître du terrain : portes, cogitateurs,
                 protocoles, esprits-machines réécrits. C'est lui qui décide de
                 l'obscurité et des sas verrouillés. Il a invité la Fraternité ;
                 il n'a jamais promis de la laisser repartir.
@@ -479,7 +501,7 @@
                 survécu à ses invités.
               </p>
               <p class="texte-petit">
-                <a href="pages/dark_mechanicum.html"
+                <a class="lien-bloc" href="pages/dark_mechanicum.html"
                   >Ordre de déploiement du Dark Mechanicum →</a
                 >
               </p>
@@ -617,8 +639,8 @@
               ombre de mort incarnée : Canon Inferno prêt à vomir ses torrents
               de flamme, Mega-Bolter Vulcan armé pour déchirer chair et acier.
               Elle n'est pas tombée avec la forge — elle est venue la garder, au
-              nom du pacte que TX-4-CP a scellé avec la Legio Audax le jour
-              où le monde-forge s'est retourné.
+              nom du pacte que TX-4-CP a scellé avec la Legio Audax le jour où
+              le monde-forge s'est retourné.
             </p>
             <p class="texte-intro">
               <strong
@@ -722,7 +744,7 @@
             <span class="etape-numero etape-numero--or" aria-hidden="true"
               >I</span
             >
-            <div class="carte etape-corps">
+            <div class="carte">
               <div class="etape-entete">
                 <h3 class="titre-etape">
                   Cendres sur Yarath <span class="mention">4 joueurs</span>
@@ -742,7 +764,7 @@
             <span class="etape-numero etape-numero--rouge" aria-hidden="true"
               >II</span
             >
-            <div class="carte etape-corps">
+            <div class="carte">
               <div class="etape-entete">
                 <h3 class="titre-etape">
                   Les galeries de coulée
@@ -765,7 +787,7 @@
             <span class="etape-numero etape-numero--bascule" aria-hidden="true"
               >III</span
             >
-            <div class="carte carte--or etape-corps">
+            <div class="carte carte--or">
               <div class="etape-entete">
                 <h3 class="titre-etape">
                   Les chantiers de Syrgalah
@@ -820,7 +842,7 @@
             <span class="etape-numero etape-numero--or" aria-hidden="true"
               >V</span
             >
-            <div class="carte etape-corps">
+            <div class="carte">
               <div class="etape-entete">
                 <h3 class="titre-etape">
                   Le Verdict de Yarath <span class="mention">4 joueurs</span>
@@ -844,6 +866,12 @@
            d'écran sont fournis nativement par le navigateur. Zéro ligne de
            JavaScript, et ça fonctionne même si le JS est désactivé.
            ================================================================== -->
+      <!-- `aria-labelledby` sur chaque <summary> : sans lui, le nom du bouton
+           est la CONCATÉNATION de tout ce qu'il contient — étiquette, titre et
+           métadonnées, soit une vingtaine de mots annoncés d'un trait avant
+           qu'on sache de quelle mission il s'agit (RGAA 6.1). L'attribut réduit
+           ce nom au seul titre ; l'étiquette et les métadonnées restent
+           visibles à l'écran et restent lues en mode navigation. -->
       <section id="missions">
         <div class="section-entete">
           <span class="section-numero" aria-hidden="true">V</span>
@@ -851,12 +879,12 @@
         </div>
 
         <details class="mission">
-          <summary class="mission-entete">
+          <summary class="mission-entete" aria-labelledby="mission-1">
             <span class="etiquette etiquette--large"
               >Mission I · Bataille planétaire · Thomas défend, trois
               assaillants</span
             >
-            <h3 class="mission-titre">Cendres sur Yarath</h3>
+            <h3 id="mission-1" class="mission-titre">Cendres sur Yarath</h3>
             <span class="mission-meta"
               >750 pts/joueur — quatre joueurs<br />5 tours</span
             >
@@ -864,13 +892,13 @@
           <div class="mission-corps grille-mission">
             <div>
               <p class="chapeau">
-                Les Thunderhawks salamanders descendent en formation serrée,
-                phares allumés dans la fumée de scorie. Au-dessus d'eux, les
-                escouades de Baal se laissent tomber en chute libre et allument
-                leurs réacteurs à deux cents mètres du sol. Personne n'a
-                coordonné les deux descentes. Les servo-tourelles de TX-4-CP
-                ouvrent le feu sur tout ce qui bouge, et la Fraternité, déjà à
-                terre, regarde.
+                Les <span lang="en">Thunderhawks</span> salamanders descendent
+                en formation serrée, phares allumés dans la fumée de scorie.
+                Au-dessus d'eux, les escouades de Baal se laissent tomber en
+                chute libre et allument leurs réacteurs à deux cents mètres du
+                sol. Personne n'a coordonné les deux descentes. Les
+                servo-tourelles de TX-4-CP ouvrent le feu sur tout ce qui bouge,
+                et la Fraternité, déjà à terre, regarde.
               </p>
 
               <h4 class="sous-titre">Objectif principal</h4>
@@ -973,12 +1001,12 @@
         </details>
 
         <details class="mission mission--rouge">
-          <summary class="mission-entete">
+          <summary class="mission-entete" aria-labelledby="mission-2">
             <span class="etiquette etiquette--large"
               >Mission II · <span lang="en">Zone Mortalis</span> · Blood Angels
               contre Dark Mechanicum</span
             >
-            <h3 class="mission-titre">Les galeries de coulée</h3>
+            <h3 id="mission-2" class="mission-titre">Les galeries de coulée</h3>
             <span class="mission-meta mission-meta--rouge"
               >1&nbsp;250 points par joueur<br />5–6 tours</span
             >
@@ -988,11 +1016,12 @@
               <p class="chapeau">
                 Sous la plaine, la forge respire encore. Les galeries
                 transportent l'acier en fusion vers les moules ; un homme en
-                Terminator y passe à peine, et deux ne se croisent pas. Les
-                Blood Angels y entrent quand même, parce que le chemin le plus
-                court vers le vault passe par là — et parce qu'une galerie de
-                trois pieds de large est exactement le genre d'endroit où une
-                hache tranche mieux qu'un bolter.
+                <span lang="en">Terminator</span> y passe à peine, et deux ne se
+                croisent pas. Les Blood Angels y entrent quand même, parce que
+                le chemin le plus court vers le vault passe par là — et parce
+                qu'une galerie de trois pieds de large est exactement le genre
+                d'endroit où une hache tranche mieux qu'un
+                <span lang="en">bolter</span>.
               </p>
 
               <h4 class="sous-titre">Sélection de la mission</h4>
@@ -1166,11 +1195,13 @@
         </details>
 
         <details class="mission mission--or">
-          <summary class="mission-entete">
+          <summary class="mission-entete" aria-labelledby="mission-3">
             <span class="etiquette etiquette--large etiquette--or"
               >Mission III · Bataille planétaire · Bascule narrative</span
             >
-            <h3 class="mission-titre">Les chantiers de Syrgalah</h3>
+            <h3 id="mission-3" class="mission-titre">
+              Les chantiers de Syrgalah
+            </h3>
             <span class="mission-meta">750 pts/joueur — quatre joueurs</span>
           </summary>
           <div class="mission-corps grille-mission">
@@ -1200,9 +1231,9 @@
                 <li>
                   <strong>Rite inachevé</strong> <span class="c-or">(3)</span> —
                   trois tests d'Intelligence réussis, cumulés sur la partie, par
-                  une figurine au contact du Warhound et hors combat : achevez
-                  la consécration si vous comptez emmener la machine, sabotez-la
-                  si vous préférez que personne ne l'ait.
+                  une figurine au contact du <span lang="en">Warhound</span> et
+                  hors combat : achevez la consécration si vous comptez emmener
+                  la machine, sabotez-la si vous préférez que personne ne l'ait.
                 </li>
                 <li>
                   Tuer le Seigneur de Guerre <span class="c-or">(3)</span> ·
@@ -1283,8 +1314,8 @@
                 <p class="texte-sec">
                   Table industrielle verticale : berceaux de coque, passerelles,
                   conteneurs, grues. Beaucoup de couvert, peu de lignes de tir
-                  longues. Le Warhound, posé au centre, fait partie du décor
-                  jusqu'à la mission V.
+                  longues. Le <span lang="en">Warhound</span>, posé au centre,
+                  fait partie du décor jusqu'à la mission V.
                 </p>
               </div>
               <div class="carte carte--dense">
@@ -1302,12 +1333,15 @@
 
         <div class="grille-2 marge-haut">
           <details class="mission">
-            <summary class="mission-entete mission-entete--compact">
+            <summary
+              class="mission-entete mission-entete--compact"
+              aria-labelledby="mission-4a"
+            >
               <span class="etiquette etiquette--large"
                 >Mission IV·A · <span lang="en">Zone Mortalis</span> ·
                 1&nbsp;500 pts · Raphaël vs Tristan</span
               >
-              <h3 class="mission-titre mission-titre--sm">
+              <h3 id="mission-4a" class="mission-titre mission-titre--sm">
                 Le Vault de Logique
               </h3>
             </summary>
@@ -1370,12 +1404,15 @@
           </details>
 
           <details class="mission mission--rouge">
-            <summary class="mission-entete mission-entete--compact">
+            <summary
+              class="mission-entete mission-entete--compact"
+              aria-labelledby="mission-4b"
+            >
               <span class="etiquette etiquette--large"
                 >Mission IV·B · <span lang="en">Zone Mortalis</span> ·
                 1&nbsp;500 pts · Raphaël vs Tristan</span
               >
-              <h3 class="mission-titre mission-titre--sm">
+              <h3 id="mission-4b" class="mission-titre mission-titre--sm">
                 Protocole de Cendres
               </h3>
             </summary>
@@ -1435,13 +1472,14 @@
         </div>
 
         <details class="mission">
-          <summary class="mission-entete">
+          <summary class="mission-entete" aria-labelledby="mission-5">
             <span class="etiquette etiquette--large"
               >Mission V · Grande bataille · Résolution</span
             >
-            <h3 class="mission-titre">Le Verdict de Yarath</h3>
+            <h3 id="mission-5" class="mission-titre">Le Verdict de Yarath</h3>
             <span class="mission-meta"
-              >750 pts/joueur — quatre joueurs — Warhound inclus</span
+              >750 pts/joueur — quatre joueurs —
+              <span lang="en">Warhound</span> inclus</span
             >
           </summary>
           <div class="mission-corps grille-mission">
@@ -1647,8 +1685,7 @@
                   <th scope="col">Joueur</th>
                   <th scope="col">Force</th>
                   <th scope="col" class="centre">Victoires</th>
-                  <th scope="col" class="centre">Points</th>
-                  <th scope="col" class="centre">Ajuster</th>
+                  <th scope="col" class="centre">Points de campagne</th>
                 </tr>
               </thead>
               <tbody>
@@ -1666,24 +1703,48 @@
                   <td class="force force--raphael">
                     Salamanders — XVIII<sup>e</sup>
                   </td>
-                  <td class="centre chiffre" data-champ="victoires">0</td>
-                  <td class="centre chiffre chiffre--or" data-champ="points">
-                    0
-                  </td>
                   <td class="centre">
-                    <div class="ajusteurs">
+                    <div class="compteur">
                       <button
                         type="button"
                         class="bouton-ajust"
-                        data-action="moins"
+                        data-champ="victoires"
+                        data-pas="-1"
+                        aria-label="Retirer une victoire à Raphaël"
+                      >
+                        <span aria-hidden="true">−</span>
+                      </button>
+                      <span class="chiffre" data-champ="victoires">0</span>
+                      <button
+                        type="button"
+                        class="bouton-ajust"
+                        data-champ="victoires"
+                        data-pas="1"
+                        aria-label="Ajouter une victoire à Raphaël"
+                      >
+                        <span aria-hidden="true">+</span>
+                      </button>
+                    </div>
+                  </td>
+                  <td class="centre">
+                    <div class="compteur">
+                      <button
+                        type="button"
+                        class="bouton-ajust"
+                        data-champ="points"
+                        data-pas="-1"
                         aria-label="Retirer un point de campagne à Raphaël"
                       >
                         <span aria-hidden="true">−</span>
                       </button>
+                      <span class="chiffre chiffre--or" data-champ="points"
+                        >0</span
+                      >
                       <button
                         type="button"
                         class="bouton-ajust"
-                        data-action="plus"
+                        data-champ="points"
+                        data-pas="1"
                         aria-label="Ajouter un point de campagne à Raphaël"
                       >
                         <span aria-hidden="true">+</span>
@@ -1705,24 +1766,48 @@
                   <td class="force force--jean">
                     Blood Angels — IX<sup>e</sup>
                   </td>
-                  <td class="centre chiffre" data-champ="victoires">0</td>
-                  <td class="centre chiffre chiffre--or" data-champ="points">
-                    0
-                  </td>
                   <td class="centre">
-                    <div class="ajusteurs">
+                    <div class="compteur">
                       <button
                         type="button"
                         class="bouton-ajust"
-                        data-action="moins"
+                        data-champ="victoires"
+                        data-pas="-1"
+                        aria-label="Retirer une victoire à Jean"
+                      >
+                        <span aria-hidden="true">−</span>
+                      </button>
+                      <span class="chiffre" data-champ="victoires">0</span>
+                      <button
+                        type="button"
+                        class="bouton-ajust"
+                        data-champ="victoires"
+                        data-pas="1"
+                        aria-label="Ajouter une victoire à Jean"
+                      >
+                        <span aria-hidden="true">+</span>
+                      </button>
+                    </div>
+                  </td>
+                  <td class="centre">
+                    <div class="compteur">
+                      <button
+                        type="button"
+                        class="bouton-ajust"
+                        data-champ="points"
+                        data-pas="-1"
                         aria-label="Retirer un point de campagne à Jean"
                       >
                         <span aria-hidden="true">−</span>
                       </button>
+                      <span class="chiffre chiffre--or" data-champ="points"
+                        >0</span
+                      >
                       <button
                         type="button"
                         class="bouton-ajust"
-                        data-action="plus"
+                        data-champ="points"
+                        data-pas="1"
                         aria-label="Ajouter un point de campagne à Jean"
                       >
                         <span aria-hidden="true">+</span>
@@ -1741,27 +1826,49 @@
                       maxlength="40"
                     />
                   </th>
-                  <td class="force force--thomas">
-                    Dark Mechanicum — TX-4-CP
-                  </td>
-                  <td class="centre chiffre" data-champ="victoires">0</td>
-                  <td class="centre chiffre chiffre--or" data-champ="points">
-                    0
-                  </td>
+                  <td class="force force--thomas">Dark Mechanicum — TX-4-CP</td>
                   <td class="centre">
-                    <div class="ajusteurs">
+                    <div class="compteur">
                       <button
                         type="button"
                         class="bouton-ajust"
-                        data-action="moins"
+                        data-champ="victoires"
+                        data-pas="-1"
+                        aria-label="Retirer une victoire à Thomas"
+                      >
+                        <span aria-hidden="true">−</span>
+                      </button>
+                      <span class="chiffre" data-champ="victoires">0</span>
+                      <button
+                        type="button"
+                        class="bouton-ajust"
+                        data-champ="victoires"
+                        data-pas="1"
+                        aria-label="Ajouter une victoire à Thomas"
+                      >
+                        <span aria-hidden="true">+</span>
+                      </button>
+                    </div>
+                  </td>
+                  <td class="centre">
+                    <div class="compteur">
+                      <button
+                        type="button"
+                        class="bouton-ajust"
+                        data-champ="points"
+                        data-pas="-1"
                         aria-label="Retirer un point de campagne à Thomas"
                       >
                         <span aria-hidden="true">−</span>
                       </button>
+                      <span class="chiffre chiffre--or" data-champ="points"
+                        >0</span
+                      >
                       <button
                         type="button"
                         class="bouton-ajust"
-                        data-action="plus"
+                        data-champ="points"
+                        data-pas="1"
                         aria-label="Ajouter un point de campagne à Thomas"
                       >
                         <span aria-hidden="true">+</span>
@@ -1783,24 +1890,48 @@
                   <td class="force force--tristan">
                     Thousand Sons — XV<sup>e</sup>
                   </td>
-                  <td class="centre chiffre" data-champ="victoires">0</td>
-                  <td class="centre chiffre chiffre--or" data-champ="points">
-                    0
-                  </td>
                   <td class="centre">
-                    <div class="ajusteurs">
+                    <div class="compteur">
                       <button
                         type="button"
                         class="bouton-ajust"
-                        data-action="moins"
+                        data-champ="victoires"
+                        data-pas="-1"
+                        aria-label="Retirer une victoire à Tristan"
+                      >
+                        <span aria-hidden="true">−</span>
+                      </button>
+                      <span class="chiffre" data-champ="victoires">0</span>
+                      <button
+                        type="button"
+                        class="bouton-ajust"
+                        data-champ="victoires"
+                        data-pas="1"
+                        aria-label="Ajouter une victoire à Tristan"
+                      >
+                        <span aria-hidden="true">+</span>
+                      </button>
+                    </div>
+                  </td>
+                  <td class="centre">
+                    <div class="compteur">
+                      <button
+                        type="button"
+                        class="bouton-ajust"
+                        data-champ="points"
+                        data-pas="-1"
                         aria-label="Retirer un point de campagne à Tristan"
                       >
                         <span aria-hidden="true">−</span>
                       </button>
+                      <span class="chiffre chiffre--or" data-champ="points"
+                        >0</span
+                      >
                       <button
                         type="button"
                         class="bouton-ajust"
-                        data-action="plus"
+                        data-champ="points"
+                        data-pas="1"
                         aria-label="Ajouter un point de campagne à Tristan"
                       >
                         <span aria-hidden="true">+</span>
@@ -1811,6 +1942,12 @@
               </tbody>
             </table>
           </div>
+
+          <p class="journal-note">
+            Victoires et points de campagne se comptent séparément : une égalité
+            vaut 1 point sans victoire, un compte-rendu rédigé vaut 1 point de
+            plus, et une victoire majeure vaut 3 points (section VI).
+          </p>
 
           <div class="journal-pied">
             <p class="journal-etats" aria-live="polite">
@@ -1857,8 +1994,12 @@
           approuvé par Games Workshop.
         </p>
         <p>
-          <a href="pages/blood_angels.html"
+          <a class="lien-bloc" href="pages/blood_angels.html"
             >Ordre de déploiement du I<sup>er</sup> Bataillon</a
+          >
+          ·
+          <a class="lien-bloc" href="pages/dark_mechanicum.html"
+            >Ordre de déploiement du Dark Mechanicum</a
           >
         </p>
       </div>

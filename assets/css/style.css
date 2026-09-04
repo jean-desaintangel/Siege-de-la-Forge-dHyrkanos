@@ -1,19 +1,24 @@
 /* =============================================================================
    Le Reflux de Yarath-Maximal — feuille de styles unique
    -----------------------------------------------------------------------------
-   Deux pages la consomment : index.html (le dossier de campagne) et
-   pages/blood_angels.html (la fiche de détachement). Aucun style en ligne dans
-   le HTML : tout est ici, nommé, commenté et réutilisable.
+   Trois pages la consomment : index.html (le dossier de campagne) et les deux
+   fiches de détachement pages/blood_angels.html et pages/dark_mechanicum.html.
+   Aucun style en ligne dans le HTML : tout est ici, nommé, commenté et
+   réutilisable. POURQUOI : un style écrit dans l'attribut `style` d'une balise
+   ne peut être ni réutilisé, ni redéfini par un media query, ni surchargé par
+   une feuille utilisateur — ce dernier point est une exigence d'accessibilité.
 
    ORGANISATION
+     0. Polices          — @font-face auto-hébergés
      1. Jetons          — couleurs, échelle typographique, espacements
      2. Réinitialisation et styles de base
      3. Accessibilité transversale
      4. Mise en page    — conteneurs, grilles, piles
      5. Typographie     — titres, étiquettes, paragraphes, listes
      6. Composants      — cartes, filets, missions, diaporama, tableaux, journal
-     7. Pages           — en-tête, navigation, pied de page
-     8. Élargissements  — media queries (mobile-first : on part du petit écran)
+     7. Structure de page — en-tête, navigation, pied de page
+     8. Fiches de détachement — pages/blood_angels.html, dark_mechanicum.html
+     9. Élargissements  — media queries (mobile-first : on part du petit écran)
 
    PARTI PRIS — mobile-first.
    Les styles de base décrivent le TÉLÉPHONE : une seule colonne, marges
@@ -27,6 +32,190 @@
    en `px`. Un utilisateur qui a réglé une police par défaut plus grande est ainsi
    servi, et pas seulement celui qui utilise le zoom.
    ============================================================================= */
+
+/* =============================================================================
+   0. Polices — auto-hébergées
+   -----------------------------------------------------------------------------
+   POURQUOI ne pas les charger depuis fonts.googleapis.com, alors que c'est
+   l'usage : trois raisons qui se cumulent.
+
+   1. RGPD — appeler Google Fonts transmet l'adresse IP du visiteur à un tiers
+      hors UE, sans son consentement. Un tribunal allemand (Munich, janvier
+      2022) l'a jugé illicite ; la CNIL tient la même position. Pour un site
+      d'établissement scolaire, c'est le point qui tranche à lui seul.
+   2. Performance — la feuille de Google est une ressource BLOQUANTE servie par
+      un autre domaine : le navigateur doit résoudre un DNS, ouvrir une
+      connexion TLS, lire une CSS, PUIS découvrir les fichiers de police. En
+      local, les `@font-face` sont connus dès la première feuille lue.
+   3. Intégrité — on ne peut pas poser d'attribut `integrity` sur la CSS de
+      Google : elle change selon le navigateur qui la demande. En local, le
+      fichier est figé dans le dépôt et versionné avec le reste.
+
+   `font-display: swap` : le texte s'affiche IMMÉDIATEMENT dans la police de
+   repli, puis bascule. Sans lui, le navigateur masque le texte jusqu'à trois
+   secondes — un écran vide n'est pas une page accessible.
+
+   `unicode-range` découpe chaque police en deux fichiers : « latin » couvre le
+   français courant, « latin-ext » les caractères rares. Le navigateur ne
+   télécharge le second QUE s'il rencontre un caractère qui l'exige.
+
+   Polices sous licence SIL Open Font License 1.1 (voir assets/fonts/LICENSE-*),
+   qui autorise expressément la redistribution avec un site.
+   ============================================================================= */
+@font-face {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/cinzel-latin-700-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/cinzel-latin-ext-700-normal.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../fonts/cinzel-latin-900-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../fonts/cinzel-latin-ext-900-normal.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Spectral";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/spectral-latin-400-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Spectral";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/spectral-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Spectral";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/spectral-latin-400-italic.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Spectral";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/spectral-latin-ext-400-italic.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Spectral";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/spectral-latin-600-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Spectral";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/spectral-latin-ext-600-normal.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/jetbrains-mono-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/jetbrains-mono-latin-700-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/jetbrains-mono-latin-ext-700-normal.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 
 /* =============================================================================
    1. Jetons
@@ -43,6 +232,11 @@
   --bordure-fine: #221d18;
   --bordure-or: #4a3c22;
   --bordure-rouge: #3a2020;
+  /* Bordure des CONTRÔLES de saisie (champs, boutons). Distincte de `--bordure`
+     décorative : WCAG 2.1 §1.4.11 « Contraste des éléments non textuels »
+     exige 3:1 entre la limite visible d'un composant d'interface et son fond.
+     `--bordure` (#2e2721) plafonnait à 1,28:1 : le champ était invisible. */
+  --bordure-controle: #786a5a; /* 3,4:1 au pire (sur #1c1813, le fond de bouton le plus clair) */
 
   /* --- Couleurs : textes -------------------------------------------------
      Toutes vérifiées au ratio WCAG 2.1 §1.4.3 : ≥ 4,5:1 sur TOUS les fonds du
@@ -114,8 +308,18 @@
 html {
   scroll-behavior: smooth;
   /* Décale les ancres pour qu'un titre ne finisse pas sous la barre de
-     navigation collante — sinon « Aller au contenu » amène sur un titre caché. */
-  scroll-padding-top: 4rem;
+     navigation collante — sinon « Aller au contenu » amène sur un titre caché
+     (WCAG 2.4.1 / RGAA 12.7 : le lien d'évitement doit rendre la cible VISIBLE).
+
+     POURQUOI trois valeurs et non une : la barre est une liste de liens qui
+     PASSE À LA LIGNE. Mesurée au navigateur, elle fait 45 px sur un écran de
+     bureau, 133 px à 544 px de large, et jusqu'à 221 px à 320 px — cinq lignes.
+     Une constante unique de 4 rem (64 px) laissait donc le titre visé sous la
+     barre sur tout écran de téléphone. On part du cas le plus haut (mobile-first)
+     et on réduit le décalage à mesure que la barre se rétracte. Une marge trop
+     GÉNÉREUSE ne fait que laisser un blanc au-dessus du titre ; une marge trop
+     courte le masque : dans le doute, on majore. */
+  scroll-padding-top: 14.5rem;
 }
 
 body {
@@ -140,13 +344,29 @@ a {
   text-decoration: none;
   /* Soulignement dessiné en `border-bottom` : sa couleur se choisit
      indépendamment de celle du texte. Le lien reste identifiable autrement que
-     par la couleur seule (WCAG 1.4.1 / RGAA 10.6). */
-  border-bottom: 1px solid rgba(201, 162, 39, 0.35);
+     par la couleur seule (WCAG 1.4.1 / RGAA 10.6).
+
+     POURQUOI l'opacité est passée de 0,35 à 0,7 : à 0,35 le trait ne
+     contrastait qu'à 1,93:1 avec le fond — invisible en pratique. La couleur
+     du lien (--or) ne se distingue elle-même du texte courant qu'à 1,07:1 :
+     sans un soulignement RÉELLEMENT visible, le lien n'était identifiable que
+     par la couleur, ce que le critère interdit. */
+  border-bottom: 1px solid rgba(201, 162, 39, 0.7);
 }
 
 a:hover {
   color: var(--or-clair);
   border-bottom-color: var(--or-clair);
+}
+
+/* Lien qui occupe seul son paragraphe — donc pas « en ligne dans une phrase »,
+   et pas couvert par l'exception du critère. WCAG 2.2 §2.5.8 « Taille de cible
+   (minimum) » demande 24 × 24 px. Ces liens mesuraient 13 à 16 px de haut :
+   le `padding` vertical les amène à 30 px sans rien changer à la mise en page,
+   puisqu'un `inline-block` ne pousse pas ses voisins. */
+.lien-bloc {
+  display: inline-block;
+  padding-block: 0.25rem;
 }
 
 ::selection {
@@ -733,6 +953,13 @@ strong {
   color: var(--or);
 }
 
+/* Reprend la couleur par défaut du numéro. Elle existe pour que le HTML soit
+   explicite : `etape-numero--or` en face de `--rouge` et `--bascule` se lit,
+   là où une classe absente laisse croire à un oubli. */
+.etape-numero--or {
+  color: var(--or);
+}
+
 .etape-numero--rouge {
   color: var(--rouge);
 }
@@ -825,7 +1052,11 @@ strong {
 }
 
 .mission-titre::before {
-  content: "▸";
+  /* `content: "▸" / ""` — la partie après la barre oblique est l'ALTERNATIVE
+     TEXTUELLE du contenu généré. Vide, elle retire le caractère du nom
+     accessible : sans elle, un lecteur d'écran annonçait « triangle noir
+     pointant vers la droite, Cendres sur Yarath » (WCAG 1.3.1 / RGAA 9.1). */
+  content: "▸" / "";
   font-size: 0.7em;
   color: var(--or);
   transition: transform 0.2s ease;
@@ -854,6 +1085,13 @@ strong {
 
 .mission-corps {
   padding: var(--esp-lg) var(--esp);
+}
+
+/* Variante compacte de l'en-tête de dossier : les missions IV·A et IV·B sont
+   présentées côte à côte, sans ligne de métadonnées. Sans cette règle, la
+   classe posée dans le HTML ne produisait aucun effet. */
+.mission-entete--compact {
+  padding-block: var(--esp);
 }
 
 /* --- Diaporama -------------------------------------------------------------
@@ -1035,6 +1273,15 @@ figcaption {
   color: var(--or);
 }
 
+/* La case porteuse d'un objectif. La classe était posée dans le HTML sans
+   qu'aucune règle ne lui corresponde : la case ne se distinguait que par le
+   losange ◈, lui-même `aria-hidden`. Le contour doré porte maintenant la même
+   information que le glyphe. */
+.schema-case--objectif {
+  border-color: var(--or);
+  background: rgba(201, 162, 39, 0.1);
+}
+
 /* --- Boutons --------------------------------------------------------------- */
 .bouton {
   font-family: var(--mono);
@@ -1056,7 +1303,7 @@ figcaption {
 .bouton--fantome {
   background: transparent;
   color: var(--texte-attenue);
-  border: 1px solid var(--bordure);
+  border: 1px solid var(--bordure-controle);
 }
 
 .bouton--fantome:hover {
@@ -1073,7 +1320,7 @@ figcaption {
   height: 2.75rem;
   background: #1c1813;
   color: var(--texte-doux);
-  border: 1px solid var(--bordure);
+  border: 1px solid var(--bordure-controle);
   cursor: pointer;
 }
 
@@ -1082,9 +1329,15 @@ figcaption {
   border-color: #4a4038;
 }
 
-.ajusteurs {
+/* Un compteur = « − valeur + » sur une ligne. Remplace `.ajusteurs`, qui
+   regroupait deux boutons commandant DEUX compteurs à la fois : chaque score a
+   désormais sa paire de boutons, à côté du chiffre qu'elle modifie. Coller le
+   contrôle à sa valeur n'est pas cosmétique — c'est ce qui rend l'effet du
+   bouton lisible sans avoir à deviner (WCAG 3.2.4). */
+.compteur {
   display: flex;
   gap: var(--esp-xs);
+  align-items: center;
   justify-content: center;
 }
 
@@ -1179,8 +1432,11 @@ caption {
   border: none;
 }
 
+/* Deux compteurs de trois éléments chacun : le tableau a besoin de plus de
+   largeur qu'avant. En dessous, `.table-defilante` le fait défiler
+   horizontalement plutôt que déborder de la page (WCAG 1.4.10). */
 .table-journal {
-  min-width: 38rem;
+  min-width: 46rem;
 }
 
 .table-journal thead th {
@@ -1215,7 +1471,7 @@ caption {
   min-width: 6rem;
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--bordure);
+  border-bottom: 1px solid var(--bordure-controle);
   color: var(--texte);
   font-size: var(--fs-base);
   padding: 0.375rem 0;
@@ -1239,7 +1495,12 @@ caption {
   color: var(--tristan);
 }
 
+/* `min-width` sur le chiffre : sans elle, le passage de 9 à 10 élargirait la
+   cellule et décalerait les deux boutons sous le doigt de l'utilisateur. */
 .chiffre {
+  display: inline-block;
+  min-width: 1.75rem;
+  text-align: center;
   font-family: var(--mono);
   font-size: var(--fs-md);
   color: var(--texte-pale);
@@ -1266,6 +1527,17 @@ caption {
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+/* Rappel du barème sous le tableau : les deux colonnes ne bougeant plus
+   ensemble, il faut dire pourquoi. */
+.journal-note {
+  margin: 0;
+  padding: 0 1.125rem;
+  font-size: var(--fs-petit);
+  line-height: 1.6;
+  color: var(--texte-doux);
+  max-width: 46rem;
 }
 
 .journal-alerte {
@@ -1309,6 +1581,17 @@ nav {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
+  /* PIÈGE CLASSIQUE de flexbox : un conteneur `flex` transforme chacun de ses
+     enfants en « élément flexible », et l'espace qui les SÉPARE dans le HTML
+     disparaît. Le lien « Le <span lang="en">Warhound</span> » s'affichait donc
+     « LeWarhound ». Le `gap` rétablit l'espace, quel que soit le nombre
+     d'éléments. En `em` : il suit la taille du texte.
+
+     0,6em et non 0,3em : mesuré au navigateur, un espace naturel vaut
+     8,4 px dans cette barre (l'interlettrage de 0,2em s'y ajoute).
+     0,6 × 10,5 px = 6,3 px, plus l'interlettrage : on retombe exactement
+     sur la largeur d'un espace tapé. */
+  gap: 0.6em;
 }
 
 .nav-liste a:hover {
@@ -1395,7 +1678,7 @@ footer {
 }
 
 /* =============================================================================
-   8. Fiche de détachement — pages/blood_angels.html
+   8. Fiches de détachement — pages/blood_angels.html et dark_mechanicum.html
    ============================================================================= */
 .carte-commandement {
   border: 1px solid var(--bordure-claire);
@@ -1546,6 +1829,28 @@ footer {
   margin-bottom: var(--esp);
 }
 
+/* En-tête de compagnie centrée. Cette règle remplace quatre attributs `style`
+   identiques recopiés dans les deux fiches de détachement : une intention
+   répétée est une classe, pas un copier-coller. */
+.carte-compagnie-entete--centre {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Blason de compagnie. `max-width` en rem plutôt que la largeur nue du fichier :
+   l'image est servie en 500 px pour les écrans à haute densité, mais ne doit
+   jamais s'afficher plus grande que 12,5 rem. */
+.logo-compagnie {
+  display: block;
+  width: auto;
+  max-width: 12.5rem;
+  height: auto;
+  margin: var(--esp) auto 0;
+}
+
 .carte-image {
   margin: var(--esp-xl) 0;
   border: 1px solid var(--bordure);
@@ -1639,6 +1944,11 @@ footer {
     --marge-page: 1.75rem;
   }
 
+  /* La barre de navigation retombe à trois lignes : voir `scroll-padding-top`. */
+  html {
+    scroll-padding-top: 9rem;
+  }
+
   .grille-4 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1649,6 +1959,11 @@ footer {
   :root {
     --marge-page: 2.5rem;
     --esp-section: 5rem;
+  }
+
+  /* Une à deux lignes de navigation à partir d'ici. */
+  html {
+    scroll-padding-top: 6.5rem;
   }
 
   .grille-2,

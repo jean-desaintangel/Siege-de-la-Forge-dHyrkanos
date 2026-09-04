@@ -250,28 +250,51 @@
       return lignes.map((tr) => ({
         nom: tr.querySelector(".champ-nom").value.trim() || "Joueur",
         victoires: Number(
-          tr.querySelector('[data-champ="victoires"]').textContent,
+          tr.querySelector('span[data-champ="victoires"]').textContent,
         ),
-        points: Number(tr.querySelector('[data-champ="points"]').textContent),
+        points: Number(
+          tr.querySelector('span[data-champ="points"]').textContent,
+        ),
       }));
+    }
+
+    /** Intitulés des quatre boutons d'une ligne.
+     *
+     *  POURQUOI ils sont regénérés à chaque écriture : l'intitulé cite le nom du
+     *  joueur, et ce nom est modifiable. Sans cette mise à jour, un lecteur
+     *  d'écran continuerait d'annoncer « Ajouter une victoire à Raphaël » après
+     *  que la case a été renommée en « Marie » (WCAG 4.1.2).
+     *
+     *  @param {HTMLTableRowElement} tr   la ligne du joueur
+     *  @param {string}              nom  le nom affiché dans la case
+     */
+    function majIntitules(tr, nom) {
+      const libelles = {
+        "victoires:1": `Ajouter une victoire à ${nom}`,
+        "victoires:-1": `Retirer une victoire à ${nom}`,
+        "points:1": `Ajouter un point de campagne à ${nom}`,
+        "points:-1": `Retirer un point de campagne à ${nom}`,
+      };
+      tr.querySelectorAll("button[data-champ]").forEach((b) => {
+        b.setAttribute(
+          "aria-label",
+          libelles[`${b.dataset.champ}:${b.dataset.pas}`],
+        );
+      });
     }
 
     function ecrireDom(donnees) {
       donnees.forEach((d, i) => {
         const tr = lignes[i];
         tr.querySelector(".champ-nom").value = d.nom;
-        tr.querySelector('[data-champ="victoires"]').textContent = d.victoires;
-        tr.querySelector('[data-champ="points"]').textContent = d.points;
-        // Les intitulés des boutons citent le joueur : ils doivent suivre le
-        // renommage, sans quoi le lecteur d'écran annoncerait l'ancien nom.
-        tr.querySelector('[data-action="plus"]').setAttribute(
-          "aria-label",
-          `Ajouter un point de campagne à ${d.nom}`,
-        );
-        tr.querySelector('[data-action="moins"]').setAttribute(
-          "aria-label",
-          `Retirer un point de campagne à ${d.nom}`,
-        );
+        // `span[data-champ]` et non `[data-champ]` tout court : depuis que
+        // chaque compteur a ses propres boutons, les BOUTONS portent eux aussi
+        // un `data-champ`. Un sélecteur trop large écrirait le score dans un
+        // bouton.
+        tr.querySelector('span[data-champ="victoires"]').textContent =
+          d.victoires;
+        tr.querySelector('span[data-champ="points"]').textContent = d.points;
+        majIntitules(tr, d.nom);
       });
     }
 
@@ -334,21 +357,38 @@
     }
 
     // --- Interactions -------------------------------------------------------
+    /* Un bouton ne touche QUE son propre compteur.
+       POURQUOI ce n'était pas le cas : la version précédente incrémentait
+       victoires ET points d'un même clic. Or le barème de la section VI les
+       dissocie — une égalité vaut 1 point sans victoire, un compte-rendu rédigé
+       vaut 1 point de plus. La colonne « Victoires » ne pouvait donc jamais
+       être juste, et l'intitulé du bouton, qui ne promettait qu'un point,
+       décrivait mal son effet (WCAG 2.5.3 « Intitulé dans le nom »).
+
+       Un seul écouteur posé sur le tableau plutôt que 16 sur les boutons :
+       c'est la délégation d'événement. L'événement remonte jusqu'ici, et
+       `closest()` retrouve le bouton d'origine. Un bouton ajouté plus tard
+       fonctionne sans qu'on ait rien à rebrancher. */
     table.addEventListener("click", (e) => {
-      const bouton = e.target.closest("[data-action]");
+      const bouton = e.target.closest("button[data-champ]");
       if (!bouton) return;
-      const tr = bouton.closest("tr");
-      const pas = bouton.dataset.action === "plus" ? 1 : -1;
-      ["points", "victoires"].forEach((champ) => {
-        const cell = tr.querySelector(`[data-champ="${champ}"]`);
-        const valeur = Number(cell.textContent) + pas;
-        cell.textContent = Math.max(0, Math.min(MAX_POINTS, valeur));
-      });
+      const cell = bouton
+        .closest("tr")
+        .querySelector(`span[data-champ="${bouton.dataset.champ}"]`);
+      const valeur = Number(cell.textContent) + Number(bouton.dataset.pas);
+      cell.textContent = Math.max(0, Math.min(MAX_POINTS, valeur));
       majDepuisDom();
     });
 
     table.addEventListener("input", (e) => {
-      if (e.target.classList.contains("champ-nom")) majDepuisDom();
+      if (!e.target.classList.contains("champ-nom")) return;
+      // Le nom vient de changer : les intitulés des quatre boutons de CETTE
+      // ligne le citent, il faut les réécrire tout de suite. Sans cette ligne,
+      // un lecteur d'écran continuerait d'annoncer l'ancien nom jusqu'au
+      // prochain rechargement de la page (WCAG 4.1.2).
+      const tr = e.target.closest("tr");
+      majIntitules(tr, e.target.value.trim() || "Joueur");
+      majDepuisDom();
     });
 
     const boutonReset = document.getElementById("reinitialiser");
