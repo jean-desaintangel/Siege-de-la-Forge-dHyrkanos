@@ -367,6 +367,12 @@ a:hover {
 .lien-bloc {
   display: inline-block;
   padding-block: 0.25rem;
+  /* Pas de soulignement ici : WCAG 1.4.1 / RGAA 10.6 n'exigent un indice
+     non chromatique que pour un lien « entouré de texte », dont on doit
+     pouvoir le distinguer. Celui-ci occupe seul son paragraphe — il n'y a
+     aucun texte voisin avec lequel le confondre. L'anneau `:focus-visible`
+     assure la conformité 2.4.7 au clavier. */
+  border-bottom: none;
 }
 
 ::selection {
