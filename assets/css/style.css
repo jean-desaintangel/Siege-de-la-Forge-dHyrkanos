@@ -583,6 +583,13 @@ section {
   margin-bottom: var(--esp-lg);
 }
 
+/* `margin-inline: auto` autant que `text-align` : sans lui, le texte serait
+   centré à l'intérieur d'un bloc de 50rem resté calé à gauche du conteneur. */
+.section-intro--centre {
+  text-align: center;
+  margin-inline: auto;
+}
+
 /* --- Titres de bloc -------------------------------------------------------- */
 .titre-carte {
   font-family: var(--titre);
