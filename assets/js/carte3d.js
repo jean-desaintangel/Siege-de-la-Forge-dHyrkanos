@@ -420,38 +420,9 @@ function demarrer() {
   );
 
   /* -------------------------------------------------------------------------
-     7. La Route de Fer Telerian et les repères lointains
+     7. Les repères lointains
      ----------------------------------------------------------------------
-     La route traverse le système de part en part : c'est un décor, elle n'est
-     ni cliquable ni sélectionnable. `CatmullRomCurve3` lisse une poignée de
-     points en une courbe continue, `TubeGeometry` lui donne une épaisseur —
-     une `Line` de Three.js ne fait qu'un pixel de large quoi qu'on demande. */
-  const route = new THREE.Mesh(
-    new THREE.TubeGeometry(
-      new THREE.CatmullRomCurve3([
-        new THREE.Vector3(-88, -6, 62),
-        new THREE.Vector3(-30, -1, 26),
-        new THREE.Vector3(18, 2, -8),
-        new THREE.Vector3(64, 5, -46),
-        new THREE.Vector3(96, 7, -74),
-      ]),
-      80,
-      0.15,
-      8,
-      false,
-    ),
-    new THREE.MeshBasicMaterial({
-      color: 0xc9a227,
-      transparent: true,
-      opacity: 0.34,
-    }),
-  );
-  scene.add(route);
-  suivre(
-    creerEtiquette("Route de Fer Telerian", "scene3d-etiquette--route"),
-    { position: new THREE.Vector3(-56, -3, 40) },
-    0,
-  );
+     Des points hors du système : décor, ni cliquables ni sélectionnables. */
 
   /** Repère lointain : un point lumineux hors du système et son étiquette. */
   function repereLointain(nom, note, x, y, z, couleur) {

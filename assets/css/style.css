@@ -2195,10 +2195,6 @@ footer {
   border-color: var(--bordure-or);
 }
 
-.scene3d-etiquette--route {
-  color: var(--or);
-}
-
 .scene3d-etiquette--repere,
 .scene3d-etiquette--limite {
   color: var(--texte-doux);

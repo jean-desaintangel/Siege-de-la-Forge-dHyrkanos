@@ -78,8 +78,6 @@
         </li>
         <li><a href="#maquette">1 · La maquette</a></li>
         <li><a href="#mondes">2 · Les mondes</a></li>
-        <li><a href="#transits">3 · Routes et transits</a></li>
-        <li><a href="#pilotage">4 · Piloter la vue</a></li>
       </ul>
     </nav>
 
@@ -386,11 +384,6 @@
                 <dd>Théâtre des cinq missions de la campagne</dd>
               </div>
             </dl>
-            <p class="texte-petit">
-              <a class="lien-bloc" href="../index.html#theatre"
-                >Les trois zones de jeu : surface, entrailles, chantiers →</a
-              >
-            </p>
           </article>
 
           <article class="carte fiche-monde" id="monde-karthis">
@@ -504,143 +497,6 @@
         </div>
       </section>
 
-      <!-- ==================================================================
-           3 · Routes et transits
-           ==================================================================
-           `<table>` et non grille de `<div>` : ce sont des données à trois
-           colonnes, chaque cellule dépend de son en-tête de ligne ET de
-           colonne. C'est exactement ce qu'un tableau exprime, et rien d'autre
-           ne l'exprime au lecteur d'écran. -->
-      <section id="transits">
-        <div class="section-entete">
-          <span class="section-numero" aria-hidden="true">III</span>
-          <h2>Routes et transits</h2>
-        </div>
-
-        <p class="texte-intro">
-          La Route de Fer Telerian traversait le secteur et alimentait au moins
-          trois fronts de la Croisade. Ce qu'il en reste détermine l'ordre
-          d'arrivée des quatre forces — et cet ordre est déjà un déséquilibre.
-        </p>
-
-        <div class="table-defilante marge-haut">
-          <table class="table-recap">
-            <caption>
-              Ordre d'arrivée des quatre belligérants dans le système
-            </caption>
-            <thead>
-              <tr>
-                <th scope="col">Force</th>
-                <th scope="col">Vient de</th>
-                <th scope="col">Transit</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Dark Mechanicum — Thomas</th>
-                <td>Yarath-Maximal</td>
-                <td>Sur place : la forge est son corps</td>
-              </tr>
-              <tr>
-                <th scope="row">Thousand Sons — Tristan</th>
-                <td>Sous le vault</td>
-                <td>Déjà entrés, invités par TX-4-CP</td>
-              </tr>
-              <tr>
-                <th scope="row">Salamanders — Raphaël</th>
-                <td>Nocturne</td>
-                <td>Deux sauts</td>
-              </tr>
-              <tr>
-                <th scope="row">Blood Angels — Jean</th>
-                <td>Baal</td>
-                <td>Le plus long des quatre : ils arrivent en dernier</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- ==================================================================
-           4 · Piloter la vue
-           ================================================================== -->
-      <section id="pilotage">
-        <div class="section-entete">
-          <span class="section-numero" aria-hidden="true">IV</span>
-          <h2>Piloter la vue</h2>
-        </div>
-
-        <p class="texte-intro">
-          Tout ce que la souris permet, le clavier le permet aussi. Les touches
-          n'agissent que lorsque la maquette a le focus — on l'atteint par
-          tabulation ou en cliquant dedans.
-        </p>
-
-        <div class="table-defilante marge-haut">
-          <table class="table-recap">
-            <caption>
-              Commandes de la maquette
-            </caption>
-            <thead>
-              <tr>
-                <th scope="col">Action</th>
-                <th scope="col">Souris ou doigt</th>
-                <th scope="col">Clavier</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Tourner autour du système</th>
-                <td>Glisser sur la maquette</td>
-                <td>Flèches (Maj pour aller plus vite)</td>
-              </tr>
-              <tr>
-                <th scope="row">Zoomer</th>
-                <td>Molette, ou pincer à deux doigts</td>
-                <td>Touches + et −</td>
-              </tr>
-              <tr>
-                <th scope="row">Viser un monde</th>
-                <td>Cliquer la planète</td>
-                <td>Boutons de la section 2</td>
-              </tr>
-              <tr>
-                <th scope="row">Revenir à la vue d'ensemble</th>
-                <td>Bouton « Vue d'ensemble »</td>
-                <td>Touche Origine (Home)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="grille-3 marge-haut">
-          <div class="carte carte--accent-or">
-            <h3 class="titre-carte">La molette ne vous piège pas</h3>
-            <p class="texte-sec">
-              La molette ne zoome que si la maquette a le focus. Sinon elle fait
-              défiler la page, comme partout ailleurs : une page qui confisque
-              le défilement est une page qu'on quitte.
-            </p>
-          </div>
-          <div class="carte carte--accent-teal">
-            <h3 class="titre-carte">Mouvement réduit</h3>
-            <p class="texte-sec">
-              Si votre système demande de limiter les animations, les orbites
-              démarrent à l'arrêt. Le bouton « Animer les orbites » les lance si
-              vous le souhaitez.
-            </p>
-          </div>
-          <div class="carte carte--accent-rouge">
-            <h3 class="titre-carte">La référence reste le texte</h3>
-            <p class="texte-sec">
-              Une toile WebGL ne se lit ni au lecteur d'écran, ni sans réseau,
-              ni sans JavaScript. Tout ce qu'elle montre est écrit dans les
-              fiches.
-              <a class="lien-bloc" href="#mondes">Les mondes du système →</a>
-            </p>
-          </div>
-        </div>
-      </section>
     </main>
 
     <footer>
