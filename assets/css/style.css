@@ -1,8 +1,9 @@
 /* =============================================================================
    Le Reflux de Yarath-Maximal — feuille de styles unique
    -----------------------------------------------------------------------------
-   Trois pages la consomment : index.html (le dossier de campagne) et les deux
-   fiches de détachement pages/blood_angels.html et pages/dark_mechanicum.html.
+   Cinq pages la consomment : index.html (le dossier de campagne), les deux
+   fiches de détachement pages/blood_angels.html et pages/dark_mechanicum.html,
+   la carte pages/carte.html et sa maquette 3D pages/carte3d.html.
    Aucun style en ligne dans le HTML : tout est ici, nommé, commenté et
    réutilisable. POURQUOI : un style écrit dans l'attribut `style` d'une balise
    ne peut être ni réutilisé, ni redéfini par un media query, ni surchargé par
@@ -18,7 +19,9 @@
      6. Composants      — cartes, filets, missions, diaporama, tableaux, journal
      7. Structure de page — en-tête, navigation, pied de page
      8. Fiches de détachement — pages/blood_angels.html, dark_mechanicum.html
-     9. Élargissements  — media queries (mobile-first : on part du petit écran)
+     9. Carte du secteur — pages/carte.html : plan SVG et fiches de mondes
+    10. Maquette 3D     — pages/carte3d.html : toile WebGL, étiquettes, boutons
+    11. Élargissements  — media queries (mobile-first : on part du petit écran)
 
    PARTI PRIS — mobile-first.
    Les styles de base décrivent le TÉLÉPHONE : une seule colonne, marges
@@ -1948,13 +1951,583 @@ footer {
 }
 
 /* =============================================================================
-   9. Élargissements — on n'ajoute des colonnes que si la place existe
+   9. Carte du secteur — pages/carte.html
+   -----------------------------------------------------------------------------
+   Le plan est un SVG écrit à la main, sans aucun attribut de présentation :
+   toutes ses couleurs et toutes ses épaisseurs de trait sont ici. POURQUOI :
+   un `fill="#c9a227"` posé dans le HTML échappe aux jetons de la section 1,
+   donc à toute relecture de contraste et à toute future variante de thème.
+
+   Le SVG se met à l'échelle par son `viewBox` : les tailles écrites ci-dessous
+   sont des UNITÉS DU VIEWBOX (900 × 700), pas des pixels d'écran. À un rendu
+   de 900 px de large, une unité vaut un pixel ; à 600 px, elle en vaut 0,67.
+   C'est pour cela que `.plan` porte une largeur minimale : en dessous, les
+   noms des mondes deviendraient illisibles.
+   ============================================================================= */
+
+/* --- Cadre défilant -------------------------------------------------------- */
+.carte-systeme {
+  margin-top: var(--esp-md);
+}
+
+.plan-cadre {
+  overflow-x: auto;
+  border: 1px solid var(--bordure);
+  background-color: var(--fond-carte);
+  /* Le halo de focus du cadre défilant doit rester visible malgré le
+     débordement : on le pose à l'intérieur. */
+  outline-offset: -3px;
+}
+
+.plan {
+  display: block;
+  width: 100%;
+  min-width: 32rem; /* 512px — en deçà, les noms passent sous 11 px */
+  height: auto;
+}
+
+/* --- Décor : route, ceinture, orbites -------------------------------------- */
+.plan-route {
+  fill: none;
+  stroke: var(--bordure-or);
+  stroke-width: 2;
+  stroke-dasharray: 10 9;
+}
+
+.plan-route-nom {
+  fill: var(--etiquette); /* 5,1:1 sur --fond-carte */
+  font-family: var(--mono);
+  font-size: 15px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.plan-ceinture {
+  fill: none;
+  stroke: var(--bordure-claire);
+  stroke-width: 2;
+  stroke-dasharray: 3 12;
+  stroke-linecap: round;
+}
+
+.plan-orbite {
+  fill: none;
+  stroke: var(--bordure);
+  stroke-width: 1.5;
+}
+
+/* L'orbite de l'objectif se distingue par sa couleur ET par son trait continu
+   plus épais : jamais par la couleur seule (WCAG 1.4.1). */
+.plan-orbite--enjeu {
+  stroke: var(--bordure-rouge);
+  stroke-width: 2.5;
+}
+
+/* --- L'étoile -------------------------------------------------------------- */
+.plan-etoile-halo {
+  fill: var(--or);
+  opacity: 0.14;
+}
+
+.plan-etoile-corps {
+  fill: var(--texte-clair);
+}
+
+.plan-etoile-nom {
+  fill: var(--texte);
+  font-family: var(--titre);
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: 0.08em;
+  text-anchor: middle;
+}
+
+.plan-etoile-type {
+  fill: var(--texte-attenue); /* 5,3:1 */
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-anchor: middle;
+}
+
+/* --- Les mondes ------------------------------------------------------------
+   `.plan-monde-cible` est le disque de préhension : transparent — et non
+   `fill: none`, qui ne capte aucun clic — il porte la zone cliquable à 60
+   unités de diamètre, au-delà des 24 px exigés par WCAG 2.5.8 à toutes les
+   largeurs de rendu retenues ici. */
+.plan-monde-cible {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 2;
+}
+
+.plan-monde-corps {
+  fill: var(--texte-pale);
+  stroke: var(--fond-page);
+  stroke-width: 2;
+}
+
+.plan-monde-nom {
+  fill: var(--texte); /* 12,9:1 */
+  font-family: var(--titre);
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: 0.06em;
+  text-anchor: middle;
+}
+
+.plan-monde-mention {
+  fill: var(--rouge); /* 5,2:1 */
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-anchor: middle;
+}
+
+.plan-monde--enjeu .plan-monde-corps {
+  fill: var(--rouge);
+}
+
+.plan-monde--secondaire .plan-monde-nom {
+  fill: var(--texte-doux); /* 6,7:1 */
+  font-family: var(--mono);
+  font-size: 15px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Survol, focus, sélection : trois états, un seul dessin. Le cercle de
+   préhension devient visible — c'est lui qui montre la zone réellement
+   cliquable, ce qu'un simple changement de couleur du monde ne dirait pas. */
+.plan-monde:hover .plan-monde-cible,
+.plan-monde:focus-visible .plan-monde-cible {
+  stroke: var(--or-clair);
+}
+
+.plan-monde:hover .plan-monde-nom,
+.plan-monde:focus-visible .plan-monde-nom {
+  fill: var(--texte-clair);
+}
+
+/* `aria-current` est posé par carte.js sur le monde sélectionné : le style
+   suit l'état ARIA au lieu d'une classe parallèle, ce qui rend impossible
+   l'écart entre ce qui est annoncé et ce qui est affiché. */
+.plan-monde[aria-current="true"] .plan-monde-cible {
+  stroke: var(--or);
+  stroke-dasharray: 4 4;
+}
+
+/* Le lien SVG hérite du soulignement des liens du corps de texte sur certains
+   navigateurs : on le retire, la mise en évidence ci-dessus le remplace. */
+.plan-monde {
+  text-decoration: none;
+}
+
+/* --- Repères lointains ----------------------------------------------------- */
+.plan-fleche {
+  fill: none;
+  stroke: var(--bordure-claire);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 6;
+}
+
+.plan-repere-nom {
+  fill: var(--texte-doux); /* 6,7:1 */
+  font-family: var(--titre);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.06em;
+}
+
+.plan-repere-note {
+  fill: var(--texte-attenue); /* 5,3:1 */
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+}
+
+/* `text-anchor: end` : les deux repères de droite s'écrivent vers l'intérieur
+   du plan, sinon ils sortiraient du viewBox. */
+.plan-repere-nom--fin {
+  text-anchor: end;
+}
+
+.plan-repere--warp .plan-fleche {
+  stroke: var(--tristan-bord);
+}
+
+/* --- Panneau de synthèse (dévoilé par carte.js) ---------------------------- */
+.plan-panneau {
+  margin-top: var(--esp-sm);
+  padding: var(--esp) var(--esp-md);
+  border: 1px solid var(--bordure);
+  border-left: 3px solid var(--or);
+  background-color: var(--fond-carte-or);
+}
+
+/* Une règle de mise en page — ici `padding` et `border` — ne doit pas ressusciter
+   un élément masqué par l'attribut `hidden`. */
+.plan-panneau[hidden] {
+  display: none;
+}
+
+.plan-panneau-nom {
+  font-family: var(--titre);
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  color: var(--texte-clair);
+  margin-bottom: 0.25rem;
+}
+
+.plan-panneau-resume {
+  font-size: var(--fs-sec);
+  line-height: 1.6;
+  color: var(--texte-lecture);
+}
+
+.plan-panneau-actions {
+  margin-top: var(--esp-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-xs);
+}
+
+/* --- Légende --------------------------------------------------------------- */
+.plan-legende {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--esp);
+  display: flex;
+  flex-wrap: wrap;
+  /* `gap` explicite : dans un conteneur flex, l'espace entre deux éléments
+     disparaît purement et simplement (voir README, le piège de la nav). */
+  gap: var(--esp-xs) var(--esp-md);
+}
+
+.plan-legende-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-family: var(--mono);
+  font-size: var(--fs-mention);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texte-attenue); /* 5,3:1 */
+}
+
+/* La pastille est décorative : elle double une information déjà écrite à côté,
+   elle ne la porte jamais seule. */
+.plan-legende-item::before {
+  content: "";
+  inline-size: 0.85rem;
+  block-size: 0.85rem;
+  flex: none;
+  border: 1px solid currentColor;
+}
+
+.plan-legende-item--enjeu::before {
+  background-color: var(--rouge);
+  border-color: var(--rouge);
+}
+
+.plan-legende-item--monde::before {
+  background-color: var(--texte-pale);
+  border-color: var(--texte-pale);
+}
+
+.plan-legende-item--route::before {
+  background-color: transparent;
+  border-color: var(--bordure-or);
+  border-style: dashed;
+}
+
+.plan-legende-item--limite::before {
+  background-color: transparent;
+  border-color: var(--bordure-claire);
+  border-style: dotted;
+}
+
+/* --- Fiches des mondes -----------------------------------------------------
+   `auto-fit` + `minmax(min(100%, 20rem), 1fr)` : la grille se réorganise seule,
+   sans le moindre media query. `min(100%, 20rem)` évite le débordement quand la
+   fenêtre est plus étroite que 20rem. */
+.grille-mondes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: var(--esp-md);
+  margin-top: var(--esp-md);
+}
+
+.fiche-monde-donnees {
+  margin-top: var(--esp);
+  border-top: 1px solid var(--bordure-fine);
+}
+
+.fiche-monde-donnees > div {
+  display: grid;
+  gap: 0.15rem;
+  padding-block: var(--esp-xs);
+  border-bottom: 1px solid var(--bordure-fine);
+}
+
+.fiche-monde-donnees dt {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--etiquette);
+}
+
+.fiche-monde-donnees dd {
+  margin: 0;
+  font-size: var(--fs-petit);
+  line-height: 1.55;
+  color: var(--texte-chaud);
+}
+
+/* Cible d'une ancre suivie depuis le plan. `:target` seul suffirait sans
+   JavaScript ; carte.js ajoute la même classe pour que la mise en évidence
+   survive à une seconde sélection sur le même monde. */
+.fiche-monde:target,
+.fiche-monde.est-designee {
+  border-color: var(--or);
+}
+
+/* Le survol d'un monde du plan éclaire sa fiche : le lien entre les deux
+   représentations devient visible sans avoir à cliquer. */
+.fiche-monde.est-survolee {
+  border-color: var(--bordure-controle);
+}
+
+@media (min-width: 48em) {
+  .fiche-monde-donnees > div {
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: var(--esp-xs);
+    align-items: baseline;
+  }
+}
+
+/* =============================================================================
+  10. Maquette 3D — pages/carte3d.html
+   -----------------------------------------------------------------------------
+   Une toile WebGL, des étiquettes HTML posées par-dessus, et une liste de
+   boutons qui en est la version accessible. Le CSS ne fait ici que trois
+   choses : réserver la place de la toile, rendre les étiquettes lisibles sur
+   un fond imprévisible, et donner un état visible aux boutons.
+   ============================================================================= */
+
+.scene3d {
+  margin-top: var(--esp-lg);
+}
+
+/* Le cadre est le seul élément qui ait une taille : la toile s'y ajuste. Le
+   ratio 16/10 évite le saut de mise en page au chargement — sans lui, la page
+   se réorganise dès que le script insère la toile.
+   `max-height: 70vh` : une maquette plus haute que la fenêtre oblige à faire
+   défiler pour voir ce qu'on manipule. */
+.scene3d-cadre {
+  position: relative;
+  /* `width: 100%` N'EST PAS FACULTATIF. Avec `aspect-ratio` et une
+     `min-height`, une largeur laissée automatique est DÉDUITE de la hauteur :
+     à 320 px de fenêtre, le cadre se retrouvait large de 435 px et faisait
+     déborder toute la page. Une largeur définie inverse le calcul — la hauteur
+     découle de la largeur, et la min-height ne fait que l'allonger. */
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: 17rem;
+  max-height: 70vh;
+  border: 1px solid var(--bordure-claire);
+  background: #07060a;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+
+  /* `pan-y` et non `none` : le glissement horizontal fait tourner la maquette,
+     le glissement vertical continue de faire défiler la page. Confisquer les
+     deux enfermerait le visiteur d'un téléphone dans un rectangle noir. */
+  touch-action: pan-y;
+}
+
+.scene3d-toile {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* --- Le message de secours ------------------------------------------------
+   Visible par défaut, masqué par le script à la première image rendue. Il
+   reste donc affiché si WebGL manque, si le CDN est filtré, ou si JavaScript
+   est désactivé — les trois cas où la maquette ne peut pas exister. */
+.scene3d-secours {
+  position: relative; /* au-dessus de la toile */
+  max-width: 34rem;
+  margin: 0;
+  padding: var(--esp-md);
+  text-align: center;
+  color: var(--texte-lecture);
+  font-size: var(--fs-sec);
+  line-height: 1.6;
+}
+
+.scene3d-secours strong {
+  display: block;
+  margin-bottom: var(--esp-xs);
+  color: var(--or-clair);
+  font-family: var(--titre);
+  letter-spacing: 0.04em;
+}
+
+/* --- Les étiquettes flottantes --------------------------------------------
+   Elles surnagent au-dessus d'une image dont on ne connaît pas la couleur :
+   d'où le fond opaque plutôt qu'une simple ombre portée. Un texte posé sur un
+   dégradé quelconque n'a pas de rapport de contraste mesurable ; posé sur
+   #0b0a09 à 78 %, il en a un, et c'est vérifiable.
+   `pointer-events: none` : les étiquettes ne doivent jamais intercepter un
+   clic destiné à la planète qui se trouve dessous. */
+.scene3d-etiquettes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scene3d-etiquette {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texte-pale);
+  background: rgba(11, 10, 9, 0.9);
+  padding: 0.15rem 0.4rem;
+  border: 1px solid transparent;
+}
+
+.scene3d-etiquette--etoile {
+  color: var(--texte-clair);
+  letter-spacing: 0.24em;
+}
+
+.scene3d-etiquette--enjeu {
+  color: var(--or-clair);
+  border-color: var(--bordure-or);
+}
+
+.scene3d-etiquette--route {
+  color: var(--or);
+}
+
+.scene3d-etiquette--repere,
+.scene3d-etiquette--limite {
+  color: var(--texte-doux);
+  letter-spacing: 0.1em;
+}
+
+/* Étiquette dont le corps est sorti du cadre. `visibility` et non `display` :
+   une étiquette en `display: none` mesure zéro pixel de large, et le script a
+   besoin de sa largeur pour savoir si elle tient encore dans le cadre. La
+   masquer par `display` la ferait clignoter. */
+.scene3d-etiquette.est-hors-champ {
+  visibility: hidden;
+}
+
+/* Monde visé : l'étiquette suit l'état des boutons, pas l'inverse. */
+.scene3d-etiquette.est-designee {
+  color: var(--fond-page);
+  background: var(--or-clair);
+  border-color: var(--or-clair);
+}
+
+/* --- La barre d'outils ---------------------------------------------------- */
+.scene3d-barre {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-xs);
+  margin-top: var(--esp);
+}
+
+/* --- La liste des mondes --------------------------------------------------
+   C'est la version accessible de la maquette : ce que le pointeur fait sur la
+   toile, ces boutons le font au clavier. Ils ne sont donc pas un complément
+   décoratif — les masquer reviendrait à supprimer la carte. */
+.scene3d-mondes {
+  list-style: none;
+  margin: var(--esp-lg) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--esp-md);
+}
+
+.scene3d-monde-bouton {
+  display: grid;
+  gap: 0.2rem;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--esp-sm) var(--esp);
+  text-align: left;
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure-controle);
+  cursor: pointer;
+}
+
+.scene3d-monde-orbite {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--etiquette);
+}
+
+.scene3d-monde-nom {
+  font-family: var(--titre);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--texte-clair);
+}
+
+.scene3d-monde-bouton:hover {
+  border-color: var(--or);
+}
+
+/* L'état sélectionné se lit sur `aria-pressed` et non sur une classe : le
+   style ne peut alors pas dire autre chose que ce qui est annoncé au lecteur
+   d'écran. Un décalage entre les deux est le défaut le plus courant des
+   composants « maison ». */
+.scene3d-monde-bouton[aria-pressed="true"] {
+  background: var(--fond-carte-or);
+  border-color: var(--or);
+}
+
+.scene3d-monde-bouton[aria-pressed="true"] .scene3d-monde-nom {
+  color: var(--or-clair);
+}
+
+.scene3d-monde p {
+  margin-top: var(--esp-xs);
+  color: var(--texte-chaud);
+}
+
+.scene3d-monde--enjeu .scene3d-monde-bouton {
+  border-color: var(--bordure-or);
+}
+
+/* =============================================================================
+  11. Élargissements — on n'ajoute des colonnes que si la place existe
    ============================================================================= */
 
 /* --- À partir de 34em (≈ 544px) : les grilles fines se dédoublent --------- */
 @media (min-width: 34em) {
   :root {
     --marge-page: 1.75rem;
+  }
+
+  /* Les quatre mondes de la maquette 3D passent sur deux colonnes. */
+  .scene3d-mondes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   /* La barre de navigation retombe à trois lignes : voir `scroll-padding-top`. */
@@ -2025,6 +2598,12 @@ footer {
 
 /* --- À partir de 60em (≈ 960px) : mise en page bureau --------------------- */
 @media (min-width: 60em) {
+  /* Les quatre mondes tiennent sur une ligne : la liste devient une légende
+     de la maquette, lue d'un coup d'œil. */
+  .scene3d-mondes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .grille-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

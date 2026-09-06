@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maquette 3D du système des Étoiles Pâles</title>
+    <meta
+      name="description"
+      content="Maquette en volume du système des Étoiles Pâles : les quatre orbites, la ceinture périphérique et les repères lointains, en trois dimensions. Complément visuel de la carte du secteur."
+    />
+    <meta name="theme-color" content="#0b0a09" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Maquette 3D du système des Étoiles Pâles"
+    />
+    <meta
+      property="og:description"
+      content="Les quatre mondes en volume, autour de la braise de Yarath."
+    />
+    <meta
+      property="og:url"
+      content="https://jean-desaintangel.github.io/Siege-de-la-Forge-dHyrkanos/pages/carte3d.html"
+    />
+    <meta
+      property="og:image"
+      content="https://jean-desaintangel.github.io/Siege-de-la-Forge-dHyrkanos/assets/images/page_index/monde-forge.webp"
+    />
+
+    <link
+      rel="icon"
+      href="../assets/images/favicon/favicon.webp"
+      type="image/webp"
+    />
+
+    <link
+      rel="preload"
+      href="../assets/fonts/spectral-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+
+    <!-- SEULE PAGE DU SITE À DÉPENDRE D'UN SERVEUR EXTÉRIEUR.
+         Toutes les autres fonctionnent hors ligne ; celle-ci a besoin de la
+         bibliothèque Three.js (~700 Ko), servie par jsDelivr. Si le CDN est
+         injoignable — réseau filtré, poste hors ligne — le module ne se charge
+         pas, le message de secours reste affiché et la carte 2D prend le
+         relais. C'est le prix assumé de la 3D sur cette page, et la raison
+         pour laquelle elle ne remplace pas `carte.html`.
+
+         `preconnect` ouvre la connexion TLS pendant que le HTML est encore en
+         cours d'analyse : quelques centaines de millisecondes gagnées.
+
+         L'`importmap` associe le nom « three » à une URL. C'est ce qui permet
+         d'écrire `import * as THREE from "three"` dans le module, comme avec
+         un outil de build — sans outil de build. La VERSION EST ÉPINGLÉE :
+         sans numéro, jsDelivr servirait la dernière publiée, et une mise à
+         jour de Three.js casserait la page sans qu'on y touche. -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js"
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <a class="lien-evitement" href="#contenu">Aller au contenu principal</a>
+
+    <nav aria-label="Sections de la maquette">
+      <ul class="nav-liste conteneur">
+        <li>
+          <a class="nav-retour" href="carte.html">← Carte du secteur</a>
+        </li>
+        <li><a href="#maquette">1 · La maquette</a></li>
+        <li><a href="#mondes">2 · Les mondes</a></li>
+        <li><a href="#pilotage">3 · Piloter la vue</a></li>
+        <li><a href="../index.html">Dossier de campagne</a></li>
+      </ul>
+    </nav>
+
+    <header>
+      <div class="conteneur bandeau">
+        <p class="surtitre">Cartographie de campagne</p>
+        <h1>Les Étoiles Pâles en volume</h1>
+        <p class="sous-titre-page">
+          La même carte, vue depuis le pont d'un vaisseau
+        </p>
+        <blockquote class="exergue">
+          <p>
+            Quatre orbites autour d'une braise, et une ceinture percée. Ce que
+            le plan à plat range en cercles, l'œil le comprend d'un coup dès
+            qu'on lui rend la profondeur.
+          </p>
+        </blockquote>
+      </div>
+    </header>
+
+    <main id="contenu" class="conteneur">
+      <!-- ==================================================================
+           1 · La maquette
+           ==================================================================
+           STRUCTURE DÉLIBÉRÉE. La toile WebGL est un dessin : elle ne contient
+           aucun texte, aucun lien, rien qu'un lecteur d'écran puisse explorer.
+           Elle est donc `aria-hidden` (posée par le script) et TOUT ce qu'elle
+           permet est doublé par des boutons HTML réels, plus bas.
+
+           Le message de secours est visible PAR DÉFAUT et masqué par le script
+           une fois la première image rendue — l'inverse du panneau de la carte
+           2D. Raison : ici, l'échec est un cas de figure normal (WebGL absent,
+           CDN filtré), et un échec silencieux laisserait un rectangle noir sans
+           explication. -->
+      <section id="maquette">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">I</span>
+          <h2>La maquette</h2>
+        </div>
+
+        <p class="texte-intro">
+          Les distances et les tailles sont ordonnées, jamais mesurées : une
+          naine blanche et son monde-forge à la même échelle donneraient une
+          image vide. Ce qui est juste ici, c'est l'ORDRE des orbites, la
+          position de la ceinture et la direction des trois repères lointains.
+        </p>
+
+        <div class="scene3d">
+          <!-- `role="group"` et non `role="application"` : la maquette ne
+               capture pas le clavier, elle n'ajoute que quelques touches. Le
+               `aria-label` les énonce, parce qu'aucune indication visuelle ne
+               le ferait pour un utilisateur qui n'a pas d'écran. -->
+          <div
+            class="scene3d-cadre"
+            id="scene3d-cadre"
+            role="group"
+            tabindex="0"
+            aria-label="Maquette 3D du système. Flèches pour tourner autour, plus et moins pour zoomer, Origine pour revenir à la vue d'ensemble."
+          >
+            <p class="scene3d-secours" id="scene3d-secours">
+              <strong>La maquette 3D n'a pas démarré.</strong> Deux causes
+              possibles : votre navigateur ou votre carte graphique ne gère pas
+              WebGL, ou la bibliothèque Three.js n'a pas pu être téléchargée
+              (réseau filtré, poste hors ligne, JavaScript désactivé).
+              <a class="lien-bloc" href="carte.html#plan"
+                >Voir la carte du secteur en 2D →</a
+              >
+            </p>
+            <!-- Les étiquettes flottantes sont des éléments HTML positionnés
+                 par le script au-dessus de la toile : le texte reste net à tous
+                 les zooms et suit la police du site. Elles doublent les noms
+                 des boutons, donc elles sortent de l'arbre d'accessibilité. -->
+            <div
+              class="scene3d-etiquettes"
+              id="scene3d-etiquettes"
+              aria-hidden="true"
+            ></div>
+          </div>
+
+          <p class="scene3d-barre">
+            <button
+              class="bouton bouton--fantome"
+              type="button"
+              id="scene3d-pause"
+            >
+              Suspendre les orbites
+            </button>
+            <button
+              class="bouton bouton--fantome"
+              type="button"
+              id="scene3d-dessus"
+            >
+              Vue de dessus
+            </button>
+            <button
+              class="bouton bouton--fantome"
+              type="button"
+              id="scene3d-plus"
+            >
+              Rapprocher
+            </button>
+            <button
+              class="bouton bouton--fantome"
+              type="button"
+              id="scene3d-moins"
+            >
+              Éloigner
+            </button>
+            <button
+              class="bouton bouton--fantome"
+              type="button"
+              id="scene3d-reinit"
+            >
+              Vue d'ensemble
+            </button>
+          </p>
+
+          <!-- Région d'annonce : c'est par elle que le lecteur d'écran apprend
+               ce que le regard voit changer dans la toile. `sr-only` — elle n'a
+               rien à afficher, l'information est déjà à l'écran. -->
+          <p class="sr-only" id="scene3d-annonce" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           2 · Les mondes
+           ==================================================================
+           CES BOUTONS SONT LA MAQUETTE. Ils en sont la version accessible et
+           la source de données : le script y lit les paramètres d'orbite dans
+           les attributs `data-*`, exactement comme `carte.js` lit les fiches de
+           la carte 2D. Corriger une orbite se fait ici, jamais dans le script.
+
+           `aria-pressed` : chaque bouton est un interrupteur à deux états
+           (monde visé / non visé), pas une action ponctuelle. Le script tient
+           l'attribut à jour et le CSS s'appuie dessus. -->
+      <section id="mondes">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">II</span>
+          <h2>Les mondes</h2>
+        </div>
+
+        <p class="texte-intro">
+          Chaque bouton amène la vue sur son monde et l'y maintient pendant
+          qu'il poursuit son orbite ; un second appui rend la vue d'ensemble. La
+          ceinture périphérique, elle, n'est pas un corps mais un anneau de
+          débris : elle ferme la maquette sans être sélectionnable.
+        </p>
+
+        <ul class="scene3d-mondes">
+          <li class="scene3d-monde scene3d-monde--enjeu">
+            <button
+              class="scene3d-monde-bouton"
+              type="button"
+              aria-pressed="false"
+              data-monde="yarath-maximal"
+              data-nom="Yarath-Maximal"
+              data-resume="Monde-forge du Dark Mechanicum, troisième orbite. Objectif commun aux quatre belligérants."
+              data-orbite="39"
+              data-rayon="3.4"
+              data-vitesse="9"
+              data-angle="300"
+              data-inclinaison="0.6"
+              data-teinte="#4a3326"
+              data-eclat="#ff8a3c"
+              data-relief="forge"
+            >
+              <span class="scene3d-monde-orbite">Troisième orbite</span>
+              <span class="scene3d-monde-nom">Yarath-Maximal</span>
+            </button>
+            <p class="texte-petit">
+              Monde-forge, objectif de la campagne. Ses fonderies éclairent la
+              face nuit.
+              <a class="lien-bloc" href="carte.html#monde-yarath-maximal"
+                >Fiche complète →</a
+              >
+            </p>
+          </li>
+
+          <li class="scene3d-monde">
+            <button
+              class="scene3d-monde-bouton"
+              type="button"
+              aria-pressed="false"
+              data-monde="karthis"
+              data-nom="Karthis"
+              data-resume="Cité-ruche de la première orbite, disputée niveau par niveau depuis les premiers mois de l'Hérésie."
+              data-orbite="20"
+              data-rayon="2"
+              data-vitesse="22"
+              data-angle="40"
+              data-inclinaison="0.8"
+              data-teinte="#4b4a52"
+              data-eclat="#ffd9a0"
+              data-relief="ruche"
+            >
+              <span class="scene3d-monde-orbite">Première orbite</span>
+              <span class="scene3d-monde-nom">Karthis</span>
+            </button>
+            <p class="texte-petit">
+              Cité-ruche contestée : les grappes de lumières sont ses niveaux
+              encore habités.
+              <a class="lien-bloc" href="carte.html#monde-karthis"
+                >Fiche complète →</a
+              >
+            </p>
+          </li>
+
+          <li class="scene3d-monde">
+            <button
+              class="scene3d-monde-bouton"
+              type="button"
+              aria-pressed="false"
+              data-monde="vorexis"
+              data-nom="Vorexis"
+              data-resume="Ancien monde-sanctuaire de la deuxième orbite, saturé de toxines et devenu impraticable."
+              data-orbite="29"
+              data-rayon="2.5"
+              data-vitesse="14"
+              data-angle="190"
+              data-inclinaison="1.4"
+              data-teinte="#2f4a2c"
+              data-eclat="#000000"
+              data-relief="jungle"
+            >
+              <span class="scene3d-monde-orbite">Deuxième orbite</span>
+              <span class="scene3d-monde-nom">Vorexis</span>
+            </button>
+            <p class="texte-petit">
+              Monde-jungle empoisonné : le seul des quatre sans une seule
+              lumière.
+              <a class="lien-bloc" href="carte.html#monde-vorexis"
+                >Fiche complète →</a
+              >
+            </p>
+          </li>
+
+          <li class="scene3d-monde">
+            <button
+              class="scene3d-monde-bouton"
+              type="button"
+              aria-pressed="false"
+              data-monde="korath-prime"
+              data-nom="Korath Prime"
+              data-resume="Quatrième orbite : un arsenal oublié s'y est activé seul, et rien ne l'a arrêté."
+              data-orbite="48"
+              data-rayon="2.2"
+              data-vitesse="7"
+              data-angle="120"
+              data-inclinaison="1"
+              data-teinte="#3a3a3d"
+              data-eclat="#ff4a3a"
+              data-relief="fusion"
+            >
+              <span class="scene3d-monde-orbite">Quatrième orbite</span>
+              <span class="scene3d-monde-nom">Korath Prime</span>
+            </button>
+            <p class="texte-petit">
+              Arsenal hors contrôle : les balafres rouges sont ses coulées.
+              <a class="lien-bloc" href="carte.html#monde-korath-prime"
+                >Fiche complète →</a
+              >
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ==================================================================
+           3 · Piloter la vue
+           ================================================================== -->
+      <section id="pilotage">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">III</span>
+          <h2>Piloter la vue</h2>
+        </div>
+
+        <p class="texte-intro">
+          Tout ce que la souris permet, le clavier le permet aussi. Les touches
+          n'agissent que lorsque la maquette a le focus — on l'atteint par
+          tabulation ou en cliquant dedans.
+        </p>
+
+        <div class="table-defilante marge-haut">
+          <table class="table-recap">
+            <caption>
+              Commandes de la maquette
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Action</th>
+                <th scope="col">Souris ou doigt</th>
+                <th scope="col">Clavier</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Tourner autour du système</th>
+                <td>Glisser sur la maquette</td>
+                <td>Flèches (Maj pour aller plus vite)</td>
+              </tr>
+              <tr>
+                <th scope="row">Zoomer</th>
+                <td>Molette, ou pincer à deux doigts</td>
+                <td>Touches + et −</td>
+              </tr>
+              <tr>
+                <th scope="row">Viser un monde</th>
+                <td>Cliquer la planète</td>
+                <td>Boutons de la section 2</td>
+              </tr>
+              <tr>
+                <th scope="row">Revenir à la vue d'ensemble</th>
+                <td>Bouton « Vue d'ensemble »</td>
+                <td>Touche Origine (Home)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grille-3 marge-haut">
+          <div class="carte carte--accent-or">
+            <h3 class="titre-carte">La molette ne vous piège pas</h3>
+            <p class="texte-sec">
+              La molette ne zoome que si la maquette a le focus. Sinon elle fait
+              défiler la page, comme partout ailleurs : une page qui confisque
+              le défilement est une page qu'on quitte.
+            </p>
+          </div>
+          <div class="carte carte--accent-teal">
+            <h3 class="titre-carte">Mouvement réduit</h3>
+            <p class="texte-sec">
+              Si votre système demande de limiter les animations, les orbites
+              démarrent à l'arrêt. Le bouton « Animer les orbites » les lance si
+              vous le souhaitez.
+            </p>
+          </div>
+          <div class="carte carte--accent-rouge">
+            <h3 class="titre-carte">La référence reste la 2D</h3>
+            <p class="texte-sec">
+              Une toile WebGL ne se lit ni au lecteur d'écran, ni sans réseau,
+              ni sans JavaScript.
+              <a class="lien-bloc" href="carte.html">La carte du secteur →</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="conteneur pied">
+        <p>Les Étoiles Pâles — maquette de campagne</p>
+        <p>
+          Rendu avec Three.js. Les textures des mondes sont peintes par le
+          script au chargement : aucune image n'est téléchargée.
+        </p>
+        <p>
+          <a class="lien-bloc" href="carte.html">← Carte du secteur</a>
+        </p>
+        <p>
+          Warhammer: The Horus Heresy, <span lang="en">Legiones Astartes</span>
+          et les noms associés sont des marques de Games Workshop Ltd. Ce
+          document n'est ni affilié ni approuvé par Games Workshop.
+        </p>
+      </div>
+    </footer>
+
+    <!-- `type="module"` : différé d'office, et `import` y fonctionne. Pas
+         d'attribut `defer`, il est implicite et redondant sur un module. -->
+    <script type="module" src="../assets/js/carte3d.js"></script>
+  </body>
+</html>
