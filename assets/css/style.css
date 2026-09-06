@@ -1,9 +1,9 @@
 /* =============================================================================
    Le Reflux de Yarath-Maximal — feuille de styles unique
    -----------------------------------------------------------------------------
-   Cinq pages la consomment : index.html (le dossier de campagne), les deux
+   Quatre pages la consomment : index.html (le dossier de campagne), les deux
    fiches de détachement pages/blood_angels.html et pages/dark_mechanicum.html,
-   la carte pages/carte.html et sa maquette 3D pages/carte3d.html.
+   et la carte du secteur pages/carte3d.html.
    Aucun style en ligne dans le HTML : tout est ici, nommé, commenté et
    réutilisable. POURQUOI : un style écrit dans l'attribut `style` d'une balise
    ne peut être ni réutilisé, ni redéfini par un media query, ni surchargé par
@@ -19,7 +19,7 @@
      6. Composants      — cartes, filets, missions, diaporama, tableaux, journal
      7. Structure de page — en-tête, navigation, pied de page
      8. Fiches de détachement — pages/blood_angels.html, dark_mechanicum.html
-     9. Carte du secteur — pages/carte.html : plan SVG et fiches de mondes
+     9. Fiches des mondes — pages/carte3d.html : grille des cinq corps
     10. Maquette 3D     — pages/carte3d.html : toile WebGL, étiquettes, boutons
     11. Élargissements  — media queries (mobile-first : on part du petit écran)
 
@@ -1951,307 +1951,16 @@ footer {
 }
 
 /* =============================================================================
-   9. Carte du secteur — pages/carte.html
+   9. Fiches des mondes — pages/carte3d.html
    -----------------------------------------------------------------------------
-   Le plan est un SVG écrit à la main, sans aucun attribut de présentation :
-   toutes ses couleurs et toutes ses épaisseurs de trait sont ici. POURQUOI :
-   un `fill="#c9a227"` posé dans le HTML échappe aux jetons de la section 1,
-   donc à toute relecture de contraste et à toute future variante de thème.
+   La grille de cartes qui décrit les cinq corps du système. C'est la version
+   lisible sans WebGL, sans réseau et sans script de ce que montre la maquette
+   de la section 10 : elle doit donc tenir seule, sans rien emprunter à la 3D.
 
-   Le SVG se met à l'échelle par son `viewBox` : les tailles écrites ci-dessous
-   sont des UNITÉS DU VIEWBOX (900 × 700), pas des pixels d'écran. À un rendu
-   de 900 px de large, une unité vaut un pixel ; à 600 px, elle en vaut 0,67.
-   C'est pour cela que `.plan` porte une largeur minimale : en dessous, les
-   noms des mondes deviendraient illisibles.
-   ============================================================================= */
-
-/* --- Cadre défilant -------------------------------------------------------- */
-.carte-systeme {
-  margin-top: var(--esp-md);
-}
-
-.plan-cadre {
-  overflow-x: auto;
-  border: 1px solid var(--bordure);
-  background-color: var(--fond-carte);
-  /* Le halo de focus du cadre défilant doit rester visible malgré le
-     débordement : on le pose à l'intérieur. */
-  outline-offset: -3px;
-}
-
-.plan {
-  display: block;
-  width: 100%;
-  min-width: 32rem; /* 512px — en deçà, les noms passent sous 11 px */
-  height: auto;
-}
-
-/* --- Décor : route, ceinture, orbites -------------------------------------- */
-.plan-route {
-  fill: none;
-  stroke: var(--bordure-or);
-  stroke-width: 2;
-  stroke-dasharray: 10 9;
-}
-
-.plan-route-nom {
-  fill: var(--etiquette); /* 5,1:1 sur --fond-carte */
-  font-family: var(--mono);
-  font-size: 15px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.plan-ceinture {
-  fill: none;
-  stroke: var(--bordure-claire);
-  stroke-width: 2;
-  stroke-dasharray: 3 12;
-  stroke-linecap: round;
-}
-
-.plan-orbite {
-  fill: none;
-  stroke: var(--bordure);
-  stroke-width: 1.5;
-}
-
-/* L'orbite de l'objectif se distingue par sa couleur ET par son trait continu
-   plus épais : jamais par la couleur seule (WCAG 1.4.1). */
-.plan-orbite--enjeu {
-  stroke: var(--bordure-rouge);
-  stroke-width: 2.5;
-}
-
-/* --- L'étoile -------------------------------------------------------------- */
-.plan-etoile-halo {
-  fill: var(--or);
-  opacity: 0.14;
-}
-
-.plan-etoile-corps {
-  fill: var(--texte-clair);
-}
-
-.plan-etoile-nom {
-  fill: var(--texte);
-  font-family: var(--titre);
-  font-weight: 700;
-  font-size: 21px;
-  letter-spacing: 0.08em;
-  text-anchor: middle;
-}
-
-.plan-etoile-type {
-  fill: var(--texte-attenue); /* 5,3:1 */
-  font-family: var(--mono);
-  font-size: 14px;
-  letter-spacing: 0.14em;
-  text-anchor: middle;
-}
-
-/* --- Les mondes ------------------------------------------------------------
-   `.plan-monde-cible` est le disque de préhension : transparent — et non
-   `fill: none`, qui ne capte aucun clic — il porte la zone cliquable à 60
-   unités de diamètre, au-delà des 24 px exigés par WCAG 2.5.8 à toutes les
-   largeurs de rendu retenues ici. */
-.plan-monde-cible {
-  fill: transparent;
-  stroke: transparent;
-  stroke-width: 2;
-}
-
-.plan-monde-corps {
-  fill: var(--texte-pale);
-  stroke: var(--fond-page);
-  stroke-width: 2;
-}
-
-.plan-monde-nom {
-  fill: var(--texte); /* 12,9:1 */
-  font-family: var(--titre);
-  font-weight: 700;
-  font-size: 21px;
-  letter-spacing: 0.06em;
-  text-anchor: middle;
-}
-
-.plan-monde-mention {
-  fill: var(--rouge); /* 5,2:1 */
-  font-family: var(--mono);
-  font-size: 14px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  text-anchor: middle;
-}
-
-.plan-monde--enjeu .plan-monde-corps {
-  fill: var(--rouge);
-}
-
-.plan-monde--secondaire .plan-monde-nom {
-  fill: var(--texte-doux); /* 6,7:1 */
-  font-family: var(--mono);
-  font-size: 15px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-/* Survol, focus, sélection : trois états, un seul dessin. Le cercle de
-   préhension devient visible — c'est lui qui montre la zone réellement
-   cliquable, ce qu'un simple changement de couleur du monde ne dirait pas. */
-.plan-monde:hover .plan-monde-cible,
-.plan-monde:focus-visible .plan-monde-cible {
-  stroke: var(--or-clair);
-}
-
-.plan-monde:hover .plan-monde-nom,
-.plan-monde:focus-visible .plan-monde-nom {
-  fill: var(--texte-clair);
-}
-
-/* `aria-current` est posé par carte.js sur le monde sélectionné : le style
-   suit l'état ARIA au lieu d'une classe parallèle, ce qui rend impossible
-   l'écart entre ce qui est annoncé et ce qui est affiché. */
-.plan-monde[aria-current="true"] .plan-monde-cible {
-  stroke: var(--or);
-  stroke-dasharray: 4 4;
-}
-
-/* Le lien SVG hérite du soulignement des liens du corps de texte sur certains
-   navigateurs : on le retire, la mise en évidence ci-dessus le remplace. */
-.plan-monde {
-  text-decoration: none;
-}
-
-/* --- Repères lointains ----------------------------------------------------- */
-.plan-fleche {
-  fill: none;
-  stroke: var(--bordure-claire);
-  stroke-width: 1.5;
-  stroke-dasharray: 6 6;
-}
-
-.plan-repere-nom {
-  fill: var(--texte-doux); /* 6,7:1 */
-  font-family: var(--titre);
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.06em;
-}
-
-.plan-repere-note {
-  fill: var(--texte-attenue); /* 5,3:1 */
-  font-family: var(--mono);
-  font-size: 13px;
-  letter-spacing: 0.12em;
-}
-
-/* `text-anchor: end` : les deux repères de droite s'écrivent vers l'intérieur
-   du plan, sinon ils sortiraient du viewBox. */
-.plan-repere-nom--fin {
-  text-anchor: end;
-}
-
-.plan-repere--warp .plan-fleche {
-  stroke: var(--tristan-bord);
-}
-
-/* --- Panneau de synthèse (dévoilé par carte.js) ---------------------------- */
-.plan-panneau {
-  margin-top: var(--esp-sm);
-  padding: var(--esp) var(--esp-md);
-  border: 1px solid var(--bordure);
-  border-left: 3px solid var(--or);
-  background-color: var(--fond-carte-or);
-}
-
-/* Une règle de mise en page — ici `padding` et `border` — ne doit pas ressusciter
-   un élément masqué par l'attribut `hidden`. */
-.plan-panneau[hidden] {
-  display: none;
-}
-
-.plan-panneau-nom {
-  font-family: var(--titre);
-  font-weight: 700;
-  font-size: var(--fs-lg);
-  color: var(--texte-clair);
-  margin-bottom: 0.25rem;
-}
-
-.plan-panneau-resume {
-  font-size: var(--fs-sec);
-  line-height: 1.6;
-  color: var(--texte-lecture);
-}
-
-.plan-panneau-actions {
-  margin-top: var(--esp-sm);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--esp-xs);
-}
-
-/* --- Légende --------------------------------------------------------------- */
-.plan-legende {
-  list-style: none;
-  padding: 0;
-  margin-top: var(--esp);
-  display: flex;
-  flex-wrap: wrap;
-  /* `gap` explicite : dans un conteneur flex, l'espace entre deux éléments
-     disparaît purement et simplement (voir README, le piège de la nav). */
-  gap: var(--esp-xs) var(--esp-md);
-}
-
-.plan-legende-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55em;
-  font-family: var(--mono);
-  font-size: var(--fs-mention);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--texte-attenue); /* 5,3:1 */
-}
-
-/* La pastille est décorative : elle double une information déjà écrite à côté,
-   elle ne la porte jamais seule. */
-.plan-legende-item::before {
-  content: "";
-  inline-size: 0.85rem;
-  block-size: 0.85rem;
-  flex: none;
-  border: 1px solid currentColor;
-}
-
-.plan-legende-item--enjeu::before {
-  background-color: var(--rouge);
-  border-color: var(--rouge);
-}
-
-.plan-legende-item--monde::before {
-  background-color: var(--texte-pale);
-  border-color: var(--texte-pale);
-}
-
-.plan-legende-item--route::before {
-  background-color: transparent;
-  border-color: var(--bordure-or);
-  border-style: dashed;
-}
-
-.plan-legende-item--limite::before {
-  background-color: transparent;
-  border-color: var(--bordure-claire);
-  border-style: dotted;
-}
-
-/* --- Fiches des mondes -----------------------------------------------------
    `auto-fit` + `minmax(min(100%, 20rem), 1fr)` : la grille se réorganise seule,
    sans le moindre media query. `min(100%, 20rem)` évite le débordement quand la
-   fenêtre est plus étroite que 20rem. */
+   fenêtre est plus étroite que 20rem.
+   ============================================================================= */
 .grille-mondes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
@@ -2286,18 +1995,10 @@ footer {
   color: var(--texte-chaud);
 }
 
-/* Cible d'une ancre suivie depuis le plan. `:target` seul suffirait sans
-   JavaScript ; carte.js ajoute la même classe pour que la mise en évidence
-   survive à une seconde sélection sur le même monde. */
-.fiche-monde:target,
-.fiche-monde.est-designee {
+/* Cible d'une ancre suivie depuis la liste des mondes. `:target` est du CSS
+   pur : la fiche visée s'encadre d'or sans qu'aucun script n'intervienne. */
+.fiche-monde:target {
   border-color: var(--or);
-}
-
-/* Le survol d'un monde du plan éclaire sa fiche : le lien entre les deux
-   représentations devient visible sans avoir à cliquer. */
-.fiche-monde.est-survolee {
-  border-color: var(--bordure-controle);
 }
 
 @media (min-width: 48em) {

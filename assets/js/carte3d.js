@@ -1,9 +1,10 @@
 /* =============================================================================
    Le Reflux de Yarath-Maximal — maquette 3D du système des Étoiles Pâles
    -----------------------------------------------------------------------------
-   Ce module dessine, dans un `<canvas>` WebGL, une maquette en volume du même
-   système que `pages/carte.html`. Il est un BONUS : la carte de référence reste
-   la carte 2D, qui fonctionne sans script, sans réseau et au lecteur d'écran.
+   Ce module dessine, dans un `<canvas>` WebGL, une maquette en volume du
+   système décrit par `pages/carte3d.html`. Il est un BONUS : la référence reste
+   le texte de la page — la liste des mondes et leurs fiches — qui tient sans
+   script, sans réseau et au lecteur d'écran.
 
    TROIS RÈGLES QUI EXPLIQUENT TOUT LE FICHIER
    -------------------------------------------------------------------------
@@ -90,7 +91,7 @@ function demarrer() {
   const toile = document.createElement("canvas");
   toile.className = "scene3d-toile";
   // La toile est un dessin : elle ne doit rien annoncer au lecteur d'écran,
-  // qui trouvera la même information dans les boutons et dans la carte 2D.
+  // qui trouvera la même information dans les boutons et dans les fiches.
   toile.setAttribute("aria-hidden", "true");
 
   try {
