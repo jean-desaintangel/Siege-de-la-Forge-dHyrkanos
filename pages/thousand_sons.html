@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>La Prémonition — ordre de déploiement</title>
+    <meta
+      name="description"
+      content="Ordre de déploiement de la Neuvième Fraternité des Thousand Sons, culte de la Prémonition, sous le commandement de Nephren-Kâ, Magister Templi. Campagne « Le Reflux de Yarath-Maximal »."
+    />
+    <meta name="theme-color" content="#0b0a09" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="La Prémonition" />
+    <meta
+      property="og:description"
+      content="Ordre de déploiement de la Neuvième Fraternité des Thousand Sons sous Nephren-Kâ, Magister Templi, sur Yarath-Maximal."
+    />
+    <meta
+      property="og:url"
+      content="https://jean-desaintangel.github.io/Siege-de-la-Forge-dHyrkanos/pages/thousand_sons.html"
+    />
+
+    <link
+      rel="icon"
+      href="../assets/images/favicon/favicon_thousand_sons.webp"
+      type="image/webp"
+    />
+
+    <!-- Polices auto-hébergées : plus aucun appel à un domaine tiers, donc
+         aucune adresse IP de visiteur transmise hors UE (RGPD). Les `@font-face`
+         sont déclarés en tête de style.css.
+
+         `preload` sur la seule police du CORPS DE TEXTE : sans lui, le
+         navigateur ne découvre le fichier qu'après avoir lu toute la feuille
+         de styles. `crossorigin` est obligatoire même en même origine — les
+         polices se chargent toujours en mode anonyme. -->
+    <link
+      rel="preload"
+      href="../assets/fonts/spectral-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+
+  <!-- `page-thousand-sons` : classe de VARIANTE, posée sur `body`. Elle ne
+       change aucune structure, seulement la palette d'accents de la fiche
+       (rouge métallisé / doré / blanc) via quelques surcharges regroupées en
+       section 8 bis de style.css. POURQUOI sur `body` et non sur chaque bloc :
+       une seule accroche suffit, et les règles restent lisibles. -->
+  <body class="page-thousand-sons">
+    <!-- Lien d'évitement : premier élément focusable de la page (WCAG 2.4.1). -->
+    <a class="lien-evitement" href="#contenu">Aller au contenu principal</a>
+
+    <nav aria-label="Sections de la fiche">
+      <ul class="nav-liste conteneur">
+        <li>
+          <a class="nav-retour" href="../index.html">← Dossier de campagne</a>
+        </li>
+        <li><a href="#commandement">1 · Commandement</a></li>
+        <li><a href="#etat-major">2 · État-major</a></li>
+        <li><a href="#troupes">3 · Troupes</a></li>
+        <li><a href="#moyens">4 · Moyens</a></li>
+        <li><a href="#mission">5 · Ordre de mission</a></li>
+        <li><a href="#recapitulatif">6 · Récapitulatif</a></li>
+      </ul>
+    </nav>
+
+    <header>
+      <div class="conteneur bandeau">
+        <p class="surtitre">Ordre de déploiement</p>
+        <h1>Thousand Sons — Yarath-Maximal</h1>
+        <p class="sous-titre-page">« La Prémonition » — Neuvième Fraternité</p>
+        <blockquote class="exergue">
+          <p>Ce qui a été effacé sera relu.</p>
+        </blockquote>
+      </div>
+    </header>
+
+    <main id="contenu" class="conteneur">
+      <!-- ==================================================================
+           1 · Commandement
+           ================================================================== -->
+      <section id="commandement">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">I</span>
+          <h2>Nephren-Kâ, Magister Templi</h2>
+        </div>
+
+        <div class="carte-commandement">
+          <div class="carte-commandement-principal">
+            <p class="etiquette">Commandement de la force</p>
+            <h3 class="titre-personnage">Nephren-Kâ</h3>
+            <p class="personnage-fonction">
+              Magister Templi du culte de la Prémonition
+            </p>
+            <p class="personnage-mention">
+              Praetor · armure Terminator Saturnine
+            </p>
+            <!-- Image la plus grande au-dessus de la ligne de flottaison :
+                 c'est elle qui décide du LCP. `loading="lazy"` la faisait
+                 attendre la fin de la mise en page ; `fetchpriority="high"` la
+                 fait au contraire demander en premier.
+                 Pas de `srcset` ici : un seul fichier existe pour l'instant.
+                 `sizes` seul serait sans effet, on l'omet donc aussi. -->
+            <img
+              class="portrait-grand"
+              src="../assets/images/thousand_sons/nephren-Kâ.jpg"
+              alt="Nephren-Kâ, Magister Templi du culte de la Prémonition, en armure Terminator Saturnine"
+              width="1536"
+              height="2048"
+              decoding="async"
+              fetchpriority="high"
+            />
+            <p class="texte-intro">
+              Il a vu Prospero brûler des années avant les loups. C'est là toute
+              son histoire, et toute sa faute. Le culte de la Prémonition, dont
+              il est le Magister Templi, poussait la divination plus loin
+              qu'aucune autre branche de la XV<sup>e</sup> Légion : non pas lire
+              l'instant qui vient, mais la forme des siècles. Les fluctuations
+              du Warp étant ce qu'elles sont, la vision n'était jamais précise
+              dans le TEMPS — Nephren-Kâ savait que Prospero tomberait, il ne
+              savait pas quel jour.
+            </p>
+            <p class="texte-sec">
+              Il a donc fait le choix qui le définit encore : ne pas avertir,
+              mais préparer. Ne pas mourir avec ses frères, mais survivre pour
+              que les Thousand Sons puissent renaître. Ceux qui lui reprochent
+              d'avoir abandonné Tizca ont raison. Ceux qui lisent aujourd'hui
+              les ouvrages de l'Archivum Ptaax lui doivent tout. Les deux
+              propositions sont vraies en même temps, et il ne cherche pas à les
+              réconcilier.
+            </p>
+          </div>
+
+          <div class="carte-commandement-cote">
+            <p class="texte-sec">
+              Lors de l'assaut des <span lang="en">Space Wolves</span>, sa
+              fraternité n'a pas défendu une seule rue. Sa priorité était
+              ailleurs : vider l'Archivum Ptaax et les arsenaux qui le
+              jouxtaient. Ouvrages antiques, savoirs interdits, et surtout un
+              stock considérable d'armures Terminator Saturnine ouvragées —
+              patiemment accumulé, jamais déclaré à Terra. C'est ce qui explique
+              l'usage hautement anormal que cette branche en fait aujourd'hui :
+              là où une Légion aligne une escouade, la Prémonition en aligne
+              quatre.
+            </p>
+            <div class="info">
+              <p class="etiquette">Titre d'usage</p>
+              <p class="texte">
+                Magister Templi. Pas capitaine, pas seigneur — un titre de
+                bibliothèque, gardé exprès. Il ne commande pas une compagnie ;
+                il tient un temple, et un temple contient des livres avant de
+                contenir des hommes.
+              </p>
+            </div>
+            <div class="info">
+              <p class="etiquette">Manière de commander</p>
+              <p class="texte">
+                Par anticipation. Les ordres sont donnés avant que la situation
+                ne se présente, et paraissent absurdes jusqu'à ce qu'elle se
+                présente. Nul ne discute deux fois. Ceux qui ont discuté une
+                fois sont restés sur Prospero.
+              </p>
+            </div>
+            <div class="info">
+              <p class="etiquette">Charge morale</p>
+              <p class="texte">
+                Il a laissé mourir des frères qu'il aurait pu prévenir, parce
+                que les prévenir aurait dispersé la fraternité et perdu
+                l'Archivum. Il ne s'en justifie pas et n'en parle jamais. Ceux
+                qui l'ont suivi savent qu'ils sont, littéralement, ce qui a été
+                sauvé à leur place.
+              </p>
+            </div>
+            <div class="info info--fin">
+              <p class="etiquette">Le fil d'Ahriman</p>
+              <p class="texte">
+                On raconte que le Maître Archiviste
+                <strong class="c-pale">Ahzek Ahriman</strong> serait parvenu à
+                le contacter. Rien n'est confirmé, et Nephren-Kâ ne dément pas.
+                Les deux hommes poursuivent peut-être le même objectif : sauver
+                la Légion d'elle-même. Restent deux questions ouvertes —
+                <em>à quel prix</em>, et <em>lequel des deux paiera</em>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           2 · État-major
+           ================================================================== -->
+      <section id="etat-major">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">II</span>
+          <h2>État-major de la Fraternité</h2>
+        </div>
+
+        <p class="texte mesure">
+          Tous ne sont pas de la Prémonition. Certaines figures d'autres cultes
+          ont fui Prospero à la suite de Nephren-Kâ : non par affinité de
+          discipline, mais parce qu'elles avaient déjà décidé, bien avant
+          l'assaut, d'écouter ses visions plutôt que les assurances de Tizca.
+        </p>
+
+        <div class="grille-auto">
+          <div class="carte">
+            <p class="etiquette">Vigilator · culte de la Prémonition</p>
+            <div class="unite-entete">
+              <h3 class="titre-unite">Magister Vigilate Ushamun</h3>
+            </div>
+            <p class="texte-sec">
+              Second de Nephren-Kâ et gardien du calendrier des visions. Son
+              travail n'est pas de prévoir, mais de DATER : confronter chaque
+              prémonition aux suivantes jusqu'à resserrer la fourchette. C'est
+              lui qui a fixé la fenêtre d'évacuation de l'Archivum — à onze
+              jours près.
+            </p>
+          </div>
+
+          <div class="carte">
+            <p class="etiquette">Rallié · culte du Pyrae</p>
+            <div class="unite-entete">
+              <h3 class="titre-unite">Menkaure</h3>
+            </div>
+            <p class="texte-sec">
+              Pyromancien, resté sourd aux ordres de son propre Magister pour
+              suivre Nephren-Kâ. Il a couvert le repli des convois de l'Archivum
+              en incendiant les rues derrière eux — y compris celles où ses
+              frères de culte se battaient encore. Il ne s'en est jamais
+              expliqué.
+            </p>
+          </div>
+
+          <div class="carte">
+            <p class="etiquette">Ralliée · culte de la Raptora</p>
+            <div class="unite-entete">
+              <h3 class="titre-unite">Iset-Ra</h3>
+            </div>
+            <p class="texte-sec">
+              Kinétiste. Les boucliers qu'elle dresse ont tenu la porte de
+              l'Archivum Ptaax pendant l'embarquement des dernières caisses. Sur
+              Yarath, sa fonction est identique : tenir un seuil le temps qu'une
+              lecture s'achève derrière elle.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           3 · Troupes
+           ================================================================== -->
+      <section id="troupes">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">III</span>
+          <h2>Fraternités d'assaut</h2>
+        </div>
+
+        <div class="pile marge-haut">
+          <article class="carte-compagnie">
+            <div class="carte-compagnie-entete carte-compagnie-entete--centre">
+              <p class="etiquette">Élite psychique</p>
+              <h3 class="titre-compagnie">Cabale Sekhmet</h3>
+              <p class="texte-sec">
+                Les automates de chair de la Légion : sorciers-guerriers
+                enfermés dans le silence de l'armure Terminator. Sur Prospero,
+                ils étaient l'ultime recours. Ici, ils ouvrent la marche — parce
+                que la Prémonition sait déjà où finit chaque couloir.
+              </p>
+            </div>
+            <div class="carte-compagnie-corps">
+              <div class="unite unite--fin">
+                <div class="unite-entete">
+                  <h4 class="titre-unite">
+                    Cabale Sekhmet « L'Œil Ouvert » — Saturnine
+                  </h4>
+                </div>
+                <p class="texte-sec">
+                  Cinq Sekhmet en armure Saturnine, escorte personnelle du
+                  Magister Templi. Combinaison rare et volontaire : la
+                  protection du Terminator lourd au service d'une unité dont la
+                  vraie arme est la divination. Elle est engagée là où la
+                  prémonition annonce le point de rupture, et nulle part
+                  ailleurs.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="carte-compagnie">
+            <div class="carte-compagnie-entete carte-compagnie-entete--centre">
+              <p class="etiquette">Trésor de l'Archivum</p>
+              <h3 class="titre-compagnie">Escouades Saturnine</h3>
+              <p class="texte-sec">
+                L'anomalie de cette branche. Les armures Saturnine ouvragées
+                sauvées des arsenaux de Tizca sont si nombreuses que la
+                Fraternité les emploie comme troupe de ligne — un luxe que Terra
+                elle-même s'interdit.
+              </p>
+            </div>
+            <div class="carte-compagnie-corps">
+              <div class="unite">
+                <div class="unite-entete">
+                  <h4 class="titre-unite">Escouade Saturnine « Les Sourds »</h4>
+                </div>
+                <p class="texte-sec">
+                  Cinq Terminators d'assaut. Surnommés ainsi parce qu'ils
+                  n'entendent plus les ordres une fois engagés : le plan a été
+                  donné avant, il ne changera pas. Chargés de la prise et du
+                  verrouillage des salles de l'Archivum.
+                </p>
+              </div>
+              <div class="unite unite--fin">
+                <div class="unite-entete">
+                  <h4 class="titre-unite">Escouade Saturnine « Les Muets »</h4>
+                </div>
+                <p class="texte-sec">
+                  Cinq Terminators de tir, configurés pour le couloir : volume
+                  de feu constant sur un axe unique. Ils tiennent les seuils
+                  déjà pris pendant que la lecture se poursuit derrière eux.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="carte-compagnie">
+            <div class="carte-compagnie-entete carte-compagnie-entete--centre">
+              <p class="etiquette">Ligne et interception</p>
+              <h3 class="titre-compagnie">Frères du Ptaax</h3>
+              <p class="texte-sec">
+                Le reste de la Fraternité : ceux qui portaient les caisses. Peu
+                nombreux, entraînés à une seule chose — protéger un lecteur
+                assez longtemps pour qu'il finisse sa page.
+              </p>
+            </div>
+            <div class="carte-compagnie-corps">
+              <div class="unite">
+                <div class="unite-entete">
+                  <h4 class="titre-unite">Escouade tactique du Ptaax</h4>
+                </div>
+                <p class="texte-sec">
+                  Dix légionnaires en armure de bataille, seule unité de la
+                  force capable de tenir du terrain dans la durée. Chaque
+                  survivant a participé à l'évacuation de l'Archivum et sait
+                  exactement ce qui est en jeu à Yarath.
+                </p>
+              </div>
+              <div class="unite unite--fin">
+                <div class="unite-entete">
+                  <h4 class="titre-unite">
+                    Cabale d'interception <span lang="en">Ammitara</span>
+                  </h4>
+                </div>
+                <p class="texte-sec">
+                  Cinq occultistes chargés de la contre-sorcellerie et du
+                  brouillage des rituels adverses. Sur Yarath-Maximal, leur
+                  cible désignée n'est pas une unité : ce sont les
+                  esprits-machines réveillés par l'Archimagos.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           4 · Moyens
+           ================================================================== -->
+      <section id="moyens">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">IV</span>
+          <h2>Moyens de la Fraternité</h2>
+        </div>
+
+        <div class="grille-auto">
+          <div class="carte carte--accent-or">
+            <div class="unite-entete unite-entete--gauche">
+              <h3 class="titre-unite">
+                Contemptor <span lang="en">Osiron</span>
+              </h3>
+            </div>
+            <p class="etiquette">Appui · relais psychique</p>
+            <p class="texte-sec">
+              Châsse de combat dont l'occupant a conservé ses facultés
+              psychiques. Sert autant d'arme lourde que d'amplificateur : les
+              visions de Nephren-Kâ portent plus loin lorsque l'Osiron marche
+              devant lui.
+            </p>
+          </div>
+
+          <div class="carte carte--accent-or">
+            <div class="unite-entete unite-entete--gauche">
+              <h3 class="titre-unite">
+                <span lang="en">Land Raider</span> Proteus
+              </h3>
+            </div>
+            <p class="etiquette">Insertion · extraction</p>
+            <p class="texte-sec">
+              Transport blindé des escouades Saturnine et, au retour, des
+              caisses. Le même véhicule a servi à vider l'Archivum Ptaax ; il
+              n'a jamais été repeint depuis.
+            </p>
+          </div>
+
+          <div class="carte carte--accent-or">
+            <div class="unite-entete unite-entete--gauche">
+              <h3 class="titre-unite">Batterie Rapier</h3>
+            </div>
+            <p class="etiquette">Appui · verrouillage d'axe</p>
+            <p class="texte-sec">
+              Deux affûts laser servis par des équipes réduites. Positionnés
+              d'après la prémonition, jamais d'après le terrain : ils tirent sur
+              un couloir que personne n'emprunte encore.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           5 · Ordre de mission
+           ================================================================== -->
+      <section id="mission">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">V</span>
+          <h2>Ordre de mission — Yarath-Maximal</h2>
+        </div>
+
+        <div class="carte carte--ample marge-haut">
+          <p class="etiquette">Protocole d'engagement</p>
+          <blockquote class="serment-bloc">
+            <p>Ce qui a été effacé sera relu.</p>
+          </blockquote>
+          <p class="texte-sec">
+            La Fraternité n'est pas venue prendre le vault, ni le détruire, ni
+            le défendre. Elle est venue le LIRE. C'est la seule des quatre
+            forces engagées qui peut tout perdre — hommes, vaisseaux, armures —
+            et remporter quand même sa guerre, à condition que la lecture soit
+            achevée. L'invitation de l'Archimagos a été acceptée en sachant
+            qu'elle était un piège : Nephren-Kâ l'avait vu. Il n'a simplement
+            pas vu quel jour il se refermerait.
+          </p>
+          <p class="texte-sec c-pale">
+            <strong>Victoire personnelle :</strong> la lecture est achevée, même
+            si tout le reste est perdu.
+          </p>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           Annexe A · État récapitulatif
+           ================================================================== -->
+      <section id="recapitulatif">
+        <div class="section-entete">
+          <h2>État récapitulatif</h2>
+        </div>
+
+        <p class="texte-sec mesure">
+          <strong class="c-rouge">Liste provisoire</strong> — composition
+          proposée à partir du lore, à confirmer par Tristan avant la première
+          mission.
+        </p>
+
+        <div class="table-defilante marge-haut">
+          <table class="table-recap">
+            <caption>
+              Ordre de bataille de la Neuvième Fraternité — effectifs et coût en
+              points
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Désignation</th>
+                <th scope="col">Effectif</th>
+                <th scope="col" class="nombre">Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Nephren-Kâ, Praetor — armure Saturnine</td>
+                <td>1</td>
+                <td class="nombre">215</td>
+              </tr>
+              <tr>
+                <td>Magister Vigilate Ushamun — Consul Vigilator</td>
+                <td>1</td>
+                <td class="nombre">85</td>
+              </tr>
+              <tr>
+                <td>Cabale Sekhmet « L'Œil Ouvert » — Saturnine</td>
+                <td>5</td>
+                <td class="nombre">320</td>
+              </tr>
+              <tr>
+                <td>Escouade Saturnine « Les Sourds » — assaut</td>
+                <td>5</td>
+                <td class="nombre">265</td>
+              </tr>
+              <tr>
+                <td>Escouade Saturnine « Les Muets » — tir</td>
+                <td>5</td>
+                <td class="nombre">265</td>
+              </tr>
+              <tr>
+                <td>Cabale d'interception <span lang="en">Ammitara</span></td>
+                <td>5</td>
+                <td class="nombre">155</td>
+              </tr>
+              <tr>
+                <td>Escouade tactique du Ptaax</td>
+                <td>10</td>
+                <td class="nombre">150</td>
+              </tr>
+              <tr>
+                <td>Contemptor <span lang="en">Osiron</span></td>
+                <td>1</td>
+                <td class="nombre">210</td>
+              </tr>
+              <tr>
+                <td><span lang="en">Land Raider</span> Proteus</td>
+                <td>1</td>
+                <td class="nombre">235</td>
+              </tr>
+              <tr>
+                <td>Batterie Rapier — affûts laser</td>
+                <td>2</td>
+                <td class="nombre">100</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th scope="row">Total force engagée</th>
+                <td></td>
+                <td class="nombre">2&nbsp;000</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="conteneur pied">
+        <p>La Prémonition — Neuvième Fraternité de la XV<sup>e</sup> Légion</p>
+        <p>Nous avons vu Prospero brûler avant les loups.</p>
+        <p>
+          <a class="lien-bloc" href="../index.html"
+            >← Le Reflux de Yarath-Maximal</a
+          >
+        </p>
+        <p>
+          Warhammer: The Horus Heresy, <span lang="en">Zone Mortalis</span>,
+          <span lang="en">Legiones Astartes</span> et les noms associés sont des
+          marques de Games Workshop Ltd. Ce document n'est ni affilié ni
+          approuvé par Games Workshop.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

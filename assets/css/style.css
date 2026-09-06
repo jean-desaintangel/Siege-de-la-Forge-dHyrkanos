@@ -1,8 +1,9 @@
 /* =============================================================================
    Le Reflux de Yarath-Maximal — feuille de styles unique
    -----------------------------------------------------------------------------
-   Quatre pages la consomment : index.html (le dossier de campagne), les deux
-   fiches de détachement pages/blood_angels.html et pages/dark_mechanicum.html,
+   Cinq pages la consomment : index.html (le dossier de campagne), les trois
+   fiches de détachement pages/blood_angels.html, pages/dark_mechanicum.html et
+   pages/thousand_sons.html,
    et la carte du secteur pages/carte3d.html.
    Aucun style en ligne dans le HTML : tout est ici, nommé, commenté et
    réutilisable. POURQUOI : un style écrit dans l'attribut `style` d'une balise
@@ -19,6 +20,7 @@
      6. Composants      — cartes, filets, missions, diaporama, tableaux, journal
      7. Structure de page — en-tête, navigation, pied de page
      8. Fiches de détachement — pages/blood_angels.html, dark_mechanicum.html
+     8 bis. Variante Thousand Sons — pages/thousand_sons.html
      9. Fiches des mondes — pages/carte3d.html : grille des cinq corps
     10. Maquette 3D     — pages/carte3d.html : toile WebGL, étiquettes, boutons
     11. Élargissements  — media queries (mobile-first : on part du petit écran)
@@ -1948,6 +1950,50 @@ footer {
 
 .table-recap tfoot .nombre {
   font-weight: 700;
+}
+
+/* =============================================================================
+   8 bis. Variante Thousand Sons — pages/thousand_sons.html
+   -----------------------------------------------------------------------------
+   La classe `page-thousand-sons` est posée sur `<body>`. Elle ne touche à
+   AUCUNE structure : elle ne fait que remplacer les accents rouge sang des
+   deux autres fiches par la palette de la XV(e) Légion — rouge métallisé,
+   doré, blanc.
+
+   POURQUOI une classe de variante plutôt qu'une deuxième feuille de styles :
+   une seule feuille reste mise en cache pour tout le site, et les quatre
+   règles ci-dessous se lisent d'un bloc. C'est le motif à reprendre pour
+   toute fiche future (Salamanders : `page-salamanders`, etc.).
+
+   Les couleurs employées sont les jetons DÉJÀ validés en contraste plus haut
+   (`--or`, `--or-clair`, `--sang`, `--texte-clair`) : aucune nouvelle valeur
+   n'est introduite, donc aucun nouveau calcul de contraste n'est nécessaire.
+   `--rouge-metal` est purement DÉCORATIF — bordures et dégradés uniquement,
+   jamais de texte posé dessus.
+   ============================================================================= */
+.page-thousand-sons {
+  --rouge-metal: #8f2b2e; /* décoratif uniquement : bordures et dégradés */
+}
+
+/* Le liseré supérieur de la carte de commandement passe du sang au doré :
+   c'est le signal visuel qui distingue la fiche au premier coup d'œil. */
+.page-thousand-sons .carte-commandement {
+  border-top-color: var(--or);
+  background: linear-gradient(#1b1512, var(--fond-article));
+}
+
+/* Filet rouge métallisé sur les en-têtes de compagnie. `border-inline-start`
+   plutôt que `border-left` : en écriture de droite à gauche, le filet reste
+   du bon côté sans règle supplémentaire. */
+.page-thousand-sons .carte-compagnie-entete {
+  border-inline-start: 3px solid var(--rouge-metal);
+}
+
+/* Blanc franc pour les titres d'unité et le serment : le troisième ton de la
+   Légion, celui des crêtes et des parchemins. */
+.page-thousand-sons .titre-compagnie,
+.page-thousand-sons .titre-personnage {
+  color: var(--texte-clair);
 }
 
 /* =============================================================================
