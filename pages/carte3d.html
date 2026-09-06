@@ -71,13 +71,11 @@
   <body>
     <a class="lien-evitement" href="#contenu">Aller au contenu principal</a>
 
-    <nav aria-label="Sections de la carte">
+    <nav aria-label="Retour au dossier">
       <ul class="nav-liste conteneur">
         <li>
           <a class="nav-retour" href="../index.html">← Dossier de campagne</a>
         </li>
-        <li><a href="#maquette">1 · La maquette</a></li>
-        <li><a href="#mondes">2 · Les mondes</a></li>
       </ul>
     </nav>
 
@@ -100,7 +98,7 @@
 
     <main id="contenu" class="conteneur">
       <!-- ==================================================================
-           1 · La maquette
+           La maquette
            ==================================================================
            STRUCTURE DÉLIBÉRÉE. La toile WebGL est un dessin : elle ne contient
            aucun texte, aucun lien, rien qu'un lecteur d'écran puisse explorer.
@@ -111,19 +109,7 @@
            une fois la première image rendue. Raison : ici, l'échec est un cas
            de figure normal (WebGL absent, CDN filtré), et un échec silencieux
            laisserait un rectangle noir sans explication. -->
-      <section id="maquette">
-        <div class="section-entete">
-          <span class="section-numero" aria-hidden="true">I</span>
-          <h2>La maquette</h2>
-        </div>
-
-        <p class="texte-intro">
-          Les distances et les tailles sont ordonnées, jamais mesurées : une
-          naine blanche et son monde-forge à la même échelle donneraient une
-          image vide. Ce qui est juste ici, c'est l'ORDRE des orbites, la
-          position de la ceinture et la direction des trois repères lointains.
-        </p>
-
+      <section id="maquette" aria-label="La maquette">
         <div class="scene3d">
           <!-- `role="group"` et non `role="application"` : la maquette ne
                capture pas le clavier, elle n'ajoute que quelques touches. Le
@@ -203,7 +189,7 @@
       </section>
 
       <!-- ==================================================================
-           2 · Les mondes
+           Les mondes
            ==================================================================
            CES BOUTONS SONT LA MAQUETTE. Ils en sont la version accessible et
            la source de données : le script y lit les paramètres d'orbite dans
@@ -218,49 +204,8 @@
            disent en toutes lettres tout ce que la maquette montre, et une de
            plus qu'elle : la ceinture périphérique, qui n'est pas un corps en
            orbite. Elles se lisent sans WebGL, sans réseau et sans script. -->
-      <section id="mondes">
-        <div class="section-entete">
-          <span class="section-numero" aria-hidden="true">II</span>
-          <h2>Les mondes</h2>
-        </div>
-
-        <p class="texte-intro">
-          Chaque bouton amène la vue sur son monde et l'y maintient pendant
-          qu'il poursuit son orbite ; un second appui rend la vue d'ensemble. La
-          ceinture périphérique, elle, n'est pas un corps mais un anneau de
-          débris : elle ferme la maquette sans être sélectionnable.
-        </p>
-
+      <section id="mondes" aria-label="Les mondes">
         <ul class="scene3d-mondes">
-          <li class="scene3d-monde scene3d-monde--enjeu">
-            <button
-              class="scene3d-monde-bouton"
-              type="button"
-              aria-pressed="false"
-              data-monde="yarath-maximal"
-              data-nom="Yarath-Maximal"
-              data-resume="Monde-forge du Dark Mechanicum, troisième orbite. Objectif commun aux quatre belligérants."
-              data-orbite="39"
-              data-rayon="3.4"
-              data-vitesse="9"
-              data-angle="300"
-              data-inclinaison="0.6"
-              data-teinte="#4a3326"
-              data-eclat="#ff8a3c"
-              data-relief="forge"
-            >
-              <span class="scene3d-monde-orbite">Troisième orbite</span>
-              <span class="scene3d-monde-nom">Yarath-Maximal</span>
-            </button>
-            <p class="texte-petit">
-              Monde-forge, objectif de la campagne. Ses fonderies éclairent la
-              face nuit.
-              <a class="lien-bloc" href="#monde-yarath-maximal"
-                >Fiche complète →</a
-              >
-            </p>
-          </li>
-
           <li class="scene3d-monde">
             <button
               class="scene3d-monde-bouton"
@@ -315,6 +260,35 @@
             </p>
           </li>
 
+          <li class="scene3d-monde scene3d-monde--enjeu">
+            <button
+              class="scene3d-monde-bouton"
+              type="button"
+              aria-pressed="false"
+              data-monde="yarath-maximal"
+              data-nom="Yarath-Maximal"
+              data-resume="Monde-forge du Dark Mechanicum, troisième orbite. Objectif commun aux quatre belligérants."
+              data-orbite="39"
+              data-rayon="3.4"
+              data-vitesse="9"
+              data-angle="300"
+              data-inclinaison="0.6"
+              data-teinte="#4a3326"
+              data-eclat="#ff8a3c"
+              data-relief="forge"
+            >
+              <span class="scene3d-monde-orbite">Troisième orbite</span>
+              <span class="scene3d-monde-nom">Yarath-Maximal</span>
+            </button>
+            <p class="texte-petit">
+              Monde-forge, objectif de la campagne. Ses fonderies éclairent la
+              face nuit.
+              <a class="lien-bloc" href="#monde-yarath-maximal"
+                >Fiche complète →</a
+              >
+            </p>
+          </li>
+
           <li class="scene3d-monde">
             <button
               class="scene3d-monde-bouton"
@@ -351,41 +325,6 @@
         </p>
 
         <div class="grille-mondes">
-          <article
-            class="carte carte--accent-rouge fiche-monde"
-            id="monde-yarath-maximal"
-          >
-            <p class="etiquette etiquette--rouge">Troisième orbite</p>
-            <h3 class="titre-carte">Yarath-Maximal</h3>
-            <p class="texte-sec">
-              Monde-forge sans prestige : fonderies de blindage lourd et
-              chantiers de coque, noyés sous leurs propres émanations. Sa valeur
-              tenait à ce que personne n'avait regardé — le vault de logique
-              Kaustos-Alpha et les archives pré-Unification de tout le secteur.
-            </p>
-            <dl class="fiche-monde-donnees">
-              <div>
-                <dt>Type</dt>
-                <dd>Monde-forge</dd>
-              </div>
-              <div>
-                <dt>Tenu par</dt>
-                <dd>Archimagos TX-4-CP, Dark Mechanicum</dd>
-              </div>
-              <div>
-                <dt>Enjeu</dt>
-                <dd>
-                  Vault Kaustos-Alpha, chantiers de Titans, et Syrgalah, le
-                  <span lang="en">Warhound</span> de la Legio Audax
-                </dd>
-              </div>
-              <div>
-                <dt>Rôle</dt>
-                <dd>Théâtre des cinq missions de la campagne</dd>
-              </div>
-            </dl>
-          </article>
-
           <article class="carte fiche-monde" id="monde-karthis">
             <p class="etiquette">Première orbite</p>
             <h3 class="titre-carte">Karthis</h3>
@@ -437,6 +376,41 @@
                   Justifie une approche par l'extérieur du système plutôt qu'en
                   ligne droite
                 </dd>
+              </div>
+            </dl>
+          </article>
+
+          <article
+            class="carte carte--accent-rouge fiche-monde"
+            id="monde-yarath-maximal"
+          >
+            <p class="etiquette etiquette--rouge">Troisième orbite</p>
+            <h3 class="titre-carte">Yarath-Maximal</h3>
+            <p class="texte-sec">
+              Monde-forge sans prestige : fonderies de blindage lourd et
+              chantiers de coque, noyés sous leurs propres émanations. Sa valeur
+              tenait à ce que personne n'avait regardé — le vault de logique
+              Kaustos-Alpha et les archives pré-Unification de tout le secteur.
+            </p>
+            <dl class="fiche-monde-donnees">
+              <div>
+                <dt>Type</dt>
+                <dd>Monde-forge</dd>
+              </div>
+              <div>
+                <dt>Tenu par</dt>
+                <dd>Archimagos TX-4-CP, Dark Mechanicum</dd>
+              </div>
+              <div>
+                <dt>Enjeu</dt>
+                <dd>
+                  Vault Kaustos-Alpha, chantiers de Titans, et Syrgalah, le
+                  <span lang="en">Warhound</span> de la Legio Audax
+                </dd>
+              </div>
+              <div>
+                <dt>Rôle</dt>
+                <dd>Théâtre des cinq missions de la campagne</dd>
               </div>
             </dl>
           </article>
