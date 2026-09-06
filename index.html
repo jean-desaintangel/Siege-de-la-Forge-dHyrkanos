@@ -906,7 +906,7 @@
             >
             <h3 id="mission-1" class="mission-titre">Cendres sur Yarath</h3>
             <span class="mission-meta"
-              >500 pts/joueur — quatre joueurs<br />5 tours</span
+              >500 pts/joueur — quatre joueurs<br />4 tours</span
             >
           </summary>
           <div class="mission-corps grille-mission">
@@ -937,12 +937,6 @@
                 </li>
                 <li>Premier sang <span class="c-or">(2)</span></li>
                 <li>Le dernier carré <span class="c-or">(3)</span></li>
-                <li>
-                  <strong>Reconnaissance de Baal</strong>
-                  <span class="c-or">(2)</span> — une unité à réacteurs dorsaux
-                  termine la partie dans le quart de table d'un autre joueur,
-                  hors combat.
-                </li>
               </ul>
 
               <h4 class="sous-titre">Règles spéciales</h4>
@@ -986,9 +980,8 @@
                 <h4 class="etiquette etiquette--large">Décor</h4>
                 <p class="texte-sec">
                   Quart de Thomas : rampes bétonnées, silos, cheminées de
-                  coulée, lignes Aegis. Les trois autres quarts : plaine de
-                  scorie ouverte, épaves, cratères de largage. Thomas pose la
-                  première pièce, puis chacun en pose une à son tour.
+                  coulée. Les trois autres quarts : plaine de scorie ouverte,
+                  épaves, cratères de largage..
                 </p>
               </div>
               <div class="carte carte--dense">
@@ -1109,18 +1102,6 @@
                 </tbody>
               </table>
 
-              <!-- Le lanceur de dé est une amélioration progressive : sans
-                   JavaScript la table ci-dessus reste utilisable avec un vrai D6.
-                   Le bouton est donc dévoilé par le script, jamais avant. -->
-              <div class="lanceur" id="lanceur" hidden>
-                <button type="button" id="lancer-de" class="bouton">
-                  Lancer le dé
-                </button>
-                <p class="lanceur-resultat" id="de-texte" aria-live="polite">
-                  Aucun jet effectué.
-                </p>
-              </div>
-
               <h4 class="sous-titre">Objectif principal — Sang pour sang</h4>
               <p class="texte">
                 1 point de victoire chaque fois que la dernière figurine d'une
@@ -1147,56 +1128,10 @@
                     supplémentaire si la figurine retirée est de type Parangon.
                   </p>
                 </div>
-                <div class="filet filet--or">
-                  <p class="texte">
-                    <strong>Saignée des valves</strong>
-                    <span class="c-or">(3)</span> —
-                    <em>propre à la campagne.</em> Trois valves de coulée sont
-                    placées, une par secteur central. Jean marque 3 points par
-                    valve dont il a pris le secteur au corps à corps ; Thomas
-                    marque 2 points par valve encore sous son contrôle en fin de
-                    partie.
-                  </p>
-                </div>
               </div>
             </div>
 
-            <aside
-              class="pile"
-              aria-label="Mission II — carte de déploiement et conséquences"
-            >
-              <div class="carte carte--dense">
-                <h4 class="etiquette etiquette--large">
-                  Carte de déploiement — Primus
-                </h4>
-                <div class="schema" role="img" aria-labelledby="schema-desc">
-                  <span class="schema-zone schema-zone--a">Zone A · 8″</span>
-                  <span class="schema-cases">
-                    <span class="schema-case"></span>
-                    <span class="schema-case schema-case--objectif"
-                      ><span aria-hidden="true">◈</span></span
-                    >
-                    <span class="schema-case schema-case--objectif"
-                      ><span aria-hidden="true">◈</span></span
-                    >
-                    <span class="schema-case"></span>
-                  </span>
-                  <span class="schema-zone schema-zone--b">Zone B · 8″</span>
-                </div>
-                <p class="sr-only" id="schema-desc">
-                  Schéma de la carte Primus : une bande de huit sections, la
-                  zone de déploiement A à une extrémité, la zone B à l'extrémité
-                  opposée, et deux objectifs au centre de la bande.
-                </p>
-                <p class="texte-petit">
-                  Huit sections de 12″ en bande. <em>Primus</em> — zones
-                  opposées aux deux extrémités, 8″ de profondeur sur toute la
-                  largeur. <em>Secundus</em> — zones opposées le long des deux
-                  grands bords, 6″ de profondeur. <em>Tertius</em> — deux angles
-                  diagonalement opposés, 16″ le long de chaque bord. Tirage :
-                  1–2 Primus, 3–4 Secundus, 5–6 Tertius.
-                </p>
-              </div>
+            <aside class="pile" aria-label="Mission II — conséquences">
               <div class="carte carte--dense">
                 <h4 class="etiquette etiquette--large">
                   Conséquence narrative
@@ -1222,7 +1157,9 @@
             <h3 id="mission-3" class="mission-titre">
               Les chantiers de Syrgalah
             </h3>
-            <span class="mission-meta">500 pts/joueur — quatre joueurs</span>
+            <span class="mission-meta"
+              >500 pts/joueur — quatre joueurs<br />4 tours</span
+            >
           </summary>
           <div class="mission-corps grille-mission">
             <div>
@@ -1386,9 +1323,9 @@
                 <h4 class="etiquette etiquette--rouge">Ténèbres Abyssales</h4>
                 <p class="texte">
                   Aucune ligne de vue au-delà de 12″. Les armes à gabarit de
-                  flamme et les unités dotées de
-                  <em>Vision Nocturne</em> ignorent cette limite. Chaque
-                  manifestation psychique ratée de la XV<sup>e</sup>
+                  flamme. Chaque manifestation psychique ratée de la XV<sup
+                    >e</sup
+                  >
                   réduit la limite de 2″ pour tout le monde jusqu'à la fin du
                   tour suivant, minimum 6″ — y compris pour elle.
                 </p>
@@ -1430,8 +1367,8 @@
                 <h4 class="etiquette etiquette--rouge">Objectif principal</h4>
                 <p class="texte">
                   Quatre <strong>nœuds de conduite</strong>, un par quadrant.
-                  Raphaël marque 3 points par nœud détruit aux charges de sape ;
-                  Tristan marque 3 points par nœud intact en fin de partie.
+                  Raphaël marque 3 points par nœud détruit ; Tristan marque 3
+                  points par nœud intact en fin de partie.
                 </p>
               </div>
               <div>
@@ -1480,17 +1417,18 @@
               >Mission V · Grande bataille · Résolution</span
             >
             <h3 id="mission-5" class="mission-titre">Le Verdict de Yarath</h3>
+
             <span class="mission-meta"
-              >500 pts/joueur — quatre joueurs —
-              <span lang="en">Warhound</span> inclus</span
+              >500 pts/joueur — quatre joueurs <br />4 tours
+              <span lang="en"> — Warhound</span> inclus</span
             >
           </summary>
           <div class="mission-corps grille-mission">
             <div>
               <p class="chapeau">
                 Tout ce qui tient encore debout entre dans la bataille, et
-                Syrgalah marche enfin. Les pactes précédents ne valent que ce que
-                vaut la parole de chacun.
+                Syrgalah marche enfin. Les pactes précédents ne valent que ce
+                que vaut la parole de chacun.
               </p>
 
               <h4 class="sous-titre">Mise en place asymétrique</h4>
@@ -1629,15 +1567,11 @@
             </p>
             <ul class="liste">
               <li>
-                <strong class="c-rouge">1-2</strong> — décimée : indisponible
+                <strong class="c-rouge">1-2-3</strong> — décimée : indisponible
                 pour la mission suivante.
               </li>
               <li>
-                <strong class="c-pale">3–4</strong> — reconstituée : aucun
-                effet.
-              </li>
-              <li>
-                <strong class="c-or">5–6</strong> — endurcie : une fois par
+                <strong class="c-or">4-5–6</strong> — endurcie : une fois par
                 partie, gagne une relance de test de Commandement ou de Sang
                 Froid.
               </li>
@@ -1940,12 +1874,6 @@
               </tbody>
             </table>
           </div>
-
-          <p class="journal-note">
-            Victoires et points de campagne se comptent séparément : une égalité
-            vaut 1 point sans victoire, un compte-rendu rédigé vaut 1 point de
-            plus, et une victoire majeure vaut 3 points (section VI).
-          </p>
 
           <div class="journal-pied">
             <p class="journal-etats" aria-live="polite">

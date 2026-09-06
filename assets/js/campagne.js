@@ -1,17 +1,16 @@
 /* =============================================================================
    Le Reflux de Yarath-Maximal — comportements de la page d'accueil
    -----------------------------------------------------------------------------
-   Trois modules indépendants : le diaporama, le lanceur de dé, le journal de
-   guerre. Aucun n'est indispensable à la lecture du dossier.
+   Deux modules indépendants : le diaporama et le journal de guerre. Aucun n'est
+   indispensable à la lecture du dossier.
 
    PRINCIPE DIRECTEUR — l'amélioration progressive.
    Le HTML seul doit déjà être utilisable : le diaporama défile alors à la
    souris ou au doigt (CSS `scroll-snap`), la table des missions se lit avec un
    vrai dé, et le journal s'affiche avec ses valeurs par défaut. Ce fichier
    n'AJOUTE que du confort. C'est pour cela que les boutons qui n'ont de sens
-   qu'avec JavaScript (pause du diaporama, lanceur de dé) sont créés ou dévoilés
-   ici, et pas écrits en dur dans le HTML : un bouton mort est pire qu'un bouton
-   absent.
+   qu'avec JavaScript (pause du diaporama) sont créés ou dévoilés ici, et pas
+   écrits en dur dans le HTML : un bouton mort est pire qu'un bouton absent.
 
    Le script est chargé avec `defer` : il s'exécute après l'analyse du HTML,
    donc le DOM est complet et aucune attente n'est nécessaire.
@@ -163,40 +162,7 @@
   }
 
   /* ===========================================================================
-     2. Lanceur de dé des missions Zone Mortalis
-     ===========================================================================
-     La table des six missions est écrite dans le HTML : elle reste utilisable
-     avec un vrai D6. Ce bouton n'est donc qu'un raccourci, dévoilé seulement
-     s'il peut fonctionner.
-     ========================================================================= */
-  const MISSIONS_ZM = [
-    "Assaut de secteur",
-    "Sans quartier",
-    "Terre ensanglantée",
-    "Prise de contrôle",
-    "Nexus de ruine",
-    "Domination totale",
-  ];
-
-  function initLanceur() {
-    const zone = document.getElementById("lanceur");
-    const bouton = document.getElementById("lancer-de");
-    const sortie = document.getElementById("de-texte");
-    if (!zone || !bouton || !sortie) return;
-
-    zone.hidden = false;
-    bouton.addEventListener("click", () => {
-      const de = 1 + Math.floor(Math.random() * 6);
-      sortie.textContent = `D6 : ${de} — ${MISSIONS_ZM[de - 1]}`;
-      // On met aussi la ligne correspondante en évidence dans la table.
-      document
-        .querySelectorAll(".table-des tbody tr")
-        .forEach((tr, i) => tr.classList.toggle("est-tiree", i === de - 1));
-    });
-  }
-
-  /* ===========================================================================
-     3. Journal de guerre
+     2. Journal de guerre
      ===========================================================================
      Les quatre lignes sont écrites dans le HTML. Ce module ne fait qu'ajouter
      la persistance et le calcul du classement.
@@ -403,6 +369,5 @@
   }
 
   initDiaporama();
-  initLanceur();
   initJournal();
 })();

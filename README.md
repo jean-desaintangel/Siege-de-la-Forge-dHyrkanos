@@ -13,7 +13,7 @@ tables composées de 4 plateaux pliables de 704 × 607 mm.
 | `pages/blood_angels.html`    | Ordre de déploiement du Ier Bataillon (Blood Angels)     |
 | `pages/dark_mechanicum.html` | Ordre de déploiement du Dark Mechanicum                  |
 | `assets/css/style.css`       | Feuille de styles unique, partagée par les trois pages   |
-| `assets/js/campagne.js`      | Diaporama, lanceur de dé et journal de guerre            |
+| `assets/js/campagne.js`      | Diaporama et journal de guerre                           |
 | `assets/images/`             | Illustrations, en WebP, avec variantes pour `srcset`     |
 | `assets/fonts/`              | Cinzel, Spectral et JetBrains Mono, auto-hébergées (OFL) |
 | `.nojekyll`                  | Désactive Jekyll côté GitHub Pages                       |
@@ -37,9 +37,9 @@ Trois règles tiennent le projet, et l'accessibilité en dépend :
    nouvelle grille, préférer `repeat(auto-fit, minmax(min(100%, 20rem), 1fr))`,
    qui se réorganise sans media query.
 3. **Amélioration progressive.** Le HTML seul doit être utilisable. Un contrôle
-   qui n'a de sens qu'avec JavaScript (le bouton pause du diaporama, le lanceur
-   de dé) est créé ou dévoilé par le script, jamais écrit en dur : un bouton mort
-   est pire qu'un bouton absent.
+   qui n'a de sens qu'avec JavaScript (le bouton pause du diaporama) est créé ou
+   dévoilé par le script, jamais écrit en dur : un bouton mort est pire qu'un
+   bouton absent.
 
 Un `<button>`, un `<table>`, un `<details>` natifs valent toujours mieux que leur
 imitation en `<div>` : le navigateur fournit gratuitement le rôle, la prise de
