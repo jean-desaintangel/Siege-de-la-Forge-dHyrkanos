@@ -21,6 +21,7 @@
      7. Structure de page — en-tête, navigation, pied de page
      8. Fiches de détachement — pages/blood_angels.html, dark_mechanicum.html
      8 bis. Variante Thousand Sons — pages/thousand_sons.html
+     8 ter. Variante Salamanders — pages/salamanders.html
      9. Fiches des mondes — pages/carte3d.html : grille des cinq corps
     10. Maquette 3D     — pages/carte3d.html : toile WebGL, étiquettes, boutons
     11. Élargissements  — media queries (mobile-first : on part du petit écran)
@@ -1994,6 +1995,114 @@ footer {
 .page-thousand-sons .titre-compagnie,
 .page-thousand-sons .titre-personnage {
   color: var(--texte-clair);
+}
+
+/* =============================================================================
+   8 ter. Variante Salamanders — pages/salamanders.html
+   -----------------------------------------------------------------------------
+   Même motif que la section 8 bis : la classe `page-salamanders` est posée sur
+   `<body>`, elle ne touche à AUCUNE structure et n'introduit qu'un seul jeton
+   décoratif. Les couleurs de TEXTE employées sont les jetons déjà validés en
+   contraste (`--raphael`, `--rouge`, `--texte-clair`) : aucun nouveau calcul
+   n'est nécessaire.
+
+   S'y ajoutent trois composants propres à cette page — le sceau, la barre de
+   caviardage et le tampon. Ils sont volontairement PORTÉS PAR LA VARIANTE
+   (`.page-salamanders .expurge`) et non déclarés globalement : ils n'ont de
+   sens que sur un dossier expurgé, et ne doivent pas polluer les autres fiches.
+
+   `--vert-forge` est purement DÉCORATIF — bordures uniquement, jamais de texte
+   posé dessus.
+   ============================================================================= */
+.page-salamanders {
+  --vert-forge: #1f4a37; /* décoratif uniquement : bordures */
+}
+
+/* Liseré supérieur de la carte de commandement : vert de Nocturne au lieu du
+   rouge sang des fiches Blood Angels / Dark Mechanicum. C'est le signal visuel
+   qui identifie la fiche au premier coup d'œil. */
+.page-salamanders .carte-commandement {
+  border-top-color: var(--raphael-bord);
+  background: linear-gradient(#12160f, var(--fond-article));
+}
+
+/* `border-inline-start` plutôt que `border-left` : en écriture de droite à
+   gauche, le filet reste du bon côté sans règle supplémentaire. */
+.page-salamanders .carte-compagnie-entete {
+  border-inline-start: 3px solid var(--vert-forge);
+}
+
+.page-salamanders .titre-compagnie,
+.page-salamanders .titre-personnage {
+  color: var(--texte-clair);
+}
+
+/* --- Sceau d'en-tête -------------------------------------------------------
+   Aucun fond ni aucune bordure propres : le bloc réutilise `carte--rouge` et
+   `carte--accent-rouge`, déjà audités. La classe n'ajoute que le centrage. */
+.page-salamanders .sceau {
+  text-align: center;
+}
+
+.page-salamanders .sceau-marque {
+  font-family: var(--titre);
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rouge);
+  margin: var(--esp-xs) 0 var(--esp-sm);
+}
+
+/* --- Barre de caviardage ---------------------------------------------------
+   Purement DÉCORATIVE : elle est vide et porte `aria-hidden="true"` dans le
+   HTML, accompagnée d'un `.sr-only` qui annonce le passage manquant. Sans ce
+   doublon, la phrase deviendrait incompréhensible au lecteur d'écran, qui ne
+   « voit » pas le rectangle noir.
+
+   Largeur en `ch` : l'unité vaut la largeur du chiffre 0 de la police
+   courante, donc la barre grandit avec le texte quand l'utilisateur zoome
+   (WCAG 1.4.4). En `px`, elle resterait figée pendant que la ligne s'allonge. */
+.page-salamanders .expurge {
+  display: inline-block;
+  width: 8ch;
+  height: 0.85em;
+  vertical-align: -0.08em;
+  background: #050505;
+  border: 1px solid var(--bordure-claire);
+}
+
+.page-salamanders .expurge--court {
+  width: 4ch;
+}
+
+.page-salamanders .expurge--long {
+  width: 15ch;
+}
+
+/* Passage entier retiré : la barre occupe toute la largeur disponible. */
+.page-salamanders .expurge--bloc {
+  display: block;
+  width: 100%;
+  margin: 0.45em 0;
+}
+
+/* --- Tampon ----------------------------------------------------------------
+   Contrairement à la barre, le tampon PORTE son texte : il est donc lu
+   normalement, et sa couleur est un jeton validé. La rotation est une
+   transformation statique, pas une animation : rien à neutraliser sous
+   `prefers-reduced-motion`. */
+.page-salamanders .tampon {
+  display: inline-block;
+  border: 2px solid var(--sang);
+  padding: 0.15em 0.6em;
+  font-family: var(--titre);
+  font-size: var(--fs-petit);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rouge);
+  transform: rotate(-3deg);
 }
 
 /* =============================================================================

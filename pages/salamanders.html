@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Le Serment de Cendre — dossier sous scellé</title>
+    <meta
+      name="description"
+      content="Dossier du détachement Salamanders « Le Serment de Cendre » sur Yarath-Maximal : pièce placée sous scellé, contenu expurgé. Campagne « Le Reflux de Yarath-Maximal »."
+    />
+    <meta name="theme-color" content="#0b0a09" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Le Serment de Cendre — dossier sous scellé"
+    />
+    <meta
+      property="og:description"
+      content="Le dossier du détachement Salamanders de Yarath-Maximal a été placé sous scellé. Ce qui subsiste tient en une page."
+    />
+    <meta
+      property="og:url"
+      content="https://jean-desaintangel.github.io/Siege-de-la-Forge-dHyrkanos/pages/salamanders.html"
+    />
+
+    <link
+      rel="icon"
+      href="../assets/images/favicon/favicon_salamanders.webp"
+      type="image/webp"
+    />
+
+    <!-- Polices auto-hébergées : aucun appel à un domaine tiers, donc aucune
+         adresse IP de visiteur transmise hors UE (RGPD). Les `@font-face` sont
+         déclarés en tête de style.css.
+
+         `preload` sur la seule police du CORPS DE TEXTE : sans lui, le
+         navigateur ne découvre le fichier qu'après avoir lu toute la feuille de
+         styles. `crossorigin` est obligatoire même en même origine — les
+         polices se chargent toujours en mode anonyme. -->
+    <link
+      rel="preload"
+      href="../assets/fonts/spectral-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+
+  <!-- `page-salamanders` : classe de VARIANTE, posée sur `body`, sur le même
+       motif que `page-thousand-sons` (section 8 bis de style.css). Elle ne
+       change AUCUNE structure : seulement la palette d'accents (vert de
+       Nocturne) et les quelques composants propres au caviardage. -->
+  <body class="page-salamanders">
+    <!-- Lien d'évitement : premier élément focusable de la page (WCAG 2.4.1). -->
+    <a class="lien-evitement" href="#contenu">Aller au contenu principal</a>
+
+    <nav aria-label="Sections du dossier">
+      <ul class="nav-liste conteneur">
+        <li>
+          <a class="nav-retour" href="../index.html">← Dossier de campagne</a>
+        </li>
+        <li><a href="#scelle">1 · Scellé</a></li>
+        <li><a href="#lisible">2 · Lisible</a></li>
+        <li><a href="#dossier">3 · Dossier</a></li>
+        <li><a href="#depositions">4 · Dépositions</a></li>
+        <li><a href="#levee">5 · Levée</a></li>
+        <li><a href="#recapitulatif">6 · Récapitulatif</a></li>
+      </ul>
+    </nav>
+
+    <header>
+      <div class="conteneur bandeau">
+        <p class="surtitre surtitre--rouge">Pièce sous scellé</p>
+        <h1>Salamanders — Yarath-Maximal</h1>
+        <p class="sous-titre-page">
+          « Le Serment de Cendre » — détachement de Raphaël
+        </p>
+        <blockquote class="exergue">
+          <p>La forge ne produira plus.</p>
+        </blockquote>
+      </div>
+    </header>
+
+    <main id="contenu" class="conteneur">
+      <div class="carte carte--rouge carte--accent-rouge sceau marge-haut">
+        <p class="etiquette etiquette--rouge">Autorité de l'Inquisition</p>
+        <p class="sceau-marque">Dossier scellé</p>
+        <p class="texte-sec">
+          Référence <span class="mention">YAR-M / IV — classe Vermillon</span> ·
+          consultation subordonnée à un mandat nominatif.
+        </p>
+        <p class="texte-petit">
+          Le présent document est reproduit dans son état expurgé. Les passages
+          retirés le sont définitivement : il n'existe plus de copie complète.
+        </p>
+      </div>
+
+      <!-- ==================================================================
+           1 · Autorité du scellé
+           ================================================================== -->
+      <section id="scelle">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">I</span>
+          <h2>Autorité du scellé</h2>
+        </div>
+
+        <p class="texte mesure">
+          Le dossier de campagne de Yarath-Maximal a été rédigé au 011.M31. Le
+          scellé, lui, a été apposé bien plus tard — au 342.M41 — sur une pièce
+          vieille de dix millénaires. Ce n'est pas une négligence d'archiviste :
+          c'est la seule chose que l'Inquisition a jugée rattrapable. Le monde
+          est mort depuis longtemps ; le procédé qui l'a tué, non.
+        </p>
+
+        <div class="carte-commandement">
+          <div class="carte-commandement-principal">
+            <p class="etiquette">Détachement concerné</p>
+            <h3 class="titre-personnage">XVIII<sup>e</sup> Légion</h3>
+            <p class="personnage-fonction">
+              Compagnie de croisade — <span lang="en">Salamanders</span>
+            </p>
+            <p class="personnage-mention">
+              Commandement :
+              <span class="expurge expurge--long" aria-hidden="true"></span>
+              <span class="sr-only">nom expurgé</span>
+            </p>
+            <p class="texte-intro">
+              Ce que le dossier contenait, on le sait par sa table des matières,
+              qui a survécu : cinq sections, quarante-deux pages, un ordre de
+              mission, un état récapitulatif. Ce que ces pages disaient, on ne
+              le sait plus. La procédure de scellé n'a laissé subsister que les
+              éléments déjà connus des trois autres belligérants — c'est-à-dire
+              ceux dont la dissimulation n'aurait servi à rien.
+            </p>
+            <p class="texte-sec">
+              Le motif retenu tient en une phrase, reproduite ici sans coupe :
+              <q class="serment">
+                la manière dont une forge s'éteint est, en elle-même, une
+                information dangereuse</q
+              >. Les Salamanders n'ont pas détruit Yarath-Maximal. Ils l'ont
+              rendue impropre à produire, ce qui n'est pas le même geste, et
+              c'est ce geste-là qui est scellé.
+            </p>
+          </div>
+
+          <div class="carte-commandement-cote">
+            <div class="info">
+              <p class="etiquette">Autorité</p>
+              <p class="texte">
+                <span class="expurge" aria-hidden="true"></span>, par délégation
+                du conclave régional. La signature est illisible, le sceau de
+                cire l'est aussi : seul le niveau de classification a résisté.
+                <span class="sr-only">Nom de l'autorité expurgé.</span>
+              </p>
+            </div>
+            <div class="info">
+              <p class="etiquette">Portée</p>
+              <p class="texte">
+                Totale sur les sections II à V. Nulle sur la section I, qui ne
+                contient que des faits publics. Le scellé ne protège pas une
+                identité : il protège un mode opératoire.
+              </p>
+            </div>
+            <div class="info">
+              <p class="etiquette">Durée</p>
+              <p class="texte">
+                Indéterminée. Aucune procédure de levée automatique n'est
+                prévue, et aucune demande n'a jamais abouti.
+                <span class="expurge expurge--court" aria-hidden="true"></span>
+                <span class="sr-only">Mention finale expurgée.</span>
+              </p>
+            </div>
+            <div class="info info--fin">
+              <p class="etiquette">Avertissement porté au dos</p>
+              <p class="texte">
+                « Ce dossier a été lu. Ceux qui l'ont lu n'ont rien allumé
+                depuis. »
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           2 · Éléments demeurés lisibles
+           ================================================================== -->
+      <section id="lisible">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">II</span>
+          <h2>Éléments demeurés lisibles</h2>
+        </div>
+
+        <p class="texte mesure">
+          Trois lignes ont échappé à l'expurgation, pour la même raison : les
+          trois autres belligérants les connaissaient déjà. On n'efface pas ce
+          qui est écrit dans la mémoire de ses ennemis.
+        </p>
+
+        <div class="grille-auto">
+          <div class="carte">
+            <p class="etiquette">Provenance</p>
+            <div class="unite-entete">
+              <h3 class="titre-unite">Nocturne</h3>
+            </div>
+            <p class="texte-sec">
+              Le détachement vient de Nocturne, et il vient pour la forge. Cette
+              seule information suffisait à en déduire la doctrine : entrer
+              lentement, tenir le terrain gagné, ne rien laisser derrière soi —
+              y compris ce que les autres étaient venus chercher.
+            </p>
+          </div>
+
+          <div class="carte">
+            <p class="etiquette">Serment</p>
+            <div class="unite-entete">
+              <h3 class="titre-unite">Le Serment de Cendre</h3>
+            </div>
+            <p class="texte-sec">
+              <q class="serment">La forge ne produira plus.</q> Il a été
+              prononcé devant témoins, dont deux ne servaient pas la XVIII<sup
+                >e</sup
+              >
+              Légion. C'est la raison pour laquelle il figure encore ici : il
+              était public avant d'être secret.
+            </p>
+          </div>
+
+          <div class="carte">
+            <p class="etiquette">Condition de victoire</p>
+            <div class="unite-entete">
+              <h3 class="titre-unite">Rien ne sort des fonderies</h3>
+            </div>
+            <p class="texte-sec">
+              Yarath-Maximal ne produit plus rien à la fin de la mission V. Ni
+              armes, ni pièces, ni servants. Peu importe qui tient le vault et
+              qui l'a lu : si les chaînes tournent encore, le serment est rompu.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           3 · Corps du dossier — expurgé
+           ==================================================================
+           Les barres de caviardage sont DÉCORATIVES : `aria-hidden="true"` les
+           retire de l'arbre d'accessibilité, et un `.sr-only` indique en clair
+           au lecteur d'écran qu'un passage manque. Sans cela, une suite de
+           `<span>` vides ne produirait strictement RIEN à l'oreille, et la
+           phrase deviendrait incompréhensible. -->
+      <section id="dossier">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">III</span>
+          <h2>Corps du dossier</h2>
+        </div>
+
+        <p class="texte mesure">
+          Les quatre sections suivantes sont reproduites telles que reçues.
+          <span class="tampon">Expurgé</span>
+        </p>
+
+        <div class="pile marge-haut">
+          <article class="carte-compagnie">
+            <div class="carte-compagnie-entete">
+              <p class="etiquette">Section 2 du dossier d'origine</p>
+              <h3 class="titre-compagnie">État-major</h3>
+              <p class="texte-sec">
+                Sept pages. Toutes retirées, à l'exception des en-têtes de
+                paragraphe, laissés par inadvertance.
+              </p>
+            </div>
+            <div class="carte-compagnie-corps">
+              <div class="unite">
+                <div class="unite-entete unite-entete--gauche">
+                  <h4 class="titre-unite">Officiers cités</h4>
+                </div>
+                <p class="texte-sec">
+                  <span class="expurge expurge--long" aria-hidden="true"></span>
+                  <span class="expurge" aria-hidden="true"></span>, ainsi que
+                  <span
+                    class="expurge expurge--court"
+                    aria-hidden="true"
+                  ></span>
+                  et <span class="expurge" aria-hidden="true"></span>.
+                  <span class="sr-only">
+                    Quatre noms d'officiers expurgés.
+                  </span>
+                </p>
+              </div>
+              <div class="unite unite--fin">
+                <div class="unite-entete unite-entete--gauche">
+                  <h4 class="titre-unite">Chapelain de la compagnie</h4>
+                </div>
+                <p class="texte-sec">
+                  Le nom manque, la fonction non : c'est lui qui recueille le
+                  serment avant chaque descente, et lui qui vérifie, après,
+                  qu'il a été tenu.
+                  <span class="expurge expurge--bloc" aria-hidden="true"></span>
+                  <span class="sr-only">Fin du paragraphe expurgée.</span>
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="carte-compagnie">
+            <div class="carte-compagnie-entete">
+              <p class="etiquette">Section 3 du dossier d'origine</p>
+              <h3 class="titre-compagnie">Troupes</h3>
+              <p class="texte-sec">
+                Quatorze pages, dont onze retirées intégralement. Les trois
+                restantes ne portent que des numéros d'escouade.
+              </p>
+            </div>
+            <div class="carte-compagnie-corps">
+              <div class="unite">
+                <div class="unite-entete unite-entete--gauche">
+                  <h4 class="titre-unite">Composition</h4>
+                </div>
+                <p class="texte-sec">
+                  <span class="expurge expurge--bloc" aria-hidden="true"></span>
+                  <span class="expurge expurge--bloc" aria-hidden="true"></span>
+                  <span class="expurge expurge--long" aria-hidden="true"></span>
+                  <span class="sr-only">
+                    Trois lignes de composition expurgées.
+                  </span>
+                </p>
+              </div>
+              <div class="unite unite--fin">
+                <div class="unite-entete unite-entete--gauche">
+                  <h4 class="titre-unite">Note marginale, écrite à la main</h4>
+                </div>
+                <p class="texte-sec">
+                  « Ils sont moins nombreux qu'annoncé, et ils avancent quand
+                  même. » L'annotation n'est pas d'un officier de la Légion :
+                  l'encre et la formule sont celles du Mechanicum.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="carte-compagnie">
+            <div class="carte-compagnie-entete">
+              <p class="etiquette">Section 4 du dossier d'origine</p>
+              <h3 class="titre-compagnie">Moyens</h3>
+              <p class="texte-sec">
+                Section la plus lourdement traitée du dossier. C'est elle qui a
+                motivé le scellé.
+              </p>
+            </div>
+            <div class="carte-compagnie-corps">
+              <div class="unite unite--fin">
+                <div class="unite-entete unite-entete--gauche">
+                  <h4 class="titre-unite">Matériel et procédés</h4>
+                </div>
+                <p class="texte-sec">
+                  Rien n'a été laissé : ni les désignations, ni les quantités,
+                  ni les schémas d'emploi.
+                  <span class="expurge expurge--bloc" aria-hidden="true"></span>
+                  <span class="expurge expurge--bloc" aria-hidden="true"></span>
+                  <span class="expurge expurge--bloc" aria-hidden="true"></span>
+                  <span class="sr-only">
+                    Le reste de la section est expurgé.
+                  </span>
+                </p>
+                <p class="texte-petit c-rouge">
+                  Seule mention conservée, et seulement parce qu'elle figure
+                  dans un autre dossier : la compagnie disposait de moyens
+                  incendiaires en quantité déraisonnable pour une force de cette
+                  taille.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="carte-compagnie">
+            <div class="carte-compagnie-entete">
+              <p class="etiquette">Section 5 du dossier d'origine</p>
+              <h3 class="titre-compagnie">Ordre de mission</h3>
+              <p class="texte-sec">
+                Une page et demie. Le premier paragraphe subsiste ; la suite a
+                été retirée feuillet par feuillet.
+              </p>
+            </div>
+            <div class="carte-compagnie-corps">
+              <div class="unite unite--fin">
+                <div class="unite-entete unite-entete--gauche">
+                  <h4 class="titre-unite">Premier paragraphe</h4>
+                </div>
+                <p class="texte-sec">
+                  « La forge de Yarath-Maximal a produit, pour l'ennemi, de quoi
+                  armer une flotte. Elle ne produira plus. Le reste — le vault,
+                  les archives, ce que les autres viennent y prendre — ne nous
+                  regarde pas, sauf s'ils veulent l'emporter avant que nous
+                  ayons fini. »
+                </p>
+                <p class="texte-sec">
+                  <span class="expurge expurge--bloc" aria-hidden="true"></span>
+                  <span class="expurge expurge--bloc" aria-hidden="true"></span>
+                  <span class="sr-only">Suite de l'ordre expurgée.</span>
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           4 · Dépositions
+           ================================================================== -->
+      <section id="depositions">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">IV</span>
+          <h2>Dépositions annexées</h2>
+        </div>
+
+        <p class="texte mesure">
+          Trois témoignages ont été joints au dossier après coup, puis laissés
+          en place : ils ne décrivent aucun procédé. Ils sont, aujourd'hui, la
+          seule description de ce détachement qui subsiste.
+        </p>
+
+        <div class="grille-auto">
+          <div class="carte carte--or">
+            <p class="etiquette etiquette--or">Servant de fonderie, réformé</p>
+            <p class="texte-sec">
+              « On les a entendus deux heures avant de les voir. Pas des cris :
+              des portes. Ils ouvraient chaque porte, une par une, et ils
+              regardaient à l'intérieur avant d'entrer. Personne ne fait ça.
+              Tout le monde court. »
+            </p>
+          </div>
+
+          <div class="carte">
+            <p class="etiquette">Scribe de la XV<sup>e</sup> Légion</p>
+            <p class="texte-sec">
+              « Nous avions prévu leur trajet. Nous n'avions pas prévu leur
+              lenteur. Un ennemi qui n'est pas pressé est un ennemi dont on ne
+              peut rien déduire : il n'a rien à rattraper. »
+            </p>
+          </div>
+
+          <div class="carte">
+            <p class="etiquette">Adepte du Mechanicum, dépôt sous serment</p>
+            <p class="texte-sec">
+              « Ils ont fait sortir les nôtres avant. Les serviteurs aussi. Puis
+              ils ont travaillé. Quand ils sont repartis, la halle tenait encore
+              debout, et elle ne servait plus à rien. J'ignore comment on fait
+              cela. »
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           5 · Levée du scellé
+           ================================================================== -->
+      <section id="levee">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">V</span>
+          <h2>Levée du scellé</h2>
+        </div>
+
+        <div class="carte carte--ample marge-haut">
+          <p class="etiquette">Procédure</p>
+          <blockquote class="serment-bloc">
+            <p>Ce qui est scellé peut être rouvert. Pas retrouvé.</p>
+          </blockquote>
+          <p class="texte-sec">
+            La levée exige la production du document d'origine par celui qui l'a
+            rédigé. Aucune reconstitution, aucun témoignage, aucune déduction
+            n'est recevable : l'Inquisition ne rouvre pas un dossier sur la foi
+            de ce que l'on croit s'en souvenir. Tant que la pièce n'est pas
+            produite, cette page reste la version officielle du détachement.
+          </p>
+          <p class="texte-sec c-pale">
+            <strong>Victoire personnelle :</strong> Yarath-Maximal ne produit
+            plus rien à la fin de la mission V.
+          </p>
+        </div>
+
+        <div class="carte carte--dense marge-haut mesure">
+          <p class="etiquette etiquette--rouge">Hors fiction</p>
+          <p class="texte-sec">
+            Cette fiche est un <strong>marque-page</strong> : Raphaël n'a pas
+            encore transmis la composition de son détachement. Rien n'a été
+            inventé à sa place, d'où le parti pris du dossier expurgé. Dès que
+            la liste arrive, cette page sera remplacée par un ordre de
+            déploiement complet, sur le gabarit des trois autres fiches.
+          </p>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           Annexe A · État récapitulatif
+           ==================================================================
+           Le tableau reste un vrai `<table>` avec `caption`, `thead` et
+           `scope` : un tableau caviardé doit rester un tableau, sinon le
+           lecteur d'écran perd la structure en même temps que le contenu. -->
+      <section id="recapitulatif">
+        <div class="section-entete">
+          <h2>État récapitulatif</h2>
+        </div>
+
+        <p class="texte-sec mesure">
+          <strong class="c-rouge">Sous scellé</strong> — les désignations et le
+          coût de chaque ligne ont été retirés. Seul subsiste le plafond de
+          collection, qui n'est pas une donnée du détachement mais une règle de
+          campagne.
+        </p>
+
+        <div class="table-defilante marge-haut">
+          <table class="table-recap">
+            <caption>
+              Ordre de bataille du détachement Salamanders — contenu expurgé,
+              plafond de collection conservé
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Désignation</th>
+                <th scope="col">Effectif</th>
+                <th scope="col" class="nombre">Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  Commandement — <span class="expurge" aria-hidden="true"></span
+                  ><span class="sr-only">expurgé</span>
+                </td>
+                <td>1</td>
+                <td class="nombre">Scellé</td>
+              </tr>
+              <tr>
+                <td>
+                  État-major —
+                  <span class="expurge expurge--court" aria-hidden="true"></span
+                  ><span class="sr-only">expurgé</span>
+                </td>
+                <td>Scellé</td>
+                <td class="nombre">Scellé</td>
+              </tr>
+              <tr>
+                <td>
+                  Élite —
+                  <span class="expurge expurge--long" aria-hidden="true"></span
+                  ><span class="sr-only">expurgé</span>
+                </td>
+                <td>Scellé</td>
+                <td class="nombre">Scellé</td>
+              </tr>
+              <tr>
+                <td>
+                  Ligne — <span class="expurge" aria-hidden="true"></span
+                  ><span class="sr-only">expurgé</span>
+                </td>
+                <td>Scellé</td>
+                <td class="nombre">Scellé</td>
+              </tr>
+              <tr>
+                <td>
+                  Appui —
+                  <span class="expurge expurge--long" aria-hidden="true"></span
+                  ><span class="sr-only">expurgé</span>
+                </td>
+                <td>Scellé</td>
+                <td class="nombre">Scellé</td>
+              </tr>
+              <tr>
+                <td>
+                  Transport —
+                  <span class="expurge expurge--court" aria-hidden="true"></span
+                  ><span class="sr-only">expurgé</span>
+                </td>
+                <td>Scellé</td>
+                <td class="nombre">Scellé</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th scope="row">Plafond de collection (règle de campagne)</th>
+                <td></td>
+                <td class="nombre">2&nbsp;000</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="conteneur pied">
+        <p>
+          Le Serment de Cendre — compagnie de croisade de la XVIII<sup>e</sup>
+          Légion
+        </p>
+        <p>Ce qui a brûlé ici ne rallumera rien ailleurs.</p>
+        <p>
+          <a class="lien-bloc" href="../index.html"
+            >← Le Reflux de Yarath-Maximal</a
+          >
+        </p>
+        <p>
+          Warhammer: The Horus Heresy, <span lang="en">Zone Mortalis</span>,
+          <span lang="en">Legiones Astartes</span> et les noms associés sont des
+          marques de Games Workshop Ltd. Ce document n'est ni affilié ni
+          approuvé par Games Workshop.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
