@@ -3,7 +3,7 @@
    -----------------------------------------------------------------------------
    Trois modules indépendants, tous facultatifs :
      1. le sas d'authentification (verrouille puis déverrouille le coffre) ;
-     2. le compteur « temps avant détection » ;
+     2. le compteur « temps avant détection », qui bloque la page à zéro ;
      3. les boutons de téléchargement, qui échouent toujours — c'est le but.
 
    PRINCIPE DIRECTEUR — l'amélioration progressive, à l'envers.
@@ -179,7 +179,17 @@
      Construit entièrement en JavaScript : un compteur figé serait un décor
      cassé, pas un décor. Il n'apparaît donc qu'après le déverrouillage.
      ========================================================================= */
-  const QUANTUM = 600; // 10 minutes, en secondes
+  const QUANTUM = 150; // 2 min 30, en secondes
+
+  /** « 150 » → « 02:30 ». Un seul endroit sait convertir des secondes en
+   *  minutes : le gabarit initial du compteur ET la mise à jour de chaque
+   *  seconde passent par ici, ils ne peuvent donc pas diverger. Changer
+   *  `QUANTUM` suffit, la valeur affichée au premier rendu suit toute seule. */
+  function formater(secondes) {
+    const m = String(Math.floor(secondes / 60)).padStart(2, "0");
+    const s = String(secondes % 60).padStart(2, "0");
+    return m + ":" + s;
+  }
 
   function initDetection() {
     const hote = document.getElementById("detection");
@@ -189,41 +199,47 @@
     hote.innerHTML = [
       '<div class="carte carte--rouge carte--accent-rouge compteur-detection">',
       '<p class="etiquette etiquette--rouge">Balayage d\'autocensus</p>',
-      '<p class="compteur-valeur" id="compteur-valeur" aria-hidden="true">10:00</p>',
+      '<p class="compteur-valeur" id="compteur-valeur" aria-hidden="true">' +
+        formater(QUANTUM) +
+        "</p>",
       '<p class="texte-petit compteur-legende" id="compteur-legende">',
       "Temps estimé avant que le recensement ne rapproche cette session du vault.",
       "</p>",
       '<p class="sr-only" id="compteur-annonce" role="status" aria-live="polite"></p>',
-      '<p class="compteur-actions">',
-      '<button type="button" class="bouton bouton--fantome" id="compteur-bouton">Suspendre le balayage</button>',
-      "</p>",
       "</div>",
     ].join("");
 
     const valeur = document.getElementById("compteur-valeur");
     const legende = document.getElementById("compteur-legende");
     const annonce = document.getElementById("compteur-annonce");
-    const bouton = document.getElementById("compteur-bouton");
 
     let reste = QUANTUM;
     let minuteur = null;
     let detecte = false;
 
-    /* WCAG 2.2.2 « Mettre en pause, arrêter, masquer » : toute information qui
-       se met à jour toute seule doit pouvoir être arrêtée par l'utilisateur.
-       C'est la raison d'être du bouton — pas seulement le style. */
+    /* PAS DE BOUTON DE SUSPENSION — c'est une décision, pas un oubli.
+       WCAG 2.2.1 « Délai modifiable » demande qu'un délai puisse être
+       désactivé, allongé ou ajusté, et 2.2.2 qu'une information qui se met à
+       jour seule puisse être arrêtée. La norme prévoit une exception : le délai
+       essentiel, celui dont la suppression viderait l'activité de son sens.
+       C'est le pari fait ici — le quantum de consultation EST le propos de la
+       page, un compteur que l'on peut geler ne raconte plus rien.
+       Deux garde-fous restent donc en place, et ne doivent pas sauter :
+         - le décompte est annoncé aux paliers, personne n'est pris par
+           surprise ;
+         - la fin ouvre une sortie explicite, pas un cul-de-sac.
+       Si le compteur redevenait un simple ornement, c'est ici qu'il faudrait
+       réintroduire le bouton. */
     function afficher() {
-      const m = String(Math.floor(reste / 60)).padStart(2, "0");
-      const s = String(reste % 60).padStart(2, "0");
-      valeur.textContent = m + ":" + s;
+      valeur.textContent = formater(reste);
     }
 
     /* Le compte à rebours n'est PAS annoncé chaque seconde : ce serait un
-       lecteur d'écran qui parle sans arrêt. Seuls quatre paliers le sont. */
+       lecteur d'écran qui parle sans arrêt. Deux paliers seulement, plus la
+       détection elle-même. Ils sont calés sur un quantum de 2 min 30 : le
+       premier tombe à peu près à mi-parcours, le second prévient de la fin. */
     function annoncerSiPalier() {
-      if (reste === 300) annonce.textContent = "Cinq minutes avant détection.";
-      else if (reste === 60)
-        annonce.textContent = "Une minute avant détection.";
+      if (reste === 60) annonce.textContent = "Une minute avant détection.";
       else if (reste === 10)
         annonce.textContent = "Dix secondes avant détection.";
     }
@@ -242,13 +258,6 @@
     function demarrer() {
       if (minuteur || detecte) return;
       minuteur = window.setInterval(battre, 1000);
-      bouton.textContent = "Suspendre le balayage";
-    }
-
-    function suspendre() {
-      window.clearInterval(minuteur);
-      minuteur = null;
-      bouton.textContent = "Reprendre le balayage";
     }
 
     function declencher() {
@@ -261,25 +270,115 @@
         "Session repérée. Le vault a signalé une consultation non autorisée à l'autocensus du secteur.";
       annonce.textContent =
         "Détection. Session repérée par le recensement du secteur.";
-      bouton.textContent = "Purger les journaux";
+      poserVerrou();
     }
 
-    bouton.addEventListener("click", () => {
-      if (detecte) {
-        // Réinitialisation : on efface la « trace » et on repart d'un quantum.
-        detecte = false;
-        reste = QUANTUM;
-        document.body.classList.remove("archives-detecte");
-        legende.textContent =
-          "Journaux purgés. Un nouveau quantum de consultation a été alloué.";
-        annonce.textContent = "Journaux purgés. Le décompte reprend.";
-        afficher();
-        demarrer();
-        return;
+    /* =========================================================================
+       Le verrou de fin de quantum
+       =========================================================================
+       À zéro, la page ne se contente plus de changer de couleur : elle se
+       bloque. Un panneau d'alerte couvre tout, le reste de la page devient
+       inatteignable, et le blocage est DÉFINITIF pour cette page : la seule
+       commande offerte est la sortie. Aucune purge, aucun second quantum — le
+       visiteur qui veut revoir les archives recharge la page et repasse par le
+       sas, ce qui est le propos.
+
+       POURQUOI UN PANNEAU PLUTÔT QU'UN `alert()`.
+       `window.alert()` gèle l'onglet entier, ne se met pas en forme, n'est pas
+       traduisible et se fait bloquer par les navigateurs après quelques
+       ouvertures. Un élément du document, lui, se style et s'annonce
+       correctement.
+
+       WCAG 2.1.2 « Pas de piège au clavier » : enfermer le focus est autorisé
+       à condition qu'une sortie existe ET soit indiquée. C'est ici la seule
+       commande du panneau, elle a le focus dès l'ouverture, et le texte la
+       décrit. Ce lien est donc la pièce à ne jamais retirer.
+       ======================================================================= */
+    let verrou = null; // le panneau ; une fois posé, il ne se retire plus
+
+    function poserVerrou() {
+      if (verrou) return;
+
+      verrou = document.createElement("div");
+      verrou.className = "verrou-detection";
+      verrou.id = "verrou-detection";
+      /* `alertdialog` (et non `dialog`) : c'est un message qui interrompt.
+         Le lecteur d'écran annonce le titre et la description à l'ouverture
+         sans attendre que l'utilisateur explore. */
+      verrou.setAttribute("role", "alertdialog");
+      verrou.setAttribute("aria-modal", "true");
+      verrou.setAttribute("aria-labelledby", "verrou-titre");
+      verrou.setAttribute("aria-describedby", "verrou-texte");
+      verrou.innerHTML = [
+        '<div class="carte carte--rouge carte--accent-rouge verrou-panneau">',
+        '<p class="etiquette etiquette--rouge">',
+        '<span class="balise-alerte" aria-hidden="true"></span> Autocensus · session repérée',
+        "</p>",
+        '<h2 class="titre-carte verrou-titre" id="verrou-titre">Consultation interrompue</h2>',
+        '<p id="verrou-texte">',
+        "Le quantum de consultation est écoulé. Le balayage d'autocensus a ",
+        "rapproché cette session du vault : le Corpus Interdictus est refermé ",
+        "et vos requêtes sont consignées.",
+        "</p>",
+        '<p class="texte-petit">',
+        "Cette session ne peut pas être reprise. Quittez les archives.",
+        "</p>",
+        '<p class="verrou-actions">',
+        '<a class="bouton" id="verrou-sortie" href="../index.html">Quitter les archives</a>',
+        "</p>",
+        "</div>",
+      ].join("");
+      document.body.appendChild(verrou);
+
+      /* Neutraliser l'arrière-plan. `inert` retire une branche entière du DOM
+         du clic, du focus ET de l'arbre d'accessibilité : c'est exactement ce
+         qu'il faut, en un attribut. Il n'existe pas sur les navigateurs
+         d'avant 2023 ; on retombe alors sur `aria-hidden`, qui ne fait que la
+         moitié du travail (le lecteur d'écran ignore le fond, mais la
+         tabulation y passe encore — d'où le piège à tabulation ci-dessous).
+         Rien n'est mémorisé pour un retour en arrière : le verrou est posé
+         pour de bon. */
+      const supporteInert = "inert" in HTMLElement.prototype;
+      Array.prototype.forEach.call(document.body.children, (el) => {
+        if (el === verrou) return;
+        if (supporteInert) el.inert = true;
+        else el.setAttribute("aria-hidden", "true");
+      });
+
+      // La page ne défile plus derrière le panneau.
+      document.body.classList.add("archives-bloque");
+
+      verrou.addEventListener("keydown", piegerTabulation);
+      /* Le focus se trouvait dans une page qui vient de devenir inerte : sans
+         ce déplacement il retomberait sur `<body>` et le panneau, pourtant
+         seul élément actif, serait à chercher. */
+      document.getElementById("verrou-sortie").focus();
+    }
+
+    /** Retient le focus dans le panneau. Le lien de sortie en est le seul
+     *  élément focalisable : Tab et Maj+Tab le rendent donc à lui-même. Sans
+     *  ce gestionnaire, sur un navigateur sans `inert`, un Tab de trop
+     *  renverrait l'utilisateur dans une page qu'il n'est plus censé lire.
+     *  La boucle est écrite en toute généralité — si une seconde commande
+     *  était ajoutée un jour, elle continuerait de fonctionner.
+     *
+     *  Échap n'est volontairement PAS traité : ce panneau n'est pas une boîte
+     *  de dialogue que l'on referme, c'est l'état de la page. La seule sortie
+     *  est le lien, et elle mène ailleurs. */
+    function piegerTabulation(evt) {
+      if (evt.key !== "Tab" || !verrou) return;
+      const cibles = verrou.querySelectorAll("button, [href]");
+      if (cibles.length === 0) return;
+      const premier = cibles[0];
+      const dernier = cibles[cibles.length - 1];
+      if (evt.shiftKey && document.activeElement === premier) {
+        evt.preventDefault();
+        dernier.focus();
+      } else if (!evt.shiftKey && document.activeElement === dernier) {
+        evt.preventDefault();
+        premier.focus();
       }
-      if (minuteur) suspendre();
-      else demarrer();
-    });
+    }
 
     afficher();
     demarrer();

@@ -2184,9 +2184,17 @@ footer {
   background: linear-gradient(#171208, var(--fond-carte));
 }
 
+/* L'en-tête est centré en bloc : la cote, le titre et le jeton de
+   classification partagent le même axe. `text-align` suffit pour les trois —
+   le jeton est un `inline-block`, il se centre donc comme un mot dans la ligne,
+   sans avoir besoin d'un `margin: auto`. Le corps du dossier, lui, reste aligné
+   à gauche : centrer un paragraphe de plusieurs lignes déplace le début de
+   chaque ligne et coûte cher en lisibilité, particulièrement aux lecteurs
+   dyslexiques. */
 .page-archives .dossier-entete {
   border-bottom: 1px solid var(--bordure);
   padding-bottom: var(--esp-sm);
+  text-align: center;
 }
 
 .page-archives .dossier-cote {
@@ -2401,13 +2409,12 @@ footer {
   font-variant-numeric: tabular-nums;
 }
 
+/* La légende est le dernier élément visible de la carte — le compteur n'a plus
+   de commande sous lui — d'où la marge basse à zéro : sinon la carte se
+   terminerait par un blanc que rien ne justifie. */
 .page-archives .compteur-legende {
-  margin: 0 auto var(--esp);
+  margin: 0 auto;
   max-width: 34rem;
-}
-
-.page-archives .compteur-actions {
-  margin: 0;
 }
 
 /* État « détecté » : le compteur passe au blanc franc et le cadre au rouge.
@@ -2421,15 +2428,95 @@ footer {
   border-color: var(--sang);
 }
 
+/* --- Verrou de fin de quantum ----------------------------------------------
+   Le panneau qui bloque la page quand le décompte atteint zéro. Il est créé
+   par le script (voir assets/js/archives.js) et n'existe jamais dans le HTML
+   livré : une page sans JavaScript ne doit pas pouvoir se retrouver bloquée
+   par un décor.
+
+   `position: fixed` + `inset: 0` : le panneau couvre la fenêtre, pas le
+   document — il reste en place quelle que soit la position de défilement.
+
+   `z-index: 60` le place au-dessus de la barre de navigation collante (40) et
+   sous le lien d'évitement (100), qui n'apparaît qu'au focus et se trouve de
+   toute façon neutralisé par `inert` pendant le blocage.
+
+   Le fond est opaque à 94 % : assez pour que la page derrière ne se lise plus
+   — c'est le propos — sans faire disparaître le contexte d'un coup. Le
+   panneau, lui, a son propre fond plein, le texte garde donc les contrastes
+   mesurés en section 1.
+
+   `overflow-y: auto` : sur un écran court ou à fort zoom (WCAG 1.4.4), le
+   panneau défile à l'intérieur du voile au lieu d'être coupé. */
+.page-archives .verrou-detection {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--marge-page);
+  overflow-y: auto;
+  background: rgba(11, 10, 9, 0.94);
+  animation: verrou-apparition 240ms ease-out both;
+}
+
+@keyframes verrou-apparition {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.page-archives .verrou-panneau {
+  max-width: 34rem;
+  /* `margin: auto` et non `align-items` seul : quand le panneau est plus haut
+     que la fenêtre, un centrage par flexbox déborde vers le haut et rend le
+     début du texte inatteignable au défilement. */
+  margin: auto;
+  text-align: center;
+}
+
+.page-archives .verrou-titre {
+  margin-bottom: var(--esp-sm);
+}
+
+.page-archives .verrou-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-sm);
+  justify-content: center;
+  margin: var(--esp-md) 0 0;
+}
+
+/* `.bouton` est dessiné pour un `<button>` ; le lien de sortie en reprend
+   l'allure et a donc besoin du mode d'affichage qui va avec. */
+.page-archives .verrou-actions .bouton {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Le défilement de la page est coupé tant que le verrou est posé. La classe
+   est posée sur `<body>` par le script ; l'`overflow` se propage au viewport
+   tant que `<html>` n'en déclare pas lui-même. */
+.page-archives.archives-bloque {
+  overflow: hidden;
+}
+
 /* --- Mouvement réduit ------------------------------------------------------
    Un seul bloc pour toute la page : l'utilisateur qui a demandé moins
    d'animations n'en reçoit aucune. Le compte à rebours, lui, continue — ce
-   n'est pas du mouvement, c'est de l'information, et il possède déjà son
-   bouton de suspension (WCAG 2.2.2). */
+   n'est pas du mouvement, c'est de l'information, et son écoulement est le
+   sujet même de la page (voir la note sur WCAG 2.2.1 dans
+   assets/js/archives.js). */
 @media (prefers-reduced-motion: reduce) {
   .page-archives .trame-scan::after,
   .page-archives .balise-alerte,
-  .page-archives .terminal-sortie--vive {
+  .page-archives .terminal-sortie--vive,
+  .page-archives .verrou-detection {
     animation: none;
   }
 
