@@ -12,8 +12,13 @@ tables composées de 4 plateaux pliables de 704 × 607 mm.
 | `index.html`                 | Le dossier de campagne complet                           |
 | `pages/blood_angels.html`    | Ordre de déploiement du Ier Bataillon (Blood Angels)     |
 | `pages/dark_mechanicum.html` | Ordre de déploiement du Dark Mechanicum                  |
-| `assets/css/style.css`       | Feuille de styles unique, partagée par les trois pages   |
+| `pages/thousand_sons.html`   | Ordre de déploiement de la Neuvième Fraternité           |
+| `pages/salamanders.html`     | Dossier du Serment de Cendre, sous scellé                |
+| `pages/carte3d.html`         | Carte du secteur des Étoiles Pâles                       |
+| `pages/archives.html`        | Archives du Mechanicum — quatre planches de Titans       |
+| `assets/css/style.css`       | Feuille de styles unique, partagée par toutes les pages  |
 | `assets/js/campagne.js`      | Diaporama et journal de guerre                           |
+| `assets/js/archives.js`      | Sas d'accès, compteur de détection (archives)            |
 | `assets/images/`             | Illustrations, en WebP, avec variantes pour `srcset`     |
 | `assets/fonts/`              | Cinzel, Spectral et JetBrains Mono, auto-hébergées (OFL) |
 | `.nojekyll`                  | Désactive Jekyll côté GitHub Pages                       |

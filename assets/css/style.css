@@ -1,10 +1,10 @@
 /* =============================================================================
    Le Reflux de Yarath-Maximal — feuille de styles unique
    -----------------------------------------------------------------------------
-   Cinq pages la consomment : index.html (le dossier de campagne), les trois
-   fiches de détachement pages/blood_angels.html, pages/dark_mechanicum.html et
-   pages/thousand_sons.html,
-   et la carte du secteur pages/carte3d.html.
+   Sept pages la consomment : index.html (le dossier de campagne), les quatre
+   fiches de détachement pages/blood_angels.html, pages/dark_mechanicum.html,
+   pages/thousand_sons.html et pages/salamanders.html, la carte du secteur
+   pages/carte3d.html et l'archive pages/archives.html.
    Aucun style en ligne dans le HTML : tout est ici, nommé, commenté et
    réutilisable. POURQUOI : un style écrit dans l'attribut `style` d'une balise
    ne peut être ni réutilisé, ni redéfini par un media query, ni surchargé par
@@ -22,6 +22,7 @@
      8. Fiches de détachement — pages/blood_angels.html, dark_mechanicum.html
      8 bis. Variante Thousand Sons — pages/thousand_sons.html
      8 ter. Variante Salamanders — pages/salamanders.html
+    8 quater. Variante Archives — pages/archives.html
      9. Fiches des mondes — pages/carte3d.html : grille des cinq corps
     10. Maquette 3D     — pages/carte3d.html : toile WebGL, étiquettes, boutons
     11. Élargissements  — media queries (mobile-first : on part du petit écran)
@@ -2025,6 +2026,416 @@ footer {
   text-transform: uppercase;
   color: var(--rouge);
   transform: rotate(-3deg);
+}
+
+/* =============================================================================
+   8 quater. Variante Archives du Mechanicum — pages/archives.html
+   -----------------------------------------------------------------------------
+   Même motif que les sections 8 bis (Thousand Sons) et 8 ter (Salamanders) : la
+   classe `page-archives` est posée sur `<body>`, elle ne touche à AUCUNE
+   structure existante et n'introduit qu'un jeton DÉCORATIF. Les couleurs de
+   TEXTE employées sont les jetons déjà validés en contraste (`--rouge`, `--or`,
+   `--etiquette`, `--texte-*`) : aucun nouveau calcul n'est nécessaire.
+
+   S'y ajoutent les composants propres à cette page — trame de balayage, sas,
+   dossier classifié, compteur de détection. Ils sont volontairement PORTÉS PAR
+   LA VARIANTE (`.page-archives .dossier`) : ils n'ont de sens que sur l'archive
+   et ne doivent pas polluer les fiches de détachement.
+
+   --- POURQUOI LA TRAME DE BALAYAGE PASSE DERRIÈRE LE TEXTE -------------------
+   Le réflexe est de poser les « scanlines » en `position: fixed` PAR-DESSUS la
+   page. Vérification faite, c'est inacceptable ici : un voile noir, même à 3 %,
+   assombrit le texte autant que le fond et fait tomber les jetons les plus
+   justes sous le seuil de WCAG 1.4.3.
+
+     voile   --etiquette   --texte-attenue   --rouge
+     0 %        4,60            4,64          4,64   ← conforme
+     3 %        4,40            4,44          4,42   ← NON conforme
+     5 %        4,28            4,27          4,28   ← NON conforme
+
+   La trame est donc en `z-index: -1` : elle se peint au-dessus du fond de page
+   mais SOUS tout le contenu. Elle n'assombrit que le fond — ce qui augmente
+   légèrement le contraste au lieu de le réduire — et reste invisible derrière
+   les cartes, qui ont leur propre fond opaque. `pointer-events: none` l'empêche
+   d'intercepter les clics.
+   ============================================================================= */
+.page-archives {
+  --ambre-forge: #7a3b0c; /* décoratif uniquement : bordures et dégradés */
+}
+
+.page-archives .trame-scan {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.55) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+/* Balayage lent qui descend l'écran. `transform` seul est animé : le navigateur
+   le traite sur la couche de composition, sans recalculer la mise en page. */
+.page-archives .trame-scan::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 12rem;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(201, 162, 39, 0.05),
+    transparent
+  );
+  animation: balayage 9s linear infinite;
+}
+
+@keyframes balayage {
+  from {
+    transform: translateY(-12rem);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+/* --- Le sas ---------------------------------------------------------------- */
+.page-archives .sas-invite {
+  font-family: var(--lecture);
+  font-size: var(--fs-md);
+  color: var(--texte-lecture);
+  margin: var(--esp-sm) 0 var(--esp);
+}
+
+.page-archives .sas-terminal {
+  font-family: var(--mono);
+  font-size: var(--fs-petit);
+  color: var(--or);
+  border-inline-start: 3px solid var(--ambre-forge);
+  padding-inline-start: var(--esp);
+  /* `min-height` réserve la place des six lignes AVANT qu'elles ne s'écrivent :
+     sans elle, la carte grandit ligne à ligne et pousse le bouton sous le
+     doigt de l'utilisateur. */
+  min-height: 9.5rem;
+}
+
+.page-archives .sas-ligne {
+  margin: 0 0 0.35em;
+  /* Le texte du terminal ne doit pas être coupé au milieu d'un mot sur
+     téléphone : `overflow-wrap` casse seulement quand c'est indispensable. */
+  overflow-wrap: anywhere;
+}
+
+.page-archives .sas-actions {
+  margin: var(--esp-md) 0 var(--esp);
+}
+
+.page-archives .sas-jeton {
+  margin-top: 0;
+}
+
+/* --- Avertissement ---------------------------------------------------------
+   La pastille clignotante est DÉCORATIVE et `aria-hidden` dans le HTML : elle
+   ne porte aucune information que le texte ne donne pas. Son rythme est de
+   0,6 Hz — WCAG 2.3.1 interdit tout clignotement au-delà de 3 Hz, et le seuil
+   de confort admis est de 2 Hz. Le texte, lui, ne clignote jamais : un contenu
+   qui apparaît et disparaît est illisible pour beaucoup de gens. */
+.page-archives .avertissement {
+  margin-top: var(--esp-lg);
+}
+
+.page-archives .balise-alerte {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  margin-inline-end: 0.4em;
+  border-radius: 50%;
+  background: var(--rouge);
+  animation: pulsation-alerte 1.6s steps(2, end) infinite;
+}
+
+@keyframes pulsation-alerte {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0.25;
+  }
+}
+
+/* --- Dossiers ---------------------------------------------------------------
+   `pile-dossiers` empile les quatre pièces ; `dossier-corps` place la planche
+   et le texte côte à côte QUAND la place existe, grâce à `auto-fit` : aucun
+   media query n'est nécessaire, la grille repasse seule en une colonne sous
+   environ 44rem. `min(100%, 22rem)` évite le débordement sur écran très
+   étroit. */
+.page-archives .pile-dossiers {
+  display: grid;
+  gap: var(--esp-lg);
+  margin-top: var(--esp-lg);
+}
+
+.page-archives .dossier {
+  border-top: 3px solid var(--ambre-forge);
+  background: linear-gradient(#171208, var(--fond-carte));
+}
+
+.page-archives .dossier-entete {
+  border-bottom: 1px solid var(--bordure);
+  padding-bottom: var(--esp-sm);
+}
+
+.page-archives .dossier-cote {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--etiquette);
+  margin: 0 0 0.4em;
+}
+
+.page-archives .dossier-classification {
+  font-family: var(--mono);
+  font-size: var(--fs-mention);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rouge);
+  border: 1px solid var(--sang);
+  display: inline-block;
+  padding: 0.25em 0.7em;
+  margin: var(--esp-xs) 0 0;
+}
+
+/* Les quatre niveaux de classification. Seule la BORDURE change de couleur :
+   le texte reste sur un jeton audité. Une pastille de couleur ne doit jamais
+   être le seul indice — le niveau est écrit en toutes lettres (WCAG 1.4.1). */
+.page-archives .dossier-classification--omega {
+  border-color: var(--sang);
+}
+
+.page-archives .dossier-classification--vermillion {
+  border-color: var(--ambre-forge);
+}
+
+.page-archives .dossier-classification--excommunicate {
+  border-color: var(--bordure-or);
+  color: var(--or);
+}
+
+.page-archives .dossier-classification--obliterata {
+  border-color: var(--bordure-claire);
+  color: var(--texte-pale);
+}
+
+.page-archives .dossier-corps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--esp-md);
+  margin-top: var(--esp-md);
+}
+
+.page-archives .dossier-planche {
+  margin: 0;
+  border: 1px solid var(--bordure);
+  background: #0d0c0a;
+  padding: 0.75rem;
+}
+
+/* `height: auto` accompagne les attributs `width`/`height` du HTML : ceux-ci
+   servent au navigateur à réserver le bon rapport d'aspect avant chargement,
+   `height: auto` lui rend ensuite la liberté de redimensionner. */
+.page-archives .dossier-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.page-archives .dossier-legende {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+  color: var(--texte-attenue);
+  margin-top: 0.75rem;
+}
+
+.page-archives .dossier-meta {
+  margin: 0 0 var(--esp);
+}
+
+.page-archives .dossier-meta-ligne {
+  display: flex;
+  flex-wrap: wrap;
+  /* `gap` est OBLIGATOIRE dans un conteneur flex : entre deux enfants, l'espace
+     du code source disparaît. Sans lui, « Frappe d'archive » et « 831.M30 »
+     seraient collés. Le piège a déjà été rencontré dans la barre de navigation
+     (voir la note de l'audit). */
+  gap: 0.6em;
+  border-bottom: 1px dotted var(--bordure);
+  padding: 0.4em 0;
+}
+
+.page-archives .dossier-meta dt {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--etiquette);
+  flex: 0 0 11rem;
+}
+
+.page-archives .dossier-meta dd {
+  margin: 0;
+  font-family: var(--lecture);
+  font-size: var(--fs-sec);
+  color: var(--texte-lecture);
+  flex: 1 1 12rem;
+}
+
+/* `<details>` natif : on ne redéfinit que l'apparence du `summary`. Le marqueur
+   par défaut est retiré et remplacé par un chevron en contenu généré, avec
+   `/ ""` comme alternative textuelle — sans quoi le lecteur d'écran annonce
+   « triangle noir pointant vers la droite, Lire la note ». */
+.page-archives .dossier-revelation {
+  border: 1px solid var(--bordure);
+  background: var(--fond-article);
+}
+
+.page-archives .dossier-revelation > summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--mono);
+  font-size: var(--fs-mention);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--or);
+  /* 2,75rem de haut : cible tactile d'au moins 44 px (WCAG 2.5.5). */
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.65rem 0.9rem;
+}
+
+.page-archives .dossier-revelation > summary::-webkit-details-marker {
+  display: none;
+}
+
+.page-archives .dossier-revelation > summary::before {
+  content: "▸" / "";
+  color: var(--rouge);
+}
+
+.page-archives .dossier-revelation[open] > summary::before {
+  content: "▾" / "";
+}
+
+.page-archives .dossier-note {
+  border-top: 1px solid var(--bordure-fine);
+  padding: var(--esp) 0.9rem var(--esp-sm);
+}
+
+.page-archives .dossier-note p {
+  font-family: var(--lecture);
+  font-size: var(--fs-sec);
+  line-height: 1.75;
+  color: var(--texte-lecture);
+  margin: 0 0 var(--esp-sm);
+}
+
+.page-archives .dossier-note strong {
+  color: var(--texte-clair);
+}
+
+.page-archives .dossier-actions {
+  margin: var(--esp) 0 0;
+}
+
+/* --- Sortie du terminal (échecs de téléchargement) -------------------------- */
+.page-archives .terminal-sortie {
+  font-family: var(--mono);
+  font-size: var(--fs-petit);
+  line-height: 1.7;
+  color: var(--rouge);
+  border-inline-start: 3px solid var(--sang);
+  padding: 0 0 0 var(--esp);
+  margin-top: var(--esp-lg);
+  min-height: 1.7em; /* réserve la place : la page ne saute pas au premier refus */
+  overflow-wrap: anywhere;
+}
+
+/* Un bref éclat au moment où le message change, pour qu'un refus identique au
+   précédent se remarque quand même. Aucune information n'en dépend. */
+.page-archives .terminal-sortie--vive {
+  animation: eclat-refus 0.5s ease-out 1;
+}
+
+@keyframes eclat-refus {
+  from {
+    color: var(--texte-clair);
+  }
+  to {
+    color: var(--rouge);
+  }
+}
+
+/* --- Compteur de détection -------------------------------------------------- */
+.page-archives .compteur-detection {
+  text-align: center;
+}
+
+.page-archives .compteur-valeur {
+  font-family: var(--mono);
+  font-size: 2.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--rouge);
+  margin: var(--esp-xs) 0 var(--esp-sm);
+  /* `tabular-nums` fige la largeur des chiffres : sans elle, le compteur
+     tressaute à chaque seconde parce que le « 1 » est plus étroit que le
+     « 8 ». */
+  font-variant-numeric: tabular-nums;
+}
+
+.page-archives .compteur-legende {
+  margin: 0 auto var(--esp);
+  max-width: 34rem;
+}
+
+.page-archives .compteur-actions {
+  margin: 0;
+}
+
+/* État « détecté » : le compteur passe au blanc franc et le cadre au rouge.
+   La couleur n'est pas le seul signal — la légende et l'annonce vocale disent
+   ce qui vient de se produire (WCAG 1.4.1). */
+.page-archives.archives-detecte .compteur-valeur {
+  color: var(--texte-clair);
+}
+
+.page-archives.archives-detecte .compteur-detection {
+  border-color: var(--sang);
+}
+
+/* --- Mouvement réduit ------------------------------------------------------
+   Un seul bloc pour toute la page : l'utilisateur qui a demandé moins
+   d'animations n'en reçoit aucune. Le compte à rebours, lui, continue — ce
+   n'est pas du mouvement, c'est de l'information, et il possède déjà son
+   bouton de suspension (WCAG 2.2.2). */
+@media (prefers-reduced-motion: reduce) {
+  .page-archives .trame-scan::after,
+  .page-archives .balise-alerte,
+  .page-archives .terminal-sortie--vive {
+    animation: none;
+  }
+
+  .page-archives .balise-alerte {
+    opacity: 1;
+  }
 }
 
 /* =============================================================================

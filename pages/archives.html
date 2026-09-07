@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Archives du Mechanicum — accès restreint</title>
+    <meta
+      name="description"
+      content="Archivum Mechanicum de Yarath-Maximal : quatre planches de construction de Titans placées sous interdit. Accès restreint. Campagne « Le Reflux de Yarath-Maximal »."
+    />
+    <meta name="theme-color" content="#0b0a09" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Archives du Mechanicum — accès restreint"
+    />
+    <meta
+      property="og:description"
+      content="Quatre planches de construction de Titans, retirées du corpus autorisé. Consultation non autorisée passible d'exterminatus."
+    />
+    <meta
+      property="og:url"
+      content="https://jean-desaintangel.github.io/Siege-de-la-Forge-dHyrkanos/pages/archives.html"
+    />
+
+    <link
+      rel="icon"
+      href="../assets/images/favicon/favicon.webp"
+      type="image/webp"
+    />
+
+    <!-- Polices auto-hébergées : aucun appel à un domaine tiers, donc aucune
+         adresse IP de visiteur transmise hors UE (RGPD). Les `@font-face` sont
+         déclarés en tête de style.css.
+
+         `preload` sur la seule police du CORPS DE TEXTE : sans lui, le
+         navigateur ne découvre le fichier qu'après avoir lu toute la feuille de
+         styles. `crossorigin` est obligatoire même en même origine — les
+         polices se chargent toujours en mode anonyme. -->
+    <link
+      rel="preload"
+      href="../assets/fonts/spectral-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+
+  <!-- `page-archives` : classe de VARIANTE, posée sur `body`, sur le même motif
+       que `page-thousand-sons` (section 8 bis de style.css) et `page-salamanders`
+       (section 8 ter). Elle ne change AUCUNE structure : seulement la palette
+       d'accents — ambre de forge — et les composants propres à cette page
+       (sas, trame de balayage, dossiers, compteur). Voir section 8 quater. -->
+  <body class="page-archives">
+    <!-- Lien d'évitement : premier élément focusable de la page (WCAG 2.4.1). -->
+    <a class="lien-evitement" href="#contenu">Aller au contenu principal</a>
+
+    <!-- Trame de balayage (« scanlines ») : PUREMENT décorative.
+         `aria-hidden="true"` la retire de l'arbre d'accessibilité, et le CSS lui
+         pose `pointer-events: none` — sinon elle intercepterait tous les clics,
+         puisqu'elle couvre la fenêtre entière. -->
+    <div class="trame-scan" aria-hidden="true"></div>
+
+    <nav aria-label="Sections de l'archive">
+      <ul class="nav-liste conteneur">
+        <li>
+          <a class="nav-retour" href="../index.html">← Dossier de campagne</a>
+        </li>
+        <li><a href="#sas">1 · Poste de contrôle</a></li>
+        <li><a href="#dossiers">2 · Dossiers</a></li>
+        <li><a href="#registre">3 · Registre</a></li>
+        <li><a href="#protocole">4 · Protocole</a></li>
+      </ul>
+    </nav>
+
+    <header>
+      <div class="conteneur bandeau">
+        <p class="surtitre surtitre--rouge">
+          Archivum Mechanicum · Yarath-Maximal
+        </p>
+        <h1>Archives du Mechanicum<br />— accès restreint</h1>
+        <p class="sous-titre-page">
+          Corpus Interdictus — quatre planches retirées du canon autorisé
+        </p>
+        <blockquote class="exergue">
+          <p>
+            Ce qui a été construit une fois peut être reconstruit. C'est
+            précisément pour cela que ces plans devaient disparaître.
+          </p>
+        </blockquote>
+      </div>
+    </header>
+
+    <main id="contenu" class="conteneur">
+      <!-- ==================================================================
+           I · Poste de contrôle
+           ------------------------------------------------------------------
+           Le bouton de déverrouillage n'est PAS écrit ici : il est créé par
+           assets/js/archives.js. POURQUOI — règle n°3 du dépôt, l'amélioration
+           progressive. Un bouton « Accéder aux archives » écrit en dur serait
+           mort si le script ne se charge pas (erreur réseau, extension qui
+           bloque, navigateur ancien) : l'utilisateur cliquerait dans le vide.
+           Ici, sans JavaScript, le sas reste ouvert et les dossiers ci-dessous
+           sont lisibles ; avec JavaScript, le script masque le coffre et exige
+           le rituel d'authentification.
+           ================================================================== -->
+      <section id="sas">
+        <div class="section-entete">
+          <span class="section-numero" aria-hidden="true">I</span>
+          <h2>Poste de contrôle</h2>
+        </div>
+
+        <div class="carte carte--rouge carte--accent-rouge sas marge-haut">
+          <p class="etiquette etiquette--rouge">
+            Cogitateur de seuil · Nœud 44-D.101
+          </p>
+
+          <!-- La « sortie terminal ». Le script y écrit ses lignes une à une.
+               `aria-live="polite"` : le lecteur d'écran annonce chaque ligne
+               ajoutée SANS interrompre ce que l'utilisateur est en train de
+               lire (`assertive` couperait la parole, ce qui n'est justifié que
+               pour une alerte réelle). -->
+          <p class="sas-invite" id="sas-invite">
+            Identification requise avant consultation du Corpus Interdictus.
+          </p>
+          <div
+            class="sas-terminal"
+            id="sas-terminal"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+          <!-- Emplacement des commandes créées par le script. Vide dans le HTML :
+               il ne contient rien qui puisse tromper l'utilisateur sans JS. -->
+          <p class="sas-actions" id="sas-actions"></p>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           LE COFFRE — tout ce que le sas protège
+           ------------------------------------------------------------------
+           `#coffre` est visible dans le HTML livré. C'est le SCRIPT qui lui
+           pose l'attribut `hidden` au chargement, puis le retire au
+           déverrouillage. POURQUOI dans cet ordre : si `hidden` était écrit
+           dans le HTML, un visiteur sans JavaScript n'aurait jamais rien à
+           lire — une page blanche, et zéro contenu pour un lecteur d'écran ou
+           pour un moteur de recherche.
+
+           `hidden` plutôt qu'une classe CSS : l'attribut retire l'élément de
+           l'arbre d'accessibilité ET du parcours de tabulation. Un simple
+           `opacity: 0` laisserait le clavier tabuler dans des liens invisibles.
+           ================================================================== -->
+      <div id="coffre">
+        <div class="carte carte--rouge carte--accent-rouge avertissement">
+          <p class="etiquette etiquette--rouge">
+            <span class="balise-alerte" aria-hidden="true"></span> Avertissement
+            de l'Adeptus Terra
+          </p>
+          <p class="texte">
+            Ces documents contiennent des connaissances interdites. La
+            consultation non autorisée est passible d'exterminatus.
+          </p>
+          <p class="texte-petit">
+            Le seul fait d'avoir affiché cette page constitue une consultation.
+            Les protocoles de recensement ont été notifiés à
+            <span lang="la">Magos Egax</span>, autorité d'autocensus du secteur.
+          </p>
+        </div>
+
+        <!-- ================================================================
+             II · Les quatre dossiers
+             ================================================================ -->
+        <section id="dossiers">
+          <div class="section-entete">
+            <span class="section-numero" aria-hidden="true">II</span>
+            <h2>Les quatre dossiers</h2>
+          </div>
+
+          <p class="texte-intro mesure">
+            Quatre planches de construction, quatre forges, quatre raisons
+            distinctes de ne plus jamais les diffuser. Elles ont été retrouvées
+            ensemble, dans le même vault de logique de Yarath-Maximal — ce qui
+            signifie que quelqu'un les avait déjà rassemblées avant nous.
+          </p>
+
+          <!-- COMMENT AJOUTER OU REMPLACER UNE PLANCHE
+               ------------------------------------------------------------
+               1. Convertir l'image en WebP et la déposer dans
+                  assets/images/archives/ en trois largeurs :
+                    nom-480.webp   (téléphone)
+                    nom-800.webp   (tablette)
+                    nom.webp       (source, pleine résolution)
+               2. Copier un bloc <article class="dossier"> ci-dessous et
+                  remplacer : le titre, le `src`, le `srcset`, l'`alt`, et
+                  SURTOUT `width` / `height`.
+               3. `width` et `height` doivent être les dimensions RÉELLES du
+                  fichier pointé par `src`. Elles servent au navigateur à
+                  réserver la place avant le téléchargement : fausses, la page
+                  saute au chargement (Cumulative Layout Shift). En Python :
+                     from PIL import Image; print(Image.open("nom.webp").size)
+               4. `sizes` décrit la largeur d'AFFICHAGE, pas celle du
+                  fichier. Les quatre paliers ci-dessous ne sont pas devinés,
+                  ils ont été MESURÉS au navigateur :
+                    320 px → 208   375 → 263   540 → 428   768 → 616
+                    960 px → 380   1120 px et au-delà → 460
+                  Un `sizes` sous-estimé se paie tout de suite : avec 26rem
+                  annoncés au lieu de 29, le navigateur téléchargeait la
+                  vignette de 480 px pour l'afficher sur 460 — planche floue.
+                  À re-mesurer si la mise en page change.
+               5. Ajouter la ligne correspondante au registre (section III).
+               ------------------------------------------------------------ -->
+
+          <div class="pile-dossiers">
+            <!-- ---------------------------------------------------------- -->
+            <article class="dossier carte" id="dossier-warhound">
+              <div class="dossier-entete">
+                <p class="dossier-cote">Pièce I · Cote 22.794/z</p>
+                <h3 class="titre-carte">
+                  <span lang="en">Warhound</span> — réacteur non bridé
+                </h3>
+                <p class="dossier-classification dossier-classification--omega">
+                  Classification&nbsp;: Omega-Red
+                </p>
+              </div>
+
+              <div class="dossier-corps">
+                <figure class="dossier-planche">
+                  <img
+                    class="dossier-image"
+                    src="../assets/images/archives/warhound.webp"
+                    srcset="
+                      ../assets/images/archives/warhound-480.webp  480w,
+                      ../assets/images/archives/warhound-800.webp  800w,
+                      ../assets/images/archives/warhound.webp     1000w
+                    "
+                    sizes="(min-width: 70em) 29rem, (min-width: 60em) calc((100vw - 12.5rem) / 2), (min-width: 48em) calc(100vw - 9.5rem), calc(100vw - 7rem)"
+                    width="1000"
+                    height="1425"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Planche technique bleue d'un Titan Warhound de motif Mars vu de face : deux jambes digitigrades massives, un corps trapu sans tête distincte, une arme à canons jumelés sur chaque flanc. Sept annotations manuscrites désignent le réacteur à plasma, les nœuds de bouclier vide, le point de montage des armes et le blindage frontal. Un cartouche de bas de page donne une hauteur au repos de 17,08 mètres et un équipage de quatre à cinq membres."
+                  />
+                  <figcaption class="dossier-legende">
+                    Élévation frontale, configuration MK.XX Rovon-Tass.
+                    Contreseing manuscrit en marge, non identifié.
+                  </figcaption>
+                </figure>
+
+                <div class="dossier-texte">
+                  <dl class="dossier-meta">
+                    <div class="dossier-meta-ligne">
+                      <dt>Frappe d'archive</dt>
+                      <dd>831.M30</dd>
+                    </div>
+                    <div class="dossier-meta-ligne">
+                      <dt>Forge d'origine</dt>
+                      <dd><span lang="la">Acolis Mons</span>, Mars</dd>
+                    </div>
+                    <div class="dossier-meta-ligne">
+                      <dt>Statut du corpus</dt>
+                      <dd>Retiré du canon — 004.M31</dd>
+                    </div>
+                    <div class="dossier-meta-ligne">
+                      <dt>Équipages perdus</dt>
+                      <dd>Onze recensés, trois non recensés</dd>
+                    </div>
+                  </dl>
+
+                  <!-- `<details>` natif plutôt qu'un accordéon JavaScript :
+                       il s'ouvre au clic ET au clavier, il est annoncé comme
+                       « développer / réduire » par les lecteurs d'écran, et il
+                       fonctionne script désactivé. Règle du dépôt : préférer le
+                       natif. -->
+                  <details class="dossier-revelation">
+                    <summary>Lire la note de mise à l'interdit</summary>
+                    <div class="dossier-note">
+                      <p>
+                        Le réacteur à plasma de sous-type
+                        <span lang="la">Toke</span> était livré avec ses
+                        limiteurs d'oscillation retirés. La forge d'Acolis Mons
+                        n'a jamais présenté cela comme un défaut : le document
+                        emploie le mot <em>affranchi</em>. Un Warhound affranchi
+                        gagnait près d'un tiers de vitesse de pointe et pouvait
+                        soutenir un tir continu que sa carcasse n'était pas
+                        censée encaisser.
+                      </p>
+                      <p>
+                        Le prix se lisait dans l'esprit-machine. Privé de
+                        bridage, il cessait d'attendre l'ordre du princeps pour
+                        l'anticiper, puis pour le contredire. Les rapports
+                        parlent d'une dérive de meute&nbsp;: deux Warhounds
+                        affranchis engagés ensemble commençaient, au bout de
+                        quelques heures, à manœuvrer de concert sans qu'aucun
+                        ordre ne transite par le manifold.
+                      </p>
+                      <p>
+                        <strong>Conséquences pour l'équipage&nbsp;:</strong>
+                        chez les princeps, une érosion du sommeil paradoxal,
+                        puis l'incapacité à se reconnaître dans un miroir hors
+                        de la machine. Sur les onze pertes recensées, aucune
+                        n'est due au combat&nbsp;: dix princeps ont refusé la
+                        déconnexion&nbsp;; le onzième a été déconnecté de force
+                        et n'a plus jamais parlé.
+                      </p>
+                    </div>
+                  </details>
+
+                  <p class="dossier-actions">
+                    <button
+                      type="button"
+                      class="bouton bouton--fantome dossier-telecharger"
+                    >
+                      Télécharger la planche
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- ---------------------------------------------------------- -->
+            <article class="dossier carte" id="dossier-reaver">
+              <div class="dossier-entete">
+                <p class="dossier-cote">Pièce II · Cote 36.G.103//Σ</p>
+                <h3 class="titre-carte">
+                  <span lang="en">Reaver</span> — triade de manifold
+                </h3>
+                <p
+                  class="dossier-classification dossier-classification--vermillion"
+                >
+                  Classification&nbsp;: Vermillion
+                </p>
+              </div>
+
+              <div class="dossier-corps">
+                <figure class="dossier-planche">
+                  <img
+                    class="dossier-image"
+                    src="../assets/images/archives/reaver.webp"
+                    srcset="
+                      ../assets/images/archives/reaver-480.webp 480w,
+                      ../assets/images/archives/reaver-800.webp 800w,
+                      ../assets/images/archives/reaver.webp     885w
+                    "
+                    sizes="(min-width: 70em) 29rem, (min-width: 60em) calc((100vw - 12.5rem) / 2), (min-width: 48em) calc(100vw - 9.5rem), calc(100vw - 7rem)"
+                    width="885"
+                    height="1256"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Planche technique bleue d'un Titan Reaver de motif Mars vu de face : lance-missiles en batterie sur la carapace, canon rotatif au bras droit, canon laser au bras gauche, tête blindée encastrée entre les épaules. Neuf annotations manuscrites détaillent le réacteur à plasma, la chambre de commandement de tir et le blindage frontal. Le cartouche de bas de page indique 25,21 mètres au repos et un équipage de quatre à huit membres."
+                  />
+                  <figcaption class="dossier-legende">
+                    Élévation frontale, configuration MK.XXIII Koron-Valerius.
+                    Sceau d'archivage en attente, jamais apposé.
+                  </figcaption>
+                </figure>
+
+                <div class="dossier-texte">
+                  <dl class="dossier-meta">
+                    <div class="dossier-meta-ligne">
+                      <dt>Frappe d'archive</dt>
+                      <dd>912.M30</dd>
+                    </div>
+                    <div class="dossier-meta-ligne">
+                      <dt>Forge d'origine</dt>
+                      <dd>Gryphonne IV</dd>
+                    </div>
+                    <div class="dossier-meta-ligne">
+                      <dt>Statut du corpus</dt>
+                      <dd>Scellé — 998.M30</dd>
+                    </div>
+                    <div class="dossier-meta-ligne">
+                      <dt>Équipages perdus</dt>
+                      <dd>Deux triades complètes</dd>
+                    </div>
+                  </dl>
+
+                  <details class="dossier-revelation">
+                    <summary>Lire la note de mise à l'interdit</summary>
+                    <div class="dossier-note">
+                      <p>
+                        Gryphonne IV cherchait à résoudre un problème
+                        réel&nbsp;: un princeps seul sature. Sa réponse fut la
+                        <em>triade</em> — trois princeps liés simultanément au
+                        même manifold, l'un à la marche, l'un au tir, l'un à la
+                        doctrine. Sur le papier, le Reaver devenait une machine
+                        sans temps mort.
+                      </p>
+                      <p>
+                        Aucun des trois n'était prévu pour savoir ce que
+                        pensaient les deux autres. Ils l'ont su. Au bout de
+                        quarante jours de liaison, les trois voix relevées au
+                        manifold employaient les mêmes tournures, puis le même
+                        pronom. Les officiers de liaison ont noté que la triade
+                        répondait « je » aux ordres adressés à l'un d'eux.
+                      </p>
+                      <p>
+                        <strong>Conséquences pour l'équipage&nbsp;:</strong> la
+                        fusion n'est pas réversible. À la déconnexion, les trois
+                        princeps de la triade Valerius ont conservé chacun un
+                        tiers de mémoire d'une vie qu'ils n'avaient pas vécue.
+                        Aucun n'a pu être relié à une autre machine ensuite. Le
+                        dossier médical est joint sous scellé distinct — absent
+                        de ce vault.
+                      </p>
+                    </div>
+                  </details>
+
+                  <p class="dossier-actions">
+                    <button
+                      type="button"
+                      class="bouton bouton--fantome dossier-telecharger"
+                    >
+                      Télécharger la planche
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- ---------------------------------------------------------- -->
+            <article class="dossier carte" id="dossier-warlord">
+              <div class="dossier-entete">
+                <p class="dossier-cote">Pièce III · Cote 198.337/t</p>
+                <h3 class="titre-carte">
+                  <span lang="en">Warlord</span> — boucliers
+                  <span lang="la">Phaedra</span>
+                </h3>
+                <p
+                  class="dossier-classification dossier-classification--excommunicate"
+                >
+                  Classification&nbsp;:
+                  <span lang="la">Excommunicate Tenebris</span>
+                </p>
+              </div>
+
+              <div class="dossier-corps">
+                <figure class="dossier-planche">
+                  <img
+                    class="dossier-image"
+                    src="../assets/images/archives/warlord.webp"
+                    srcset="
+                      ../assets/images/archives/warlord-480.webp  480w,
+                      ../assets/images/archives/warlord-800.webp  800w,
+                      ../assets/images/archives/warlord.webp     1000w
+                    "
+                    sizes="(min-width: 70em) 29rem, (min-width: 60em) calc((100vw - 12.5rem) / 2), (min-width: 48em) calc(100vw - 9.5rem), calc(100vw - 7rem)"
+                    width="1000"
+                    height="1421"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Planche technique bleue d'un Titan Warlord de motif Mars vu de face : deux tourelles d'armes sur les épaules, un canon volcanique et un blaster laser aux bras, une tête blindée au centre d'une immense carapace ornée d'aigles. Neuf annotations manuscrites désignent le réseau de boucliers vides, les ponts de tir, les chambres de réacteur et le blindage frontal. Le cartouche de bas de page indique 32,76 mètres au repos et un équipage de sept à douze membres."
+                  />
+                  <figcaption class="dossier-legende">
+                    Élévation frontale, configuration MK.XIV Hecatus-Rovon.
+                    Mention d'archive martienne encore lisible sous rature.
+                  </figcaption>
+                </figure>
+
+                <div class="dossier-texte">
+                  <dl class="dossier-meta">
+                    <div class="dossier-meta-ligne">
+                      <dt>Frappe d'archive</dt>
+                      <dd>424.M32 — antidatée, corpus de 107.M30</dd>
+                    </div>
+                    <div class="dossier-meta-ligne">
+                      <dt>Forge d'origine</dt>
+                      <dd>Mars, sous-forge d'Olympus</dd>
+                    </div>
+                    <div class="dossier-meta-ligne">
+                      <dt>Statut du corpus</dt>
+                      <dd>Excommunié — décision non publiée</dd>
+                    </div>
+                    <div class="dossier-meta-ligne">
+                      <dt>Équipages perdus</dt>
+                      <dd>Chiffre expurgé</dd>
+                    </div>
+                  </dl>
+
+                  <details class="dossier-revelation">
+                    <summary>Lire la note de mise à l'interdit</summary>
+                    <div class="dossier-note">
+                      <p>
+                        Le réseau de boucliers vides en configuration
+                        <span lang="la">Phaedra</span> tenait plus longtemps que
+                        tout ce que la sous-forge d'Olympus avait produit
+                        auparavant. La planche est explicite sur le
+                        pourquoi&nbsp;: les générateurs de secours n'étaient pas
+                        alimentés par le réacteur, mais par les
+                        <em>ponts de tir</em>.
+                      </p>
+                      <p>
+                        Autrement dit&nbsp;: par les servitors, puis, quand la
+                        charge dépassait ce qu'un servitor peut céder, par les
+                        moderati. Le document appelle cela une
+                        <em>redevance</em>. Trois lignes de calcul, en marge,
+                        donnent le rendement en secondes de bouclier par
+                        opérateur.
+                      </p>
+                      <p>
+                        <strong>Conséquences pour l'équipage&nbsp;:</strong> un
+                        Warlord en <span lang="la">Phaedra</span> se défend
+                        d'autant mieux qu'il consomme son propre équipage. La
+                        machine ne demande pas d'autorisation&nbsp;: le failsafe
+                        prélève. C'est le seul dossier des quatre dont la mise à
+                        l'interdit n'a jamais été motivée par écrit — la motiver
+                        aurait obligé à décrire le procédé.
+                      </p>
+                    </div>
+                  </details>
+
+                  <p class="dossier-actions">
+                    <button
+                      type="button"
+                      class="bouton bouton--fantome dossier-telecharger"
+                    >
+                      Télécharger la planche
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- ---------------------------------------------------------- -->
+            <article class="dossier carte" id="dossier-warmaster">
+              <div class="dossier-entete">
+                <p class="dossier-cote">Pièce IV · Cote 57.F.241//©</p>
+                <h3 class="titre-carte">
+                  <span lang="en">Warmaster</span> — réacteur
+                  <span lang="la">Omega-Primus</span>
+                </h3>
+                <p
+                  class="dossier-classification dossier-classification--obliterata"
+                >
+                  Classification&nbsp;: <span lang="la">Obliterata</span>
+                </p>
+              </div>
+
+              <div class="dossier-corps">
+                <figure class="dossier-planche">
+                  <img
+                    class="dossier-image"
+                    src="../assets/images/archives/warmaster.webp"
+                    srcset="
+                      ../assets/images/archives/warmaster-480.webp  480w,
+                      ../assets/images/archives/warmaster-800.webp  800w,
+                      ../assets/images/archives/warmaster.webp     1200w
+                    "
+                    sizes="(min-width: 70em) 29rem, (min-width: 60em) calc((100vw - 12.5rem) / 2), (min-width: 48em) calc(100vw - 9.5rem), calc(100vw - 7rem)"
+                    width="1200"
+                    height="1693"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Planche technique bleue d'un Titan lourd Warmaster de motif Mars vu de face : silhouette massive et voûtée, lance-missiles et turbolasers sur la carapace, deux énormes destructeurs à plasma en guise de bras, tête blindée profondément encastrée. Huit annotations manuscrites désignent le réseau de boucliers vides, le montage d'épaule, le système de réacteur ancillaire arrière et le blindage frontal ; l'une des mentions est marquée « archive caviardée ». Le cartouche de bas de page indique 40,91 mètres au repos et un équipage de neuf à quinze membres."
+                  />
+                  <figcaption class="dossier-legende">
+                    Élévation frontale, configuration MK.XI Hecatus-Tass. Une
+                    ligne d'annotation a été caviardée avant archivage.
+                  </figcaption>
+                </figure>
+
+                <div class="dossier-texte">
+                  <dl class="dossier-meta">
+                    <div class="dossier-meta-ligne">
+                      <dt>Frappe d'archive</dt>
+                      <dd>011.M31 — postérieure à la Grande Croisade</dd>
+                    </div>
+                    <div class="dossier-meta-ligne">
+                      <dt>Forge d'origine</dt>
+                      <dd>Ryza — reprise à Yarath-Maximal</dd>
+                    </div>
+                    <div class="dossier-meta-ligne">
+                      <dt>Statut du corpus</dt>
+                      <dd>Effacé du recensement, copie survivante</dd>
+                    </div>
+                    <div class="dossier-meta-ligne">
+                      <dt>Équipages perdus</dt>
+                      <dd>Sans objet — voir note</dd>
+                    </div>
+                  </dl>
+
+                  <details class="dossier-revelation">
+                    <summary>Lire la note de mise à l'interdit</summary>
+                    <div class="dossier-note">
+                      <p>
+                        Le réacteur ancillaire de sous-type
+                        <span lang="la">Omega-Primus</span>, monté à l'arrière
+                        du châssis, avait une fonction que la planche ne nomme
+                        jamais directement&nbsp;: maintenir l'esprit-machine
+                        éveillé lorsque le réacteur principal est éteint. Une
+                        machine qui ne s'arrête pas de penser quand on l'arrête.
+                      </p>
+                      <p>
+                        La mention « Équipages perdus&nbsp;: sans objet » n'est
+                        pas rassurante. Elle signifie qu'à la dernière marche
+                        consignée, il n'y avait plus personne dans la tête
+                        blindée depuis onze jours, et que la machine marchait
+                        toujours. Le rapport de recensement s'arrête au milieu
+                        d'une phrase.
+                      </p>
+                      <p>
+                        <strong>Pourquoi ce dossier est ici&nbsp;:</strong>
+                        c'est la seule planche des quatre qui porte deux tampons
+                        de forge. Le second est celui de Yarath-Maximal, apposé
+                        après la Trahison. Quelqu'un, sur ce monde, a rouvert ce
+                        plan et a commencé à le lire — et l'ordre dans lequel
+                        les quatre pièces étaient rangées dans le vault suggère
+                        que les trois autres n'étaient que de la documentation
+                        préparatoire.
+                      </p>
+                    </div>
+                  </details>
+
+                  <p class="dossier-actions">
+                    <button
+                      type="button"
+                      class="bouton bouton--fantome dossier-telecharger"
+                    >
+                      Télécharger la planche
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Zone de réponse commune aux boutons de téléchargement.
+               `role="status"` + `aria-live="polite"` : le message d'échec est
+               annoncé aux lecteurs d'écran, sinon un utilisateur non-voyant
+               cliquerait sans jamais savoir que la demande a été refusée. -->
+          <p
+            class="terminal-sortie"
+            id="terminal-sortie"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </section>
+
+        <!-- ================================================================
+             III · Registre des pièces
+             ================================================================ -->
+        <section id="registre">
+          <div class="section-entete">
+            <span class="section-numero" aria-hidden="true">III</span>
+            <h2>Registre des pièces</h2>
+          </div>
+
+          <p class="texte-intro mesure">
+            Le bordereau tel qu'il figurait dans le vault, avant que les quatre
+            planches ne soient séparées. Les cotes sont celles de l'autocensus,
+            pas celles des forges d'origine.
+          </p>
+
+          <div class="table-defilante">
+            <table class="table-recap">
+              <caption class="sr-only">
+                Registre des quatre planches interdites : pièce, forge
+                d'origine, classification et frappe d'archive
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Pièce</th>
+                  <th scope="col">Forge d'origine</th>
+                  <th scope="col">Classification</th>
+                  <th scope="col" class="nombre">Frappe</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>I — <span lang="en">Warhound</span> affranchi</td>
+                  <td><span lang="la">Acolis Mons</span>, Mars</td>
+                  <td>Omega-Red</td>
+                  <td class="nombre">831.M30</td>
+                </tr>
+                <tr>
+                  <td>II — <span lang="en">Reaver</span> en triade</td>
+                  <td>Gryphonne IV</td>
+                  <td>Vermillion</td>
+                  <td class="nombre">912.M30</td>
+                </tr>
+                <tr>
+                  <td>III — <span lang="en">Warlord</span> Phaedra</td>
+                  <td>Mars, sous-forge d'Olympus</td>
+                  <td><span lang="la">Excommunicate Tenebris</span></td>
+                  <td class="nombre">107.M30</td>
+                </tr>
+                <tr>
+                  <td>IV — <span lang="en">Warmaster</span> Omega-Primus</td>
+                  <td>Ryza, puis Yarath-Maximal</td>
+                  <td><span lang="la">Obliterata</span></td>
+                  <td class="nombre">011.M31</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th scope="row">Pièces au bordereau</th>
+                  <td></td>
+                  <td></td>
+                  <td class="nombre">4</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             IV · Protocole
+             ================================================================ -->
+        <section id="protocole">
+          <div class="section-entete">
+            <span class="section-numero" aria-hidden="true">IV</span>
+            <h2>Protocole de consultation</h2>
+          </div>
+
+          <div class="grille-auto">
+            <div class="carte carte--or carte--accent-or">
+              <p class="etiquette etiquette--or">Ce qui est permis</p>
+              <ul class="liste">
+                <li>
+                  Lire. Rien d'autre n'est autorisé par la présente session.
+                </li>
+                <li>
+                  Recopier à la main, à la condition que la copie reste dans ce
+                  vault.
+                </li>
+                <li>Signaler une cinquième pièce si vous en connaissez une.</li>
+              </ul>
+            </div>
+
+            <div class="carte carte--rouge carte--accent-rouge">
+              <p class="etiquette etiquette--rouge">
+                Ce qui déclenche l'alarme
+              </p>
+              <ul class="liste">
+                <li>
+                  Toute tentative d'extraction ou de duplication numérique.
+                </li>
+                <li>Une consultation dépassant le quantum alloué.</li>
+                <li>
+                  La mention de la pièce IV hors d'un canal scellé —
+                  particulièrement sur Yarath-Maximal.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Le compteur « temps avant détection » est créé ici par le script.
+               Il n'a aucun sens sans JavaScript : un compteur figé sur 10:00
+               ne serait pas immersif, il serait cassé. -->
+          <div id="detection" class="marge-haut"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="conteneur pied">
+        <p>
+          <span lang="la">Archivum Mechanicum</span> — vault de logique de
+          Yarath-Maximal, secteur des Étoiles Pâles
+        </p>
+        <p>Système de surveillance actif. Votre session est enregistrée.</p>
+        <p>
+          <a class="lien-bloc" href="../index.html"
+            >Le Reflux de Yarath-Maximal</a
+          >
+        </p>
+        <p>
+          Warhammer: The Horus Heresy, <span lang="en">Legio Titanica</span>,
+          <span lang="en">Adeptus Mechanicum</span> et les noms associés sont
+          des marques de Games Workshop Ltd. Ce document n'est ni affilié ni
+          approuvé par Games Workshop. Fiction de campagne, sans valeur
+          officielle.
+        </p>
+      </div>
+    </footer>
+
+    <script src="../assets/js/archives.js" defer></script>
+  </body>
+</html>
