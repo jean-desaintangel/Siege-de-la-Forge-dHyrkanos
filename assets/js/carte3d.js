@@ -3,7 +3,7 @@
    -----------------------------------------------------------------------------
    Ce module dessine, dans un `<canvas>` WebGL, une maquette en volume du
    système décrit par `pages/carte3d.html`. Il est un BONUS : la référence reste
-   le texte de la page — la liste des mondes et leurs fiches — qui tient sans
+   le texte de la page — les fiches des mondes — qui tient sans
    script, sans réseau et au lecteur d'écran.
 
    TROIS RÈGLES QUI EXPLIQUENT TOUT LE FICHIER
@@ -11,12 +11,12 @@
    1. UN CANVAS N'EST PAS ACCESSIBLE. Ce que WebGL dessine n'existe nulle part
       dans le DOM : ni le lecteur d'écran ni le clavier n'y ont accès. La toile
       est donc marquée `aria-hidden="true"` et TOUTE l'interaction passe par de
-      vrais boutons HTML, listés dans la page. Le pointeur ne fait que doubler
-      ce que les boutons permettent déjà. C'est la seule façon honnête de
+      vrais liens HTML, ceux des titres de fiches. Le pointeur ne fait que
+      doubler ce que ces liens permettent déjà. C'est la seule façon honnête de
       livrer de la 3D sans exclure personne.
 
    2. AUCUNE DONNÉE N'EST ÉCRITE ICI. Les noms, les résumés et les paramètres
-      d'orbite sont lus dans les attributs `data-*` des boutons de la page. Le
+      d'orbite sont lus dans les attributs `data-*` des fiches de la page. Le
       HTML reste la source unique — corriger une orbite dans le HTML suffit.
 
    3. RIEN N'EST GARANTI. WebGL peut être indisponible (vieux poste, pilote
@@ -41,11 +41,11 @@ const cadre = document.getElementById("scene3d-cadre");
 const secours = document.getElementById("scene3d-secours");
 const coucheEtiquettes = document.getElementById("scene3d-etiquettes");
 const annonce = document.getElementById("scene3d-annonce");
-const boutonsMondes = Array.from(document.querySelectorAll("[data-monde]"));
+const liensMondes = Array.from(document.querySelectorAll("[data-monde]"));
 
 // Si la page n'est pas celle qu'on attend, on ne fait rien : ce module est
 // chargé par une seule page, mais mieux vaut une sortie propre qu'une erreur.
-if (cadre && coucheEtiquettes && boutonsMondes.length > 0) {
+if (cadre && coucheEtiquettes && liensMondes.length > 0) {
   demarrer();
 }
 
@@ -53,7 +53,7 @@ function demarrer() {
   /* -------------------------------------------------------------------------
      1. Les corps du système, lus dans le HTML
      ----------------------------------------------------------------------
-     Chaque bouton de la liste « Les mondes » porte ses paramètres :
+     Le lien du titre de chaque fiche de monde porte ses paramètres :
 
        data-monde     identifiant court, sert de clé
        data-nom       nom affiché sur l'étiquette flottante
@@ -67,18 +67,18 @@ function demarrer() {
 
      `dataset` renvoie toujours des CHAÎNES : d'où les `Number(...)`. Oublier
      cette conversion est l'erreur classique — « 14 » + 1 vaut « 141 ». */
-  const mondes = boutonsMondes.map((bouton) => ({
-    cle: bouton.dataset.monde,
-    nom: bouton.dataset.nom || "",
-    bouton,
-    orbite: Number(bouton.dataset.orbite),
-    rayon: Number(bouton.dataset.rayon),
-    vitesse: Number(bouton.dataset.vitesse) / 100,
-    angle: (Number(bouton.dataset.angle) * Math.PI) / 180,
-    teinte: bouton.dataset.teinte,
-    eclat: bouton.dataset.eclat,
-    relief: bouton.dataset.relief,
-    inclinaison: Number(bouton.dataset.inclinaison || 0),
+  const mondes = liensMondes.map((lien) => ({
+    cle: lien.dataset.monde,
+    nom: lien.dataset.nom || "",
+    lien,
+    orbite: Number(lien.dataset.orbite),
+    rayon: Number(lien.dataset.rayon),
+    vitesse: Number(lien.dataset.vitesse) / 100,
+    angle: (Number(lien.dataset.angle) * Math.PI) / 180,
+    teinte: lien.dataset.teinte,
+    eclat: lien.dataset.eclat,
+    relief: lien.dataset.relief,
+    inclinaison: Number(lien.dataset.inclinaison || 0),
   }));
 
   /* -------------------------------------------------------------------------
@@ -91,7 +91,7 @@ function demarrer() {
   const toile = document.createElement("canvas");
   toile.className = "scene3d-toile";
   // La toile est un dessin : elle ne doit rien annoncer au lecteur d'écran,
-  // qui trouvera la même information dans les boutons et dans les fiches.
+  // qui trouvera la même information dans les fiches des mondes.
   toile.setAttribute("aria-hidden", "true");
 
   try {
@@ -294,7 +294,7 @@ function demarrer() {
   /** Une étiquette est un vrai élément HTML posé PAR-DESSUS la toile, pas du
    *  texte dessiné dans la 3D : le texte HTML reste net à tous les zooms,
    *  hérite des polices du site, et suit les réglages de taille du visiteur.
-   *  La couche entière est `aria-hidden` (elle double les boutons). */
+   *  La couche entière est `aria-hidden` (elle double les fiches). */
   function creerEtiquette(texte, classe) {
     const el = document.createElement("span");
     el.className = "scene3d-etiquette" + (classe ? " " + classe : "");
@@ -529,7 +529,7 @@ function demarrer() {
      9. Sélection d'un monde
      ----------------------------------------------------------------------
      Un seul chemin de code pour les trois gestes possibles — clic sur le
-     bouton, clic sur la planète, touche du clavier. Tout passe par
+     lien du titre d'une fiche, clic sur la planète, touche du clavier. Tout passe par
      `selectionner()`, donc l'affichage ne peut pas diverger de ce qui est
      annoncé. */
   let selection = null;
@@ -539,10 +539,10 @@ function demarrer() {
     mondes.forEach((m) => {
       const actif = m === monde;
       m.designation.visible = actif;
-      // `aria-pressed` porte l'état : le lecteur d'écran l'annonce, et le CSS
+      // `aria-current` porte l'état : le lecteur d'écran l'annonce, et le CSS
       // s'appuie sur le même attribut. Une classe seule mentirait à l'un des
       // deux publics.
-      m.bouton.setAttribute("aria-pressed", actif ? "true" : "false");
+      m.lien.setAttribute("aria-current", actif ? "true" : "false");
       m.etiquette.classList.toggle("est-designee", actif);
     });
 
@@ -555,7 +555,7 @@ function demarrer() {
           "Vue centrée sur " +
           monde.nom +
           ". " +
-          (monde.bouton.dataset.resume || "");
+          (monde.lien.dataset.resume || "");
       }
     } else {
       cibleVoulue.set(0, 0, 0);
@@ -564,12 +564,13 @@ function demarrer() {
     }
   }
 
-  boutonsMondes.forEach((bouton) => {
-    const monde = mondes.find((m) => m.bouton === bouton);
-    bouton.addEventListener("click", () => {
-      // Un deuxième clic sur le même monde désélectionne : c'est le
-      // comportement attendu d'un bouton à deux états.
-      selectionner(selection === monde ? null : monde);
+  liensMondes.forEach((lien) => {
+    const monde = mondes.find((m) => m.lien === lien);
+    lien.addEventListener("click", () => {
+      // Pas de bascule ici : le geste est un lien vers la maquette, et la
+      // page y remonte. Un deuxième clic ne doit pas éteindre ce qu'on vient
+      // de monter regarder.
+      selectionner(monde);
     });
   });
 
@@ -655,9 +656,10 @@ function demarrer() {
     const monde = mondeSousLePointeur(ev);
     if (monde) {
       selectionner(selection === monde ? null : monde);
-      // Le focus rejoint le bouton correspondant : l'utilisateur au clavier
-      // reprend la main là où l'action a eu lieu (WCAG 2.4.3).
-      if (selection) selection.bouton.focus();
+      // Le focus rejoint le titre de la fiche : l'utilisateur au clavier
+      // reprend la main là où l'action a eu lieu (WCAG 2.4.3), et la page
+      // descend d'elle-même sur le texte du monde qu'il vient de désigner.
+      if (selection) selection.lien.focus();
     }
   });
 

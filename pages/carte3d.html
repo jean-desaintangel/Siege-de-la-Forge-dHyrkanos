@@ -6,7 +6,7 @@
     <title>Carte du secteur des Étoiles Pâles</title>
     <meta
       name="description"
-      content="Le système des Étoiles Pâles, monde par monde : Yarath-Maximal, Karthis, Vorexis, Korath Prime et la ceinture périphérique, avec une maquette en volume des quatre orbites. Campagne « Le Reflux de Yarath-Maximal »."
+      content="Le système des Étoiles Pâles, monde par monde : Yarath-Maximal, Karthis, Vorexis, Korath Prime et la ceinture périphérique, avec une maquette en volume des quatre planètes. Campagne « Le Reflux de Yarath-Maximal »."
     />
     <meta name="theme-color" content="#0b0a09" />
 
@@ -87,11 +87,7 @@
           Quatre mondes autour d'une braise mourante
         </p>
         <blockquote class="exergue">
-          <p>
-            Quatre orbites autour d'une braise, et une ceinture percée. Ce que
-            le plan à plat range en cercles, l'œil le comprend d'un coup dès
-            qu'on lui rend la profondeur.
-          </p>
+          <p>Quatre planètes autour d'une braise, et une ceinture percée.</p>
         </blockquote>
       </div>
     </header>
@@ -103,7 +99,8 @@
            STRUCTURE DÉLIBÉRÉE. La toile WebGL est un dessin : elle ne contient
            aucun texte, aucun lien, rien qu'un lecteur d'écran puisse explorer.
            Elle est donc `aria-hidden` (posée par le script) et TOUT ce qu'elle
-           permet est doublé par des boutons HTML réels, plus bas.
+           permet est doublé par les fiches des mondes, plus bas : leur titre
+           est un lien qui vise le monde dans la maquette.
 
            Le message de secours est visible PAR DÉFAUT et masqué par le script
            une fois la première image rendue. Raison : ici, l'échec est un cas
@@ -135,7 +132,7 @@
             <!-- Les étiquettes flottantes sont des éléments HTML positionnés
                  par le script au-dessus de la toile : le texte reste net à tous
                  les zooms et suit la police du site. Elles doublent les noms
-                 des boutons, donc elles sortent de l'arbre d'accessibilité. -->
+                 des fiches, donc elles sortent de l'arbre d'accessibilité. -->
             <div
               class="scene3d-etiquettes"
               id="scene3d-etiquettes"
@@ -191,143 +188,49 @@
       <!-- ==================================================================
            Les mondes
            ==================================================================
-           CES BOUTONS SONT LA MAQUETTE. Ils en sont la version accessible et
-           la source de données : le script y lit les paramètres d'orbite dans
-           les attributs `data-*`. Corriger une orbite se fait ici, jamais dans
-           le script.
+           CES FICHES SONT LA SOURCE DE VÉRITÉ DE LA PAGE. Elles disent en
+           toutes lettres tout ce que la maquette montre, et une de plus
+           qu'elle : la ceinture périphérique, qui n'est pas un corps en
+           orbite. Elles se lisent sans WebGL, sans réseau et sans script.
 
-           `aria-pressed` : chaque bouton est un interrupteur à deux états
-           (monde visé / non visé), pas une action ponctuelle. Le script tient
-           l'attribut à jour et le CSS s'appuie dessus.
+           ELLES SONT AUSSI LA MAQUETTE. Les quatre fiches de mondes portent
+           les paramètres d'orbite dans leurs attributs `data-*` — le script
+           les y lit, et corriger une orbite se fait ici, jamais dans le
+           script. Le lien de leur titre est le geste accessible qui vise le
+           monde dans la scène ; le CSS l'étire sur toute la carte, donc le
+           clic marche partout sans qu'on emboîte un lien dans un article.
+           `aria-current` porte l'état « monde visé » : le script le tient à
+           jour et le CSS s'appuie dessus.
 
-           LES FICHES QUI SUIVENT SONT LA SOURCE DE VÉRITÉ DE LA PAGE. Elles
-           disent en toutes lettres tout ce que la maquette montre, et une de
-           plus qu'elle : la ceinture périphérique, qui n'est pas un corps en
-           orbite. Elles se lisent sans WebGL, sans réseau et sans script. -->
+           La ceinture n'a pas de `data-*` : elle n'orbite pas, elle ferme le
+           système. Sa fiche n'est donc pas cliquable. -->
       <section id="mondes" aria-label="Les mondes">
-        <ul class="scene3d-mondes">
-          <li class="scene3d-monde">
-            <button
-              class="scene3d-monde-bouton"
-              type="button"
-              aria-pressed="false"
-              data-monde="karthis"
-              data-nom="Karthis"
-              data-resume="Cité-ruche de la première orbite, disputée niveau par niveau depuis les premiers mois de l'Hérésie."
-              data-orbite="20"
-              data-rayon="2"
-              data-vitesse="22"
-              data-angle="40"
-              data-inclinaison="0.8"
-              data-teinte="#4b4a52"
-              data-eclat="#ffd9a0"
-              data-relief="ruche"
-            >
-              <span class="scene3d-monde-orbite">Première orbite</span>
-              <span class="scene3d-monde-nom">Karthis</span>
-            </button>
-            <p class="texte-petit">
-              Cité-ruche contestée : les grappes de lumières sont ses niveaux
-              encore habités.
-              <a class="lien-bloc" href="#monde-karthis">Fiche complète →</a>
-            </p>
-          </li>
-
-          <li class="scene3d-monde">
-            <button
-              class="scene3d-monde-bouton"
-              type="button"
-              aria-pressed="false"
-              data-monde="vorexis"
-              data-nom="Vorexis"
-              data-resume="Ancien monde-sanctuaire de la deuxième orbite, saturé de toxines et devenu impraticable."
-              data-orbite="29"
-              data-rayon="2.5"
-              data-vitesse="14"
-              data-angle="190"
-              data-inclinaison="1.4"
-              data-teinte="#2f4a2c"
-              data-eclat="#000000"
-              data-relief="jungle"
-            >
-              <span class="scene3d-monde-orbite">Deuxième orbite</span>
-              <span class="scene3d-monde-nom">Vorexis</span>
-            </button>
-            <p class="texte-petit">
-              Monde-jungle empoisonné : le seul des quatre sans une seule
-              lumière.
-              <a class="lien-bloc" href="#monde-vorexis">Fiche complète →</a>
-            </p>
-          </li>
-
-          <li class="scene3d-monde scene3d-monde--enjeu">
-            <button
-              class="scene3d-monde-bouton"
-              type="button"
-              aria-pressed="false"
-              data-monde="yarath-maximal"
-              data-nom="Yarath-Maximal"
-              data-resume="Monde-forge du Dark Mechanicum, troisième orbite. Objectif commun aux quatre belligérants."
-              data-orbite="39"
-              data-rayon="3.4"
-              data-vitesse="9"
-              data-angle="300"
-              data-inclinaison="0.6"
-              data-teinte="#4a3326"
-              data-eclat="#ff8a3c"
-              data-relief="forge"
-            >
-              <span class="scene3d-monde-orbite">Troisième orbite</span>
-              <span class="scene3d-monde-nom">Yarath-Maximal</span>
-            </button>
-            <p class="texte-petit">
-              Monde-forge, objectif de la campagne. Ses fonderies éclairent la
-              face nuit.
-              <a class="lien-bloc" href="#monde-yarath-maximal"
-                >Fiche complète →</a
-              >
-            </p>
-          </li>
-
-          <li class="scene3d-monde">
-            <button
-              class="scene3d-monde-bouton"
-              type="button"
-              aria-pressed="false"
-              data-monde="korath-prime"
-              data-nom="Korath Prime"
-              data-resume="Quatrième orbite : un arsenal oublié s'y est activé seul, et rien ne l'a arrêté."
-              data-orbite="48"
-              data-rayon="2.2"
-              data-vitesse="7"
-              data-angle="120"
-              data-inclinaison="1"
-              data-teinte="#3a3a3d"
-              data-eclat="#ff4a3a"
-              data-relief="fusion"
-            >
-              <span class="scene3d-monde-orbite">Quatrième orbite</span>
-              <span class="scene3d-monde-nom">Korath Prime</span>
-            </button>
-            <p class="texte-petit">
-              Arsenal hors contrôle : les balafres rouges sont ses coulées.
-              <a class="lien-bloc" href="#monde-korath-prime"
-                >Fiche complète →</a
-              >
-            </p>
-          </li>
-        </ul>
-
-        <p class="texte-intro marge-haut">
-          Un seul de ces mondes est joué : Yarath-Maximal. Les trois autres
-          expliquent pourquoi le secteur est disputé, et fournissent de quoi
-          justifier un renfort, une avarie ou un retard entre deux missions.
-        </p>
-
         <div class="grille-mondes">
-          <article class="carte fiche-monde" id="monde-karthis">
-            <p class="etiquette">Première orbite</p>
-            <h3 class="titre-carte">Karthis</h3>
+          <article
+            class="carte fiche-monde fiche-monde--visee"
+            id="monde-karthis"
+          >
+            <p class="etiquette">Première planète</p>
+            <h3 class="titre-carte">
+              <a
+                class="fiche-monde-viser"
+                href="#maquette"
+                aria-current="false"
+                aria-label="Karthis — viser ce monde dans la maquette"
+                data-monde="karthis"
+                data-nom="Karthis"
+                data-resume="Cité-ruche de la première planète, disputée niveau par niveau depuis les premiers mois de l'Hérésie."
+                data-orbite="20"
+                data-rayon="2"
+                data-vitesse="22"
+                data-angle="40"
+                data-inclinaison="0.8"
+                data-teinte="#4b4a52"
+                data-eclat="#ffd9a0"
+                data-relief="ruche"
+                >Karthis</a
+              >
+            </h3>
             <p class="texte-sec">
               Cité-ruche tombée dans la guerre urbaine. Ses niveaux inférieurs
               grouillent de combats pendant que ses tours s'effondrent sous les
@@ -353,9 +256,31 @@
             </dl>
           </article>
 
-          <article class="carte fiche-monde" id="monde-vorexis">
-            <p class="etiquette">Deuxième orbite</p>
-            <h3 class="titre-carte">Vorexis</h3>
+          <article
+            class="carte fiche-monde fiche-monde--visee"
+            id="monde-vorexis"
+          >
+            <p class="etiquette">Deuxième planète</p>
+            <h3 class="titre-carte">
+              <a
+                class="fiche-monde-viser"
+                href="#maquette"
+                aria-current="false"
+                aria-label="Vorexis — viser ce monde dans la maquette"
+                data-monde="vorexis"
+                data-nom="Vorexis"
+                data-resume="Ancien monde-sanctuaire de la deuxième planète, saturé de toxines et devenu impraticable."
+                data-orbite="29"
+                data-rayon="2.5"
+                data-vitesse="14"
+                data-angle="190"
+                data-inclinaison="1.4"
+                data-teinte="#2f4a2c"
+                data-eclat="#000000"
+                data-relief="jungle"
+                >Vorexis</a
+              >
+            </h3>
             <p class="texte-sec">
               Sanctuaire naturel avant l'Hérésie, saturé de toxines depuis. Ses
               jungles sont devenues des tombeaux verts pour des armées entières
@@ -381,11 +306,30 @@
           </article>
 
           <article
-            class="carte carte--accent-rouge fiche-monde"
+            class="carte carte--accent-rouge fiche-monde fiche-monde--visee"
             id="monde-yarath-maximal"
           >
-            <p class="etiquette etiquette--rouge">Troisième orbite</p>
-            <h3 class="titre-carte">Yarath-Maximal</h3>
+            <p class="etiquette etiquette--rouge">Troisième planète</p>
+            <h3 class="titre-carte">
+              <a
+                class="fiche-monde-viser"
+                href="#maquette"
+                aria-current="false"
+                aria-label="Yarath-Maximal — viser ce monde dans la maquette"
+                data-monde="yarath-maximal"
+                data-nom="Yarath-Maximal"
+                data-resume="Monde-forge du Dark Mechanicum, troisième planète. Objectif commun aux quatre belligérants."
+                data-orbite="39"
+                data-rayon="3.4"
+                data-vitesse="9"
+                data-angle="300"
+                data-inclinaison="0.6"
+                data-teinte="#4a3326"
+                data-eclat="#ff8a3c"
+                data-relief="forge"
+                >Yarath-Maximal</a
+              >
+            </h3>
             <p class="texte-sec">
               Monde-forge sans prestige : fonderies de blindage lourd et
               chantiers de coque, noyés sous leurs propres émanations. Sa valeur
@@ -415,9 +359,31 @@
             </dl>
           </article>
 
-          <article class="carte fiche-monde" id="monde-korath-prime">
-            <p class="etiquette">Quatrième orbite</p>
-            <h3 class="titre-carte">Korath Prime</h3>
+          <article
+            class="carte fiche-monde fiche-monde--visee"
+            id="monde-korath-prime"
+          >
+            <p class="etiquette">Quatrième planète</p>
+            <h3 class="titre-carte">
+              <a
+                class="fiche-monde-viser"
+                href="#maquette"
+                aria-current="false"
+                aria-label="Korath Prime — viser ce monde dans la maquette"
+                data-monde="korath-prime"
+                data-nom="Korath Prime"
+                data-resume="Quatrième planète : un arsenal oublié s'y est activé seul, et rien ne l'a arrêté."
+                data-orbite="48"
+                data-rayon="2.2"
+                data-vitesse="7"
+                data-angle="120"
+                data-inclinaison="1"
+                data-teinte="#3a3a3d"
+                data-eclat="#ff4a3a"
+                data-relief="fusion"
+                >Korath Prime</a
+              >
+            </h3>
             <p class="texte-sec">
               L'activation d'un arsenal oublié y a déclenché une spirale que
               personne n'a su interrompre. Le monde tire encore, sur ce qui
@@ -470,7 +436,6 @@
           </article>
         </div>
       </section>
-
     </main>
 
     <footer>

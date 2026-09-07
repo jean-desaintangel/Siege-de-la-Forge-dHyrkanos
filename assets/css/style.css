@@ -2072,9 +2072,51 @@ footer {
   color: var(--texte-chaud);
 }
 
-/* Cible d'une ancre suivie depuis la liste des mondes. `:target` est du CSS
+/* Cible d'une ancre suivie depuis ailleurs dans le site. `:target` est du CSS
    pur : la fiche visée s'encadre d'or sans qu'aucun script n'intervienne. */
 .fiche-monde:target {
+  border-color: var(--or);
+}
+
+/* --- Une fiche qui vise son monde dans la maquette ------------------------
+   Le lien est celui du titre : c'est lui qui a un nom accessible sensé, et
+   lui seul est dans l'ordre de tabulation. Son `::after` s'étire ensuite sur
+   toute la carte pour que le clic tombe juste partout — un article entier
+   enveloppé dans un `<a>` donnerait au lecteur d'écran un lien long de dix
+   lignes, ce qui est le remède pire que le mal. */
+.fiche-monde--visee {
+  position: relative;
+}
+
+.fiche-monde-viser {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fiche-monde-viser::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.fiche-monde--visee:hover,
+.fiche-monde--visee:focus-within {
+  border-color: var(--or);
+}
+
+/* L'état « monde visé » se lit sur `aria-current` et non sur une classe : le
+   style ne peut alors pas dire autre chose que ce qui est annoncé au lecteur
+   d'écran. Un décalage entre les deux est le défaut le plus courant des
+   composants « maison ». */
+.fiche-monde-viser[aria-current="true"] {
+  color: var(--or-clair);
+}
+
+/* Le fond doré de la carte entière est un bonus : `:has` manque encore à
+   quelques navigateurs anciens, et sans lui le titre doré suffit à dire
+   quel monde est visé. */
+.fiche-monde--visee:has(.fiche-monde-viser[aria-current="true"]) {
+  background: var(--fond-carte-or);
   border-color: var(--or);
 }
 
@@ -2089,10 +2131,10 @@ footer {
 /* =============================================================================
   10. Maquette 3D — pages/carte3d.html
    -----------------------------------------------------------------------------
-   Une toile WebGL, des étiquettes HTML posées par-dessus, et une liste de
-   boutons qui en est la version accessible. Le CSS ne fait ici que trois
-   choses : réserver la place de la toile, rendre les étiquettes lisibles sur
-   un fond imprévisible, et donner un état visible aux boutons.
+   Une toile WebGL et des étiquettes HTML posées par-dessus ; la version
+   accessible, elle, est plus haut — ce sont les fiches des mondes (section 9).
+   Le CSS ne fait ici que deux choses : réserver la place de la toile et rendre
+   les étiquettes lisibles sur un fond imprévisible.
    ============================================================================= */
 
 .scene3d {
@@ -2224,71 +2266,6 @@ footer {
   margin-top: var(--esp);
 }
 
-/* --- La liste des mondes --------------------------------------------------
-   C'est la version accessible de la maquette : ce que le pointeur fait sur la
-   toile, ces boutons le font au clavier. Ils ne sont donc pas un complément
-   décoratif — les masquer reviendrait à supprimer la carte. */
-.scene3d-mondes {
-  list-style: none;
-  margin: var(--esp-lg) 0 0;
-  padding: 0;
-  display: grid;
-  gap: var(--esp-md);
-}
-
-.scene3d-monde-bouton {
-  display: grid;
-  gap: 0.2rem;
-  width: 100%;
-  min-height: 2.75rem;
-  padding: var(--esp-sm) var(--esp);
-  text-align: left;
-  background: var(--fond-carte);
-  border: 1px solid var(--bordure-controle);
-  cursor: pointer;
-}
-
-.scene3d-monde-orbite {
-  font-family: var(--mono);
-  font-size: var(--fs-micro);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--etiquette);
-}
-
-.scene3d-monde-nom {
-  font-family: var(--titre);
-  font-size: var(--fs-lg);
-  font-weight: 700;
-  color: var(--texte-clair);
-}
-
-.scene3d-monde-bouton:hover {
-  border-color: var(--or);
-}
-
-/* L'état sélectionné se lit sur `aria-pressed` et non sur une classe : le
-   style ne peut alors pas dire autre chose que ce qui est annoncé au lecteur
-   d'écran. Un décalage entre les deux est le défaut le plus courant des
-   composants « maison ». */
-.scene3d-monde-bouton[aria-pressed="true"] {
-  background: var(--fond-carte-or);
-  border-color: var(--or);
-}
-
-.scene3d-monde-bouton[aria-pressed="true"] .scene3d-monde-nom {
-  color: var(--or-clair);
-}
-
-.scene3d-monde p {
-  margin-top: var(--esp-xs);
-  color: var(--texte-chaud);
-}
-
-.scene3d-monde--enjeu .scene3d-monde-bouton {
-  border-color: var(--bordure-or);
-}
-
 /* =============================================================================
   11. Élargissements — on n'ajoute des colonnes que si la place existe
    ============================================================================= */
@@ -2297,11 +2274,6 @@ footer {
 @media (min-width: 34em) {
   :root {
     --marge-page: 1.75rem;
-  }
-
-  /* Les quatre mondes de la maquette 3D passent sur deux colonnes. */
-  .scene3d-mondes {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   /* La barre de navigation retombe à trois lignes : voir `scroll-padding-top`. */
@@ -2372,12 +2344,6 @@ footer {
 
 /* --- À partir de 60em (≈ 960px) : mise en page bureau --------------------- */
 @media (min-width: 60em) {
-  /* Les quatre mondes tiennent sur une ligne : la liste devient une légende
-     de la maquette, lue d'un coup d'œil. */
-  .scene3d-mondes {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
   .grille-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
