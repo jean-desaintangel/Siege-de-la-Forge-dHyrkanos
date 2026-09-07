@@ -1598,7 +1598,8 @@
            -------------------------------------------------------------------
            Un vrai <table> : cinq colonnes de données ne se restituent pas si
            elles sont bâties en <div> (WCAG 1.3.1). Sans JavaScript le tableau
-           reste lisible ; le script n'ajoute que la persistance localStorage.
+           reste lisible ; le script ajoute la persistance partagée (Supabase),
+           avec repli sur localStorage si la base est injoignable.
            ================================================================== -->
       <section id="journal">
         <div class="section-entete">
@@ -1941,6 +1942,11 @@
       </div>
     </footer>
 
+    <!-- Persistance partagée du journal de guerre (section VII).
+         Le SDK Supabase est chargé SANS `defer` : il doit avoir défini
+         `window.supabase` avant que campagne.js ne s'exécute. -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.115.0/dist/umd/supabase.js"></script>
+    <script src="./assets/js/supabase-config.js" defer></script>
     <script src="./assets/js/campagne.js" defer></script>
   </body>
 </html>

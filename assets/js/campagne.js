@@ -162,44 +162,198 @@
   }
 
   /* ===========================================================================
-     2. Journal de guerre
+     2. Journal de guerre — persistance partagée
      ===========================================================================
-     Les quatre lignes sont écrites dans le HTML. Ce module ne fait qu'ajouter
-     la persistance et le calcul du classement.
+     Le journal était sauvegardé dans `localStorage` : chaque joueur voyait SON
+     navigateur, et personne ne voyait celui des autres. Les scores sont
+     désormais rangés dans une base Postgres hébergée chez Supabase, lue et
+     écrite directement depuis la page (voir SUPABASE.md pour la mise en place).
+
+     TROIS NIVEAUX DE REPLI, du meilleur au pire :
+       1. Supabase joignable  → scores partagés, mise à jour en direct.
+       2. Supabase injoignable → repli sur localStorage + message à l'écran.
+       3. Aucun JavaScript    → le tableau HTML reste lisible avec ses zéros.
+
+     SÉCURITÉ — pourquoi la clé « anon » peut être écrite en clair.
+     La clé anon n'est PAS un mot de passe : c'est un identifiant public, que
+     n'importe qui peut lire dans les outils de développement du navigateur.
+     Ce qui protège réellement la table, c'est la RLS (Row Level Security) de
+     Postgres : les politiques écrites côté serveur n'autorisent QUE la lecture
+     et la mise à jour des quatre lignes existantes — ni insertion, ni
+     suppression, ni accès aux autres tables.
+     Ne JAMAIS mettre la clé « service_role » dans une page web : celle-là
+     ignore la RLS et donne les pleins pouvoirs sur la base.
      ========================================================================= */
   const CLE = "yarath-journal-v2";
   const NOMS_DEFAUT = ["Raphaël", "Jean", "Thomas", "Tristan"];
   const MAX_POINTS = 99;
+  const TABLE = "journal_campagne";
+  /** Délai d'attente avant écriture réseau, en millisecondes.
+   *  Cliquer cinq fois sur « + » ne doit pas déclencher cinq requêtes : on
+   *  attend que les clics se calment. C'est le principe du « debounce ». */
+  const DELAI_ECRITURE = 500;
 
-  /** Assainit ce qui sort de localStorage.
+  /** Assainit UNE ligne de joueur, d'où qu'elle vienne.
    *
-   *  POURQUOI cette fonction existe : une donnée qui a quitté la mémoire du
-   *  programme redevient une donnée non fiable, même si c'est nous qui l'y avons
-   *  mise. L'utilisateur peut éditer localStorage depuis la console, une
-   *  extension peut l'écrire, le poste peut être partagé. Sans ce filtre, un
+   *  POURQUOI : une donnée qui a quitté la mémoire du programme redevient une
+   *  donnée non fiable, même si c'est nous qui l'y avons mise. L'utilisateur
+   *  peut éditer localStorage depuis la console, un autre joueur peut écrire
+   *  n'importe quoi dans la base avec un `curl`. Sans ce filtre, un
    *  `points: "abc"` ferait planter le calcul du meneur.
    *
-   *  @param {unknown} brut  la valeur issue de JSON.parse
-   *  @returns {Array<{nom: string, victoires: number, points: number}>|null}
-   *           un tableau de 4 lignes valides, ou null si la donnée est inutilisable
+   *  @param {unknown} source  l'objet brut (localStorage ou réponse Supabase)
+   *  @param {number}  i       l'indice de la ligne, pour le nom par défaut
+   *  @returns {{nom: string, victoires: number, points: number}}
    */
-  function assainir(brut) {
-    if (!Array.isArray(brut) || brut.length !== 4) return null;
-    return brut.map((l, i) => {
-      const source = l && typeof l === "object" ? l : {};
-      const borner = (v) =>
-        Number.isInteger(v) ? Math.max(0, Math.min(MAX_POINTS, v)) : 0;
-      return {
-        nom:
-          typeof source.nom === "string" && source.nom.trim()
-            ? source.nom.slice(0, 40)
-            : NOMS_DEFAUT[i],
-        victoires: borner(source.victoires),
-        points: borner(source.points),
-      };
-    });
+  function assainirLigne(source, i) {
+    const s = source && typeof source === "object" ? source : {};
+    const borner = (v) => {
+      const n = Number(v);
+      return Number.isInteger(n) ? Math.max(0, Math.min(MAX_POINTS, n)) : 0;
+    };
+    return {
+      nom:
+        typeof s.nom === "string" && s.nom.trim()
+          ? s.nom.slice(0, 40)
+          : NOMS_DEFAUT[i],
+      victoires: borner(s.victoires),
+      points: borner(s.points),
+    };
   }
 
+  /** Assainit un tableau complet de 4 lignes.
+   *  @returns {Array|null} 4 lignes valides, ou null si la donnée est inutilisable */
+  function assainir(brut) {
+    if (!Array.isArray(brut) || brut.length !== 4) return null;
+    return brut.map(assainirLigne);
+  }
+
+  /* ---------------------------------------------------------------------------
+     2a. Les deux stockages possibles
+     ---------------------------------------------------------------------------
+     Les deux exposent EXACTEMENT la même interface :
+        charger()        → Promise<Array|null>
+        sauver(donnees)  → Promise<void>
+        ecouter(rappel)  → branche les mises à jour venues des autres joueurs
+     Le reste du code ne sait donc pas — et n'a pas à savoir — lequel il utilise.
+     C'est le patron « stratégie » : on change l'implémentation sans toucher à
+     l'appelant.
+     ------------------------------------------------------------------------- */
+
+  /** Stockage de repli : le navigateur, et lui seul. */
+  function creerStockageLocal() {
+    return {
+      nom: "local",
+      async charger() {
+        const brut = localStorage.getItem(CLE);
+        return brut ? assainir(JSON.parse(brut)) : null;
+      },
+      async sauver(donnees) {
+        localStorage.setItem(CLE, JSON.stringify(donnees));
+      },
+      // Rien à écouter : un seul navigateur, personne d'autre n'écrit.
+      ecouter() {},
+    };
+  }
+
+  /** Stockage partagé : la table `journal_campagne` chez Supabase.
+   *  @returns {object|null} null si le SDK n'est pas chargé ou la config absente */
+  function creerStockageDistant() {
+    const config = window.CONFIG_SUPABASE;
+    // Trois vérifications avant de tenter quoi que ce soit : le SDK est-il
+    // chargé (CDN bloqué, hors ligne) ? la config existe-t-elle ? a-t-elle été
+    // remplie, ou est-elle restée sur le gabarit livré avec le dépôt ?
+    if (!window.supabase) return null;
+    if (!config || !config.url || !config.cleAnon) return null;
+    if (config.url.includes("VOTRE-PROJET")) return null;
+
+    const client = window.supabase.createClient(config.url, config.cleAnon);
+
+    /** Dernier état confirmé côté base.
+     *  Il sert à n'envoyer QUE les lignes réellement modifiées : un clic sur le
+     *  « + » de Jean ne doit pas réécrire les quatre joueurs. */
+    let dernierEtat = null;
+
+    return {
+      nom: "distant",
+
+      async charger() {
+        const { data, error } = await client
+          .from(TABLE)
+          .select("id, nom, victoires, points")
+          .order("id");
+        if (error) throw error;
+
+        // La base rend les lignes dans un tableau ; nous, on les veut rangées
+        // par indice de joueur. Une ligne manquante laisse un trou, qu'
+        // `assainirLigne` remplira avec les valeurs par défaut.
+        const rangees = new Array(4);
+        data.forEach((l) => {
+          if (l.id >= 0 && l.id < 4) rangees[l.id] = l;
+        });
+
+        dernierEtat = assainir(rangees);
+        return dernierEtat;
+      },
+
+      async sauver(donnees) {
+        const aEnvoyer = [];
+        donnees.forEach((d, i) => {
+          const ancien = dernierEtat && dernierEtat[i];
+          const identique =
+            ancien &&
+            ancien.nom === d.nom &&
+            ancien.victoires === d.victoires &&
+            ancien.points === d.points;
+          if (!identique) aEnvoyer.push({ id: i, valeurs: d });
+        });
+        if (aEnvoyer.length === 0) return;
+
+        for (const ligne of aEnvoyer) {
+          // `update` et non `insert` : les quatre lignes existent déjà et la
+          // RLS interdit d'en créer. `.eq("id", …)` désigne la ligne à toucher —
+          // sans lui, PostgREST refuserait la requête (garde-fou anti-écrasement).
+          const { error } = await client
+            .from(TABLE)
+            .update({
+              nom: ligne.valeurs.nom,
+              victoires: ligne.valeurs.victoires,
+              points: ligne.valeurs.points,
+              maj_le: new Date().toISOString(),
+            })
+            .eq("id", ligne.id);
+          if (error) throw error;
+        }
+
+        // Copie défensive : sans le `{ ...d }`, `dernierEtat` pointerait sur les
+        // mêmes objets que `donnees` et le prochain diff ne verrait jamais rien.
+        dernierEtat = donnees.map((d) => ({ ...d }));
+      },
+
+      ecouter(rappel) {
+        client
+          .channel("journal-campagne")
+          .on(
+            "postgres_changes",
+            { event: "UPDATE", schema: "public", table: TABLE },
+            (message) => {
+              const l = message.new;
+              if (!l || l.id < 0 || l.id >= 4) return;
+              // On tient `dernierEtat` à jour même quand le changement vient
+              // d'un autre joueur : sinon le prochain diff croirait devoir
+              // renvoyer des valeurs périmées et écraserait son score.
+              if (dernierEtat) dernierEtat[l.id] = assainirLigne(l, l.id);
+              rappel(l);
+            },
+          )
+          .subscribe();
+      },
+    };
+  }
+
+  /* ---------------------------------------------------------------------------
+     2b. Le module lui-même
+     ------------------------------------------------------------------------- */
   function initJournal() {
     const table = document.getElementById("table-journal");
     if (!table) return;
@@ -210,8 +364,18 @@
     const sortieDernier = document.getElementById("dernier-txt");
     const sortieEtat = document.getElementById("etat-campagne");
 
+    // Distant si possible, local sinon. La variable n'est pas `const` : en cas
+    // de panne réseau on bascule sur le local en cours de partie.
+    let stockage = creerStockageDistant() || creerStockageLocal();
+    let minuteurEcriture = null;
+    /** Avertissement qui doit RESTER affiché tant que la situation dure.
+     *  Sans lui, la première sauvegarde locale réussie effacerait le message
+     *  « base injoignable » et le joueur croirait ses scores partagés alors
+     *  qu'ils ne sortent plus de son navigateur. */
+    let avertissementPersistant = "";
+
     /** Lit l'état courant depuis le DOM — le DOM est la source de vérité,
-     *  localStorage n'en est qu'une copie. */
+     *  la base n'en est qu'une copie. */
     function lireDom() {
       return lignes.map((tr) => ({
         nom: tr.querySelector(".champ-nom").value.trim() || "Joueur",
@@ -230,9 +394,6 @@
      *  joueur, et ce nom est modifiable. Sans cette mise à jour, un lecteur
      *  d'écran continuerait d'annoncer « Ajouter une victoire à Raphaël » après
      *  que la case a été renommée en « Marie » (WCAG 4.1.2).
-     *
-     *  @param {HTMLTableRowElement} tr   la ligne du joueur
-     *  @param {string}              nom  le nom affiché dans la case
      */
     function majIntitules(tr, nom) {
       const libelles = {
@@ -249,38 +410,29 @@
       });
     }
 
+    /** Écrit UNE ligne dans le DOM. Utilisé au chargement comme à la réception
+     *  d'une mise à jour temps réel venue d'un autre joueur. */
+    function ecrireLigne(i, d) {
+      const tr = lignes[i];
+      if (!tr) return;
+      tr.querySelector(".champ-nom").value = d.nom;
+      // `span[data-champ]` et non `[data-champ]` tout court : les BOUTONS
+      // portent eux aussi un `data-champ`. Un sélecteur trop large écrirait le
+      // score à l'intérieur d'un bouton.
+      tr.querySelector('span[data-champ="victoires"]').textContent =
+        d.victoires;
+      tr.querySelector('span[data-champ="points"]').textContent = d.points;
+      majIntitules(tr, d.nom);
+    }
+
     function ecrireDom(donnees) {
-      donnees.forEach((d, i) => {
-        const tr = lignes[i];
-        tr.querySelector(".champ-nom").value = d.nom;
-        // `span[data-champ]` et non `[data-champ]` tout court : depuis que
-        // chaque compteur a ses propres boutons, les BOUTONS portent eux aussi
-        // un `data-champ`. Un sélecteur trop large écrirait le score dans un
-        // bouton.
-        tr.querySelector('span[data-champ="victoires"]').textContent =
-          d.victoires;
-        tr.querySelector('span[data-champ="points"]').textContent = d.points;
-        majIntitules(tr, d.nom);
-      });
+      donnees.forEach((d, i) => ecrireLigne(i, d));
     }
 
     function signaler(message) {
       if (!alerte) return;
       alerte.textContent = message;
       alerte.hidden = !message;
-    }
-
-    function sauver(donnees) {
-      try {
-        localStorage.setItem(CLE, JSON.stringify(donnees));
-        signaler("");
-      } catch (e) {
-        // Ne PAS avaler l'erreur en silence : l'utilisateur croirait sauvegarder
-        // alors que rien n'est écrit (navigation privée stricte, quota dépassé).
-        signaler(
-          "Sauvegarde impossible sur cet appareil — notez les scores à la main.",
-        );
-      }
     }
 
     function classer(donnees) {
@@ -304,37 +456,93 @@
         : "Le dernier choisit la branche IV et la mission V";
     }
 
-    function majDepuisDom() {
+    /** Envoie l'état courant au stockage, en dégradant si ça échoue.
+     *  Ne PAS avaler l'erreur en silence : l'utilisateur croirait sauvegarder
+     *  alors que rien n'est écrit. */
+    async function envoyer() {
       const donnees = lireDom();
-      classer(donnees);
-      sauver(donnees);
+      try {
+        await stockage.sauver(donnees);
+        signaler(avertissementPersistant);
+      } catch (e) {
+        if (stockage.nom === "distant") {
+          stockage = creerStockageLocal();
+          avertissementPersistant =
+            "Base distante injoignable — scores conservés sur cet appareil seulement.";
+          signaler(avertissementPersistant);
+          try {
+            await stockage.sauver(donnees);
+          } catch (_) {
+            /* le repli a échoué lui aussi : le message ci-dessus suffit */
+          }
+        } else {
+          signaler(
+            "Sauvegarde impossible sur cet appareil — notez les scores à la main.",
+          );
+        }
+      }
+    }
+
+    function majDepuisDom() {
+      // Le classement est recalculé TOUT DE SUITE (l'affichage doit être
+      // instantané), l'écriture réseau est différée (elle peut attendre).
+      classer(lireDom());
+      clearTimeout(minuteurEcriture);
+      minuteurEcriture = setTimeout(envoyer, DELAI_ECRITURE);
     }
 
     // --- Restauration -------------------------------------------------------
-    try {
-      const brut = localStorage.getItem(CLE);
-      if (brut) {
-        const propre = assainir(JSON.parse(brut));
+    // `async` : lire la base est une opération réseau. En attendant sa réponse,
+    // le tableau reste affiché avec ses valeurs par défaut — jamais vide.
+    (async () => {
+      try {
+        const propre = await stockage.charger();
         if (propre) ecrireDom(propre);
+      } catch (e) {
+        if (stockage.nom === "distant") {
+          stockage = creerStockageLocal();
+          avertissementPersistant =
+            "Base distante injoignable — scores de cet appareil affichés.";
+          signaler(avertissementPersistant);
+          try {
+            const secours = await stockage.charger();
+            if (secours) ecrireDom(secours);
+          } catch (_) {
+            signaler(
+              "Journal précédent illisible — reparti des valeurs par défaut.",
+            );
+          }
+        } else {
+          signaler(
+            "Journal précédent illisible — reparti des valeurs par défaut.",
+          );
+        }
       }
-    } catch (e) {
-      // Donnée corrompue : on garde les valeurs par défaut du HTML et on le dit.
-      signaler("Journal précédent illisible — reparti des valeurs par défaut.");
-    }
+      classer(lireDom());
+
+      // Mise à jour en direct : quand un autre joueur clique, Supabase nous
+      // pousse la ligne modifiée par WebSocket. Aucun rechargement de page.
+      stockage.ecouter((ligne) => {
+        const i = Number(ligne.id);
+        const tr = lignes[i];
+        if (!tr) return;
+        // Si le curseur de l'utilisateur est DANS cette ligne (il est en train
+        // de taper un nom), on ne la réécrit pas : sa frappe fait foi, et
+        // remplacer la valeur d'un `<input>` en cours d'édition renvoie le
+        // curseur à la fin du champ.
+        if (tr.contains(document.activeElement)) return;
+        ecrireLigne(i, assainirLigne(ligne, i));
+        classer(lireDom());
+      });
+    })();
 
     // --- Interactions -------------------------------------------------------
-    /* Un bouton ne touche QUE son propre compteur.
-       POURQUOI ce n'était pas le cas : la version précédente incrémentait
-       victoires ET points d'un même clic. Or le barème de la section VI les
-       dissocie — une égalité vaut 1 point sans victoire, un compte-rendu rédigé
-       vaut 1 point de plus. La colonne « Victoires » ne pouvait donc jamais
-       être juste, et l'intitulé du bouton, qui ne promettait qu'un point,
-       décrivait mal son effet (WCAG 2.5.3 « Intitulé dans le nom »).
+    /* Un bouton ne touche QUE son propre compteur : le barème de la section VI
+       dissocie victoires et points (une égalité vaut 1 point sans victoire).
 
        Un seul écouteur posé sur le tableau plutôt que 16 sur les boutons :
        c'est la délégation d'événement. L'événement remonte jusqu'ici, et
-       `closest()` retrouve le bouton d'origine. Un bouton ajouté plus tard
-       fonctionne sans qu'on ait rien à rebrancher. */
+       `closest()` retrouve le bouton d'origine. */
     table.addEventListener("click", (e) => {
       const bouton = e.target.closest("button[data-champ]");
       if (!bouton) return;
@@ -349,9 +557,7 @@
     table.addEventListener("input", (e) => {
       if (!e.target.classList.contains("champ-nom")) return;
       // Le nom vient de changer : les intitulés des quatre boutons de CETTE
-      // ligne le citent, il faut les réécrire tout de suite. Sans cette ligne,
-      // un lecteur d'écran continuerait d'annoncer l'ancien nom jusqu'au
-      // prochain rechargement de la page (WCAG 4.1.2).
+      // ligne le citent, il faut les réécrire tout de suite (WCAG 4.1.2).
       const tr = e.target.closest("tr");
       majIntitules(tr, e.target.value.trim() || "Joueur");
       majDepuisDom();
@@ -360,12 +566,20 @@
     const boutonReset = document.getElementById("reinitialiser");
     if (boutonReset) {
       boutonReset.addEventListener("click", () => {
+        // La remise à zéro touche TOUT LE MONDE quand le stockage est partagé :
+        // on demande confirmation avant de l'envoyer aux quatre joueurs.
+        if (
+          stockage.nom === "distant" &&
+          !window.confirm(
+            "Remettre le journal à zéro pour les quatre joueurs ? Cette action est partagée.",
+          )
+        ) {
+          return;
+        }
         ecrireDom(NOMS_DEFAUT.map((nom) => ({ nom, victoires: 0, points: 0 })));
         majDepuisDom();
       });
     }
-
-    classer(lireDom());
   }
 
   initDiaporama();
