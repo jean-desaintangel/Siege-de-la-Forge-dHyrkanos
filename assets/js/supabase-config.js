@@ -1,5 +1,5 @@
 /* =============================================================================
-   Configuration Supabase — journal de guerre (section VII)
+   Configuration Supabase — journal de guerre (section VI)
    -----------------------------------------------------------------------------
    Remplacez les deux valeurs ci-dessous par celles de VOTRE projet Supabase.
    Elles se trouvent dans le tableau de bord Supabase :

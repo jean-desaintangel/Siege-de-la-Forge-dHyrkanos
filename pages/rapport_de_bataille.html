@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapports de bataille — la chronique du Reflux</title>
+    <meta
+      name="description"
+      content="Les rapports de bataille des cinq missions de la campagne « Le Reflux de Yarath-Maximal » : résultat, moments marquants et conséquences narratives, mission par mission."
+    />
+    <meta name="theme-color" content="#0b0a09" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Rapports de bataille — la chronique du Reflux"
+    />
+    <meta
+      property="og:description"
+      content="Mis bout à bout, les cinq comptes-rendus forment la chronique du Reflux de Yarath-Maximal."
+    />
+    <meta
+      property="og:url"
+      content="https://jean-desaintangel.github.io/Siege-de-la-Forge-dHyrkanos/pages/rapport_de_bataille.html"
+    />
+
+    <link
+      rel="icon"
+      href="../assets/images/favicon/favicon.webp"
+      type="image/webp"
+    />
+
+    <!-- Polices auto-hébergées (voir la tête de style.css). `preload` sur la
+         seule police du CORPS DE TEXTE ; `crossorigin` est obligatoire même en
+         même origine, les polices se chargeant toujours en mode anonyme. -->
+    <link
+      rel="preload"
+      href="../assets/fonts/spectral-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+
+  <!-- `page-rapports` : classe de VARIANTE posée sur `body`, sur le même motif
+       que les fiches de détachement (section 8 quinquies de style.css). -->
+  <body class="page-rapports">
+    <!-- Lien d'évitement : premier élément focusable de la page (WCAG 2.4.1). -->
+    <a class="lien-evitement" href="#contenu">Aller au contenu principal</a>
+
+    <nav aria-label="Rapports par mission">
+      <ul class="nav-liste conteneur">
+        <li>
+          <a class="nav-retour" href="../index.html">← Dossier de campagne</a>
+        </li>
+        <li><a href="#mission-i">I · Cendres</a></li>
+        <li><a href="#mission-ii">II · Galeries</a></li>
+        <li><a href="#mission-iii">III · Syrgalah</a></li>
+        <li><a href="#mission-iv">IV · Vault / Cendres</a></li>
+        <li><a href="#mission-v">V · Verdict</a></li>
+      </ul>
+    </nav>
+
+    <header>
+      <div class="conteneur bandeau">
+        <p class="surtitre">Le Reflux de Yarath-Maximal</p>
+        <h1>Rapports de bataille</h1>
+        <p class="sous-titre-page">La chronique du Reflux, mission par mission</p>
+        <blockquote class="exergue">
+          <p>
+            C'est ce texte, et non le score, qui alimente la mission suivante.
+          </p>
+        </blockquote>
+      </div>
+    </header>
+
+    <main id="contenu" class="conteneur">
+      <!-- ==================================================================
+           Mission I · Cendres sur Yarath
+           `<article>` : chaque rapport est un contenu autonome, qui aurait un
+           sens seul (RGAA 9.2). Le titre de l'article est son `<h2>`.
+           `<details>` / `<summary>` : chaque rapport est replié par défaut et
+           s'ouvre au clic, sans JavaScript (même motif que les dossiers de
+           mission de l'accueil).
+           ================================================================== -->
+      <article id="mission-i" class="rapport" aria-labelledby="titre-mission-i">
+        <details class="rapport-pli">
+          <summary class="section-entete rapport-entete">
+            <span class="section-numero" aria-hidden="true">I</span>
+            <h2 id="titre-mission-i">Cendres sur Yarath</h2>
+          </summary>
+
+          <p class="etiquette etiquette--large etiquette--or">
+            Rapport de bataille · Mission I · diffusion restreinte
+          </p>
+
+          <!-- Fiche technique : une liste de définitions et non un tableau à deux
+               colonnes. Chaque ligne est un couple « intitulé : valeur », sans
+               croisement de données — c'est exactement ce que décrit `<dl>`. -->
+          <dl class="fiche-bataille carte carte--or">
+            <div>
+              <dt>Mission</dt>
+              <dd>Cendres sur Yarath · bataille planétaire</dd>
+            </div>
+            <div>
+              <dt>Durée</dt>
+              <dd>4 tours</dd>
+            </div>
+            <div>
+              <dt>Vainqueur</dt>
+              <dd>
+                <strong class="c-jean">Blood Angels</strong> — II<sup>e</sup>
+                Compagnie « Enclume »
+              </dd>
+            </div>
+            <div>
+              <dt>Fait marquant</dt>
+              <dd>Pacte Dark Mechanicum / Thousand Sons révélé</dd>
+            </div>
+          </dl>
+
+          <!-- `<figure>` + `<figcaption>` : l'attribution est rattachée à la
+               citation par la structure elle-même, pas seulement par la mise en
+               page. Les guillemets sont posés par le CSS de `.exergue`. -->
+          <figure class="citation-rapport">
+            <blockquote class="exergue">
+              <p>
+                Ils ont tenu. Je n'ai pas d'autre mot pour le rapport, et je n'en
+                chercherai pas.
+              </p>
+            </blockquote>
+            <figcaption class="attribution">
+              Apothicaire Vaelor, note marginale adressée au Premier Capitaine
+              Raldoron
+            </figcaption>
+          </figure>
+
+          <p class="chapeau mesure">
+            Compilé d'après les vox-registres de la II<sup>e</sup> Compagnie, les
+            relevés d'augure du module de largage et le témoignage des cinq
+            survivants. Diffusion restreinte : Premier Capitaine seul.
+          </p>
+
+          <!-- --- Prologue -------------------------------------------------- -->
+          <section class="rapport-partie mesure" aria-labelledby="m1-prologue">
+            <h3 id="m1-prologue" class="titre-tour">
+              <span class="titre-tour-numero">Prologue</span>
+              La descente
+            </h3>
+            <div class="pile">
+              <p class="texte lettrine">
+                La II<sup>e</sup> Compagnie, l'« Enclume », fut désignée pour
+                ouvrir la voie. Cinquante légionnaires, aucun officier supérieur,
+                et un ordre que le Capitaine avait résumé en une ligne : prendre
+                et tenir le puits. Le Premier Bataillon descendrait ensuite par la
+                porte que l'Enclume aurait gardée ouverte.
+              </p>
+              <p class="texte">
+                Ils n'étaient pas seuls dans le ciel. Sur le flanc est, des
+                <span lang="en">Thunderhawks</span> aux couleurs de Nocturne
+                perçaient la fumée en formation serrée, phares allumés. Personne
+                n'avait coordonné les deux descentes.
+              </p>
+            </div>
+          </section>
+
+          <!-- Ornement purement décoratif : masqué aux lecteurs d'écran, sinon
+               il serait lu « croix de Malte, croix de Malte, croix de Malte ». -->
+          <p class="fleuron" aria-hidden="true">✠ ✠ ✠</p>
+
+          <!-- --- Tour 1 ---------------------------------------------------- -->
+          <section class="rapport-partie" aria-labelledby="m1-tour1">
+            <div class="rapport-tour rapport-tour--figure">
+              <div class="mesure">
+                <h3 id="m1-tour1" class="titre-tour">
+                  <span class="titre-tour-numero">Tour 1</span>
+                  Le pacte se dévoile
+                </h3>
+                <div class="pile">
+                  <p class="texte">
+                    La brume de scorie était si dense, ce premier jour, qu'aucun
+                    viseur ne portait au-delà de vingt-quatre pas. La Fraternité
+                    de la XV<sup>e</sup> Légion était déjà sur place. Nephren-Kâ
+                    et ses Terminators Saturnine avaient pris position à l'ombre
+                    des structures de la forge, entre les silos et les cheminées
+                    de coulée — et les servo-tourelles de l'Archimagos, qui
+                    balayaient la plaine en tirant sur tout ce qui bougeait, ne se
+                    tournaient jamais vers eux. Les Castellax et les Thanatar de
+                    TX-4-CP se déployaient à quelques pas des sorciers sans lever
+                    une arme. Les deux forces se tenaient comme des pièces posées
+                    par la même main.
+                  </p>
+                  <p class="texte">
+                    Ce n'était pas une coïncidence de terrain. C'était un
+                    <strong>pacte</strong>, et il venait d'apparaître au grand
+                    jour : la forge renégate et les fils de Prospero
+                    combattraient côte à côte. Sur le canal de commandement, le
+                    sergent de Bephael n'eut qu'un commentaire :
+                    <q class="serment"
+                      >Deux ennemis sur un seul front. Au moins, on saura où
+                      tirer.</q
+                    >
+                  </p>
+                </div>
+              </div>
+
+              <!-- Photographie de table : informative, donc un `alt` qui dit ce
+                   qu'on y VOIT ; la légende, elle, dit ce que ça RACONTE.
+                   `width`/`height` = dimensions réelles du fichier, pour que le
+                   navigateur réserve la place avant chargement (pas de saut de
+                   mise en page). -->
+              <figure class="figure-rapport figure-rapport--portrait">
+                <img
+                  src="../assets/images/rapports/mission1-tour1-fraternite-525.webp"
+                  srcset="
+                    ../assets/images/rapports/mission1-tour1-fraternite-525.webp   525w,
+                    ../assets/images/rapports/mission1-tour1-fraternite.webp      1050w
+                  "
+                  sizes="(min-width: 60em) 22rem, (min-width: 34em) 24rem, 90vw"
+                  alt="Figurines Thousand Sons, en armure rouge et or, déployées au pied de ruines industrielles grises."
+                  width="1050"
+                  height="1400"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>
+                  <span class="figure-tour">Tour 1</span> La Fraternité se
+                  déploie à l'abri des ruines de la forge : Nephren-Kâ en tête,
+                  ses Saturnine et l'escouade tactique derrière lui.
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <!-- --- Tour 2 ---------------------------------------------------- -->
+          <section class="rapport-partie mesure" aria-labelledby="m1-tour2">
+            <h3 id="m1-tour2" class="titre-tour">
+              <span class="titre-tour-numero">Tour 2</span>
+              L'Enclume frappe
+            </h3>
+            <div class="pile">
+              <p class="texte">
+                La brume se leva à trente-six pas, et l'Enclume tomba du ciel.
+              </p>
+              <p class="texte">
+                Le module de largage de l'escouade nettoyeuse
+                <strong>« Tazael »</strong> toucha le sol au bord même du puits
+                d'accès majeur. Les rampes s'abattirent avant que le module ait
+                fini de trembler ; les épées tronçonneuses rugissaient déjà. En
+                quelques secondes, l'objectif central — le premier de toute la
+                campagne — était aux mains des fils de Sanguinius. Derrière eux,
+                le reste de la compagnie se jetait en avant, droit vers la forge,
+                droit vers le Dark Mechanicum.
+              </p>
+              <p class="texte">
+                La forge répondit. Les manipules Castellax et le Thanatar
+                ouvrirent un feu méthodique, sans hâte, comme une machine qui
+                exécute un protocole. L'escouade tactique
+                <strong>« Araféo »</strong> — la discipline de tir la plus
+                austère du Chapitre, celle que Raldoron cite plus souvent que les
+                autres — encaissa la première salve de plein fouet. Pour la
+                première fois de son histoire, elle rompit. Ses survivants se
+                replièrent sous le feu, en bon ordre mais en arrière, et le vox
+                n'enregistra de leur sergent qu'une longue respiration.
+              </p>
+              <p class="texte">
+                C'est alors que les Salamanders arrivèrent. Un Praetor en armure
+                Terminator, un Centurion, deux escouades tactiques et un
+                Dreadnought <strong>Leviathan</strong> débarquèrent sur le flanc
+                et ouvrirent le feu sur les automates de TX-4-CP. Les salves
+                frappèrent les carapaces des Castellax, ricochèrent,
+                s'éteignirent. Pas une machine ne tomba. La riposte, elle, porta
+                : les automates pivotèrent d'un bloc, répondirent d'une seule
+                salve, et deux légionnaires de Nocturne tombèrent dans la
+                scorie. Les fils de Vulkan observèrent le résultat un long
+                moment, et ne s'approchèrent pas davantage.
+              </p>
+            </div>
+          </section>
+
+          <!-- --- Tour 3 ---------------------------------------------------- -->
+          <section class="rapport-partie" aria-labelledby="m1-tour3">
+            <div class="rapport-tour rapport-tour--figure">
+              <div class="mesure">
+                <h3 id="m1-tour3" class="titre-tour">
+                  <span class="titre-tour-numero">Tour 3</span>
+                  Le sang au fond du puits
+                </h3>
+                <div class="pile">
+                  <p class="texte">
+                    La Fraternité entra en guerre sans un cri. Depuis les rampes
+                    de la forge, les armes de la XV<sup>e</sup> se tournèrent
+                    vers les Blood Angels, et chaque tir semblait avoir été décidé
+                    avant même que la cible n'apparaisse — ce qui, avec
+                    Nephren-Kâ, est peut-être exactement le cas. Des légionnaires
+                    de l'Enclume tombèrent sans avoir vu d'où venait le coup.
+                  </p>
+                  <p class="texte">
+                    Puis les fils de Prospero montèrent à l'assaut du puits
+                    d'accès. Au bord de la gueule de béton, contre le flanc
+                    encore fumant du module de largage,
+                    <strong>« Tazael »</strong> reçut la charge au corps à corps.
+                    Tronçonneuses contre lames psychiques, dans un espace où deux
+                    hommes ne se croisaient pas : ce fut le genre de combat pour
+                    lequel l'escouade avait été levée. Les nettoyeurs de Tazael
+                    ne reculèrent pas d'un pas, et le puits resta rouge.
+                  </p>
+                  <p class="texte">
+                    Pendant ce temps, la forge poursuivait son protocole. Les
+                    batteries de TX-4-CP prirent pour cible l'escouade tactique
+                    <strong>« Bephael »</strong>. Cette escouade avait été levée
+                    après l'anéantissement de sa compagnie d'origine ; l'ancien
+                    numéro restait peint sous le neuf, en mémoire. Sur
+                    Yarath-Maximal, elle mourut une seconde fois. Il ne resta rien
+                    à repeindre.
+                  </p>
+                </div>
+              </div>
+
+              <figure class="figure-rapport figure-rapport--portrait">
+                <img
+                  src="../assets/images/rapports/mission1-tour3-rampes-525.webp"
+                  srcset="
+                    ../assets/images/rapports/mission1-tour3-rampes-525.webp   525w,
+                    ../assets/images/rapports/mission1-tour3-rampes.webp      1050w
+                  "
+                  sizes="(min-width: 60em) 22rem, (min-width: 34em) 24rem, 90vw"
+                  alt="Figurines Thousand Sons et un Dreadnought au pied d'une plateforme métallique, où des Blood Angels entourent un module de largage rouge."
+                  width="1050"
+                  height="1400"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>
+                  <span class="figure-tour">Tour 3</span> Nephren-Kâ au pied des
+                  rampes, le Deredeo à sa droite ; l'escouade tactique de la
+                  Fraternité s'avance sous la plateforme, où l'Enclume tient le
+                  module de largage.
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <!-- --- Tour 4 ---------------------------------------------------- -->
+          <section class="rapport-partie" aria-labelledby="m1-tour4">
+            <div class="mesure">
+              <h3 id="m1-tour4" class="titre-tour">
+                <span class="titre-tour-numero">Tour 4</span>
+                Le feu qui ne se casse pas
+              </h3>
+              <div class="pile">
+                <p class="texte">
+                  Le dernier jour fut un massacre. La brume s'était dissipée, et
+                  plus rien n'arrêtait les armes. Les Thousand Sons ouvrirent le
+                  feu sur la II<sup>e</sup> Compagnie avec une précision que les
+                  survivants décrivent encore mal : le Dreadnought
+                  <strong>Deredeo</strong> vida ses canonnades à plasma
+                  <span lang="en">Hellfire</span>, les Saturnine suivirent, et
+                  les rangs des Blood Angels fondirent.
+                </p>
+                <p class="texte">
+                  La cible prioritaire fut l'escouade de vétérans brécheuse
+                  <strong>« Ordamael »</strong>. Dix vétérans en formation coin,
+                  boucliers verrouillés — une tactique que le I<sup>er</sup>
+                  Chapitre pratique depuis les guerres de Compliance, et dont on
+                  dit que le feu se casse sur elle. Ce jour-là, le feu ne se cassa
+                  pas. La formation se disloqua et l'Ordamael fut mise en déroute.
+                </p>
+                <p class="texte">
+                  La forge acheva ce que la Fraternité avait commencé. Les
+                  Castellax retrouvèrent <strong>« Araféo »</strong>, qui
+                  s'était ralliée et revenait vers la ligne, et l'abattirent
+                  jusqu'au dernier homme. Puis TX-4-CP tourna ses machines vers
+                  l'Ordamael en fuite : quand les tirs cessèrent, il manquait à la
+                  forge un seul coup pour effacer l'escouade du registre.
+                </p>
+              </div>
+            </div>
+
+            <figure class="figure-rapport figure-rapport--paysage">
+              <img
+                src="../assets/images/rapports/mission1-tour4-passerelles-700.webp"
+                srcset="
+                  ../assets/images/rapports/mission1-tour4-passerelles-700.webp   700w,
+                  ../assets/images/rapports/mission1-tour4-passerelles.webp      1400w
+                "
+                sizes="(min-width: 60em) 44rem, 92vw"
+                alt="Vue plongeante sur des passerelles industrielles : un module de largage rouge, un groupe serré de Blood Angels aux boucliers dorés, et quelques légionnaires isolés en contrebas."
+                width="1400"
+                height="1050"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                <span class="figure-tour">Tour 4</span> Sur les passerelles de la
+                forge, la Fraternité presse le module de largage ; les boucliers
+                dorés de l'Ordamael tiennent encore la travée. En contrebas, ce
+                qui reste de l'Enclume.
+              </figcaption>
+            </figure>
+
+            <p class="texte mesure marge-haut">
+              Et pourtant, lorsque le silence retomba sur la plaine de scorie, les
+              couleurs de Baal flottaient encore sur les objectifs.
+              Quarante-cinq légionnaires étaient tombés. Cinq restaient debout.
+              Ces cinq-là avaient tenu le terrain assez longtemps — et c'était
+              tout ce que l'ordre exigeait.
+              <strong>La II<sup>e</sup> Compagnie remportait la bataille.</strong>
+            </p>
+          </section>
+
+          <p class="fleuron" aria-hidden="true">✠ ✠ ✠</p>
+
+          <!-- --- Épilogue -------------------------------------------------- -->
+          <section class="rapport-partie mesure" aria-labelledby="m1-epilogue">
+            <h3 id="m1-epilogue" class="titre-tour">
+              <span class="titre-tour-numero">Épilogue</span>
+              Le compte de Vaelor
+            </h3>
+            <div class="pile">
+              <p class="texte">
+                L'Apothicaire Vaelor descendit le soir même. Il avait
+                quarante-cinq progénoïdes à arracher à la scorie avant que la
+                lignée ne se perde, et quarante-cinq noms à consigner. Ses
+                rapports ne remontent qu'à Raldoron ; celui-ci tient en une page.
+                Il ne cite aucun des cinq survivants par son nom. À la question du
+                Premier Capitaine, il répondit qu'il ne nommerait pas les vivants
+                tant que les morts ne seraient pas tous comptés.
+              </p>
+              <p class="texte">
+                Le bilan des autres forces tient en moins de mots encore. La
+                Fraternité de Nephren-Kâ a perdu deux légionnaires de son escouade
+                tactique. Les machines de TX-4-CP n'ont pas une égratignure. Les
+                Salamanders comptent cinq morts : deux sous la riposte des
+                Castellax, trois sous un tir de bombarde des Saturnine. L'obus
+                aurait dû en coucher bien davantage ; il tomba sur une formation
+                si éclatée — chaque légionnaire à bonne distance du suivant —
+                qu'il n'en trouva que trois. Nocturne connaît le prix d'un rang
+                trop serré. Sur le plan des
+                effectifs, la bataille est un désastre pour Baal. Sur le plan de
+                la guerre, elle est une victoire : le puits d'accès majeur est
+                ouvert, et il le restera.
+              </p>
+
+              <figure class="citation-rapport">
+                <blockquote class="exergue">
+                  <p>
+                    Ce qui dort à Yarath rentrera à Baal — ou ne sera lu par
+                    personne.
+                  </p>
+                </blockquote>
+                <figcaption class="attribution">
+                  Serment du I<sup>er</sup> Bataillon
+                </figcaption>
+              </figure>
+
+              <p class="texte">
+                Sous la plaine, la forge respire encore. Les galeries de coulée
+                attendent. Et quelque part au fond du vault, la Neuvième
+                Fraternité <em>lit déjà</em>.
+              </p>
+            </div>
+          </section>
+
+          <!-- --- Annexe hors fiction --------------------------------------- -->
+          <section class="rapport-partie rapport-annexe" aria-labelledby="m1-annexe">
+            <h3 id="m1-annexe" class="titre-tour">
+              <span class="titre-tour-numero">Annexe</span>
+              Hors fiction
+            </h3>
+
+            <!-- Tableau de données : <caption>, scope="col" / scope="row"
+                 (RGAA 5.4 à 5.7). Le conteneur défile au lieu de déborder de la
+                 page sur téléphone (WCAG 1.4.10). -->
+            <div class="table-defilante">
+              <table class="table-recap table-rapport">
+                <caption>
+                  Mission I — forces engagées et pertes
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Force</th>
+                    <th scope="col">Unités engagées</th>
+                    <th scope="col">Pertes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" class="c-jean">Blood Angels</th>
+                    <td>
+                      II<sup>e</sup> Compagnie « Enclume » : escouades
+                      nettoyeuses « Tazael » et « Fernibus », escouades tactiques
+                      « Araféo » et « Bephael », escouade de vétérans brécheuse
+                      « Ordamael ».
+                    </td>
+                    <td><strong>45 morts sur 50</strong> — 5 survivants</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="c-tristan">Thousand Sons</th>
+                    <td>
+                      Nephren-Kâ (Praetor, armure Saturnine), 3 Terminators
+                      Saturnine, 1 escouade tactique, 1 Dreadnought Deredeo
+                      (2 canonnades à plasma <span lang="en">Hellfire</span>).
+                    </td>
+                    <td>2 légionnaires de l'escouade tactique</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="c-thomas">Dark Mechanicum</th>
+                    <td>
+                      2 Magos, 2 manipules de combat Castellax, 1 manipule de
+                      siège Thanatar.
+                    </td>
+                    <td>Aucune</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="c-raphael">Salamanders</th>
+                    <td>
+                      1 Praetor en armure Terminator, 1 Centurion, 2 escouades
+                      tactiques, 1 Dreadnought Leviathan.
+                    </td>
+                    <td>
+                      5 légionnaires — 2 par le tir de riposte du Dark
+                      Mechanicum, 3 par une bombarde Saturnine
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="carte carte--rouge carte--accent-rouge marge-haut mesure">
+              <h4 class="titre-carte">Conséquences pour la suite de la campagne</h4>
+              <div class="pile pile--serree">
+                <p class="texte">
+                  Victoire de <strong class="c-jean">Jean (Blood Angels)</strong>
+                  : le puits d'accès est ouvert. Conformément au dossier de
+                  mission :
+                </p>
+                <ul class="liste">
+                  <li>
+                    <strong>Mission II — Les galeries de coulée :</strong> les
+                    portes commencent ouvertes et Jean bénéficie d'une
+                    infiltration.
+                  </li>
+                </ul>
+                <p class="texte-sec">
+                  <em>Note narrative :</em> le pacte Dark Mechanicum / Thousand
+                  Sons est désormais public.
+                </p>
+              </div>
+            </div>
+          </section>
+        </details>
+      </article>
+
+      <!-- ==================================================================
+           Missions II à V — rapports à venir
+           Même gabarit à chaque fois : on remplacera la carte « à venir » par
+           le rapport complet, sur le modèle de la mission I.
+           ================================================================== -->
+      <section id="mission-ii" class="rapport" aria-labelledby="titre-mission-ii">
+        <details class="rapport-pli">
+          <summary class="section-entete rapport-entete">
+            <span class="section-numero" aria-hidden="true">II</span>
+            <h2 id="titre-mission-ii">Les galeries de coulée</h2>
+          </summary>
+          <div class="carte rapport-a-venir mesure">
+            <p class="texte-sec">Prochainement</p>
+          </div>
+        </details>
+      </section>
+
+      <section
+        id="mission-iii"
+        class="rapport"
+        aria-labelledby="titre-mission-iii"
+      >
+        <details class="rapport-pli">
+          <summary class="section-entete rapport-entete">
+            <span class="section-numero" aria-hidden="true">III</span>
+            <h2 id="titre-mission-iii">Les chantiers de Syrgalah</h2>
+          </summary>
+          <div class="carte rapport-a-venir mesure">
+            <p class="texte-sec">Prochainement</p>
+          </div>
+        </details>
+      </section>
+
+      <section id="mission-iv" class="rapport" aria-labelledby="titre-mission-iv">
+        <details class="rapport-pli">
+          <summary class="section-entete rapport-entete">
+            <span class="section-numero" aria-hidden="true">IV</span>
+            <h2 id="titre-mission-iv">
+              Le Vault de Logique <span class="c-pale">ou</span> Protocole de
+              Cendres
+            </h2>
+          </summary>
+          <div class="carte rapport-a-venir mesure">
+            <p class="texte-sec">Prochainement</p>
+          </div>
+        </details>
+      </section>
+
+      <section id="mission-v" class="rapport" aria-labelledby="titre-mission-v">
+        <details class="rapport-pli">
+          <summary class="section-entete rapport-entete">
+            <span class="section-numero" aria-hidden="true">V</span>
+            <h2 id="titre-mission-v">Le Verdict de Yarath</h2>
+          </summary>
+          <div class="carte rapport-a-venir mesure">
+            <p class="texte-sec">Prochainement</p>
+          </div>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      <div class="conteneur pied">
+        <p>La chronique du Reflux — compilée partie après partie.</p>
+        <p>
+          <a class="lien-bloc" href="../index.html"
+            >Le Reflux de Yarath-Maximal</a
+          >
+        </p>
+        <p>
+          Warhammer: The Horus Heresy, <span lang="en">Zone Mortalis</span>,
+          <span lang="en">Legiones Astartes</span> et les noms associés sont des
+          marques de Games Workshop Ltd. Ce document n'est ni affilié ni
+          approuvé par Games Workshop.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

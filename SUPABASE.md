@@ -1,6 +1,6 @@
 # Journal de guerre partagé — mise en place de Supabase
 
-Le journal de guerre (section VII d'`index.html`) était sauvegardé dans le
+Le journal de guerre (section VI d'`index.html`) était sauvegardé dans le
 `localStorage` du navigateur : chaque joueur voyait ses propres scores et
 personne ne voyait ceux des autres. Il est désormais rangé dans une base
 PostgreSQL hébergée chez Supabase.

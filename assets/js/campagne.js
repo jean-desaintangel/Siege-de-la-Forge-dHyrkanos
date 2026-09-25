@@ -537,7 +537,7 @@
     })();
 
     // --- Interactions -------------------------------------------------------
-    /* Un bouton ne touche QUE son propre compteur : le barème de la section VI
+    /* Un bouton ne touche QUE son propre compteur : le barème de la section V
        dissocie victoires et points (une égalité vaut 1 point sans victoire).
 
        Un seul écouteur posé sur le tableau plutôt que 16 sur les boutons :

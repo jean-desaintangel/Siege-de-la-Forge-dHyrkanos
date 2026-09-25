@@ -1,10 +1,11 @@
 /* =============================================================================
    Le Reflux de Yarath-Maximal — feuille de styles unique
    -----------------------------------------------------------------------------
-   Sept pages la consomment : index.html (le dossier de campagne), les quatre
+   Huit pages la consomment : index.html (le dossier de campagne), les quatre
    fiches de détachement pages/blood_angels.html, pages/dark_mechanicum.html,
    pages/thousand_sons.html et pages/salamanders.html, la carte du secteur
-   pages/carte3d.html et l'archive pages/archives.html.
+   pages/carte3d.html, l'archive pages/archives.html et la chronique
+   pages/rapport_de_bataille.html.
    Aucun style en ligne dans le HTML : tout est ici, nommé, commenté et
    réutilisable. POURQUOI : un style écrit dans l'attribut `style` d'une balise
    ne peut être ni réutilisé, ni redéfini par un media query, ni surchargé par
@@ -23,6 +24,7 @@
      8 bis. Variante Thousand Sons — pages/thousand_sons.html
      8 ter. Variante Salamanders — pages/salamanders.html
     8 quater. Variante Archives — pages/archives.html
+    8 quinquies. Rapports — pages/rapport_de_bataille.html
      9. Fiches des mondes — pages/carte3d.html : grille des cinq corps
     10. Maquette 3D     — pages/carte3d.html : toile WebGL, étiquettes, boutons
     11. Élargissements  — media queries (mobile-first : on part du petit écran)
@@ -485,16 +487,6 @@ sup {
   }
 }
 
-@keyframes pulsation-braise {
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
 /* =============================================================================
    4. Mise en page
    ============================================================================= */
@@ -543,8 +535,7 @@ section {
 .grille-3,
 .grille-4,
 .grille-texte-aside,
-.grille-mission,
-.branches {
+.grille-mission {
   display: grid;
   gap: var(--esp-md);
 }
@@ -603,6 +594,11 @@ section {
   margin-inline: auto;
 }
 
+/* Lien de renvoi seul sur sa ligne, centré sous le bloc qui le précède. */
+.renvoi-centre {
+  text-align: center;
+}
+
 /* --- Titres de bloc -------------------------------------------------------- */
 .titre-carte {
   font-family: var(--titre);
@@ -616,7 +612,6 @@ section {
 }
 
 .titre-belligerant,
-.titre-etape,
 .titre-compagnie,
 .titre-unite,
 .titre-personnage {
@@ -632,11 +627,6 @@ section {
 .titre-belligerant a {
   color: inherit;
   border-bottom-color: rgba(230, 220, 200, 0.3);
-}
-
-.titre-etape {
-  font-size: 1.3125rem;
-  font-weight: 700;
 }
 
 /* Sous-titre interne aux dossiers de mission. */
@@ -687,12 +677,6 @@ section {
   text-transform: uppercase;
   color: var(--texte-attenue);
   white-space: nowrap;
-}
-
-.mention--bascule {
-  color: var(--or);
-  letter-spacing: 0.22em;
-  animation: pulsation-braise 3.2s ease-in-out infinite;
 }
 
 /* --- Paragraphes ----------------------------------------------------------- */
@@ -939,76 +923,6 @@ strong {
 .belligerant--tristan {
   --faction: var(--tristan);
   --faction-bord: var(--tristan-bord);
-}
-
-/* --- Arbre de campagne -----------------------------------------------------
-   `<ol>` et non une suite de `<div>` : les cinq missions forment une séquence
-   ordonnée, l'information est dans la structure (RGAA 9.3). */
-.arbre {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: var(--esp-md);
-}
-
-.etape {
-  display: grid;
-  grid-template-columns: 3.5rem 1fr;
-  gap: var(--esp);
-  align-items: stretch;
-}
-
-.etape--branches {
-  grid-template-columns: 1fr;
-}
-
-.etape-numero {
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--bordure);
-  background: var(--fond-carte);
-  font-family: var(--titre);
-  font-size: 1.75rem;
-  color: var(--or);
-}
-
-/* Reprend la couleur par défaut du numéro. Elle existe pour que le HTML soit
-   explicite : `etape-numero--or` en face de `--rouge` et `--bascule` se lit,
-   là où une classe absente laisse croire à un oubli. */
-.etape-numero--or {
-  color: var(--or);
-}
-
-.etape-numero--rouge {
-  color: var(--rouge);
-}
-
-.etape-numero--bascule {
-  border: 2px solid var(--or);
-  background: var(--fond-carte-or);
-  color: var(--or-clair);
-}
-
-.etape-entete {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--esp-xs) var(--esp-sm);
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: var(--esp-xs);
-}
-
-.etape-format {
-  font-family: var(--mono);
-  font-size: var(--fs-mention);
-  letter-spacing: 0.16em;
-  color: var(--etiquette);
-  text-transform: uppercase;
-}
-
-.branches {
-  padding-left: 0;
 }
 
 /* --- Dossiers de mission ---------------------------------------------------
@@ -2526,6 +2440,226 @@ footer {
 }
 
 /* =============================================================================
+   8 quinquies. Rapports de bataille — pages/rapport_de_bataille.html
+   -----------------------------------------------------------------------------
+   Une page de LECTURE : un long récit par mission, entrecoupé de photographies
+   de table. Tout ce qui suit réutilise les jetons déjà validés en contraste
+   (`--or`, `--texte-doux`, `--etiquette`, `--bordure-*`) : aucune couleur
+   nouvelle, donc aucun nouveau calcul de contraste à faire.
+   ============================================================================= */
+
+/* `<article>` n'hérite pas de la marge haute de `section` : on la lui donne,
+   pour que les cinq rapports soient espacés comme les sections du dossier. */
+.rapport {
+  padding-top: var(--esp-section);
+}
+
+/* Les sous-parties (prologue, tours, épilogue) sont des `<section>` IMBRIQUÉES.
+   Sans cette règle, elles hériteraient des 3,5 à 5 rem de `section` : bien
+   trop pour séparer deux tours d'un même récit. */
+.rapport-partie {
+  padding-top: var(--esp-xl);
+}
+
+/* --- Fiche technique ------------------------------------------------------
+   `<dl>` en grille auto-ajustable : quatre colonnes sur grand écran, une
+   seule sur téléphone, sans aucune media query (motif `auto-fit` + `min()`). */
+.fiche-bataille {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: var(--esp-md);
+  margin-block: var(--esp) var(--esp-lg);
+}
+
+/* --- Titres de tour -------------------------------------------------------
+   Le numéro (« Tour 1 ») passe AU-DESSUS du titre, en petites capitales dorées.
+   `display: block` et non `flex` : dans un conteneur flex, l'espace tapé entre
+   le `<span>` et le texte disparaîtrait (voir le piège de `.nav-liste a`), et
+   le lecteur d'écran annoncerait « Tour 1Le pacte se dévoile ». */
+.titre-tour {
+  font-size: clamp(1.375rem, 4vw, 1.75rem);
+  font-weight: 700;
+  margin-bottom: var(--esp);
+}
+
+.titre-tour-numero {
+  display: block;
+  font-family: var(--mono);
+  font-size: var(--fs-mention);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--or);
+  margin-bottom: var(--esp-xs);
+}
+
+/* --- Ornement ------------------------------------------------------------- */
+.fleuron {
+  text-align: center;
+  color: var(--or);
+  letter-spacing: 0.8em;
+  margin-top: var(--esp-xl);
+}
+
+/* --- Citation attribuée --------------------------------------------------- */
+.citation-rapport {
+  margin: var(--esp-lg) 0;
+}
+
+/* `.exergue` est centrée par défaut (marge automatique) : on garde ce
+   centrage et on aligne l'attribution dessous. */
+.citation-rapport .exergue {
+  margin-top: 0;
+}
+
+.attribution {
+  max-width: 44rem;
+  margin: var(--esp-xs) auto 0;
+  text-align: right;
+  font-size: var(--fs-petit);
+  color: var(--texte-attenue);
+}
+
+/* Tiret cadratin posé par le CSS : purement typographique, donc retiré du nom
+   accessible par l'alternative vide après la barre oblique. */
+.attribution::before {
+  content: "— " / "";
+}
+
+/* --- Photographies de table -----------------------------------------------
+   `<figure>` + `<figcaption>` : la légende est rattachée à l'image par la
+   structure (RGAA 1.9). Les photos gardent leurs couleurs réelles : pas de
+   filtre sépia comme sur les portraits, ce sont des pièces du rapport. */
+.figure-rapport {
+  margin: var(--esp-lg) 0 0;
+  border: 1px solid var(--bordure);
+  background: var(--fond-carte);
+  padding: 0.75rem;
+}
+
+.figure-rapport img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figure-rapport figcaption {
+  font-size: var(--fs-petit);
+  line-height: 1.6;
+  font-style: italic;
+  color: var(--texte-doux);
+  padding: var(--esp-sm) 0.25rem 0.25rem;
+}
+
+.figure-tour {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--etiquette);
+  margin-right: 0.5em;
+}
+
+/* Photo verticale : elle ne doit jamais occuper toute la largeur d'un
+   téléphone couché, sinon elle dépasse la hauteur de l'écran. */
+.figure-rapport--portrait {
+  max-width: 24rem;
+  margin-inline: auto;
+}
+
+.figure-rapport--paysage {
+  max-width: 46rem;
+}
+
+/* Texte + photo verticale côte à côte. Une seule colonne par défaut
+   (mobile-first) ; la seconde colonne apparaît à 60em, plus bas. */
+.rapport-tour {
+  display: grid;
+  gap: 0 var(--esp-xl);
+}
+
+/* --- Tableau des forces ---------------------------------------------------
+   Dans `.table-recap`, la première colonne est une `<td>` ; ici c'est un
+   `<th scope="row">` (le nom de la force EST l'en-tête de la ligne). On lui
+   rend la typographie de titre et la couleur du joueur. */
+.table-rapport tbody th {
+  font-family: var(--titre);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.table-rapport tbody td {
+  font-family: var(--lecture);
+  font-size: var(--fs-sec);
+  line-height: 1.55;
+  color: var(--texte-chaud);
+  vertical-align: top;
+}
+
+/* La règle générique `.table-recap tbody td:first-child` vise la cellule
+   « Unités » ici (première `<td>`, après le `<th>`) : on l'annule. */
+.table-rapport tbody td:first-child {
+  font-size: var(--fs-sec);
+  color: var(--texte-chaud);
+}
+
+/* --- Rapport replié ---------------------------------------------------------
+   `<details>` natif : on ne redéfinit que l'apparence du `summary`, qui garde
+   l'allure d'un titre de section. Le chevron reprend celui des dossiers de
+   mission (`.mission-titre::before`). */
+.rapport-entete {
+  cursor: pointer;
+  list-style: none;
+}
+
+.rapport-entete::-webkit-details-marker {
+  display: none;
+}
+
+.rapport-entete:hover {
+  filter: brightness(1.25);
+}
+
+/* Chevron posé sur le `summary` (déjà en flex) et non sur le `h2` : passer le
+   titre en flex éclaterait « Le Vault de Logique ou Protocole de Cendres » en
+   plusieurs blocs autour du `<span>` intérieur. */
+.rapport-entete::before {
+  content: "▸" / "";
+  color: var(--or);
+  flex: none;
+  transition: transform 0.2s ease;
+}
+
+.rapport-pli[open] > .rapport-entete::before {
+  transform: rotate(90deg);
+}
+
+/* Replié, le filet du titre suffit : pas de marge basse orpheline. */
+.rapport-pli:not([open]) > .rapport-entete {
+  margin-bottom: 0;
+}
+
+/* --- Rapport non encore écrit --------------------------------------------- */
+.rapport-a-venir {
+  border-style: dashed;
+  border-color: var(--bordure-claire);
+}
+
+@media (min-width: 60em) {
+  .rapport-tour--figure {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    align-items: start;
+  }
+
+  /* L'image s'aligne sur le titre du tour, pas sur le bas du texte. */
+  .rapport-tour--figure .figure-rapport {
+    margin-top: 0;
+  }
+}
+
+/* =============================================================================
    9. Fiches des mondes — pages/carte3d.html
    -----------------------------------------------------------------------------
    La grille de cartes qui décrit les cinq corps du système. C'est la version
@@ -2797,22 +2931,8 @@ footer {
   }
 
   .grille-2,
-  .grille-3,
-  .branches {
+  .grille-3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .etape {
-    grid-template-columns: 5.75rem 1fr;
-    gap: var(--esp-md);
-  }
-
-  .etape--branches {
-    grid-template-columns: 5.75rem 1fr;
-  }
-
-  .etape--branches .branches {
-    grid-column: 2;
   }
 
   .mission-entete,
